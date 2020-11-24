@@ -319,13 +319,74 @@
         <span class="column is-narrow">
             
             
-            29 minutes read (About 4313 words)
+            29 minutes read (About 4314 words)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <html><head></head><body><h3 id="&#x4E00;&#x3001;&#x5B89;&#x5168;"><a href="#&#x4E00;&#x3001;&#x5B89;&#x5168;" class="headerlink" title="&#x4E00;&#x3001;&#x5B89;&#x5168;"></a>&#x4E00;&#x3001;&#x5B89;&#x5168;</h3><h4 id="1&#x3001;PHP-&#x4F5C;&#x4E3A;&#x5F31;&#x7C7B;&#x578B;&#x8BED;&#x8A00;&#xFF0C;&#x5728;&#x5E95;&#x5C42;&#x5B83;&#x662F;&#x600E;&#x4E48;&#x5224;&#x65AD;&#x53D8;&#x91CF;&#x7684;&#x7C7B;&#x578B;&#x7684;"><a href="#1&#x3001;PHP-&#x4F5C;&#x4E3A;&#x5F31;&#x7C7B;&#x578B;&#x8BED;&#x8A00;&#xFF0C;&#x5728;&#x5E95;&#x5C42;&#x5B83;&#x662F;&#x600E;&#x4E48;&#x5224;&#x65AD;&#x53D8;&#x91CF;&#x7684;&#x7C7B;&#x578B;&#x7684;" class="headerlink" title="1&#x3001;PHP &#x4F5C;&#x4E3A;&#x5F31;&#x7C7B;&#x578B;&#x8BED;&#x8A00;&#xFF0C;&#x5728;&#x5E95;&#x5C42;&#x5B83;&#x662F;&#x600E;&#x4E48;&#x5224;&#x65AD;&#x53D8;&#x91CF;&#x7684;&#x7C7B;&#x578B;&#x7684;"></a>1&#x3001;PHP &#x4F5C;&#x4E3A;&#x5F31;&#x7C7B;&#x578B;&#x8BED;&#x8A00;&#xFF0C;&#x5728;&#x5E95;&#x5C42;&#x5B83;&#x662F;&#x600E;&#x4E48;&#x5224;&#x65AD;&#x53D8;&#x91CF;&#x7684;&#x7C7B;&#x578B;&#x7684;</h4><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tangchuanyang/p/6185655.html">PHP &#x4F5C;&#x4E3A;&#x5F31;&#x7C7B;&#x578B;&#x8BED;&#x8A00;&#xFF0C;&#x5728;&#x5E95;&#x5C42;&#x5B83;&#x662F;&#x600E;&#x4E48;&#x5224;&#x65AD;&#x53D8;&#x91CF;&#x7684;&#x7C7B;&#x578B;&#x7684;</a></p>
+        <!-- toc --><html><head></head><body><ul>
+<li><a href="#%E4%B8%80-%E5%AE%89%E5%85%A8">&#x4E00;&#x3001;&#x5B89;&#x5168;</a><ul>
+<li><a href="#1-php-%E4%BD%9C%E4%B8%BA%E5%BC%B1%E7%B1%BB%E5%9E%8B%E8%AF%AD%E8%A8%80%E5%9C%A8%E5%BA%95%E5%B1%82%E5%AE%83%E6%98%AF%E6%80%8E%E4%B9%88%E5%88%A4%E6%96%AD%E5%8F%98%E9%87%8F%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%9A%84">1&#x3001;PHP &#x4F5C;&#x4E3A;&#x5F31;&#x7C7B;&#x578B;&#x8BED;&#x8A00;&#xFF0C;&#x5728;&#x5E95;&#x5C42;&#x5B83;&#x662F;&#x600E;&#x4E48;&#x5224;&#x65AD;&#x53D8;&#x91CF;&#x7684;&#x7C7B;&#x578B;&#x7684;</a></li>
+<li><a href="#2-sql-%E6%B3%A8%E5%85%A5%E6%97%B6%E6%9C%89%E5%93%AA%E4%BA%9B%E6%9B%BF%E4%BB%A3%E7%A9%BA%E6%A0%BC">2&#x3001;SQL &#x6CE8;&#x5165;&#x65F6;&#x6709;&#x54EA;&#x4E9B;&#x66FF;&#x4EE3;&#x7A7A;&#x683C;</a></li>
+<li><a href="#3-xss%E4%B8%8Ecsrf%E5%8C%BA%E5%88%AB">3&#x3001;xss&#x4E0E;csrf&#x533A;&#x522B;</a></li>
+<li><a href="#4-%E5%95%A5%E6%98%AF%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5%E8%B7%A8%E5%9F%9F%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F">4&#x3001;&#x5565;&#x662F;&#x540C;&#x6E90;&#x7B56;&#x7565;&#xFF0C;&#x8DE8;&#x57DF;&#x6709;&#x51E0;&#x79CD;&#x65B9;&#x5F0F;</a></li>
+<li><a href="#5-jsonp">5&#x3001;jsonp</a></li>
+<li><a href="#6-%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5csp">6&#x3001;&#x5185;&#x5BB9;&#x5B89;&#x5168;&#x7B56;&#x7565;&#xFF08;CSP&#xFF09;</a></li>
+<li><a href="#7-ssrf%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%E5%88%A9%E7%94%A8%E6%97%B6%E6%9C%89%E5%93%AA%E4%BA%9B%E4%BC%AA%E5%8D%8F%E8%AE%AE">7&#x3001;SSRF&#x6F0F;&#x6D1E;&#x539F;&#x7406;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;&#x5229;&#x7528;&#x65F6;&#x6709;&#x54EA;&#x4E9B;&#x4F2A;&#x534F;&#x8BAE;</a></li>
+<li><a href="#8-%E4%BA%91waf">8&#x3001;&#x4E91;waf</a></li>
+<li><a href="#9-%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8A%AB%E6%8C%81">9&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x52AB;&#x6301;</a></li>
+<li><a href="#10-%E5%A6%82%E4%BD%95%E7%BB%95%E8%BF%87cdn%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9Eip">10&#x3001;&#x5982;&#x4F55;&#x7ED5;&#x8FC7;cdn&#xFF0C;&#x83B7;&#x53D6;&#x771F;&#x5B9E;ip</a></li>
+<li><a href="#11-arp%E6%94%BB%E5%87%BB">11&#x3001;ARP&#x653B;&#x51FB;</a></li>
+<li><a href="#12-https%E5%8E%9F%E7%90%86%E4%BB%A5%E5%8F%8A%E5%8A%A0%E5%AF%86-%E8%A7%A3%E5%AF%86%E7%9A%84%E5%8E%9F%E7%90%86">12&#x3001;HTTPS&#x539F;&#x7406;&#xFF0C;&#x4EE5;&#x53CA;&#x52A0;&#x5BC6;&#x3001;&#x89E3;&#x5BC6;&#x7684;&#x539F;&#x7406;</a></li>
+<li><a href="#13-mysql57%E4%B8%AD%E7%9A%84%E5%AE%89%E5%85%A8%E7%89%B9%E6%80%A7">13&#x3001;MYSQL5.7&#x4E2D;&#x7684;&#x5B89;&#x5168;&#x7279;&#x6027;</a></li>
+<li><a href="#14-mysql%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F">14&#x3001;MYSQL&#x52A0;&#x5BC6;&#x65B9;&#x5F0F;</a></li>
+<li><a href="#15-localstoragesesseionstorage">15&#x3001;localStorage,sesseionStorage</a></li>
+<li><a href="#16-hql%E6%B3%A8%E5%85%A5">16&#x3001;HQL&#x6CE8;&#x5165;</a></li>
+<li><a href="#17-order-by-%E6%B3%A8%E5%85%A5">17&#x3001;order by &#x6CE8;&#x5165;</a></li>
+<li><a href="#18-limit-%E6%B3%A8%E5%85%A5">18&#x3001; limit &#x6CE8;&#x5165;</a></li>
+<li><a href="#19-php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB-session">19&#x3001;PHP&#x6587;&#x4EF6;&#x5305;&#x542B;&#x2013;session</a></li>
+<li><a href="#20-iis%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D%E6%BC%8F%E6%B4%9E">20&#x3001;IIS&#x77ED;&#x6587;&#x4EF6;&#x540D;&#x6F0F;&#x6D1E;</a></li>
+<li><a href="#21-ssrf%E6%97%A0%E5%9B%9E%E6%98%BE">21&#x3001;SSRF&#x65E0;&#x56DE;&#x663E;</a></li>
+<li><a href="#22-redis%E6%9C%AA%E6%8E%88%E6%9D%83getshell">22&#x3001;redis&#x672A;&#x6388;&#x6743;getshell</a></li>
+<li><a href="#23-phar%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96">23&#x3001;phar+&#x53CD;&#x5E8F;&#x5217;&#x5316;</a></li>
+<li><a href="#23-http-only%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95">23&#x3001;http-only&#x7ED5;&#x8FC7;&#x65B9;&#x6CD5;</a></li>
+<li><a href="#24-php55-~-php72-%E6%96%B0%E7%89%B9%E6%80%A7">24&#x3001;PHP5.5 ~ PHP7.2 &#x65B0;&#x7279;&#x6027;</a></li>
+<li><a href="#25-owasp-top10">25&#x3001;OWASP-top10</a></li>
+<li><a href="#26-gopher%E5%8D%8F%E8%AE%AE">26&#x3001;GOpher&#x534F;&#x8BAE;</a></li>
+<li><a href="#27-%E6%96%87%E4%BB%B6%E5%90%8D%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E">27&#x3001;&#x6587;&#x4EF6;&#x540D;&#x89E3;&#x6790;&#x6F0F;&#x6D1E;</a></li>
+<li><a href="#28-java%E5%AE%89%E5%85%A8">28&#x3001;java&#x5B89;&#x5168;</a></li>
+<li><a href="#29-%E5%90%8E%E6%B8%97%E9%80%8F">29&#x3001;&#x540E;&#x6E17;&#x900F;</a></li>
+<li><a href="#30-fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96">30&#x3001;FastJson&#x53CD;&#x5E8F;&#x5217;&#x5316;</a></li>
+<li><a href="#31-dnslog">31&#x3001;DNSlog</a></li>
+<li><a href="#32-iptables">32&#x3001;iptables</a></li>
+<li><a href="#33-javascript-%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93">33&#x3001;JavaScript &#x539F;&#x578B;&#x94FE;&#x6C61;&#x67D3;</a></li>
+<li><a href="#34-websocket">34&#x3001;websocket</a></li>
+<li><a href="#35-%E4%B8%80%E4%BA%9Bcms%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90">35&#x3001;&#x4E00;&#x4E9B;cms&#x6F0F;&#x6D1E;&#x5206;&#x6790;</a></li>
+<li><a href="#36-%E5%85%8D%E6%9D%80">36&#x3001;&#x514D;&#x6740;</a></li>
+<li><a href="#37-sql%E6%B3%A8%E5%85%A5%E9%98%B2%E5%BE%A1">37&#x3001;sql&#x6CE8;&#x5165;&#x9632;&#x5FA1;</a></li>
+<li><a href="#38-%E4%B8%80%E6%AC%A1%E6%9C%89%E8%B6%A3%E7%9A%84%E7%BB%95%E8%BF%87">38&#x3001;&#x4E00;&#x6B21;&#x6709;&#x8DA3;&#x7684;&#x7ED5;&#x8FC7;</a></li>
+<li><a href="#39-linux%E4%B8%8Bpasswd%E5%92%8Cshadow%E5%8C%BA%E5%88%AB">39&#x3001;linux&#x4E0B;passwd&#x548C;shadow&#x533A;&#x522B;</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8C-python">&#x4E8C;&#x3001;python</a><ul>
+<li><a href="#1-python%E4%B8%89%E5%A4%A7%E7%A5%9E%E5%99%A8%E8%A3%85%E9%A5%B0%E5%99%A8%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%94%9F%E6%88%90%E5%99%A8">1&#x3001;PYTHON&#x4E09;&#x5927;&#x795E;&#x5668;&#xFF1A;&#x88C5;&#x9970;&#x5668;&#xFF0C;&#x8FED;&#x4EE3;&#x5668;&#xFF0C;&#x751F;&#x6210;&#x5668;</a></li>
+<li><a href="#2-%E6%A0%87%E5%87%86%E5%BA%93%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E9%98%9F%E5%88%97%E6%98%AF%E5%93%AA%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%E6%98%AF%E5%93%AA%E4%B8%80%E4%B8%AAlogging%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%90%97">2&#x3001;&#x6807;&#x51C6;&#x5E93;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#x961F;&#x5217;&#x662F;&#x54EA;&#x4E00;&#x4E2A;&#xFF1F;&#x4E0D;&#x5B89;&#x5168;&#x7684;&#x662F;&#x54EA;&#x4E00;&#x4E2A;&#xFF1F;logging&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#x5417;&#xFF1F;</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%89-%E5%90%8E%E6%B8%97%E9%80%8F">&#x4E09;&#x3001;&#x540E;&#x6E17;&#x900F;</a><ul>
+<li><a href="#1-mysql%E6%8F%90%E6%9D%83">1&#x3001;mysql&#x63D0;&#x6743;</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9B%9B-%E5%85%B6%E4%BB%96">&#x56DB;&#x3001;&#x5176;&#x4ED6;</a><ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E7%9A%84%E4%B8%89%E5%A4%A7%E8%8C%83%E5%BC%8F">&#x6570;&#x636E;&#x5E93;&#x8BBE;&#x8BA1;&#x7684;&#x4E09;&#x5927;&#x8303;&#x5F0F;</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">&#x53C2;&#x8003;</a></li>
+</ul>
+<!-- tocstop -->
+
+<h3 id="&#x4E00;&#x3001;&#x5B89;&#x5168;"><a href="#&#x4E00;&#x3001;&#x5B89;&#x5168;" class="headerlink" title="&#x4E00;&#x3001;&#x5B89;&#x5168;"></a>&#x4E00;&#x3001;&#x5B89;&#x5168;</h3><h4 id="1&#x3001;PHP-&#x4F5C;&#x4E3A;&#x5F31;&#x7C7B;&#x578B;&#x8BED;&#x8A00;&#xFF0C;&#x5728;&#x5E95;&#x5C42;&#x5B83;&#x662F;&#x600E;&#x4E48;&#x5224;&#x65AD;&#x53D8;&#x91CF;&#x7684;&#x7C7B;&#x578B;&#x7684;"><a href="#1&#x3001;PHP-&#x4F5C;&#x4E3A;&#x5F31;&#x7C7B;&#x578B;&#x8BED;&#x8A00;&#xFF0C;&#x5728;&#x5E95;&#x5C42;&#x5B83;&#x662F;&#x600E;&#x4E48;&#x5224;&#x65AD;&#x53D8;&#x91CF;&#x7684;&#x7C7B;&#x578B;&#x7684;" class="headerlink" title="1&#x3001;PHP &#x4F5C;&#x4E3A;&#x5F31;&#x7C7B;&#x578B;&#x8BED;&#x8A00;&#xFF0C;&#x5728;&#x5E95;&#x5C42;&#x5B83;&#x662F;&#x600E;&#x4E48;&#x5224;&#x65AD;&#x53D8;&#x91CF;&#x7684;&#x7C7B;&#x578B;&#x7684;"></a>1&#x3001;PHP &#x4F5C;&#x4E3A;&#x5F31;&#x7C7B;&#x578B;&#x8BED;&#x8A00;&#xFF0C;&#x5728;&#x5E95;&#x5C42;&#x5B83;&#x662F;&#x600E;&#x4E48;&#x5224;&#x65AD;&#x53D8;&#x91CF;&#x7684;&#x7C7B;&#x578B;&#x7684;</h4><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tangchuanyang/p/6185655.html">PHP &#x4F5C;&#x4E3A;&#x5F31;&#x7C7B;&#x578B;&#x8BED;&#x8A00;&#xFF0C;&#x5728;&#x5E95;&#x5C42;&#x5B83;&#x662F;&#x600E;&#x4E48;&#x5224;&#x65AD;&#x53D8;&#x91CF;&#x7684;&#x7C7B;&#x578B;&#x7684;</a></p>
 <h4 id="2&#x3001;SQL-&#x6CE8;&#x5165;&#x65F6;&#x6709;&#x54EA;&#x4E9B;&#x66FF;&#x4EE3;&#x7A7A;&#x683C;"><a href="#2&#x3001;SQL-&#x6CE8;&#x5165;&#x65F6;&#x6709;&#x54EA;&#x4E9B;&#x66FF;&#x4EE3;&#x7A7A;&#x683C;" class="headerlink" title="2&#x3001;SQL &#x6CE8;&#x5165;&#x65F6;&#x6709;&#x54EA;&#x4E9B;&#x66FF;&#x4EE3;&#x7A7A;&#x683C;"></a>2&#x3001;SQL &#x6CE8;&#x5165;&#x65F6;&#x6709;&#x54EA;&#x4E9B;&#x66FF;&#x4EE3;&#x7A7A;&#x683C;</h4><p>/**/&#x66FF;&#x4EE3;&#x7A7A;&#x683C;<br>and(1=0)&#x62EC;&#x53F7;&#x7ED5;&#x8FC7;<br><code>%09  %0A  %0D  +&#x90FD;&#x53EF;&#x4EE5;&#x66FF;&#x4EE3;&#x7A7A;&#x683C;</code>&#x7ED5;&#x8FC7;</p></body></html>
         <p class="article-more-link">
             <a href="../../../../2000/02/13/%E9%9D%A2%E7%BB%8F%E7%A7%AF%E7%B4%AF/#more">Read More</a>
