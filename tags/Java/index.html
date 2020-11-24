@@ -41,10 +41,10 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css">
 
 
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="../../css/style.css">
 
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
@@ -70,9 +70,9 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/">
+            <a class="navbar-item navbar-logo" href="../../index.html">
                 
-                <img src="/images/logo.png" alt="" height="28">
+                <img src="../../images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -85,16 +85,16 @@
         <div class="navbar-menu navbar-start">
             
             <a class="navbar-item "
-               href="/archives">Archives</a>
+               href="../../archives">Archives</a>
             
             <a class="navbar-item "
-               href="/friends">Friends</a>
+               href="../../friends">Friends</a>
             
             <a class="navbar-item "
-               href="/about">About</a>
+               href="../../about">About</a>
             
             <a class="navbar-item "
-               href="/tags">Tags</a>
+               href="../../tags">Tags</a>
             
         </div>
         
@@ -130,19 +130,19 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/2020/06/17/JAVA4-%E6%94%B9%E5%86%99ysoserial%E8%A7%A3%E5%86%B3%E5%B8%B8%E8%A7%84shell%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/" itemprop="url">JAVA4-改写ysoserial解决常规shell失效问题</a>
+            <a href="../../2020/06/17/JAVA4-%E6%94%B9%E5%86%99ysoserial%E8%A7%A3%E5%86%B3%E5%B8%B8%E8%A7%84shell%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/" itemprop="url">JAVA4-改写ysoserial解决常规shell失效问题</a>
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <span>Jun 17 2020</span>
+                <time datetime="2020-06-17T07:16:11.000Z" itemprop="datePublished">Jun 17 2020</time>
             
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/java%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6/">java安全研究</a>
+            <a class="article-category-link" href="../../categories/java%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6/">java安全研究</a>
         </span>
         
         
@@ -155,10 +155,10 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <p>最近项目中碰到了两个shiro反序列化，能出网反弹shell失败的情况，和公司师傅请教了一下，豁然开朗，修改了一下ysoserial的一些源码，也成功打通了<br>改动的仓库<a target="_blank" rel="noopener" href="https://github.com/Kit4y/shuyu-ysoserial">https://github.com/Kit4y/shuyu-ysoserial</a><br>打包版本<a target="_blank" rel="noopener" href="https://github.com/Kit4y/Awesome_shiro/tree/master/shiro_shuyu">https://github.com/Kit4y/Awesome_shiro/tree/master/shiro_shuyu</a></p>
-<h2 id="为什么之前打不通？"><a href="#为什么之前打不通？" class="headerlink" title="为什么之前打不通？"></a>为什么之前打不通？</h2><p>两次项目均是这种情况，可以出网，可以反弹shell,但是命令执行就是没有回显</p>
+        <html><head></head><body><p>&#x6700;&#x8FD1;&#x9879;&#x76EE;&#x4E2D;&#x78B0;&#x5230;&#x4E86;&#x4E24;&#x4E2A;shiro&#x53CD;&#x5E8F;&#x5217;&#x5316;&#xFF0C;&#x80FD;&#x51FA;&#x7F51;&#x53CD;&#x5F39;shell&#x5931;&#x8D25;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x548C;&#x516C;&#x53F8;&#x5E08;&#x5085;&#x8BF7;&#x6559;&#x4E86;&#x4E00;&#x4E0B;&#xFF0C;&#x8C41;&#x7136;&#x5F00;&#x6717;&#xFF0C;&#x4FEE;&#x6539;&#x4E86;&#x4E00;&#x4E0B;ysoserial&#x7684;&#x4E00;&#x4E9B;&#x6E90;&#x7801;&#xFF0C;&#x4E5F;&#x6210;&#x529F;&#x6253;&#x901A;&#x4E86;<br>&#x6539;&#x52A8;&#x7684;&#x4ED3;&#x5E93;<a target="_blank" rel="noopener" href="https://github.com/Kit4y/shuyu-ysoserial">https://github.com/Kit4y/shuyu-ysoserial</a><br>&#x6253;&#x5305;&#x7248;&#x672C;<a target="_blank" rel="noopener" href="https://github.com/Kit4y/Awesome_shiro/tree/master/shiro_shuyu">https://github.com/Kit4y/Awesome_shiro/tree/master/shiro_shuyu</a></p>
+<h2 id="&#x4E3A;&#x4EC0;&#x4E48;&#x4E4B;&#x524D;&#x6253;&#x4E0D;&#x901A;&#xFF1F;"><a href="#&#x4E3A;&#x4EC0;&#x4E48;&#x4E4B;&#x524D;&#x6253;&#x4E0D;&#x901A;&#xFF1F;" class="headerlink" title="&#x4E3A;&#x4EC0;&#x4E48;&#x4E4B;&#x524D;&#x6253;&#x4E0D;&#x901A;&#xFF1F;"></a>&#x4E3A;&#x4EC0;&#x4E48;&#x4E4B;&#x524D;&#x6253;&#x4E0D;&#x901A;&#xFF1F;</h2><p>&#x4E24;&#x6B21;&#x9879;&#x76EE;&#x5747;&#x662F;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;&#x53EF;&#x4EE5;&#x51FA;&#x7F51;&#xFF0C;&#x53EF;&#x4EE5;&#x53CD;&#x5F39;shell,&#x4F46;&#x662F;&#x547D;&#x4EE4;&#x6267;&#x884C;&#x5C31;&#x662F;&#x6CA1;&#x6709;&#x56DE;&#x663E;</p></body></html>
         <p class="article-more-link">
-            <a href="/2020/06/17/JAVA4-%E6%94%B9%E5%86%99ysoserial%E8%A7%A3%E5%86%B3%E5%B8%B8%E8%A7%84shell%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/#more">Read More</a>
+            <a href="../../2020/06/17/JAVA4-%E6%94%B9%E5%86%99ysoserial%E8%A7%A3%E5%86%B3%E5%B8%B8%E8%A7%84shell%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/#more">Read More</a>
         </p>
     
     </div>
@@ -173,19 +173,19 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/2020/05/29/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A83-ysoserial%E8%B0%83%E8%AF%95%E5%92%8C%E6%9E%84%E9%80%A0URLDNS%E7%9A%84pop%E9%93%BE/" itemprop="url">JAVA3-ysoserial调试和构造URLDNS的pop链</a>
+            <a href="../../2020/05/29/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A83-ysoserial%E8%B0%83%E8%AF%95%E5%92%8C%E6%9E%84%E9%80%A0URLDNS%E7%9A%84pop%E9%93%BE/" itemprop="url">JAVA3-ysoserial调试和构造URLDNS的pop链</a>
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <span>May 29 2020</span>
+                <time datetime="2020-05-29T07:39:15.000Z" itemprop="datePublished">May 29 2020</time>
             
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/java%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6/">java安全研究</a>
+            <a class="article-category-link" href="../../categories/java%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6/">java安全研究</a>
         </span>
         
         
@@ -198,11 +198,9 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <!-- toc -->
-
-<p>这是java代码审计入门的第三篇，其实才算真的入门了一点java代码审计的皮毛<br>如果大家对java一点都不懂，还是建议看本博客前2篇关于<a href="/2020/05/25/java-dai-ma-shen-ji-ru-men-2-fan-xu-lie-hua-he-rmi/">反序列化</a>和<a href="/2020/05/25/java-dai-ma-shen-ji-ru-men/">反射</a>的基础知识</p>
+        <!-- toc --><html><head></head><body><p>&#x8FD9;&#x662F;java&#x4EE3;&#x7801;&#x5BA1;&#x8BA1;&#x5165;&#x95E8;&#x7684;&#x7B2C;&#x4E09;&#x7BC7;&#xFF0C;&#x5176;&#x5B9E;&#x624D;&#x7B97;&#x771F;&#x7684;&#x5165;&#x95E8;&#x4E86;&#x4E00;&#x70B9;java&#x4EE3;&#x7801;&#x5BA1;&#x8BA1;&#x7684;&#x76AE;&#x6BDB;<br>&#x5982;&#x679C;&#x5927;&#x5BB6;&#x5BF9;java&#x4E00;&#x70B9;&#x90FD;&#x4E0D;&#x61C2;&#xFF0C;&#x8FD8;&#x662F;&#x5EFA;&#x8BAE;&#x770B;&#x672C;&#x535A;&#x5BA2;&#x524D;2&#x7BC7;&#x5173;&#x4E8E;<a href="/2020/05/25/java-dai-ma-shen-ji-ru-men-2-fan-xu-lie-hua-he-rmi/">&#x53CD;&#x5E8F;&#x5217;&#x5316;</a>&#x548C;<a href="/2020/05/25/java-dai-ma-shen-ji-ru-men/">&#x53CD;&#x5C04;</a>&#x7684;&#x57FA;&#x7840;&#x77E5;&#x8BC6;</p></body></html>
         <p class="article-more-link">
-            <a href="/2020/05/29/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A83-ysoserial%E8%B0%83%E8%AF%95%E5%92%8C%E6%9E%84%E9%80%A0URLDNS%E7%9A%84pop%E9%93%BE/#more">Read More</a>
+            <a href="../../2020/05/29/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A83-ysoserial%E8%B0%83%E8%AF%95%E5%92%8C%E6%9E%84%E9%80%A0URLDNS%E7%9A%84pop%E9%93%BE/#more">Read More</a>
         </p>
     
     </div>
@@ -217,19 +215,19 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A82-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8CRMI/" itemprop="url">JAVA2-反序列化和RMI</a>
+            <a href="../../2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A82-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8CRMI/" itemprop="url">JAVA2-反序列化和RMI</a>
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <span>May 25 2020</span>
+                <time datetime="2020-05-25T07:34:23.000Z" itemprop="datePublished">May 25 2020</time>
             
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/java%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6/">java安全研究</a>
+            <a class="article-category-link" href="../../categories/java%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6/">java安全研究</a>
         </span>
         
         
@@ -242,12 +240,12 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <h3 id="java反序列化"><a href="#java反序列化" class="headerlink" title="java反序列化"></a>java反序列化</h3><p>博客前面也记了很多php，python反序列化的内容，所以本文也就不再复述序列化反序列化的作用之类的，直奔主题-java的反序列化利用</p>
+        <html><head></head><body><h3 id="java&#x53CD;&#x5E8F;&#x5217;&#x5316;"><a href="#java&#x53CD;&#x5E8F;&#x5217;&#x5316;" class="headerlink" title="java&#x53CD;&#x5E8F;&#x5217;&#x5316;"></a>java&#x53CD;&#x5E8F;&#x5217;&#x5316;</h3><p>&#x535A;&#x5BA2;&#x524D;&#x9762;&#x4E5F;&#x8BB0;&#x4E86;&#x5F88;&#x591A;php&#xFF0C;python&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x6240;&#x4EE5;&#x672C;&#x6587;&#x4E5F;&#x5C31;&#x4E0D;&#x518D;&#x590D;&#x8FF0;&#x5E8F;&#x5217;&#x5316;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x4F5C;&#x7528;&#x4E4B;&#x7C7B;&#x7684;&#xFF0C;&#x76F4;&#x5954;&#x4E3B;&#x9898;-java&#x7684;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x5229;&#x7528;</p>
 <blockquote>
-<p>Java 序列化是指把 Java 对象转换为字节序列的过程<br>ObjectOutputStream类的 writeObject() 方法可以实现序列化<br>Java 反序列化是指把字节序列恢复为 Java 对象的过程<br>ObjectInputStream 类的 readObject() 方法用于反序列化。</p>
-</blockquote>
+<p>Java &#x5E8F;&#x5217;&#x5316;&#x662F;&#x6307;&#x628A; Java &#x5BF9;&#x8C61;&#x8F6C;&#x6362;&#x4E3A;&#x5B57;&#x8282;&#x5E8F;&#x5217;&#x7684;&#x8FC7;&#x7A0B;<br>ObjectOutputStream&#x7C7B;&#x7684; writeObject() &#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x5E8F;&#x5217;&#x5316;<br>Java &#x53CD;&#x5E8F;&#x5217;&#x5316;&#x662F;&#x6307;&#x628A;&#x5B57;&#x8282;&#x5E8F;&#x5217;&#x6062;&#x590D;&#x4E3A; Java &#x5BF9;&#x8C61;&#x7684;&#x8FC7;&#x7A0B;<br>ObjectInputStream &#x7C7B;&#x7684; readObject() &#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x3002;</p>
+</blockquote></body></html>
         <p class="article-more-link">
-            <a href="/2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A82-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8CRMI/#more">Read More</a>
+            <a href="../../2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A82-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8CRMI/#more">Read More</a>
         </p>
     
     </div>
@@ -262,19 +260,19 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8/" itemprop="url">JAVA1-反射机制</a>
+            <a href="../../2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8/" itemprop="url">JAVA1-反射机制</a>
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <span>May 25 2020</span>
+                <time datetime="2020-05-25T02:29:10.000Z" itemprop="datePublished">May 25 2020</time>
             
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/java%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6/">java安全研究</a>
+            <a class="article-category-link" href="../../categories/java%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6/">java安全研究</a>
         </span>
         
         
@@ -287,11 +285,9 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <!-- toc -->
-
-<h3 id="楔子"><a href="#楔子" class="headerlink" title="楔子"></a>楔子</h3><p>很久就想写和java审计有关的文章了，java博大精深，学得断断续续，最近来长亭实习，从旁边一个Java大牛师傅学了一下下，还是打算记一下，内容偏易，大牛绕道<br>目录</p>
+        <!-- toc --><html><head></head><body><h3 id="&#x6954;&#x5B50;"><a href="#&#x6954;&#x5B50;" class="headerlink" title="&#x6954;&#x5B50;"></a>&#x6954;&#x5B50;</h3><p>&#x5F88;&#x4E45;&#x5C31;&#x60F3;&#x5199;&#x548C;java&#x5BA1;&#x8BA1;&#x6709;&#x5173;&#x7684;&#x6587;&#x7AE0;&#x4E86;&#xFF0C;java&#x535A;&#x5927;&#x7CBE;&#x6DF1;&#xFF0C;&#x5B66;&#x5F97;&#x65AD;&#x65AD;&#x7EED;&#x7EED;&#xFF0C;&#x6700;&#x8FD1;&#x6765;&#x957F;&#x4EAD;&#x5B9E;&#x4E60;&#xFF0C;&#x4ECE;&#x65C1;&#x8FB9;&#x4E00;&#x4E2A;Java&#x5927;&#x725B;&#x5E08;&#x5085;&#x5B66;&#x4E86;&#x4E00;&#x4E0B;&#x4E0B;&#xFF0C;&#x8FD8;&#x662F;&#x6253;&#x7B97;&#x8BB0;&#x4E00;&#x4E0B;&#xFF0C;&#x5185;&#x5BB9;&#x504F;&#x6613;&#xFF0C;&#x5927;&#x725B;&#x7ED5;&#x9053;<br>&#x76EE;&#x5F55;</p></body></html>
         <p class="article-more-link">
-            <a href="/2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8/#more">Read More</a>
+            <a href="../../2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8/#more">Read More</a>
         </p>
     
     </div>
@@ -477,7 +473,7 @@
 
 
 
-<script src="/js/script.js"></script>
+<script src="../../js/script.js"></script>
 
 
     
@@ -503,13 +499,13 @@
                 TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
-            CONTENT_URL: '/content.json',
+            CONTENT_URL: '../../content.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
 
-<script src="/js/insight.js"></script>
+<script src="../../js/insight.js"></script>
 
     
 </body>

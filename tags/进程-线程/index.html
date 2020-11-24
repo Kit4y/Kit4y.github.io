@@ -41,10 +41,10 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css">
 
 
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="../../css/style.css">
 
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
@@ -70,9 +70,9 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/">
+            <a class="navbar-item navbar-logo" href="../../index.html">
                 
-                <img src="/images/logo.png" alt="" height="28">
+                <img src="../../images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -85,16 +85,16 @@
         <div class="navbar-menu navbar-start">
             
             <a class="navbar-item "
-               href="/archives">Archives</a>
+               href="../../archives">Archives</a>
             
             <a class="navbar-item "
-               href="/friends">Friends</a>
+               href="../../friends">Friends</a>
             
             <a class="navbar-item "
-               href="/about">About</a>
+               href="../../about">About</a>
             
             <a class="navbar-item "
-               href="/tags">Tags</a>
+               href="../../tags">Tags</a>
             
         </div>
         
@@ -130,19 +130,19 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/2018/12/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%9A%A7%E6%98%A7%E7%BC%A0%E7%BB%B5/" itemprop="url">多线程和多进程的暧昧缠绵</a>
+            <a href="../../2018/12/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%9A%A7%E6%98%A7%E7%BC%A0%E7%BB%B5/" itemprop="url">多线程和多进程的暧昧缠绵</a>
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <span>Dec 3 2018</span>
+                <time datetime="2018-12-03T15:01:18.000Z" itemprop="datePublished">Dec 3 2018</time>
             
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/">计算机杂七杂八</a>
+            <a class="article-category-link" href="../../categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/">计算机杂七杂八</a>
         </span>
         
         
@@ -155,10 +155,10 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <h4 id="先教科书一波（“千万别被吓到”），教科书上关于多进程和多线程解释为"><a href="#先教科书一波（“千万别被吓到”），教科书上关于多进程和多线程解释为" class="headerlink" title="先教科书一波（“千万别被吓到”），教科书上关于多进程和多线程解释为"></a>先教科书一波（“千万别被吓到”），教科书上关于多进程和多线程解释为</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">进程是资源分配的最小单位，线程是CPU调度的最小单位</span><br></pre></td></tr></table></figure>
-<p>据说这句话拿去考试,改卷老师一定会给高分，但是还是嘚深入了解一下</p>
+        <html><head></head><body><h4 id="&#x5148;&#x6559;&#x79D1;&#x4E66;&#x4E00;&#x6CE2;&#xFF08;&#x201C;&#x5343;&#x4E07;&#x522B;&#x88AB;&#x5413;&#x5230;&#x201D;&#xFF09;&#xFF0C;&#x6559;&#x79D1;&#x4E66;&#x4E0A;&#x5173;&#x4E8E;&#x591A;&#x8FDB;&#x7A0B;&#x548C;&#x591A;&#x7EBF;&#x7A0B;&#x89E3;&#x91CA;&#x4E3A;"><a href="#&#x5148;&#x6559;&#x79D1;&#x4E66;&#x4E00;&#x6CE2;&#xFF08;&#x201C;&#x5343;&#x4E07;&#x522B;&#x88AB;&#x5413;&#x5230;&#x201D;&#xFF09;&#xFF0C;&#x6559;&#x79D1;&#x4E66;&#x4E0A;&#x5173;&#x4E8E;&#x591A;&#x8FDB;&#x7A0B;&#x548C;&#x591A;&#x7EBF;&#x7A0B;&#x89E3;&#x91CA;&#x4E3A;" class="headerlink" title="&#x5148;&#x6559;&#x79D1;&#x4E66;&#x4E00;&#x6CE2;&#xFF08;&#x201C;&#x5343;&#x4E07;&#x522B;&#x88AB;&#x5413;&#x5230;&#x201D;&#xFF09;&#xFF0C;&#x6559;&#x79D1;&#x4E66;&#x4E0A;&#x5173;&#x4E8E;&#x591A;&#x8FDB;&#x7A0B;&#x548C;&#x591A;&#x7EBF;&#x7A0B;&#x89E3;&#x91CA;&#x4E3A;"></a>&#x5148;&#x6559;&#x79D1;&#x4E66;&#x4E00;&#x6CE2;&#xFF08;&#x201C;&#x5343;&#x4E07;&#x522B;&#x88AB;&#x5413;&#x5230;&#x201D;&#xFF09;&#xFF0C;&#x6559;&#x79D1;&#x4E66;&#x4E0A;&#x5173;&#x4E8E;&#x591A;&#x8FDB;&#x7A0B;&#x548C;&#x591A;&#x7EBF;&#x7A0B;&#x89E3;&#x91CA;&#x4E3A;</h4><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">&#x8FDB;&#x7A0B;&#x662F;&#x8D44;&#x6E90;&#x5206;&#x914D;&#x7684;&#x6700;&#x5C0F;&#x5355;&#x4F4D;&#xFF0C;&#x7EBF;&#x7A0B;&#x662F;CPU&#x8C03;&#x5EA6;&#x7684;&#x6700;&#x5C0F;&#x5355;&#x4F4D;<br></code></pre></td></tr></tbody></table></figure>
+<p>&#x636E;&#x8BF4;&#x8FD9;&#x53E5;&#x8BDD;&#x62FF;&#x53BB;&#x8003;&#x8BD5;,&#x6539;&#x5377;&#x8001;&#x5E08;&#x4E00;&#x5B9A;&#x4F1A;&#x7ED9;&#x9AD8;&#x5206;&#xFF0C;&#x4F46;&#x662F;&#x8FD8;&#x662F;&#x561A;&#x6DF1;&#x5165;&#x4E86;&#x89E3;&#x4E00;&#x4E0B;</p></body></html>
         <p class="article-more-link">
-            <a href="/2018/12/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%9A%A7%E6%98%A7%E7%BC%A0%E7%BB%B5/#more">Read More</a>
+            <a href="../../2018/12/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%9A%A7%E6%98%A7%E7%BC%A0%E7%BB%B5/#more">Read More</a>
         </p>
     
     </div>
@@ -344,7 +344,7 @@
 
 
 
-<script src="/js/script.js"></script>
+<script src="../../js/script.js"></script>
 
 
     
@@ -370,13 +370,13 @@
                 TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
-            CONTENT_URL: '/content.json',
+            CONTENT_URL: '../../content.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
 
-<script src="/js/insight.js"></script>
+<script src="../../js/insight.js"></script>
 
     
 </body>

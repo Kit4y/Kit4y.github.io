@@ -16,12 +16,12 @@
 
 
 
-    <meta name="description" content="楔子在很久很久之前，一个很傻很傻的刘萌新不知何因上传了一个带特殊字符文件名的文件到服务器中，于是他想着怎么删除。">
+    <meta name="description" content="&amp;#x6954;&amp;#x5B50;&amp;#x5728;&amp;#x5F88;&amp;#x4E45;&amp;#x5F88;&amp;#x4E45;&amp;#x4E4B;&amp;#x524D;&amp;#xFF0C;&amp;#x4E00;&amp;#x4E2A;&amp;#x5F88;&amp;#x50BB;&amp;#x5F88;&amp;#x50BB;&amp;#x7684;&amp;#x5218;&amp;#x840C;&amp;#x65B0;&amp;#x4E0D;&amp;#x77E5;&amp;#x4F55;&amp;#x56E0;&amp;#x4E0A;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从一次删除带特殊字符文件名的文件中学习Linux索引节点inode">
 <meta property="og:url" content="http://example.com/2019/03/13/%E4%BB%8E%E4%B8%80%E6%AC%A1%E5%88%A0%E9%99%A4%E5%B8%A6%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6%E6%96%87%E4%BB%B6%E5%90%8D%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%AD%E5%AD%A6%E4%B9%A0Linux%E7%B4%A2%E5%BC%95%E8%8A%82%E7%82%B9inode/index.html">
 <meta property="og:site_name" content="ShuYu">
-<meta property="og:description" content="楔子在很久很久之前，一个很傻很傻的刘萌新不知何因上传了一个带特殊字符文件名的文件到服务器中，于是他想着怎么删除。">
+<meta property="og:description" content="&amp;#x6954;&amp;#x5B50;&amp;#x5728;&amp;#x5F88;&amp;#x4E45;&amp;#x5F88;&amp;#x4E45;&amp;#x4E4B;&amp;#x524D;&amp;#xFF0C;&amp;#x4E00;&amp;#x4E2A;&amp;#x5F88;&amp;#x50BB;&amp;#x5F88;&amp;#x50BB;&amp;#x7684;&amp;#x5218;&amp;#x840C;&amp;#x65B0;&amp;#x4E0D;&amp;#x77E5;&amp;#x4F55;&amp;#x56E0;&amp;#x4E0A;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2019/03/13/%E4%BB%8E%E4%B8%80%E6%AC%A1%E5%88%A0%E9%99%A4%E5%B8%A6%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6%E6%96%87%E4%BB%B6%E5%90%8D%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%AD%E5%AD%A6%E4%B9%A0Linux%E7%B4%A2%E5%BC%95%E8%8A%82%E7%82%B9inode/1.png">
 <meta property="og:image" content="http://example.com/2019/03/13/%E4%BB%8E%E4%B8%80%E6%AC%A1%E5%88%A0%E9%99%A4%E5%B8%A6%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6%E6%96%87%E4%BB%B6%E5%90%8D%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%AD%E5%AD%A6%E4%B9%A0Linux%E7%B4%A2%E5%BC%95%E8%8A%82%E7%82%B9inode/2.png">
@@ -52,10 +52,10 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css">
 
 
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="../../../../css/style.css">
 
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
@@ -81,9 +81,9 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/">
+            <a class="navbar-item navbar-logo" href="../../../../index.html">
                 
-                <img src="/images/logo.png" alt="" height="28">
+                <img src="../../../../images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -96,16 +96,16 @@
         <div class="navbar-menu navbar-start">
             
             <a class="navbar-item "
-               href="/archives">Archives</a>
+               href="../../../../archives">Archives</a>
             
             <a class="navbar-item "
-               href="/friends">Friends</a>
+               href="../../../../friends">Friends</a>
             
             <a class="navbar-item "
-               href="/about">About</a>
+               href="../../../../about">About</a>
             
             <a class="navbar-item "
-               href="/tags">Tags</a>
+               href="../../../../tags">Tags</a>
             
         </div>
         
@@ -139,13 +139,13 @@
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <span>Mar 13 2019</span>
+                <time datetime="2019-03-13T13:29:25.000Z" itemprop="datePublished">Mar 13 2019</time>
             
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/">计算机杂七杂八</a>
+            <a class="article-category-link" href="../../../../categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/">计算机杂七杂八</a>
         </span>
         
         
@@ -158,27 +158,27 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <h3 id="楔子"><a href="#楔子" class="headerlink" title="楔子"></a>楔子</h3><p>在很久很久之前，一个很傻很傻的刘萌新不知何因上传了一个带特殊字符文件名的文件到服务器中，于是他想着怎么删除。</p>
+        <html><head></head><body><h3 id="&#x6954;&#x5B50;"><a href="#&#x6954;&#x5B50;" class="headerlink" title="&#x6954;&#x5B50;"></a>&#x6954;&#x5B50;</h3><p>&#x5728;&#x5F88;&#x4E45;&#x5F88;&#x4E45;&#x4E4B;&#x524D;&#xFF0C;&#x4E00;&#x4E2A;&#x5F88;&#x50BB;&#x5F88;&#x50BB;&#x7684;&#x5218;&#x840C;&#x65B0;&#x4E0D;&#x77E5;&#x4F55;&#x56E0;&#x4E0A;&#x4F20;&#x4E86;&#x4E00;&#x4E2A;&#x5E26;&#x7279;&#x6B8A;&#x5B57;&#x7B26;&#x6587;&#x4EF6;&#x540D;&#x7684;&#x6587;&#x4EF6;&#x5230;&#x670D;&#x52A1;&#x5668;&#x4E2D;&#xFF0C;&#x4E8E;&#x662F;&#x4ED6;&#x60F3;&#x7740;&#x600E;&#x4E48;&#x5220;&#x9664;&#x3002;</p>
 <a id="more"></a>
 
 
-<p><img src="1.png"><br>方法1、从面板中删除，然而面板和萌新一样垃圾，在文件管理中根本不显示这个文件<br>方法2、xshell连接，rm -rf一梭子下去 ，但是文件名你不能输入，并且同目录下有其他重要的东西。<br><img src="2.png"><br>然后你会想通过 | grep 啦正则啦 一梭子来找到那个文件，没错本萌新就是这样的 ε=ε=ε=┏(゜ロ゜;)┛。但是还是找不到<br><img src="3.png"><br>直到你发现了一个叫inode的东西</p>
-<h4 id="1、inode简介"><a href="#1、inode简介" class="headerlink" title="1、inode简介"></a>1、inode简介</h4><p>理解inode，要从文件储存说起。<br>文件储存在硬盘上，硬盘的最小存储单位叫做”扇区”（Sector）。每个扇区储存512字节（相当于0.5KB）。<br>操作系统读取硬盘的时候，不会一个个扇区地读取，这样效率太低，而是一次性连续读取多个扇区，即一次性读取一个”块”（block）。这种由多个扇区组成的”块”，是文件存取的最小单位。”块”的大小，最常见的是4KB，即连续八个 sector组成一个 block。<br>文件数据都储存在”块”中，那么很显然，我们还必须找到一个地方储存文件的元信息，比如文件的创建者、文件的创建日期、文件的大小等等。这种储存文件元信息的区域就叫做inode，中文译名为”索引节点”。</p>
-<h4 id="2、inode的内容"><a href="#2、inode的内容" class="headerlink" title="2、inode的内容"></a>2、inode的内容</h4><p>inode包含文件的元信息，具体来说有以下内容：<br>    * 文件的字节数<br>    * 文件拥有者的User ID<br>    * 文件的Group ID<br>    * 文件的读、写、执行权限<br>    * 文件的时间戳，共有三个：ctime指inode上一次变动的时间，mtime指文件内容上一次变动的时间，atime指文件上一次打开的时间。<br>    * 链接数，即有多少文件名指向这个inode<br>    * 文件数据block的位置<br>    可以用stat命令，查看某个文件的inode信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost &#x2F;]# stat example.txt  </span><br></pre></td></tr></table></figure>
-<h4 id="3、inode号码"><a href="#3、inode号码" class="headerlink" title="3、inode号码"></a>3、inode号码</h4><p>每个inode都有一个号码，操作系统用inode号码来识别不同的文件。<br>    这里值得重复一遍，Unix/Linux系统内部不使用文件名，而使用inode号码来识别文件。对于系统来说，文件名只是inode号码便于识别的别称或者绰号。表面上，用户通过文件名，打开文件。实际上，系统内部这个过程分成三步：首先，系统找到这个文件名对应的inode号码；其次，通过inode号码，获取inode信息；最后，根据inode信息，找到文件数据所在的block，读出数据。<br>     使用ls -i命令，可以看到文件名对应的inode号码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost &#x2F;]# ls -i test.txt   </span><br><span class="line">6970 test.txt  </span><br></pre></td></tr></table></figure>
+<p><img src="1.png"><br>&#x65B9;&#x6CD5;1&#x3001;&#x4ECE;&#x9762;&#x677F;&#x4E2D;&#x5220;&#x9664;&#xFF0C;&#x7136;&#x800C;&#x9762;&#x677F;&#x548C;&#x840C;&#x65B0;&#x4E00;&#x6837;&#x5783;&#x573E;&#xFF0C;&#x5728;&#x6587;&#x4EF6;&#x7BA1;&#x7406;&#x4E2D;&#x6839;&#x672C;&#x4E0D;&#x663E;&#x793A;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;<br>&#x65B9;&#x6CD5;2&#x3001;xshell&#x8FDE;&#x63A5;&#xFF0C;rm -rf&#x4E00;&#x68AD;&#x5B50;&#x4E0B;&#x53BB; &#xFF0C;&#x4F46;&#x662F;&#x6587;&#x4EF6;&#x540D;&#x4F60;&#x4E0D;&#x80FD;&#x8F93;&#x5165;&#xFF0C;&#x5E76;&#x4E14;&#x540C;&#x76EE;&#x5F55;&#x4E0B;&#x6709;&#x5176;&#x4ED6;&#x91CD;&#x8981;&#x7684;&#x4E1C;&#x897F;&#x3002;<br><img src="2.png"><br>&#x7136;&#x540E;&#x4F60;&#x4F1A;&#x60F3;&#x901A;&#x8FC7; | grep &#x5566;&#x6B63;&#x5219;&#x5566; &#x4E00;&#x68AD;&#x5B50;&#x6765;&#x627E;&#x5230;&#x90A3;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;&#x6CA1;&#x9519;&#x672C;&#x840C;&#x65B0;&#x5C31;&#x662F;&#x8FD9;&#x6837;&#x7684; &#x3B5;=&#x3B5;=&#x3B5;=&#x250F;(&#x309C;&#x30ED;&#x309C;;)&#x251B;&#x3002;&#x4F46;&#x662F;&#x8FD8;&#x662F;&#x627E;&#x4E0D;&#x5230;<br><img src="3.png"><br>&#x76F4;&#x5230;&#x4F60;&#x53D1;&#x73B0;&#x4E86;&#x4E00;&#x4E2A;&#x53EB;inode&#x7684;&#x4E1C;&#x897F;</p>
+<h4 id="1&#x3001;inode&#x7B80;&#x4ECB;"><a href="#1&#x3001;inode&#x7B80;&#x4ECB;" class="headerlink" title="1&#x3001;inode&#x7B80;&#x4ECB;"></a>1&#x3001;inode&#x7B80;&#x4ECB;</h4><p>&#x7406;&#x89E3;inode&#xFF0C;&#x8981;&#x4ECE;&#x6587;&#x4EF6;&#x50A8;&#x5B58;&#x8BF4;&#x8D77;&#x3002;<br>&#x6587;&#x4EF6;&#x50A8;&#x5B58;&#x5728;&#x786C;&#x76D8;&#x4E0A;&#xFF0C;&#x786C;&#x76D8;&#x7684;&#x6700;&#x5C0F;&#x5B58;&#x50A8;&#x5355;&#x4F4D;&#x53EB;&#x505A;&#x201D;&#x6247;&#x533A;&#x201D;&#xFF08;Sector&#xFF09;&#x3002;&#x6BCF;&#x4E2A;&#x6247;&#x533A;&#x50A8;&#x5B58;512&#x5B57;&#x8282;&#xFF08;&#x76F8;&#x5F53;&#x4E8E;0.5KB&#xFF09;&#x3002;<br>&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x8BFB;&#x53D6;&#x786C;&#x76D8;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E0D;&#x4F1A;&#x4E00;&#x4E2A;&#x4E2A;&#x6247;&#x533A;&#x5730;&#x8BFB;&#x53D6;&#xFF0C;&#x8FD9;&#x6837;&#x6548;&#x7387;&#x592A;&#x4F4E;&#xFF0C;&#x800C;&#x662F;&#x4E00;&#x6B21;&#x6027;&#x8FDE;&#x7EED;&#x8BFB;&#x53D6;&#x591A;&#x4E2A;&#x6247;&#x533A;&#xFF0C;&#x5373;&#x4E00;&#x6B21;&#x6027;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x201D;&#x5757;&#x201D;&#xFF08;block&#xFF09;&#x3002;&#x8FD9;&#x79CD;&#x7531;&#x591A;&#x4E2A;&#x6247;&#x533A;&#x7EC4;&#x6210;&#x7684;&#x201D;&#x5757;&#x201D;&#xFF0C;&#x662F;&#x6587;&#x4EF6;&#x5B58;&#x53D6;&#x7684;&#x6700;&#x5C0F;&#x5355;&#x4F4D;&#x3002;&#x201D;&#x5757;&#x201D;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x6700;&#x5E38;&#x89C1;&#x7684;&#x662F;4KB&#xFF0C;&#x5373;&#x8FDE;&#x7EED;&#x516B;&#x4E2A; sector&#x7EC4;&#x6210;&#x4E00;&#x4E2A; block&#x3002;<br>&#x6587;&#x4EF6;&#x6570;&#x636E;&#x90FD;&#x50A8;&#x5B58;&#x5728;&#x201D;&#x5757;&#x201D;&#x4E2D;&#xFF0C;&#x90A3;&#x4E48;&#x5F88;&#x663E;&#x7136;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x5FC5;&#x987B;&#x627E;&#x5230;&#x4E00;&#x4E2A;&#x5730;&#x65B9;&#x50A8;&#x5B58;&#x6587;&#x4EF6;&#x7684;&#x5143;&#x4FE1;&#x606F;&#xFF0C;&#x6BD4;&#x5982;&#x6587;&#x4EF6;&#x7684;&#x521B;&#x5EFA;&#x8005;&#x3001;&#x6587;&#x4EF6;&#x7684;&#x521B;&#x5EFA;&#x65E5;&#x671F;&#x3001;&#x6587;&#x4EF6;&#x7684;&#x5927;&#x5C0F;&#x7B49;&#x7B49;&#x3002;&#x8FD9;&#x79CD;&#x50A8;&#x5B58;&#x6587;&#x4EF6;&#x5143;&#x4FE1;&#x606F;&#x7684;&#x533A;&#x57DF;&#x5C31;&#x53EB;&#x505A;inode&#xFF0C;&#x4E2D;&#x6587;&#x8BD1;&#x540D;&#x4E3A;&#x201D;&#x7D22;&#x5F15;&#x8282;&#x70B9;&#x201D;&#x3002;</p>
+<h4 id="2&#x3001;inode&#x7684;&#x5185;&#x5BB9;"><a href="#2&#x3001;inode&#x7684;&#x5185;&#x5BB9;" class="headerlink" title="2&#x3001;inode&#x7684;&#x5185;&#x5BB9;"></a>2&#x3001;inode&#x7684;&#x5185;&#x5BB9;</h4><p>inode&#x5305;&#x542B;&#x6587;&#x4EF6;&#x7684;&#x5143;&#x4FE1;&#x606F;&#xFF0C;&#x5177;&#x4F53;&#x6765;&#x8BF4;&#x6709;&#x4EE5;&#x4E0B;&#x5185;&#x5BB9;&#xFF1A;<br>    * &#x6587;&#x4EF6;&#x7684;&#x5B57;&#x8282;&#x6570;<br>    * &#x6587;&#x4EF6;&#x62E5;&#x6709;&#x8005;&#x7684;User ID<br>    * &#x6587;&#x4EF6;&#x7684;Group ID<br>    * &#x6587;&#x4EF6;&#x7684;&#x8BFB;&#x3001;&#x5199;&#x3001;&#x6267;&#x884C;&#x6743;&#x9650;<br>    * &#x6587;&#x4EF6;&#x7684;&#x65F6;&#x95F4;&#x6233;&#xFF0C;&#x5171;&#x6709;&#x4E09;&#x4E2A;&#xFF1A;ctime&#x6307;inode&#x4E0A;&#x4E00;&#x6B21;&#x53D8;&#x52A8;&#x7684;&#x65F6;&#x95F4;&#xFF0C;mtime&#x6307;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x4E0A;&#x4E00;&#x6B21;&#x53D8;&#x52A8;&#x7684;&#x65F6;&#x95F4;&#xFF0C;atime&#x6307;&#x6587;&#x4EF6;&#x4E0A;&#x4E00;&#x6B21;&#x6253;&#x5F00;&#x7684;&#x65F6;&#x95F4;&#x3002;<br>    * &#x94FE;&#x63A5;&#x6570;&#xFF0C;&#x5373;&#x6709;&#x591A;&#x5C11;&#x6587;&#x4EF6;&#x540D;&#x6307;&#x5411;&#x8FD9;&#x4E2A;inode<br>    * &#x6587;&#x4EF6;&#x6570;&#x636E;block&#x7684;&#x4F4D;&#x7F6E;<br>    &#x53EF;&#x4EE5;&#x7528;stat&#x547D;&#x4EE4;&#xFF0C;&#x67E5;&#x770B;&#x67D0;&#x4E2A;&#x6587;&#x4EF6;&#x7684;inode&#x4FE1;&#x606F;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">[root@localhost /]# stat example.txt  <br></code></pre></td></tr></tbody></table></figure>
+<h4 id="3&#x3001;inode&#x53F7;&#x7801;"><a href="#3&#x3001;inode&#x53F7;&#x7801;" class="headerlink" title="3&#x3001;inode&#x53F7;&#x7801;"></a>3&#x3001;inode&#x53F7;&#x7801;</h4><p>&#x6BCF;&#x4E2A;inode&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x53F7;&#x7801;&#xFF0C;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7528;inode&#x53F7;&#x7801;&#x6765;&#x8BC6;&#x522B;&#x4E0D;&#x540C;&#x7684;&#x6587;&#x4EF6;&#x3002;<br>    &#x8FD9;&#x91CC;&#x503C;&#x5F97;&#x91CD;&#x590D;&#x4E00;&#x904D;&#xFF0C;Unix/Linux&#x7CFB;&#x7EDF;&#x5185;&#x90E8;&#x4E0D;&#x4F7F;&#x7528;&#x6587;&#x4EF6;&#x540D;&#xFF0C;&#x800C;&#x4F7F;&#x7528;inode&#x53F7;&#x7801;&#x6765;&#x8BC6;&#x522B;&#x6587;&#x4EF6;&#x3002;&#x5BF9;&#x4E8E;&#x7CFB;&#x7EDF;&#x6765;&#x8BF4;&#xFF0C;&#x6587;&#x4EF6;&#x540D;&#x53EA;&#x662F;inode&#x53F7;&#x7801;&#x4FBF;&#x4E8E;&#x8BC6;&#x522B;&#x7684;&#x522B;&#x79F0;&#x6216;&#x8005;&#x7EF0;&#x53F7;&#x3002;&#x8868;&#x9762;&#x4E0A;&#xFF0C;&#x7528;&#x6237;&#x901A;&#x8FC7;&#x6587;&#x4EF6;&#x540D;&#xFF0C;&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x3002;&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;&#x7CFB;&#x7EDF;&#x5185;&#x90E8;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x5206;&#x6210;&#x4E09;&#x6B65;&#xFF1A;&#x9996;&#x5148;&#xFF0C;&#x7CFB;&#x7EDF;&#x627E;&#x5230;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x540D;&#x5BF9;&#x5E94;&#x7684;inode&#x53F7;&#x7801;&#xFF1B;&#x5176;&#x6B21;&#xFF0C;&#x901A;&#x8FC7;inode&#x53F7;&#x7801;&#xFF0C;&#x83B7;&#x53D6;inode&#x4FE1;&#x606F;&#xFF1B;&#x6700;&#x540E;&#xFF0C;&#x6839;&#x636E;inode&#x4FE1;&#x606F;&#xFF0C;&#x627E;&#x5230;&#x6587;&#x4EF6;&#x6570;&#x636E;&#x6240;&#x5728;&#x7684;block&#xFF0C;&#x8BFB;&#x51FA;&#x6570;&#x636E;&#x3002;<br>     &#x4F7F;&#x7528;ls -i&#x547D;&#x4EE4;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x6587;&#x4EF6;&#x540D;&#x5BF9;&#x5E94;&#x7684;inode&#x53F7;&#x7801;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plain">[root@localhost /]# ls -i test.txt   <br>6970 test.txt  <br></code></pre></td></tr></tbody></table></figure>
 <p><img src="7.png"></p>
-<h4 id="4、硬链接"><a href="#4、硬链接" class="headerlink" title="4、硬链接"></a>4、硬链接</h4><p>一般情况下，文件名和inode号码是”一一对应”关系，每个inode号码对应一个文件名。但是，Unix/Linux系统，允许多个文件名指向同一个inode号码。这意味着，可以用不同的文件名访问同样的内容；对文件内容进行修改，会影响到所有文件名；但是，删除一个文件名，不影响另一个文件名的访问。这种情况就被称为”硬链接”（hard link）。</p>
-<h4 id="5、软链接"><a href="#5、软链接" class="headerlink" title="5、软链接"></a>5、软链接</h4><p>除了硬链接以外，还有一种特殊情况。文件A和文件B的inode号码虽然不一样，但是文件A的内容是文件B的路径。读取文件A时，系统会自动将访问者导向文件B。因此，无论打开哪一个文件，最终读取的都是文件B。这时，文件A就称为文件B的”软链接”（soft link）或者”符号链接（symbolic link）。<br>这意味着，文件A依赖于文件B而存在，如果删除了文件B，打开文件A就会报错：”No such file or directory”。这是软链接与硬链接最大的不同：文件A指向文件B的文件名，而不是文件B的inode号码，文件B的inode”链接数”不会因此发生变化。<br>ln -s命令可以创建软链接。</p>
-<h3 id="当我们知道有inode号码这么个东西后，那么刘萌新的问题就能迎刃而解了"><a href="#当我们知道有inode号码这么个东西后，那么刘萌新的问题就能迎刃而解了" class="headerlink" title="当我们知道有inode号码这么个东西后，那么刘萌新的问题就能迎刃而解了"></a>当我们知道有inode号码这么个东西后，那么刘萌新的问题就能迎刃而解了</h3><p><img src="4.png"><br><img src="5.png"><br><img src="6.png"></p>
-
+<h4 id="4&#x3001;&#x786C;&#x94FE;&#x63A5;"><a href="#4&#x3001;&#x786C;&#x94FE;&#x63A5;" class="headerlink" title="4&#x3001;&#x786C;&#x94FE;&#x63A5;"></a>4&#x3001;&#x786C;&#x94FE;&#x63A5;</h4><p>&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6587;&#x4EF6;&#x540D;&#x548C;inode&#x53F7;&#x7801;&#x662F;&#x201D;&#x4E00;&#x4E00;&#x5BF9;&#x5E94;&#x201D;&#x5173;&#x7CFB;&#xFF0C;&#x6BCF;&#x4E2A;inode&#x53F7;&#x7801;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x540D;&#x3002;&#x4F46;&#x662F;&#xFF0C;Unix/Linux&#x7CFB;&#x7EDF;&#xFF0C;&#x5141;&#x8BB8;&#x591A;&#x4E2A;&#x6587;&#x4EF6;&#x540D;&#x6307;&#x5411;&#x540C;&#x4E00;&#x4E2A;inode&#x53F7;&#x7801;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x4E0D;&#x540C;&#x7684;&#x6587;&#x4EF6;&#x540D;&#x8BBF;&#x95EE;&#x540C;&#x6837;&#x7684;&#x5185;&#x5BB9;&#xFF1B;&#x5BF9;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x8FDB;&#x884C;&#x4FEE;&#x6539;&#xFF0C;&#x4F1A;&#x5F71;&#x54CD;&#x5230;&#x6240;&#x6709;&#x6587;&#x4EF6;&#x540D;&#xFF1B;&#x4F46;&#x662F;&#xFF0C;&#x5220;&#x9664;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x540D;&#xFF0C;&#x4E0D;&#x5F71;&#x54CD;&#x53E6;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x540D;&#x7684;&#x8BBF;&#x95EE;&#x3002;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x5C31;&#x88AB;&#x79F0;&#x4E3A;&#x201D;&#x786C;&#x94FE;&#x63A5;&#x201D;&#xFF08;hard link&#xFF09;&#x3002;</p>
+<h4 id="5&#x3001;&#x8F6F;&#x94FE;&#x63A5;"><a href="#5&#x3001;&#x8F6F;&#x94FE;&#x63A5;" class="headerlink" title="5&#x3001;&#x8F6F;&#x94FE;&#x63A5;"></a>5&#x3001;&#x8F6F;&#x94FE;&#x63A5;</h4><p>&#x9664;&#x4E86;&#x786C;&#x94FE;&#x63A5;&#x4EE5;&#x5916;&#xFF0C;&#x8FD8;&#x6709;&#x4E00;&#x79CD;&#x7279;&#x6B8A;&#x60C5;&#x51B5;&#x3002;&#x6587;&#x4EF6;A&#x548C;&#x6587;&#x4EF6;B&#x7684;inode&#x53F7;&#x7801;&#x867D;&#x7136;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;&#x4F46;&#x662F;&#x6587;&#x4EF6;A&#x7684;&#x5185;&#x5BB9;&#x662F;&#x6587;&#x4EF6;B&#x7684;&#x8DEF;&#x5F84;&#x3002;&#x8BFB;&#x53D6;&#x6587;&#x4EF6;A&#x65F6;&#xFF0C;&#x7CFB;&#x7EDF;&#x4F1A;&#x81EA;&#x52A8;&#x5C06;&#x8BBF;&#x95EE;&#x8005;&#x5BFC;&#x5411;&#x6587;&#x4EF6;B&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x65E0;&#x8BBA;&#x6253;&#x5F00;&#x54EA;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;&#x6700;&#x7EC8;&#x8BFB;&#x53D6;&#x7684;&#x90FD;&#x662F;&#x6587;&#x4EF6;B&#x3002;&#x8FD9;&#x65F6;&#xFF0C;&#x6587;&#x4EF6;A&#x5C31;&#x79F0;&#x4E3A;&#x6587;&#x4EF6;B&#x7684;&#x201D;&#x8F6F;&#x94FE;&#x63A5;&#x201D;&#xFF08;soft link&#xFF09;&#x6216;&#x8005;&#x201D;&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#xFF08;symbolic link&#xFF09;&#x3002;<br>&#x8FD9;&#x610F;&#x5473;&#x7740;&#xFF0C;&#x6587;&#x4EF6;A&#x4F9D;&#x8D56;&#x4E8E;&#x6587;&#x4EF6;B&#x800C;&#x5B58;&#x5728;&#xFF0C;&#x5982;&#x679C;&#x5220;&#x9664;&#x4E86;&#x6587;&#x4EF6;B&#xFF0C;&#x6253;&#x5F00;&#x6587;&#x4EF6;A&#x5C31;&#x4F1A;&#x62A5;&#x9519;&#xFF1A;&#x201D;No such file or directory&#x201D;&#x3002;&#x8FD9;&#x662F;&#x8F6F;&#x94FE;&#x63A5;&#x4E0E;&#x786C;&#x94FE;&#x63A5;&#x6700;&#x5927;&#x7684;&#x4E0D;&#x540C;&#xFF1A;&#x6587;&#x4EF6;A&#x6307;&#x5411;&#x6587;&#x4EF6;B&#x7684;&#x6587;&#x4EF6;&#x540D;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x6587;&#x4EF6;B&#x7684;inode&#x53F7;&#x7801;&#xFF0C;&#x6587;&#x4EF6;B&#x7684;inode&#x201D;&#x94FE;&#x63A5;&#x6570;&#x201D;&#x4E0D;&#x4F1A;&#x56E0;&#x6B64;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x3002;<br>ln -s&#x547D;&#x4EE4;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x8F6F;&#x94FE;&#x63A5;&#x3002;</p>
+<h3 id="&#x5F53;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#x6709;inode&#x53F7;&#x7801;&#x8FD9;&#x4E48;&#x4E2A;&#x4E1C;&#x897F;&#x540E;&#xFF0C;&#x90A3;&#x4E48;&#x5218;&#x840C;&#x65B0;&#x7684;&#x95EE;&#x9898;&#x5C31;&#x80FD;&#x8FCE;&#x5203;&#x800C;&#x89E3;&#x4E86;"><a href="#&#x5F53;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#x6709;inode&#x53F7;&#x7801;&#x8FD9;&#x4E48;&#x4E2A;&#x4E1C;&#x897F;&#x540E;&#xFF0C;&#x90A3;&#x4E48;&#x5218;&#x840C;&#x65B0;&#x7684;&#x95EE;&#x9898;&#x5C31;&#x80FD;&#x8FCE;&#x5203;&#x800C;&#x89E3;&#x4E86;" class="headerlink" title="&#x5F53;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#x6709;inode&#x53F7;&#x7801;&#x8FD9;&#x4E48;&#x4E2A;&#x4E1C;&#x897F;&#x540E;&#xFF0C;&#x90A3;&#x4E48;&#x5218;&#x840C;&#x65B0;&#x7684;&#x95EE;&#x9898;&#x5C31;&#x80FD;&#x8FCE;&#x5203;&#x800C;&#x89E3;&#x4E86;"></a>&#x5F53;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#x6709;inode&#x53F7;&#x7801;&#x8FD9;&#x4E48;&#x4E2A;&#x4E1C;&#x897F;&#x540E;&#xFF0C;&#x90A3;&#x4E48;&#x5218;&#x840C;&#x65B0;&#x7684;&#x95EE;&#x9898;&#x5C31;&#x80FD;&#x8FCE;&#x5203;&#x800C;&#x89E3;&#x4E86;</h3><p><img src="4.png"><br><img src="5.png"><br><img src="6.png"></p>
+</body></html>
     
     </div>
     
     <div class="columns is-variable is-1 is-multiline is-mobile">
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Linux/">#Linux</a></span>
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="../../../../tags/Linux/">#Linux</a></span>
     
     </div>
     
@@ -186,12 +186,12 @@
     <div class="columns is-mobile is-multiline article-nav">
         <span class="column is-12-mobile is-half-desktop  article-nav-prev">
             
-            <a href="/2019/03/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B-%E9%93%BE%E8%B7%AF%E5%B1%82/">计算机网络自顶向下-链路层</a>
+            <a href="../../15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B-%E9%93%BE%E8%B7%AF%E5%B1%82/">计算机网络自顶向下-链路层</a>
             
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">
             
-            <a href="/2019/03/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B-%E7%BD%91%E7%BB%9C%E5%B1%82/">计算机网络自顶向下-网络层</a>
+            <a href="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B-%E7%BD%91%E7%BB%9C%E5%B1%82/">计算机网络自顶向下-网络层</a>
             
         </span>
     </div>
@@ -374,7 +374,7 @@
 
 
 
-<script src="/js/script.js"></script>
+<script src="../../../../js/script.js"></script>
 
 
     
@@ -400,13 +400,13 @@
                 TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
-            CONTENT_URL: '/content.json',
+            CONTENT_URL: '../../../../content.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
 
-<script src="/js/insight.js"></script>
+<script src="../../../../js/insight.js"></script>
 
     
 </body>

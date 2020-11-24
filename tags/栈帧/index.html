@@ -41,10 +41,10 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css">
 
 
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="../../css/style.css">
 
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
@@ -70,9 +70,9 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/">
+            <a class="navbar-item navbar-logo" href="../../index.html">
                 
-                <img src="/images/logo.png" alt="" height="28">
+                <img src="../../images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -85,16 +85,16 @@
         <div class="navbar-menu navbar-start">
             
             <a class="navbar-item "
-               href="/archives">Archives</a>
+               href="../../archives">Archives</a>
             
             <a class="navbar-item "
-               href="/friends">Friends</a>
+               href="../../friends">Friends</a>
             
             <a class="navbar-item "
-               href="/about">About</a>
+               href="../../about">About</a>
             
             <a class="navbar-item "
-               href="/tags">Tags</a>
+               href="../../tags">Tags</a>
             
         </div>
         
@@ -130,19 +130,19 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/2018/12/21/CSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B%E6%A0%88%E5%B8%A7%E7%9A%84%E5%8F%98%E5%8C%96/" itemprop="url">CSAPP又双叒叕来一遍之函数调用过程栈帧的变化</a>
+            <a href="../../2018/12/21/CSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B%E6%A0%88%E5%B8%A7%E7%9A%84%E5%8F%98%E5%8C%96/" itemprop="url">CSAPP又双叒叕来一遍之函数调用过程栈帧的变化</a>
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <span>Dec 21 2018</span>
+                <time datetime="2018-12-20T22:33:53.000Z" itemprop="datePublished">Dec 21 2018</time>
             
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/CSAPP/">CSAPP</a>
+            <a class="article-category-link" href="../../categories/CSAPP/">CSAPP</a>
         </span>
         
         
@@ -155,9 +155,9 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <h2 id="函数调用在第三章第七章均有涉及，故专门总结一波函数调用栈帧的变化"><a href="#函数调用在第三章第七章均有涉及，故专门总结一波函数调用栈帧的变化" class="headerlink" title="函数调用在第三章第七章均有涉及，故专门总结一波函数调用栈帧的变化"></a>函数调用在第三章第七章均有涉及，故专门总结一波函数调用栈帧的变化</h2><h4 id="1、熟悉一下程序的进程空间-，即对进程如何使用内存"><a href="#1、熟悉一下程序的进程空间-，即对进程如何使用内存" class="headerlink" title="1、熟悉一下程序的进程空间 ，即对进程如何使用内存"></a>1、熟悉一下程序的进程空间 ，即对进程如何使用内存</h4>
+        <html><head></head><body><h2 id="&#x51FD;&#x6570;&#x8C03;&#x7528;&#x5728;&#x7B2C;&#x4E09;&#x7AE0;&#x7B2C;&#x4E03;&#x7AE0;&#x5747;&#x6709;&#x6D89;&#x53CA;&#xFF0C;&#x6545;&#x4E13;&#x95E8;&#x603B;&#x7ED3;&#x4E00;&#x6CE2;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x6808;&#x5E27;&#x7684;&#x53D8;&#x5316;"><a href="#&#x51FD;&#x6570;&#x8C03;&#x7528;&#x5728;&#x7B2C;&#x4E09;&#x7AE0;&#x7B2C;&#x4E03;&#x7AE0;&#x5747;&#x6709;&#x6D89;&#x53CA;&#xFF0C;&#x6545;&#x4E13;&#x95E8;&#x603B;&#x7ED3;&#x4E00;&#x6CE2;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x6808;&#x5E27;&#x7684;&#x53D8;&#x5316;" class="headerlink" title="&#x51FD;&#x6570;&#x8C03;&#x7528;&#x5728;&#x7B2C;&#x4E09;&#x7AE0;&#x7B2C;&#x4E03;&#x7AE0;&#x5747;&#x6709;&#x6D89;&#x53CA;&#xFF0C;&#x6545;&#x4E13;&#x95E8;&#x603B;&#x7ED3;&#x4E00;&#x6CE2;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x6808;&#x5E27;&#x7684;&#x53D8;&#x5316;"></a>&#x51FD;&#x6570;&#x8C03;&#x7528;&#x5728;&#x7B2C;&#x4E09;&#x7AE0;&#x7B2C;&#x4E03;&#x7AE0;&#x5747;&#x6709;&#x6D89;&#x53CA;&#xFF0C;&#x6545;&#x4E13;&#x95E8;&#x603B;&#x7ED3;&#x4E00;&#x6CE2;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x6808;&#x5E27;&#x7684;&#x53D8;&#x5316;</h2><h4 id="1&#x3001;&#x719F;&#x6089;&#x4E00;&#x4E0B;&#x7A0B;&#x5E8F;&#x7684;&#x8FDB;&#x7A0B;&#x7A7A;&#x95F4;-&#xFF0C;&#x5373;&#x5BF9;&#x8FDB;&#x7A0B;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5185;&#x5B58;"><a href="#1&#x3001;&#x719F;&#x6089;&#x4E00;&#x4E0B;&#x7A0B;&#x5E8F;&#x7684;&#x8FDB;&#x7A0B;&#x7A7A;&#x95F4;-&#xFF0C;&#x5373;&#x5BF9;&#x8FDB;&#x7A0B;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5185;&#x5B58;" class="headerlink" title="1&#x3001;&#x719F;&#x6089;&#x4E00;&#x4E0B;&#x7A0B;&#x5E8F;&#x7684;&#x8FDB;&#x7A0B;&#x7A7A;&#x95F4; &#xFF0C;&#x5373;&#x5BF9;&#x8FDB;&#x7A0B;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5185;&#x5B58;"></a>1&#x3001;&#x719F;&#x6089;&#x4E00;&#x4E0B;&#x7A0B;&#x5E8F;&#x7684;&#x8FDB;&#x7A0B;&#x7A7A;&#x95F4; &#xFF0C;&#x5373;&#x5BF9;&#x8FDB;&#x7A0B;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5185;&#x5B58;</h4></body></html>
         <p class="article-more-link">
-            <a href="/2018/12/21/CSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B%E6%A0%88%E5%B8%A7%E7%9A%84%E5%8F%98%E5%8C%96/#more">Read More</a>
+            <a href="../../2018/12/21/CSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B%E6%A0%88%E5%B8%A7%E7%9A%84%E5%8F%98%E5%8C%96/#more">Read More</a>
         </p>
     
     </div>
@@ -343,7 +343,7 @@
 
 
 
-<script src="/js/script.js"></script>
+<script src="../../js/script.js"></script>
 
 
     
@@ -369,13 +369,13 @@
                 TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
-            CONTENT_URL: '/content.json',
+            CONTENT_URL: '../../content.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
 
-<script src="/js/insight.js"></script>
+<script src="../../js/insight.js"></script>
 
     
 </body>

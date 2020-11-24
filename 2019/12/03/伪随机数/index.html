@@ -16,12 +16,12 @@
 
 
 
-    <meta name="description" content="在比赛中多次遇到了伪随机数的问题-总结一下在web安恒测试决赛的题目 12345678910111213141516171819202122232425262728 &lt;?php#这不是抽奖程序的源代码！不许看！header(&quot;Content-Type: textml;charset&#x3D;utf-8&quot;);session_start();if(!isset($_SESSION[&amp;">
+    <meta name="description" content="&amp;#x5728;&amp;#x6BD4;&amp;#x8D5B;&amp;#x4E2D;&amp;#x591A;&amp;#x6B21;&amp;#x9047;&amp;#x5230;&amp;#x4E86;&amp;#x4F2A;&amp;#x968F;&amp;#x673A;&amp;#x6570;&amp;#x7684;&amp;#x95EE;&amp;#x9898;-&amp;#x603B;&amp;#x7ED3;&amp;#x4E00;&amp;#x4E0B;&amp;#x5728;web&amp;#x5B89;&amp;#x6052;&amp;#x6D4B;&amp;#x8">
 <meta property="og:type" content="article">
 <meta property="og:title" content="伪随机数">
 <meta property="og:url" content="http://example.com/2019/12/03/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/index.html">
 <meta property="og:site_name" content="ShuYu">
-<meta property="og:description" content="在比赛中多次遇到了伪随机数的问题-总结一下在web安恒测试决赛的题目 12345678910111213141516171819202122232425262728 &lt;?php#这不是抽奖程序的源代码！不许看！header(&quot;Content-Type: textml;charset&#x3D;utf-8&quot;);session_start();if(!isset($_SESSION[&amp;">
+<meta property="og:description" content="&amp;#x5728;&amp;#x6BD4;&amp;#x8D5B;&amp;#x4E2D;&amp;#x591A;&amp;#x6B21;&amp;#x9047;&amp;#x5230;&amp;#x4E86;&amp;#x4F2A;&amp;#x968F;&amp;#x673A;&amp;#x6570;&amp;#x7684;&amp;#x95EE;&amp;#x9898;-&amp;#x603B;&amp;#x7ED3;&amp;#x4E00;&amp;#x4E0B;&amp;#x5728;web&amp;#x5B89;&amp;#x6052;&amp;#x6D4B;&amp;#x8">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2019/12/03/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/1.png">
 <meta property="og:image" content="http://example.com/2019/12/03/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/2.png">
@@ -47,10 +47,10 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css">
 
 
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="../../../../css/style.css">
 
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
@@ -76,9 +76,9 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/">
+            <a class="navbar-item navbar-logo" href="../../../../index.html">
                 
-                <img src="/images/logo.png" alt="" height="28">
+                <img src="../../../../images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -91,16 +91,16 @@
         <div class="navbar-menu navbar-start">
             
             <a class="navbar-item "
-               href="/archives">Archives</a>
+               href="../../../../archives">Archives</a>
             
             <a class="navbar-item "
-               href="/friends">Friends</a>
+               href="../../../../friends">Friends</a>
             
             <a class="navbar-item "
-               href="/about">About</a>
+               href="../../../../about">About</a>
             
             <a class="navbar-item "
-               href="/tags">Tags</a>
+               href="../../../../tags">Tags</a>
             
         </div>
         
@@ -134,13 +134,13 @@
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <span>Dec 3 2019</span>
+                <time datetime="2019-12-02T18:24:49.000Z" itemprop="datePublished">Dec 3 2019</time>
             
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/Web/">Web</a>
+            <a class="article-category-link" href="../../../../categories/Web/">Web</a>
         </span>
         
         
@@ -153,30 +153,30 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <h4 id="在比赛中多次遇到了伪随机数的问题-总结一下"><a href="#在比赛中多次遇到了伪随机数的问题-总结一下" class="headerlink" title="在比赛中多次遇到了伪随机数的问题-总结一下"></a>在比赛中多次遇到了伪随机数的问题-总结一下</h4><p>在web安恒测试决赛的题目</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">#这不是抽奖程序的源代码！不许看！</span></span><br><span class="line">header(<span class="string">&quot;Content-Type: textml;charset=utf-8&quot;</span>);</span><br><span class="line">session_start();</span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable">$_SESSION</span>[<span class="string">&#x27;seed&#x27;</span>]))&#123;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&#x27;seed&#x27;</span>]=rand(<span class="number">0</span>,<span class="number">999999999</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mt_srand(<span class="variable">$_SESSION</span>[<span class="string">&#x27;seed&#x27;</span>]);</span><br><span class="line"><span class="variable">$str_long1</span> = <span class="string">&quot;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>;</span><br><span class="line"><span class="variable">$str</span>=<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$len1</span>=<span class="number">20</span>;</span><br><span class="line"><span class="keyword">for</span> ( <span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="variable">$len1</span>; <span class="variable">$i</span>++ )&#123;</span><br><span class="line">    <span class="variable">$str</span>.=substr(<span class="variable">$str_long1</span>, mt_rand(<span class="number">0</span>, strlen(<span class="variable">$str_long1</span>) - <span class="number">1</span>), <span class="number">1</span>);       </span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$str_show</span> = substr(<span class="variable">$str</span>, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;p id=&#x27;p1&#x27;&gt;&quot;</span>.<span class="variable">$str_show</span>.<span class="string">&quot;&lt;/p&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;num&#x27;</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;num&#x27;</span>]===<span class="variable">$str</span>)&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;&lt;p id=flag&gt;抽奖，就是那么枯燥且无味，给你flag&#123;xxxxxxxxx&#125;&lt;/p&gt;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;&lt;p id=flag&gt;没抽中哦，再试试吧&lt;/p&gt;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">show_source(<span class="string">&quot;check.php&quot;</span>); </span><br></pre></td></tr></table></figure>
+        <html><head></head><body><h4 id="&#x5728;&#x6BD4;&#x8D5B;&#x4E2D;&#x591A;&#x6B21;&#x9047;&#x5230;&#x4E86;&#x4F2A;&#x968F;&#x673A;&#x6570;&#x7684;&#x95EE;&#x9898;-&#x603B;&#x7ED3;&#x4E00;&#x4E0B;"><a href="#&#x5728;&#x6BD4;&#x8D5B;&#x4E2D;&#x591A;&#x6B21;&#x9047;&#x5230;&#x4E86;&#x4F2A;&#x968F;&#x673A;&#x6570;&#x7684;&#x95EE;&#x9898;-&#x603B;&#x7ED3;&#x4E00;&#x4E0B;" class="headerlink" title="&#x5728;&#x6BD4;&#x8D5B;&#x4E2D;&#x591A;&#x6B21;&#x9047;&#x5230;&#x4E86;&#x4F2A;&#x968F;&#x673A;&#x6570;&#x7684;&#x95EE;&#x9898;-&#x603B;&#x7ED3;&#x4E00;&#x4E0B;"></a>&#x5728;&#x6BD4;&#x8D5B;&#x4E2D;&#x591A;&#x6B21;&#x9047;&#x5230;&#x4E86;&#x4F2A;&#x968F;&#x673A;&#x6570;&#x7684;&#x95EE;&#x9898;-&#x603B;&#x7ED3;&#x4E00;&#x4E0B;</h4><p>&#x5728;web&#x5B89;&#x6052;&#x6D4B;&#x8BD5;&#x51B3;&#x8D5B;&#x7684;&#x9898;&#x76EE;</p>
+<figure class="highlight php hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs php"> <span class="hljs-meta">&lt;?php</span><br><span class="hljs-comment">#&#x8FD9;&#x4E0D;&#x662F;&#x62BD;&#x5956;&#x7A0B;&#x5E8F;&#x7684;&#x6E90;&#x4EE3;&#x7801;&#xFF01;&#x4E0D;&#x8BB8;&#x770B;&#xFF01;</span><br>header(<span class="hljs-string">&quot;Content-Type: textml;charset=utf-8&quot;</span>);<br>session_start();<br><span class="hljs-keyword">if</span>(!<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;seed&apos;</span>])){<br><span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;seed&apos;</span>]=rand(<span class="hljs-number">0</span>,<span class="hljs-number">999999999</span>);<br>}<br><br>mt_srand(<span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;seed&apos;</span>]);<br><span class="hljs-variable">$str_long1</span> = <span class="hljs-string">&quot;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>;<br><span class="hljs-variable">$str</span>=<span class="hljs-string">&apos;&apos;</span>;<br><span class="hljs-variable">$len1</span>=<span class="hljs-number">20</span>;<br><span class="hljs-keyword">for</span> ( <span class="hljs-variable">$i</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$i</span> &lt; <span class="hljs-variable">$len1</span>; <span class="hljs-variable">$i</span>++ ){<br>    <span class="hljs-variable">$str</span>.=substr(<span class="hljs-variable">$str_long1</span>, mt_rand(<span class="hljs-number">0</span>, strlen(<span class="hljs-variable">$str_long1</span>) - <span class="hljs-number">1</span>), <span class="hljs-number">1</span>);       <br>}<br><span class="hljs-variable">$str_show</span> = substr(<span class="hljs-variable">$str</span>, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;p id=&apos;p1&apos;&gt;&quot;</span>.<span class="hljs-variable">$str_show</span>.<span class="hljs-string">&quot;&lt;/p&gt;&quot;</span>;<br><br><br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&apos;num&apos;</span>])){<br>    <span class="hljs-keyword">if</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&apos;num&apos;</span>]===<span class="hljs-variable">$str</span>){<br>        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;p id=flag&gt;&#x62BD;&#x5956;&#xFF0C;&#x5C31;&#x662F;&#x90A3;&#x4E48;&#x67AF;&#x71E5;&#x4E14;&#x65E0;&#x5473;&#xFF0C;&#x7ED9;&#x4F60;flag{xxxxxxxxx}&lt;/p&gt;&quot;</span>;<br>    }<br>    <span class="hljs-keyword">else</span>{<br>        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;p id=flag&gt;&#x6CA1;&#x62BD;&#x4E2D;&#x54E6;&#xFF0C;&#x518D;&#x8BD5;&#x8BD5;&#x5427;&lt;/p&gt;&quot;</span>;<br>    }<br>}<br>show_source(<span class="hljs-string">&quot;check.php&quot;</span>); <br></code></pre></td></tr></tbody></table></figure>
 
 <a id="more"></a>
 
 
-<p>参考几篇博客<br><a target="_blank" rel="noopener" href="http://wonderkun.cc/index.html/?p=585">http://wonderkun.cc/index.html/?p=585</a><br><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/168308">https://www.anquanke.com/post/id/168308</a><br>思路就很明显了</p>
-<h3 id="Hack"><a href="#Hack" class="headerlink" title="Hack"></a>Hack</h3><h4 id="1、安装php-mt-seed"><a href="#1、安装php-mt-seed" class="headerlink" title="1、安装php_mt_seed"></a>1、安装php_mt_seed</h4><p><a target="_blank" rel="noopener" href="https://www.openwall.com/php_mt_seed/">https://www.openwall.com/php_mt_seed/</a>随便下载一个版本，放到linux下make就行了<br>使用的话直接</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~&#x2F;桌面&#x2F;php_mt_seed-3.4# .&#x2F;php_mt_seed 42 42 0 61 48 48 0 61 0 0 0 61 37 37 0 61 2 2 0 61 11 11 0 61 54 54 0 61 1 1 0 61 37 37 0 61 2 2 0 61 </span><br></pre></td></tr></table></figure>
-<h4 id="2、整理本题数据"><a href="#2、整理本题数据" class="headerlink" title="2、整理本题数据"></a>2、整理本题数据</h4><p>我们先访问一下拿到前10位<br><img src="1.png"><br>从博客参考中我们能看到，还需要整理</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&quot;GMaBclSbBc&quot;</span>;</span><br><span class="line"><span class="variable">$randStr</span> = <span class="string">&quot;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span>(<span class="variable">$i</span>=<span class="number">0</span>;<span class="variable">$i</span>&lt;strlen(<span class="variable">$str</span>);<span class="variable">$i</span>++)&#123;</span><br><span class="line">   <span class="variable">$pos</span> = strpos(<span class="variable">$randStr</span>,<span class="variable">$str</span>[<span class="variable">$i</span>]);</span><br><span class="line">   <span class="keyword">echo</span> <span class="variable">$pos</span>.<span class="string">&quot; &quot;</span>.<span class="variable">$pos</span>.<span class="string">&quot; &quot;</span>.<span class="string">&quot;0 &quot;</span>.(strlen(<span class="variable">$randStr</span>)<span class="number">-1</span>).<span class="string">&quot; &quot;</span>;</span><br><span class="line">   <span class="comment">//整理成方便 php_mt_seed 测试的格式</span></span><br><span class="line">  <span class="comment">//php_mt_seed VALUE_OR_MATCH_MIN [MATCH_MAX [RANGE_MIN RANGE_MAX]]</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>生成了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">42 42 0 61 48 48 0 61 0 0 0 61 37 37 0 61 2 2 0 61 11 11 0 61 54 54 0 61 1 1 0 61 37 37 0 61 2 2 0 61</span><br></pre></td></tr></table></figure>
-<h4 id="3、使用php-mt-seed"><a href="#3、使用php-mt-seed" class="headerlink" title="3、使用php_mt_seed"></a>3、使用php_mt_seed</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~&#x2F;桌面&#x2F;php_mt_seed-3.4# .&#x2F;php_mt_seed 42 42 0 61 48 48 0 61 0 0 0 61 37 37 0 61 2 2 0 61 11 11 0 61 54 54 0 61 1 1 0 61 37 37 0 61 2 2 0 61 </span><br><span class="line">Pattern: EXACT-FROM-62 EXACT-FROM-62 EXACT-FROM-62 EXACT-FROM-62 EXACT-FROM-62 EXACT-FROM-62 EXACT-FROM-62 EXACT-FROM-62 EXACT-FROM-62 EXACT-FROM-62</span><br><span class="line">Found 0, trying 536870912 - 570425343, speed 115704937 seeds per second </span><br><span class="line">seed &#x3D; 552481257</span><br><span class="line">Found 1, trying 4261412864 - 4294967295, speed 109971944 seeds per second </span><br><span class="line">Found 1</span><br></pre></td></tr></table></figure>
-<p>拿到种子552481257<br>一般而言是会返回你php版本号的，一定要使用特定的版本才能得到正确下一步</p>
-<h4 id="4、还原数据"><a href="#4、还原数据" class="headerlink" title="4、还原数据"></a>4、还原数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">mt_srand(552481257);</span><br><span class="line">$str_long1 &#x3D; &quot;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;;</span><br><span class="line">$str&#x3D;&#39;&#39;;</span><br><span class="line">$len1&#x3D;20;</span><br><span class="line">for ( $i &#x3D; 0; $i &lt; $len1; $i++ )&#123;</span><br><span class="line">    $str.&#x3D;substr($str_long1, mt_rand(0, strlen($str_long1) - 1), 1);       </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">echo $str;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p><code>输出GMaBclSbBcDfVku346h4</code><br><img src="2.png"></p>
-
+<p>&#x53C2;&#x8003;&#x51E0;&#x7BC7;&#x535A;&#x5BA2;<br><a target="_blank" rel="noopener" href="http://wonderkun.cc/index.html/?p=585">http://wonderkun.cc/index.html/?p=585</a><br><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/168308">https://www.anquanke.com/post/id/168308</a><br>&#x601D;&#x8DEF;&#x5C31;&#x5F88;&#x660E;&#x663E;&#x4E86;</p>
+<h3 id="Hack"><a href="#Hack" class="headerlink" title="Hack"></a>Hack</h3><h4 id="1&#x3001;&#x5B89;&#x88C5;php-mt-seed"><a href="#1&#x3001;&#x5B89;&#x88C5;php-mt-seed" class="headerlink" title="1&#x3001;&#x5B89;&#x88C5;php_mt_seed"></a>1&#x3001;&#x5B89;&#x88C5;php_mt_seed</h4><p><a target="_blank" rel="noopener" href="https://www.openwall.com/php_mt_seed/">https://www.openwall.com/php_mt_seed/</a>&#x968F;&#x4FBF;&#x4E0B;&#x8F7D;&#x4E00;&#x4E2A;&#x7248;&#x672C;&#xFF0C;&#x653E;&#x5230;linux&#x4E0B;make&#x5C31;&#x884C;&#x4E86;<br>&#x4F7F;&#x7528;&#x7684;&#x8BDD;&#x76F4;&#x63A5;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">root@kali:~/&#x684C;&#x9762;/php_mt_seed-3.4# ./php_mt_seed 42 42 0 61 48 48 0 61 0 0 0 61 37 37 0 61 2 2 0 61 11 11 0 61 54 54 0 61 1 1 0 61 37 37 0 61 2 2 0 61 <br></code></pre></td></tr></tbody></table></figure>
+<h4 id="2&#x3001;&#x6574;&#x7406;&#x672C;&#x9898;&#x6570;&#x636E;"><a href="#2&#x3001;&#x6574;&#x7406;&#x672C;&#x9898;&#x6570;&#x636E;" class="headerlink" title="2&#x3001;&#x6574;&#x7406;&#x672C;&#x9898;&#x6570;&#x636E;"></a>2&#x3001;&#x6574;&#x7406;&#x672C;&#x9898;&#x6570;&#x636E;</h4><p>&#x6211;&#x4EEC;&#x5148;&#x8BBF;&#x95EE;&#x4E00;&#x4E0B;&#x62FF;&#x5230;&#x524D;10&#x4F4D;<br><img src="1.png"><br>&#x4ECE;&#x535A;&#x5BA2;&#x53C2;&#x8003;&#x4E2D;&#x6211;&#x4EEC;&#x80FD;&#x770B;&#x5230;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x6574;&#x7406;</p>
+<figure class="highlight php hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$str</span> = <span class="hljs-string">&quot;GMaBclSbBc&quot;</span>;<br><span class="hljs-variable">$randStr</span> = <span class="hljs-string">&quot;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>;<br> <br><span class="hljs-keyword">for</span>(<span class="hljs-variable">$i</span>=<span class="hljs-number">0</span>;<span class="hljs-variable">$i</span>&lt;strlen(<span class="hljs-variable">$str</span>);<span class="hljs-variable">$i</span>++){<br>   <span class="hljs-variable">$pos</span> = strpos(<span class="hljs-variable">$randStr</span>,<span class="hljs-variable">$str</span>[<span class="hljs-variable">$i</span>]);<br>   <span class="hljs-keyword">echo</span> <span class="hljs-variable">$pos</span>.<span class="hljs-string">&quot; &quot;</span>.<span class="hljs-variable">$pos</span>.<span class="hljs-string">&quot; &quot;</span>.<span class="hljs-string">&quot;0 &quot;</span>.(strlen(<span class="hljs-variable">$randStr</span>)<span class="hljs-number">-1</span>).<span class="hljs-string">&quot; &quot;</span>;<br>   <span class="hljs-comment">//&#x6574;&#x7406;&#x6210;&#x65B9;&#x4FBF; php_mt_seed &#x6D4B;&#x8BD5;&#x7684;&#x683C;&#x5F0F;</span><br>  <span class="hljs-comment">//php_mt_seed VALUE_OR_MATCH_MIN [MATCH_MAX [RANGE_MIN RANGE_MAX]]</span><br>}<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;\n&quot;</span>;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></tbody></table></figure>
+<p>&#x751F;&#x6210;&#x4E86;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">42 42 0 61 48 48 0 61 0 0 0 61 37 37 0 61 2 2 0 61 11 11 0 61 54 54 0 61 1 1 0 61 37 37 0 61 2 2 0 61<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="3&#x3001;&#x4F7F;&#x7528;php-mt-seed"><a href="#3&#x3001;&#x4F7F;&#x7528;php-mt-seed" class="headerlink" title="3&#x3001;&#x4F7F;&#x7528;php_mt_seed"></a>3&#x3001;&#x4F7F;&#x7528;php_mt_seed</h4><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plain">root@kali:~/&#x684C;&#x9762;/php_mt_seed-3.4# ./php_mt_seed 42 42 0 61 48 48 0 61 0 0 0 61 37 37 0 61 2 2 0 61 11 11 0 61 54 54 0 61 1 1 0 61 37 37 0 61 2 2 0 61 <br>Pattern: EXACT-FROM-62 EXACT-FROM-62 EXACT-FROM-62 EXACT-FROM-62 EXACT-FROM-62 EXACT-FROM-62 EXACT-FROM-62 EXACT-FROM-62 EXACT-FROM-62 EXACT-FROM-62<br>Found 0, trying 536870912 - 570425343, speed 115704937 seeds per second <br>seed = 552481257<br>Found 1, trying 4261412864 - 4294967295, speed 109971944 seeds per second <br>Found 1<br></code></pre></td></tr></tbody></table></figure>
+<p>&#x62FF;&#x5230;&#x79CD;&#x5B50;552481257<br>&#x4E00;&#x822C;&#x800C;&#x8A00;&#x662F;&#x4F1A;&#x8FD4;&#x56DE;&#x4F60;php&#x7248;&#x672C;&#x53F7;&#x7684;&#xFF0C;&#x4E00;&#x5B9A;&#x8981;&#x4F7F;&#x7528;&#x7279;&#x5B9A;&#x7684;&#x7248;&#x672C;&#x624D;&#x80FD;&#x5F97;&#x5230;&#x6B63;&#x786E;&#x4E0B;&#x4E00;&#x6B65;</p>
+<h4 id="4&#x3001;&#x8FD8;&#x539F;&#x6570;&#x636E;"><a href="#4&#x3001;&#x8FD8;&#x539F;&#x6570;&#x636E;" class="headerlink" title="4&#x3001;&#x8FD8;&#x539F;&#x6570;&#x636E;"></a>4&#x3001;&#x8FD8;&#x539F;&#x6570;&#x636E;</h4><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs plain">&lt;?php<br>mt_srand(552481257);<br>$str_long1 = &quot;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;;<br>$str=&apos;&apos;;<br>$len1=20;<br>for ( $i = 0; $i &lt; $len1; $i++ ){<br>    $str.=substr($str_long1, mt_rand(0, strlen($str_long1) - 1), 1);       <br>}<br><br>echo $str;<br>?&gt;<br></code></pre></td></tr></tbody></table></figure>
+<p><code>&#x8F93;&#x51FA;GMaBclSbBcDfVku346h4</code><br><img src="2.png"></p>
+</body></html>
     
     </div>
     
     <div class="columns is-variable is-1 is-multiline is-mobile">
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/%E9%9A%8F%E6%9C%BA%E6%95%B0/">#随机数</a></span>
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="../../../../tags/%E9%9A%8F%E6%9C%BA%E6%95%B0/">#随机数</a></span>
     
     </div>
     
@@ -184,12 +184,12 @@
     <div class="columns is-mobile is-multiline article-nav">
         <span class="column is-12-mobile is-half-desktop  article-nav-prev">
             
-            <a href="/2019/12/03/php%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">php文件上传</a>
+            <a href="../php%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">php文件上传</a>
             
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">
             
-            <a href="/2019/12/03/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/">php伪协议</a>
+            <a href="../php%E4%BC%AA%E5%8D%8F%E8%AE%AE/">php伪协议</a>
             
         </span>
     </div>
@@ -372,7 +372,7 @@
 
 
 
-<script src="/js/script.js"></script>
+<script src="../../../../js/script.js"></script>
 
 
     
@@ -398,13 +398,13 @@
                 TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
-            CONTENT_URL: '/content.json',
+            CONTENT_URL: '../../../../content.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
 
-<script src="/js/insight.js"></script>
+<script src="../../../../js/insight.js"></script>
 
     
 </body>

@@ -41,10 +41,10 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css">
 
 
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="../../css/style.css">
 
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
@@ -70,9 +70,9 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/">
+            <a class="navbar-item navbar-logo" href="../../index.html">
                 
-                <img src="/images/logo.png" alt="" height="28">
+                <img src="../../images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -85,16 +85,16 @@
         <div class="navbar-menu navbar-start">
             
             <a class="navbar-item "
-               href="/archives">Archives</a>
+               href="../../archives">Archives</a>
             
             <a class="navbar-item "
-               href="/friends">Friends</a>
+               href="../../friends">Friends</a>
             
             <a class="navbar-item "
-               href="/about">About</a>
+               href="../../about">About</a>
             
             <a class="navbar-item "
-               href="/tags">Tags</a>
+               href="../../tags">Tags</a>
             
         </div>
         
@@ -130,19 +130,19 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/2019/01/06/KMP%E6%B5%85%E6%98%BE%E8%AF%81%E6%98%8E%E4%B8%80%E6%B3%A2/" itemprop="url">KMP浅显证明一波</a>
+            <a href="../../2019/01/06/KMP%E6%B5%85%E6%98%BE%E8%AF%81%E6%98%8E%E4%B8%80%E6%B3%A2/" itemprop="url">KMP浅显证明一波</a>
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <span>Jan 6 2019</span>
+                <time datetime="2019-01-05T21:14:00.000Z" itemprop="datePublished">Jan 6 2019</time>
             
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+            <a class="article-category-link" href="../../categories/%E7%AE%97%E6%B3%95/">算法</a>
         </span>
         
         
@@ -155,9 +155,9 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <h3 id="一、KMP的背景"><a href="#一、KMP的背景" class="headerlink" title="一、KMP的背景"></a>一、KMP的背景</h3><p>KMP算法是一种改进的字符串匹配算法，由D.E.Knuth，J.H.Morris和V.R.Pratt同时发现<br>因此人们称它为克努特——莫里斯——普拉特操作（简称KMP算法）。<br>KMP算法的关键是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。<br>具体实现就是实现一个next()函数，函数本身包含了模式串的局部匹配信息。时间复杂度O(m+n)。<br>from –百度百科</p>
+        <html><head></head><body><h3 id="&#x4E00;&#x3001;KMP&#x7684;&#x80CC;&#x666F;"><a href="#&#x4E00;&#x3001;KMP&#x7684;&#x80CC;&#x666F;" class="headerlink" title="&#x4E00;&#x3001;KMP&#x7684;&#x80CC;&#x666F;"></a>&#x4E00;&#x3001;KMP&#x7684;&#x80CC;&#x666F;</h3><p>KMP&#x7B97;&#x6CD5;&#x662F;&#x4E00;&#x79CD;&#x6539;&#x8FDB;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5339;&#x914D;&#x7B97;&#x6CD5;&#xFF0C;&#x7531;D.E.Knuth&#xFF0C;J.H.Morris&#x548C;V.R.Pratt&#x540C;&#x65F6;&#x53D1;&#x73B0;<br>&#x56E0;&#x6B64;&#x4EBA;&#x4EEC;&#x79F0;&#x5B83;&#x4E3A;&#x514B;&#x52AA;&#x7279;&#x2014;&#x2014;&#x83AB;&#x91CC;&#x65AF;&#x2014;&#x2014;&#x666E;&#x62C9;&#x7279;&#x64CD;&#x4F5C;&#xFF08;&#x7B80;&#x79F0;KMP&#x7B97;&#x6CD5;&#xFF09;&#x3002;<br>KMP&#x7B97;&#x6CD5;&#x7684;&#x5173;&#x952E;&#x662F;&#x5229;&#x7528;&#x5339;&#x914D;&#x5931;&#x8D25;&#x540E;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x5C3D;&#x91CF;&#x51CF;&#x5C11;&#x6A21;&#x5F0F;&#x4E32;&#x4E0E;&#x4E3B;&#x4E32;&#x7684;&#x5339;&#x914D;&#x6B21;&#x6570;&#x4EE5;&#x8FBE;&#x5230;&#x5FEB;&#x901F;&#x5339;&#x914D;&#x7684;&#x76EE;&#x7684;&#x3002;<br>&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x5C31;&#x662F;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;next()&#x51FD;&#x6570;&#xFF0C;&#x51FD;&#x6570;&#x672C;&#x8EAB;&#x5305;&#x542B;&#x4E86;&#x6A21;&#x5F0F;&#x4E32;&#x7684;&#x5C40;&#x90E8;&#x5339;&#x914D;&#x4FE1;&#x606F;&#x3002;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;O(m+n)&#x3002;<br>from &#x2013;&#x767E;&#x5EA6;&#x767E;&#x79D1;</p></body></html>
         <p class="article-more-link">
-            <a href="/2019/01/06/KMP%E6%B5%85%E6%98%BE%E8%AF%81%E6%98%8E%E4%B8%80%E6%B3%A2/#more">Read More</a>
+            <a href="../../2019/01/06/KMP%E6%B5%85%E6%98%BE%E8%AF%81%E6%98%8E%E4%B8%80%E6%B3%A2/#more">Read More</a>
         </p>
     
     </div>
@@ -343,7 +343,7 @@
 
 
 
-<script src="/js/script.js"></script>
+<script src="../../js/script.js"></script>
 
 
     
@@ -369,13 +369,13 @@
                 TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
-            CONTENT_URL: '/content.json',
+            CONTENT_URL: '../../content.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
 
-<script src="/js/insight.js"></script>
+<script src="../../js/insight.js"></script>
 
     
 </body>

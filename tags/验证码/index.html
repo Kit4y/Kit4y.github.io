@@ -41,10 +41,10 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css">
 
 
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="../../css/style.css">
 
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
@@ -70,9 +70,9 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/">
+            <a class="navbar-item navbar-logo" href="../../index.html">
                 
-                <img src="/images/logo.png" alt="" height="28">
+                <img src="../../images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -85,16 +85,16 @@
         <div class="navbar-menu navbar-start">
             
             <a class="navbar-item "
-               href="/archives">Archives</a>
+               href="../../archives">Archives</a>
             
             <a class="navbar-item "
-               href="/friends">Friends</a>
+               href="../../friends">Friends</a>
             
             <a class="navbar-item "
-               href="/about">About</a>
+               href="../../about">About</a>
             
             <a class="navbar-item "
-               href="/tags">Tags</a>
+               href="../../tags">Tags</a>
             
         </div>
         
@@ -130,19 +130,19 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/2019/06/14/%E4%BD%BF%E7%94%A8tesseract%E5%92%8CPillow%E7%AE%80%E5%8D%95%E8%AF%86%E5%88%AB%E9%AA%8C%E8%AF%81%E7%A0%81/" itemprop="url">使用tesseract和Pillow简单识别验证码</a>
+            <a href="../../2019/06/14/%E4%BD%BF%E7%94%A8tesseract%E5%92%8CPillow%E7%AE%80%E5%8D%95%E8%AF%86%E5%88%AB%E9%AA%8C%E8%AF%81%E7%A0%81/" itemprop="url">使用tesseract和Pillow简单识别验证码</a>
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <span>Jun 14 2019</span>
+                <time datetime="2019-06-13T17:09:45.000Z" itemprop="datePublished">Jun 14 2019</time>
             
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/Web/">Web</a>
+            <a class="article-category-link" href="../../categories/Web/">Web</a>
         </span>
         
         
@@ -155,10 +155,10 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <h2 id="楔子"><a href="#楔子" class="headerlink" title="楔子"></a>楔子</h2><p>之前的爬虫总是被验证码卡住，无论是爬某数据，还是爆破某东西，有了验证码貌似就GG,发现了一个不错的库很简答的识别简单的验证码，就是安装不能直接pip安装</p>
-<h3 id="一、win10安装tesseract"><a href="#一、win10安装tesseract" class="headerlink" title="一、win10安装tesseract"></a>一、win10安装tesseract</h3><p><a target="_blank" rel="noopener" href="https://github.com/tesseract-ocr/tesseract/wiki/Downloads">Github地址</a>,找了半天没找到在哪下win10安装包，orz<br><a target="_blank" rel="noopener" href="https://digi.bib.uni-mannheim.de/tesseract/">备用一个下载地址</a>，下载一个就行比如tesseract-ocr-setup-3.05.01.exe，然后安装<br>之后需要配置环境变量（和jdk，python一样），具体就是<code>\tesseract\Tesseract-OCR</code>,在终端输入tesseract为↓</p>
+        <html><head></head><body><h2 id="&#x6954;&#x5B50;"><a href="#&#x6954;&#x5B50;" class="headerlink" title="&#x6954;&#x5B50;"></a>&#x6954;&#x5B50;</h2><p>&#x4E4B;&#x524D;&#x7684;&#x722C;&#x866B;&#x603B;&#x662F;&#x88AB;&#x9A8C;&#x8BC1;&#x7801;&#x5361;&#x4F4F;&#xFF0C;&#x65E0;&#x8BBA;&#x662F;&#x722C;&#x67D0;&#x6570;&#x636E;&#xFF0C;&#x8FD8;&#x662F;&#x7206;&#x7834;&#x67D0;&#x4E1C;&#x897F;&#xFF0C;&#x6709;&#x4E86;&#x9A8C;&#x8BC1;&#x7801;&#x8C8C;&#x4F3C;&#x5C31;GG,&#x53D1;&#x73B0;&#x4E86;&#x4E00;&#x4E2A;&#x4E0D;&#x9519;&#x7684;&#x5E93;&#x5F88;&#x7B80;&#x7B54;&#x7684;&#x8BC6;&#x522B;&#x7B80;&#x5355;&#x7684;&#x9A8C;&#x8BC1;&#x7801;&#xFF0C;&#x5C31;&#x662F;&#x5B89;&#x88C5;&#x4E0D;&#x80FD;&#x76F4;&#x63A5;pip&#x5B89;&#x88C5;</p>
+<h3 id="&#x4E00;&#x3001;win10&#x5B89;&#x88C5;tesseract"><a href="#&#x4E00;&#x3001;win10&#x5B89;&#x88C5;tesseract" class="headerlink" title="&#x4E00;&#x3001;win10&#x5B89;&#x88C5;tesseract"></a>&#x4E00;&#x3001;win10&#x5B89;&#x88C5;tesseract</h3><p><a target="_blank" rel="noopener" href="https://github.com/tesseract-ocr/tesseract/wiki/Downloads">Github&#x5730;&#x5740;</a>,&#x627E;&#x4E86;&#x534A;&#x5929;&#x6CA1;&#x627E;&#x5230;&#x5728;&#x54EA;&#x4E0B;win10&#x5B89;&#x88C5;&#x5305;&#xFF0C;orz<br><a target="_blank" rel="noopener" href="https://digi.bib.uni-mannheim.de/tesseract/">&#x5907;&#x7528;&#x4E00;&#x4E2A;&#x4E0B;&#x8F7D;&#x5730;&#x5740;</a>&#xFF0C;&#x4E0B;&#x8F7D;&#x4E00;&#x4E2A;&#x5C31;&#x884C;&#x6BD4;&#x5982;tesseract-ocr-setup-3.05.01.exe&#xFF0C;&#x7136;&#x540E;&#x5B89;&#x88C5;<br>&#x4E4B;&#x540E;&#x9700;&#x8981;&#x914D;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#xFF08;&#x548C;jdk&#xFF0C;python&#x4E00;&#x6837;&#xFF09;&#xFF0C;&#x5177;&#x4F53;&#x5C31;&#x662F;<code>\tesseract\Tesseract-OCR</code>,&#x5728;&#x7EC8;&#x7AEF;&#x8F93;&#x5165;tesseract&#x4E3A;&#x2193;</p></body></html>
         <p class="article-more-link">
-            <a href="/2019/06/14/%E4%BD%BF%E7%94%A8tesseract%E5%92%8CPillow%E7%AE%80%E5%8D%95%E8%AF%86%E5%88%AB%E9%AA%8C%E8%AF%81%E7%A0%81/#more">Read More</a>
+            <a href="../../2019/06/14/%E4%BD%BF%E7%94%A8tesseract%E5%92%8CPillow%E7%AE%80%E5%8D%95%E8%AF%86%E5%88%AB%E9%AA%8C%E8%AF%81%E7%A0%81/#more">Read More</a>
         </p>
     
     </div>
@@ -344,7 +344,7 @@
 
 
 
-<script src="/js/script.js"></script>
+<script src="../../js/script.js"></script>
 
 
     
@@ -370,13 +370,13 @@
                 TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
-            CONTENT_URL: '/content.json',
+            CONTENT_URL: '../../content.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
 
-<script src="/js/insight.js"></script>
+<script src="../../js/insight.js"></script>
 
     
 </body>

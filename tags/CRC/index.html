@@ -41,10 +41,10 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css">
 
 
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="../../css/style.css">
 
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
@@ -70,9 +70,9 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/">
+            <a class="navbar-item navbar-logo" href="../../index.html">
                 
-                <img src="/images/logo.png" alt="" height="28">
+                <img src="../../images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -85,16 +85,16 @@
         <div class="navbar-menu navbar-start">
             
             <a class="navbar-item "
-               href="/archives">Archives</a>
+               href="../../archives">Archives</a>
             
             <a class="navbar-item "
-               href="/friends">Friends</a>
+               href="../../friends">Friends</a>
             
             <a class="navbar-item "
-               href="/about">About</a>
+               href="../../about">About</a>
             
             <a class="navbar-item "
-               href="/tags">Tags</a>
+               href="../../tags">Tags</a>
             
         </div>
         
@@ -130,19 +130,19 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/2019/03/15/CRC%E6%8E%A8%E5%AF%BC%E4%BB%A5%E5%8F%8A%E4%B8%80%E9%81%93CRC32%E7%88%86%E7%A0%B4%E4%BE%8B%E9%A2%98/" itemprop="url">CRC推导以及一道CRC32爆破例题</a>
+            <a href="../../2019/03/15/CRC%E6%8E%A8%E5%AF%BC%E4%BB%A5%E5%8F%8A%E4%B8%80%E9%81%93CRC32%E7%88%86%E7%A0%B4%E4%BE%8B%E9%A2%98/" itemprop="url">CRC推导以及一道CRC32爆破例题</a>
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <span>Mar 15 2019</span>
+                <time datetime="2019-03-15T08:33:12.000Z" itemprop="datePublished">Mar 15 2019</time>
             
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/Crypto/">Crypto</a>
+            <a class="article-category-link" href="../../categories/Crypto/">Crypto</a>
         </span>
         
         
@@ -155,9 +155,9 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <h3 id="一、在计算机网络自顶向下链路层有一笔带过CRC检验，感觉这个地方很实用，也经常见所以还是认真对待了一下"><a href="#一、在计算机网络自顶向下链路层有一笔带过CRC检验，感觉这个地方很实用，也经常见所以还是认真对待了一下" class="headerlink" title="一、在计算机网络自顶向下链路层有一笔带过CRC检验，感觉这个地方很实用，也经常见所以还是认真对待了一下"></a>一、在计算机网络自顶向下链路层有一笔带过CRC检验，感觉这个地方很实用，也经常见所以还是认真对待了一下</h3><p><strong>百度百科</strong>：循环冗余校验(Cyclic Redundancy Check, CRC)是一种根据网络数据包或电脑文件等数据产生简短固定位数校验码的一种散列函数，主要用来检测或校验数据传输或者保存后可能出现的错误。它是利用除法及余数的原理来作错误侦测的</p>
+        <html><head></head><body><h3 id="&#x4E00;&#x3001;&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x7F51;&#x7EDC;&#x81EA;&#x9876;&#x5411;&#x4E0B;&#x94FE;&#x8DEF;&#x5C42;&#x6709;&#x4E00;&#x7B14;&#x5E26;&#x8FC7;CRC&#x68C0;&#x9A8C;&#xFF0C;&#x611F;&#x89C9;&#x8FD9;&#x4E2A;&#x5730;&#x65B9;&#x5F88;&#x5B9E;&#x7528;&#xFF0C;&#x4E5F;&#x7ECF;&#x5E38;&#x89C1;&#x6240;&#x4EE5;&#x8FD8;&#x662F;&#x8BA4;&#x771F;&#x5BF9;&#x5F85;&#x4E86;&#x4E00;&#x4E0B;"><a href="#&#x4E00;&#x3001;&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x7F51;&#x7EDC;&#x81EA;&#x9876;&#x5411;&#x4E0B;&#x94FE;&#x8DEF;&#x5C42;&#x6709;&#x4E00;&#x7B14;&#x5E26;&#x8FC7;CRC&#x68C0;&#x9A8C;&#xFF0C;&#x611F;&#x89C9;&#x8FD9;&#x4E2A;&#x5730;&#x65B9;&#x5F88;&#x5B9E;&#x7528;&#xFF0C;&#x4E5F;&#x7ECF;&#x5E38;&#x89C1;&#x6240;&#x4EE5;&#x8FD8;&#x662F;&#x8BA4;&#x771F;&#x5BF9;&#x5F85;&#x4E86;&#x4E00;&#x4E0B;" class="headerlink" title="&#x4E00;&#x3001;&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x7F51;&#x7EDC;&#x81EA;&#x9876;&#x5411;&#x4E0B;&#x94FE;&#x8DEF;&#x5C42;&#x6709;&#x4E00;&#x7B14;&#x5E26;&#x8FC7;CRC&#x68C0;&#x9A8C;&#xFF0C;&#x611F;&#x89C9;&#x8FD9;&#x4E2A;&#x5730;&#x65B9;&#x5F88;&#x5B9E;&#x7528;&#xFF0C;&#x4E5F;&#x7ECF;&#x5E38;&#x89C1;&#x6240;&#x4EE5;&#x8FD8;&#x662F;&#x8BA4;&#x771F;&#x5BF9;&#x5F85;&#x4E86;&#x4E00;&#x4E0B;"></a>&#x4E00;&#x3001;&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x7F51;&#x7EDC;&#x81EA;&#x9876;&#x5411;&#x4E0B;&#x94FE;&#x8DEF;&#x5C42;&#x6709;&#x4E00;&#x7B14;&#x5E26;&#x8FC7;CRC&#x68C0;&#x9A8C;&#xFF0C;&#x611F;&#x89C9;&#x8FD9;&#x4E2A;&#x5730;&#x65B9;&#x5F88;&#x5B9E;&#x7528;&#xFF0C;&#x4E5F;&#x7ECF;&#x5E38;&#x89C1;&#x6240;&#x4EE5;&#x8FD8;&#x662F;&#x8BA4;&#x771F;&#x5BF9;&#x5F85;&#x4E86;&#x4E00;&#x4E0B;</h3><p><strong>&#x767E;&#x5EA6;&#x767E;&#x79D1;</strong>&#xFF1A;&#x5FAA;&#x73AF;&#x5197;&#x4F59;&#x6821;&#x9A8C;(Cyclic Redundancy Check, CRC)&#x662F;&#x4E00;&#x79CD;&#x6839;&#x636E;&#x7F51;&#x7EDC;&#x6570;&#x636E;&#x5305;&#x6216;&#x7535;&#x8111;&#x6587;&#x4EF6;&#x7B49;&#x6570;&#x636E;&#x4EA7;&#x751F;&#x7B80;&#x77ED;&#x56FA;&#x5B9A;&#x4F4D;&#x6570;&#x6821;&#x9A8C;&#x7801;&#x7684;&#x4E00;&#x79CD;&#x6563;&#x5217;&#x51FD;&#x6570;&#xFF0C;&#x4E3B;&#x8981;&#x7528;&#x6765;&#x68C0;&#x6D4B;&#x6216;&#x6821;&#x9A8C;&#x6570;&#x636E;&#x4F20;&#x8F93;&#x6216;&#x8005;&#x4FDD;&#x5B58;&#x540E;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x7684;&#x9519;&#x8BEF;&#x3002;&#x5B83;&#x662F;&#x5229;&#x7528;&#x9664;&#x6CD5;&#x53CA;&#x4F59;&#x6570;&#x7684;&#x539F;&#x7406;&#x6765;&#x4F5C;&#x9519;&#x8BEF;&#x4FA6;&#x6D4B;&#x7684;</p></body></html>
         <p class="article-more-link">
-            <a href="/2019/03/15/CRC%E6%8E%A8%E5%AF%BC%E4%BB%A5%E5%8F%8A%E4%B8%80%E9%81%93CRC32%E7%88%86%E7%A0%B4%E4%BE%8B%E9%A2%98/#more">Read More</a>
+            <a href="../../2019/03/15/CRC%E6%8E%A8%E5%AF%BC%E4%BB%A5%E5%8F%8A%E4%B8%80%E9%81%93CRC32%E7%88%86%E7%A0%B4%E4%BE%8B%E9%A2%98/#more">Read More</a>
         </p>
     
     </div>
@@ -343,7 +343,7 @@
 
 
 
-<script src="/js/script.js"></script>
+<script src="../../js/script.js"></script>
 
 
     
@@ -369,13 +369,13 @@
                 TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
-            CONTENT_URL: '/content.json',
+            CONTENT_URL: '../../content.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
 
-<script src="/js/insight.js"></script>
+<script src="../../js/insight.js"></script>
 
     
 </body>

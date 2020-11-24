@@ -16,12 +16,12 @@
 
 
 
-    <meta name="description" content="函数调用在第三章第七章均有涉及，故专门总结一波函数调用栈帧的变化1、熟悉一下程序的进程空间 ，即对进程如何使用内存">
+    <meta name="description" content="&amp;#x51FD;&amp;#x6570;&amp;#x8C03;&amp;#x7528;&amp;#x5728;&amp;#x7B2C;&amp;#x4E09;&amp;#x7AE0;&amp;#x7B2C;&amp;#x4E03;&amp;#x7AE0;&amp;#x5747;&amp;#x6709;&amp;#x6D89;&amp;#x53CA;&amp;#xFF0C;&amp;#x6545;&amp;#x4E13;&amp;#x95E8;&amp;#x603B;&amp;#x7ED3;&amp;#x4E00;&amp;#x6CE2;&amp;#x51FD;&amp;#x6570;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSAPP又双叒叕来一遍之函数调用过程栈帧的变化">
 <meta property="og:url" content="http://example.com/2018/12/21/CSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B%E6%A0%88%E5%B8%A7%E7%9A%84%E5%8F%98%E5%8C%96/index.html">
 <meta property="og:site_name" content="ShuYu">
-<meta property="og:description" content="函数调用在第三章第七章均有涉及，故专门总结一波函数调用栈帧的变化1、熟悉一下程序的进程空间 ，即对进程如何使用内存">
+<meta property="og:description" content="&amp;#x51FD;&amp;#x6570;&amp;#x8C03;&amp;#x7528;&amp;#x5728;&amp;#x7B2C;&amp;#x4E09;&amp;#x7AE0;&amp;#x7B2C;&amp;#x4E03;&amp;#x7AE0;&amp;#x5747;&amp;#x6709;&amp;#x6D89;&amp;#x53CA;&amp;#xFF0C;&amp;#x6545;&amp;#x4E13;&amp;#x95E8;&amp;#x603B;&amp;#x7ED3;&amp;#x4E00;&amp;#x6CE2;&amp;#x51FD;&amp;#x6570;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2018/12/21/CSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B%E6%A0%88%E5%B8%A7%E7%9A%84%E5%8F%98%E5%8C%96/2.png">
 <meta property="og:image" content="http://example.com/2018/12/21/CSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B%E6%A0%88%E5%B8%A7%E7%9A%84%E5%8F%98%E5%8C%96/1.png">
@@ -48,10 +48,10 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css">
 
 
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="../../../../css/style.css">
 
 
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
@@ -77,9 +77,9 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/">
+            <a class="navbar-item navbar-logo" href="../../../../index.html">
                 
-                <img src="/images/logo.png" alt="" height="28">
+                <img src="../../../../images/logo.png" alt="" height="28">
                 
             </a>
             <div class="navbar-burger">
@@ -92,16 +92,16 @@
         <div class="navbar-menu navbar-start">
             
             <a class="navbar-item "
-               href="/archives">Archives</a>
+               href="../../../../archives">Archives</a>
             
             <a class="navbar-item "
-               href="/friends">Friends</a>
+               href="../../../../friends">Friends</a>
             
             <a class="navbar-item "
-               href="/about">About</a>
+               href="../../../../about">About</a>
             
             <a class="navbar-item "
-               href="/tags">Tags</a>
+               href="../../../../tags">Tags</a>
             
         </div>
         
@@ -135,13 +135,13 @@
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <span>Dec 21 2018</span>
+                <time datetime="2018-12-20T22:33:53.000Z" itemprop="datePublished">Dec 21 2018</time>
             
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/CSAPP/">CSAPP</a>
+            <a class="article-category-link" href="../../../../categories/CSAPP/">CSAPP</a>
         </span>
         
         
@@ -154,27 +154,27 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <h2 id="函数调用在第三章第七章均有涉及，故专门总结一波函数调用栈帧的变化"><a href="#函数调用在第三章第七章均有涉及，故专门总结一波函数调用栈帧的变化" class="headerlink" title="函数调用在第三章第七章均有涉及，故专门总结一波函数调用栈帧的变化"></a>函数调用在第三章第七章均有涉及，故专门总结一波函数调用栈帧的变化</h2><h4 id="1、熟悉一下程序的进程空间-，即对进程如何使用内存"><a href="#1、熟悉一下程序的进程空间-，即对进程如何使用内存" class="headerlink" title="1、熟悉一下程序的进程空间 ，即对进程如何使用内存"></a>1、熟悉一下程序的进程空间 ，即对进程如何使用内存</h4><a id="more"></a>
+        <html><head></head><body><h2 id="&#x51FD;&#x6570;&#x8C03;&#x7528;&#x5728;&#x7B2C;&#x4E09;&#x7AE0;&#x7B2C;&#x4E03;&#x7AE0;&#x5747;&#x6709;&#x6D89;&#x53CA;&#xFF0C;&#x6545;&#x4E13;&#x95E8;&#x603B;&#x7ED3;&#x4E00;&#x6CE2;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x6808;&#x5E27;&#x7684;&#x53D8;&#x5316;"><a href="#&#x51FD;&#x6570;&#x8C03;&#x7528;&#x5728;&#x7B2C;&#x4E09;&#x7AE0;&#x7B2C;&#x4E03;&#x7AE0;&#x5747;&#x6709;&#x6D89;&#x53CA;&#xFF0C;&#x6545;&#x4E13;&#x95E8;&#x603B;&#x7ED3;&#x4E00;&#x6CE2;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x6808;&#x5E27;&#x7684;&#x53D8;&#x5316;" class="headerlink" title="&#x51FD;&#x6570;&#x8C03;&#x7528;&#x5728;&#x7B2C;&#x4E09;&#x7AE0;&#x7B2C;&#x4E03;&#x7AE0;&#x5747;&#x6709;&#x6D89;&#x53CA;&#xFF0C;&#x6545;&#x4E13;&#x95E8;&#x603B;&#x7ED3;&#x4E00;&#x6CE2;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x6808;&#x5E27;&#x7684;&#x53D8;&#x5316;"></a>&#x51FD;&#x6570;&#x8C03;&#x7528;&#x5728;&#x7B2C;&#x4E09;&#x7AE0;&#x7B2C;&#x4E03;&#x7AE0;&#x5747;&#x6709;&#x6D89;&#x53CA;&#xFF0C;&#x6545;&#x4E13;&#x95E8;&#x603B;&#x7ED3;&#x4E00;&#x6CE2;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x6808;&#x5E27;&#x7684;&#x53D8;&#x5316;</h2><h4 id="1&#x3001;&#x719F;&#x6089;&#x4E00;&#x4E0B;&#x7A0B;&#x5E8F;&#x7684;&#x8FDB;&#x7A0B;&#x7A7A;&#x95F4;-&#xFF0C;&#x5373;&#x5BF9;&#x8FDB;&#x7A0B;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5185;&#x5B58;"><a href="#1&#x3001;&#x719F;&#x6089;&#x4E00;&#x4E0B;&#x7A0B;&#x5E8F;&#x7684;&#x8FDB;&#x7A0B;&#x7A7A;&#x95F4;-&#xFF0C;&#x5373;&#x5BF9;&#x8FDB;&#x7A0B;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5185;&#x5B58;" class="headerlink" title="1&#x3001;&#x719F;&#x6089;&#x4E00;&#x4E0B;&#x7A0B;&#x5E8F;&#x7684;&#x8FDB;&#x7A0B;&#x7A7A;&#x95F4; &#xFF0C;&#x5373;&#x5BF9;&#x8FDB;&#x7A0B;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5185;&#x5B58;"></a>1&#x3001;&#x719F;&#x6089;&#x4E00;&#x4E0B;&#x7A0B;&#x5E8F;&#x7684;&#x8FDB;&#x7A0B;&#x7A7A;&#x95F4; &#xFF0C;&#x5373;&#x5BF9;&#x8FDB;&#x7A0B;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5185;&#x5B58;</h4><a id="more"></a>
 
 
 <p><img src="2.png"></p>
-<p>先讨论32位的计算机，计算机物理内存的大小是固定的，就是计算机主板内存槽上的实际物理内存，cpu可以直接进行寻址，物理内存的容量是固定的，但是寻址的空间取决于cpu地址线的数量。在32位系统上，线性地址空间可达4G（2^32）；这4G一般是按照3：1的比例进行分配，用户进程享有3G的空间，而内核独自享有剩下的1G内存</p>
-<h4 id="2、谈谈栈帧的概念"><a href="#2、谈谈栈帧的概念" class="headerlink" title="2、谈谈栈帧的概念"></a>2、谈谈栈帧的概念</h4><p>栈帧(stack frame)，机器用栈来传递过程参数，存储返回信息，保存寄存器用于以后恢复，以及本地存储。为单个过程(函数调用)分配的那部分栈称为栈帧。<br>栈帧其实 是两个指针寄存器，寄存器%ebp为帧指针（指向该栈帧的最底部），而寄存器%esp为栈指针（指向该栈帧的最顶部），当程序运行时，栈指针可以移动(大多数的信息的访问都是通过帧指针的，换句话说，就是如果该栈存在，%ebp帧指针是不移动的，访问栈里面的元素可以用-4(%ebp）或者8(%ebp)访问%ebp指针下面或者上面的元素)。<br>总之简单 一句话，栈帧的主要作用是用来控制和保存一个过程的所有信息的。栈帧结构如下所示：<br><img src="1.png"><br>大概解释：假设过程P（调用者）调用过程Q（被调用者），则Q的参数放在P的栈帧中。另外，当P调用Q时，P中的返回地址被压入栈中，形成P的栈帧的末尾 （返回地址就是当程序从Q返回时应该继续执行的地方）。Q的栈帧从保存的帧指针的值开始，后面到新的栈指针之间就是该过程的部分了。</p>
-<h4 id="3、函数具体调用示例"><a href="#3、函数具体调用示例" class="headerlink" title="3、函数具体调用示例"></a>3、函数具体调用示例</h4><p>源代码（忽略主函数）:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int swap_add(int* xp,int* yp) &#123;</span><br><span class="line">    int x &#x3D; *xp;</span><br><span class="line">    int y &#x3D; *yp;</span><br><span class="line">    *xp &#x3D; y;</span><br><span class="line">    *yp &#x3D; x;</span><br><span class="line">    return x+y;</span><br><span class="line">&#125;</span><br><span class="line">int caller()&#123;</span><br><span class="line">    int arg1 &#x3D; 534;</span><br><span class="line">    int arg2 &#x3D; 1057;</span><br><span class="line">    int sum &#x3D; swap_add(&amp;arg1,&amp;arg2);</span><br><span class="line">    int diff &#x3D; arg1 - arg2;</span><br><span class="line">    </span><br><span class="line">    return sum * diff;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>经过汇编之后caller部分的代码为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">caller:</span><br><span class="line">    pushl %ebp   &#x2F;&#x2F;保存%ebp </span><br><span class="line">    movl %esp,%ebp    &#x2F;&#x2F;设置新的帧指针为旧的栈指针</span><br><span class="line">    subl $24,%esp  &#x2F;&#x2F;分配24子节的栈空间</span><br><span class="line">    movl $534,-4(%ebp) &#x2F;&#x2F;设置arg1&#x3D;534</span><br><span class="line">    movl $1057,-8(%ebp) &#x2F;&#x2F;设置arg2&#x3D;1057</span><br><span class="line">    leal -8(%ebp),%eax &#x2F;&#x2F;计算&amp;arg2</span><br><span class="line">    movl %eax,4(%esp) &#x2F;&#x2F;将&amp;arg2存入栈中</span><br><span class="line">    leal -4(%ebp),%eax &#x2F;&#x2F;计算&amp;arg1</span><br><span class="line">    movl %eax,(%esp) &#x2F;&#x2F;将&amp;arg1存入栈中</span><br><span class="line">    call swap_add &#x2F;&#x2F;调用swap_add-------------------》过程调用</span><br><span class="line">    movl -4(%ebp),%edx &#x2F;从栈中取出arg1,和arg2的值</span><br><span class="line">    subl -8(%ebp),%edx &#x2F;&#x2F;为了计算diff, </span><br><span class="line">    imull %edx,%eax  </span><br><span class="line">    leave &#x2F;&#x2F;为返回准备栈，GCC 产生的代码有时候会使用leave指令来释放栈帧，</span><br><span class="line">           &#x2F;&#x2F;而有时会使用一个或者两个popl指令。两个方法都可行。</span><br><span class="line">    ret             &#x2F;&#x2F;从过程调用中返回  </span><br></pre></td></tr></table></figure>
-<p>这段代码先保存了%ebp的一个副本，将新的过程（该函数的ebp）的ebp设置为栈帧的开始位置。然后将栈指针减去24，从而在栈上分配了24字 节的空间（你应该思考一下为什么是24字节,记得有两个为保存的寄存器），然后是初始化两个局部变量，计算两个局部变量的地址并存入栈中，形成了函数swap_add的参数。将这些 参数存储到相对于栈指针偏移量为0和+4的地方，留待稍后的swap_add调用访问。然后调用swap_add</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">swap_add:</span><br><span class="line">    pushl %ebp &#x2F;&#x2F;save old %ebp</span><br><span class="line">    movl %esp,%ebp  &#x2F;&#x2F;set %ebp as frame pointer</span><br><span class="line">    pushl %ebx     &#x2F;&#x2F;save %ebx</span><br><span class="line">     </span><br><span class="line">    movl 8(%ebp),%edx   &#x2F;&#x2F;Get xp</span><br><span class="line">    movl 12(%ebp),%ecx   &#x2F;&#x2F;Get yp</span><br><span class="line">    movl (%edx),%ebx   &#x2F;&#x2F;Get x</span><br><span class="line">    movl (%ecx),%eax    &#x2F;&#x2F;Get u</span><br><span class="line">    movl %eax,(%edx)    &#x2F;&#x2F;Store y as xp</span><br><span class="line">    movl %ebx,(%ecx)      &#x2F;&#x2F;Sotre x as yp</span><br><span class="line">    addl %ebx,%eax         &#x2F;&#x2F;return value &#x3D; x + y</span><br><span class="line">     </span><br><span class="line">    popl %ebx        &#x2F;&#x2F;restore  %ebx</span><br><span class="line">    popl %ebp        &#x2F;&#x2F;restore %ebp</span><br><span class="line">    ret        &#x2F;&#x2F;从过程调用中返回, 将控制转移回caller</span><br></pre></td></tr></table></figure>
-<p>说明三点，1、说明一点程序在执行到swap_add的代码之前，也就是在执行call语句已经把返回地址压入栈中，包括%esp-4. 2、最后一部 分的popl %ebx   popl %ebp。它的作用是恢复了之前存储的栈帧指针的值.  3、返回值是存入了%eax中，在接下来的调用程序caller中直接访问该寄存器</p>
-<h4 id="整个过程的栈变化如下所示"><a href="#整个过程的栈变化如下所示" class="headerlink" title="整个过程的栈变化如下所示"></a>整个过程的栈变化如下所示</h4><p><img src="3.png"></p>
-
+<p>&#x5148;&#x8BA8;&#x8BBA;32&#x4F4D;&#x7684;&#x8BA1;&#x7B97;&#x673A;&#xFF0C;&#x8BA1;&#x7B97;&#x673A;&#x7269;&#x7406;&#x5185;&#x5B58;&#x7684;&#x5927;&#x5C0F;&#x662F;&#x56FA;&#x5B9A;&#x7684;&#xFF0C;&#x5C31;&#x662F;&#x8BA1;&#x7B97;&#x673A;&#x4E3B;&#x677F;&#x5185;&#x5B58;&#x69FD;&#x4E0A;&#x7684;&#x5B9E;&#x9645;&#x7269;&#x7406;&#x5185;&#x5B58;&#xFF0C;cpu&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x8FDB;&#x884C;&#x5BFB;&#x5740;&#xFF0C;&#x7269;&#x7406;&#x5185;&#x5B58;&#x7684;&#x5BB9;&#x91CF;&#x662F;&#x56FA;&#x5B9A;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x5BFB;&#x5740;&#x7684;&#x7A7A;&#x95F4;&#x53D6;&#x51B3;&#x4E8E;cpu&#x5730;&#x5740;&#x7EBF;&#x7684;&#x6570;&#x91CF;&#x3002;&#x5728;32&#x4F4D;&#x7CFB;&#x7EDF;&#x4E0A;&#xFF0C;&#x7EBF;&#x6027;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#x53EF;&#x8FBE;4G&#xFF08;2^32&#xFF09;&#xFF1B;&#x8FD9;4G&#x4E00;&#x822C;&#x662F;&#x6309;&#x7167;3&#xFF1A;1&#x7684;&#x6BD4;&#x4F8B;&#x8FDB;&#x884C;&#x5206;&#x914D;&#xFF0C;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x4EAB;&#x6709;3G&#x7684;&#x7A7A;&#x95F4;&#xFF0C;&#x800C;&#x5185;&#x6838;&#x72EC;&#x81EA;&#x4EAB;&#x6709;&#x5269;&#x4E0B;&#x7684;1G&#x5185;&#x5B58;</p>
+<h4 id="2&#x3001;&#x8C08;&#x8C08;&#x6808;&#x5E27;&#x7684;&#x6982;&#x5FF5;"><a href="#2&#x3001;&#x8C08;&#x8C08;&#x6808;&#x5E27;&#x7684;&#x6982;&#x5FF5;" class="headerlink" title="2&#x3001;&#x8C08;&#x8C08;&#x6808;&#x5E27;&#x7684;&#x6982;&#x5FF5;"></a>2&#x3001;&#x8C08;&#x8C08;&#x6808;&#x5E27;&#x7684;&#x6982;&#x5FF5;</h4><p>&#x6808;&#x5E27;(stack frame)&#xFF0C;&#x673A;&#x5668;&#x7528;&#x6808;&#x6765;&#x4F20;&#x9012;&#x8FC7;&#x7A0B;&#x53C2;&#x6570;&#xFF0C;&#x5B58;&#x50A8;&#x8FD4;&#x56DE;&#x4FE1;&#x606F;&#xFF0C;&#x4FDD;&#x5B58;&#x5BC4;&#x5B58;&#x5668;&#x7528;&#x4E8E;&#x4EE5;&#x540E;&#x6062;&#x590D;&#xFF0C;&#x4EE5;&#x53CA;&#x672C;&#x5730;&#x5B58;&#x50A8;&#x3002;&#x4E3A;&#x5355;&#x4E2A;&#x8FC7;&#x7A0B;(&#x51FD;&#x6570;&#x8C03;&#x7528;)&#x5206;&#x914D;&#x7684;&#x90A3;&#x90E8;&#x5206;&#x6808;&#x79F0;&#x4E3A;&#x6808;&#x5E27;&#x3002;<br>&#x6808;&#x5E27;&#x5176;&#x5B9E; &#x662F;&#x4E24;&#x4E2A;&#x6307;&#x9488;&#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x5BC4;&#x5B58;&#x5668;%ebp&#x4E3A;&#x5E27;&#x6307;&#x9488;&#xFF08;&#x6307;&#x5411;&#x8BE5;&#x6808;&#x5E27;&#x7684;&#x6700;&#x5E95;&#x90E8;&#xFF09;&#xFF0C;&#x800C;&#x5BC4;&#x5B58;&#x5668;%esp&#x4E3A;&#x6808;&#x6307;&#x9488;&#xFF08;&#x6307;&#x5411;&#x8BE5;&#x6808;&#x5E27;&#x7684;&#x6700;&#x9876;&#x90E8;&#xFF09;&#xFF0C;&#x5F53;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x6808;&#x6307;&#x9488;&#x53EF;&#x4EE5;&#x79FB;&#x52A8;(&#x5927;&#x591A;&#x6570;&#x7684;&#x4FE1;&#x606F;&#x7684;&#x8BBF;&#x95EE;&#x90FD;&#x662F;&#x901A;&#x8FC7;&#x5E27;&#x6307;&#x9488;&#x7684;&#xFF0C;&#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;&#x5C31;&#x662F;&#x5982;&#x679C;&#x8BE5;&#x6808;&#x5B58;&#x5728;&#xFF0C;%ebp&#x5E27;&#x6307;&#x9488;&#x662F;&#x4E0D;&#x79FB;&#x52A8;&#x7684;&#xFF0C;&#x8BBF;&#x95EE;&#x6808;&#x91CC;&#x9762;&#x7684;&#x5143;&#x7D20;&#x53EF;&#x4EE5;&#x7528;-4(%ebp&#xFF09;&#x6216;&#x8005;8(%ebp)&#x8BBF;&#x95EE;%ebp&#x6307;&#x9488;&#x4E0B;&#x9762;&#x6216;&#x8005;&#x4E0A;&#x9762;&#x7684;&#x5143;&#x7D20;)&#x3002;<br>&#x603B;&#x4E4B;&#x7B80;&#x5355; &#x4E00;&#x53E5;&#x8BDD;&#xFF0C;&#x6808;&#x5E27;&#x7684;&#x4E3B;&#x8981;&#x4F5C;&#x7528;&#x662F;&#x7528;&#x6765;&#x63A7;&#x5236;&#x548C;&#x4FDD;&#x5B58;&#x4E00;&#x4E2A;&#x8FC7;&#x7A0B;&#x7684;&#x6240;&#x6709;&#x4FE1;&#x606F;&#x7684;&#x3002;&#x6808;&#x5E27;&#x7ED3;&#x6784;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;<br><img src="1.png"><br>&#x5927;&#x6982;&#x89E3;&#x91CA;&#xFF1A;&#x5047;&#x8BBE;&#x8FC7;&#x7A0B;P&#xFF08;&#x8C03;&#x7528;&#x8005;&#xFF09;&#x8C03;&#x7528;&#x8FC7;&#x7A0B;Q&#xFF08;&#x88AB;&#x8C03;&#x7528;&#x8005;&#xFF09;&#xFF0C;&#x5219;Q&#x7684;&#x53C2;&#x6570;&#x653E;&#x5728;P&#x7684;&#x6808;&#x5E27;&#x4E2D;&#x3002;&#x53E6;&#x5916;&#xFF0C;&#x5F53;P&#x8C03;&#x7528;Q&#x65F6;&#xFF0C;P&#x4E2D;&#x7684;&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x88AB;&#x538B;&#x5165;&#x6808;&#x4E2D;&#xFF0C;&#x5F62;&#x6210;P&#x7684;&#x6808;&#x5E27;&#x7684;&#x672B;&#x5C3E; &#xFF08;&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x5C31;&#x662F;&#x5F53;&#x7A0B;&#x5E8F;&#x4ECE;Q&#x8FD4;&#x56DE;&#x65F6;&#x5E94;&#x8BE5;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#x7684;&#x5730;&#x65B9;&#xFF09;&#x3002;Q&#x7684;&#x6808;&#x5E27;&#x4ECE;&#x4FDD;&#x5B58;&#x7684;&#x5E27;&#x6307;&#x9488;&#x7684;&#x503C;&#x5F00;&#x59CB;&#xFF0C;&#x540E;&#x9762;&#x5230;&#x65B0;&#x7684;&#x6808;&#x6307;&#x9488;&#x4E4B;&#x95F4;&#x5C31;&#x662F;&#x8BE5;&#x8FC7;&#x7A0B;&#x7684;&#x90E8;&#x5206;&#x4E86;&#x3002;</p>
+<h4 id="3&#x3001;&#x51FD;&#x6570;&#x5177;&#x4F53;&#x8C03;&#x7528;&#x793A;&#x4F8B;"><a href="#3&#x3001;&#x51FD;&#x6570;&#x5177;&#x4F53;&#x8C03;&#x7528;&#x793A;&#x4F8B;" class="headerlink" title="3&#x3001;&#x51FD;&#x6570;&#x5177;&#x4F53;&#x8C03;&#x7528;&#x793A;&#x4F8B;"></a>3&#x3001;&#x51FD;&#x6570;&#x5177;&#x4F53;&#x8C03;&#x7528;&#x793A;&#x4F8B;</h4><p>&#x6E90;&#x4EE3;&#x7801;&#xFF08;&#x5FFD;&#x7565;&#x4E3B;&#x51FD;&#x6570;&#xFF09;:</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs plain">int swap_add(int* xp,int* yp) {<br>    int x = *xp;<br>    int y = *yp;<br>    *xp = y;<br>    *yp = x;<br>    return x+y;<br>}<br>int caller(){<br>    int arg1 = 534;<br>    int arg2 = 1057;<br>    int sum = swap_add(&amp;arg1,&amp;arg2);<br>    int diff = arg1 - arg2;<br>    <br>    return sum * diff;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>&#x7ECF;&#x8FC7;&#x6C47;&#x7F16;&#x4E4B;&#x540E;caller&#x90E8;&#x5206;&#x7684;&#x4EE3;&#x7801;&#x4E3A;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs plain">caller:<br>    pushl %ebp   //&#x4FDD;&#x5B58;%ebp <br>    movl %esp,%ebp    //&#x8BBE;&#x7F6E;&#x65B0;&#x7684;&#x5E27;&#x6307;&#x9488;&#x4E3A;&#x65E7;&#x7684;&#x6808;&#x6307;&#x9488;<br>    subl $24,%esp  //&#x5206;&#x914D;24&#x5B50;&#x8282;&#x7684;&#x6808;&#x7A7A;&#x95F4;<br>    movl $534,-4(%ebp) //&#x8BBE;&#x7F6E;arg1=534<br>    movl $1057,-8(%ebp) //&#x8BBE;&#x7F6E;arg2=1057<br>    leal -8(%ebp),%eax //&#x8BA1;&#x7B97;&amp;arg2<br>    movl %eax,4(%esp) //&#x5C06;&amp;arg2&#x5B58;&#x5165;&#x6808;&#x4E2D;<br>    leal -4(%ebp),%eax //&#x8BA1;&#x7B97;&amp;arg1<br>    movl %eax,(%esp) //&#x5C06;&amp;arg1&#x5B58;&#x5165;&#x6808;&#x4E2D;<br>    call swap_add //&#x8C03;&#x7528;swap_add-------------------&#x300B;&#x8FC7;&#x7A0B;&#x8C03;&#x7528;<br>    movl -4(%ebp),%edx /&#x4ECE;&#x6808;&#x4E2D;&#x53D6;&#x51FA;arg1,&#x548C;arg2&#x7684;&#x503C;<br>    subl -8(%ebp),%edx //&#x4E3A;&#x4E86;&#x8BA1;&#x7B97;diff, <br>    imull %edx,%eax  <br>    leave //&#x4E3A;&#x8FD4;&#x56DE;&#x51C6;&#x5907;&#x6808;&#xFF0C;GCC &#x4EA7;&#x751F;&#x7684;&#x4EE3;&#x7801;&#x6709;&#x65F6;&#x5019;&#x4F1A;&#x4F7F;&#x7528;leave&#x6307;&#x4EE4;&#x6765;&#x91CA;&#x653E;&#x6808;&#x5E27;&#xFF0C;<br>           //&#x800C;&#x6709;&#x65F6;&#x4F1A;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x6216;&#x8005;&#x4E24;&#x4E2A;popl&#x6307;&#x4EE4;&#x3002;&#x4E24;&#x4E2A;&#x65B9;&#x6CD5;&#x90FD;&#x53EF;&#x884C;&#x3002;<br>    ret             //&#x4ECE;&#x8FC7;&#x7A0B;&#x8C03;&#x7528;&#x4E2D;&#x8FD4;&#x56DE;  <br></code></pre></td></tr></tbody></table></figure>
+<p>&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x5148;&#x4FDD;&#x5B58;&#x4E86;%ebp&#x7684;&#x4E00;&#x4E2A;&#x526F;&#x672C;&#xFF0C;&#x5C06;&#x65B0;&#x7684;&#x8FC7;&#x7A0B;&#xFF08;&#x8BE5;&#x51FD;&#x6570;&#x7684;ebp&#xFF09;&#x7684;ebp&#x8BBE;&#x7F6E;&#x4E3A;&#x6808;&#x5E27;&#x7684;&#x5F00;&#x59CB;&#x4F4D;&#x7F6E;&#x3002;&#x7136;&#x540E;&#x5C06;&#x6808;&#x6307;&#x9488;&#x51CF;&#x53BB;24&#xFF0C;&#x4ECE;&#x800C;&#x5728;&#x6808;&#x4E0A;&#x5206;&#x914D;&#x4E86;24&#x5B57; &#x8282;&#x7684;&#x7A7A;&#x95F4;&#xFF08;&#x4F60;&#x5E94;&#x8BE5;&#x601D;&#x8003;&#x4E00;&#x4E0B;&#x4E3A;&#x4EC0;&#x4E48;&#x662F;24&#x5B57;&#x8282;,&#x8BB0;&#x5F97;&#x6709;&#x4E24;&#x4E2A;&#x4E3A;&#x4FDD;&#x5B58;&#x7684;&#x5BC4;&#x5B58;&#x5668;&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x662F;&#x521D;&#x59CB;&#x5316;&#x4E24;&#x4E2A;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#xFF0C;&#x8BA1;&#x7B97;&#x4E24;&#x4E2A;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#x7684;&#x5730;&#x5740;&#x5E76;&#x5B58;&#x5165;&#x6808;&#x4E2D;&#xFF0C;&#x5F62;&#x6210;&#x4E86;&#x51FD;&#x6570;swap_add&#x7684;&#x53C2;&#x6570;&#x3002;&#x5C06;&#x8FD9;&#x4E9B; &#x53C2;&#x6570;&#x5B58;&#x50A8;&#x5230;&#x76F8;&#x5BF9;&#x4E8E;&#x6808;&#x6307;&#x9488;&#x504F;&#x79FB;&#x91CF;&#x4E3A;0&#x548C;+4&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x7559;&#x5F85;&#x7A0D;&#x540E;&#x7684;swap_add&#x8C03;&#x7528;&#x8BBF;&#x95EE;&#x3002;&#x7136;&#x540E;&#x8C03;&#x7528;swap_add</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs plain">swap_add:<br>    pushl %ebp //save old %ebp<br>    movl %esp,%ebp  //set %ebp as frame pointer<br>    pushl %ebx     //save %ebx<br>     <br>    movl 8(%ebp),%edx   //Get xp<br>    movl 12(%ebp),%ecx   //Get yp<br>    movl (%edx),%ebx   //Get x<br>    movl (%ecx),%eax    //Get u<br>    movl %eax,(%edx)    //Store y as xp<br>    movl %ebx,(%ecx)      //Sotre x as yp<br>    addl %ebx,%eax         //return value = x + y<br>     <br>    popl %ebx        //restore  %ebx<br>    popl %ebp        //restore %ebp<br>    ret        //&#x4ECE;&#x8FC7;&#x7A0B;&#x8C03;&#x7528;&#x4E2D;&#x8FD4;&#x56DE;, &#x5C06;&#x63A7;&#x5236;&#x8F6C;&#x79FB;&#x56DE;caller<br></code></pre></td></tr></tbody></table></figure>
+<p>&#x8BF4;&#x660E;&#x4E09;&#x70B9;&#xFF0C;1&#x3001;&#x8BF4;&#x660E;&#x4E00;&#x70B9;&#x7A0B;&#x5E8F;&#x5728;&#x6267;&#x884C;&#x5230;swap_add&#x7684;&#x4EE3;&#x7801;&#x4E4B;&#x524D;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5728;&#x6267;&#x884C;call&#x8BED;&#x53E5;&#x5DF2;&#x7ECF;&#x628A;&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x538B;&#x5165;&#x6808;&#x4E2D;&#xFF0C;&#x5305;&#x62EC;%esp-4. 2&#x3001;&#x6700;&#x540E;&#x4E00;&#x90E8; &#x5206;&#x7684;popl %ebx   popl %ebp&#x3002;&#x5B83;&#x7684;&#x4F5C;&#x7528;&#x662F;&#x6062;&#x590D;&#x4E86;&#x4E4B;&#x524D;&#x5B58;&#x50A8;&#x7684;&#x6808;&#x5E27;&#x6307;&#x9488;&#x7684;&#x503C;.  3&#x3001;&#x8FD4;&#x56DE;&#x503C;&#x662F;&#x5B58;&#x5165;&#x4E86;%eax&#x4E2D;&#xFF0C;&#x5728;&#x63A5;&#x4E0B;&#x6765;&#x7684;&#x8C03;&#x7528;&#x7A0B;&#x5E8F;caller&#x4E2D;&#x76F4;&#x63A5;&#x8BBF;&#x95EE;&#x8BE5;&#x5BC4;&#x5B58;&#x5668;</p>
+<h4 id="&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x7684;&#x6808;&#x53D8;&#x5316;&#x5982;&#x4E0B;&#x6240;&#x793A;"><a href="#&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x7684;&#x6808;&#x53D8;&#x5316;&#x5982;&#x4E0B;&#x6240;&#x793A;" class="headerlink" title="&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x7684;&#x6808;&#x53D8;&#x5316;&#x5982;&#x4E0B;&#x6240;&#x793A;"></a>&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x7684;&#x6808;&#x53D8;&#x5316;&#x5982;&#x4E0B;&#x6240;&#x793A;</h4><p><img src="3.png"></p>
+</body></html>
     
     </div>
     
     <div class="columns is-variable is-1 is-multiline is-mobile">
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/%E6%A0%88%E5%B8%A7/">#栈帧</a></span>
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="../../../../tags/%E6%A0%88%E5%B8%A7/">#栈帧</a></span>
     
     </div>
     
@@ -182,12 +182,12 @@
     <div class="columns is-mobile is-multiline article-nav">
         <span class="column is-12-mobile is-half-desktop  article-nav-prev">
             
-            <a href="/2018/12/21/CSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E9%93%BE%E6%8E%A5/">CSAPP又双叒叕来一遍之链接</a>
+            <a href="../CSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E9%93%BE%E6%8E%A5/">CSAPP又双叒叕来一遍之链接</a>
             
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">
             
-            <a href="/2018/12/20/%E5%90%84%E7%A7%8D%E6%BA%90%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/">Ubuntu16环境配置-换源</a>
+            <a href="../../20/%E5%90%84%E7%A7%8D%E6%BA%90%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/">Ubuntu16环境配置-换源</a>
             
         </span>
     </div>
@@ -370,7 +370,7 @@
 
 
 
-<script src="/js/script.js"></script>
+<script src="../../../../js/script.js"></script>
 
 
     
@@ -396,13 +396,13 @@
                 TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
-            CONTENT_URL: '/content.json',
+            CONTENT_URL: '../../../../content.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
 
-<script src="/js/insight.js"></script>
+<script src="../../../../js/insight.js"></script>
 
     
 </body>
