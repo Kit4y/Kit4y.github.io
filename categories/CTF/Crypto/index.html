@@ -30,7 +30,7 @@
 
 
 
-<link rel="icon" href="/favicon.png">
+<link rel="icon" href="/images/logo.png">
 
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
@@ -136,7 +136,7 @@
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <time datetime="2019-11-19T06:25:51.000Z" itemprop="datePublished">19 Nov 2019</time>
+                <time datetime="2019-11-19T06:25:51.000Z" itemprop="datePublished">Nov 19 2019</time>
             
         </span>
         
@@ -155,7 +155,7 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <html><head></head><body><h3 id="&#x80FD;&#x505A;&#x4EC0;&#x4E48;"><a href="#&#x80FD;&#x505A;&#x4EC0;&#x4E48;" class="headerlink" title="&#x80FD;&#x505A;&#x4EC0;&#x4E48;"></a>&#x80FD;&#x505A;&#x4EC0;&#x4E48;</h3><p>&#x5982;&#x679C;salt&#x7684;&#x503C;&#x4F60;&#x4E0D;&#x77E5;&#x9053;&#xFF0C;&#x4F46;&#x662F;&#x4F60;&#x77E5;&#x9053;&#x957F;&#x5EA6;&#xFF0C;&#x53C8;&#x77E5;&#x9053;sha1(salt+&#x201C;&#x4E00;&#x7EC4;&#x6B63;&#x786E;&#x6570;&#x636E;&#x201D;)&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8BA9;sha1(salt+&#x201C;&#x586B;&#x5145;&#x6570;&#x636E;&#x201D;+&#x201C;&#x4EFB;&#x610F;&#x53EF;&#x63A7;&#x6570;&#x636E;&#x201D;)&#x7B49;&#x4E8E;&#x6211;&#x4EEC;&#x7684;sha1(salt+&#x201C;&#x4E00;&#x7EC4;&#x6B63;&#x786E;&#x6570;&#x636E;&#x201D;).&#x8FD9;&#x91CC;&#x7684;salt+&#x201C;&#x586B;&#x5145;&#x6570;&#x636E;&#x201D;&#x5C31;&#x662F;&#x5BF9;salt&#x8FDB;&#x884C;sha1&#x65F6;&#x6240;&#x8865;&#x5168;&#x7684;&#x6570;&#x636E;+&#x6700;&#x540E;8&#x4F4D;&#x7684;&#x957F;&#x5EA6;&#x63CF;&#x8FF0;&#x7B26;&#x3002;&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;salt+&#x201D;&#x586B;&#x5145;&#x6570;&#x636E;&#x201D;&#x7684;&#x957F;&#x5EA6;&#x5C31;&#x662F;64&#x5B57;&#x8282;&#xFF0C;&#x6B63;&#x597D;&#x662F;&#x4E00;&#x4E2A;&#x5206;&#x7EC4;&#x3002;&#x5982;&#x679C;salt&#x7684;&#x957F;&#x5EA6;&#x5C31;&#x5927;&#x4E8E;&#x4E86;56&#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x90A3;&#x4E48;&#x52A0;&#x5165;&#x586B;&#x5145;&#x6570;&#x636E;&#x540E;&#x7684;&#x957F;&#x5EA6;&#x5E94;&#x8BE5;&#x662F;N&#x4E2A;64&#x5B57;&#x8282;&#xFF0C;&#x7B49;&#x4E8E;N&#x4E2A;&#x5206;&#x7EC4;&#x3002;<br>&#x4E3A;&#x4EC0;&#x4E48;&#xFF1F;&#x4F60;&#x53EF;&#x4EE5;&#x60F3;&#x8C61;&#xFF0C;sha1&#x7A0B;&#x5E8F;&#x518D;&#x5BF9;&#xFF08;salt+&#x201C;&#x586B;&#x5145;&#x6570;&#x636E;&#x201D;+&#x201C;&#x4EFB;&#x610F;&#x53EF;&#x63A7;&#x6570;&#x636E;&#x201D;&#xFF09;&#x8FDB;&#x884C;hash&#x65F6;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x7B2C;&#x4E8C;&#x8F6E;&#x53CA;&#x7B2C;&#x4E8C;&#x8F6E;&#x4EE5;&#x540E;&#x7684;&#x8FD0;&#x7B97;&#x3002;&#x56E0;&#x4E3A;&#x7B2C;&#x4E00;&#x8F6E;&#x8FD0;&#x7B97;&#x540E;&#x7684;registers&#x503C;&#x5C31;&#x662F;sha1(salt)&#x7684;&#x503C;&#xFF0C;&#x8BE5;&#x503C;&#x4F60;&#x5DF2;&#x7ECF;&#x77E5;&#x9053;&#x4E86;&#x3002;</p></body></html>
+        <h3 id="能做什么"><a href="#能做什么" class="headerlink" title="能做什么"></a>能做什么</h3><p>如果salt的值你不知道，但是你知道长度，又知道sha1(salt+“一组正确数据”)，那么我们可以让sha1(salt+“填充数据”+“任意可控数据”)等于我们的sha1(salt+“一组正确数据”).这里的salt+“填充数据”就是对salt进行sha1时所补全的数据+最后8位的长度描述符。一般来说，salt+”填充数据”的长度就是64字节，正好是一个分组。如果salt的长度就大于了56个字节，那么加入填充数据后的长度应该是N个64字节，等于N个分组。<br>为什么？你可以想象，sha1程序再对（salt+“填充数据”+“任意可控数据”）进行hash时，只需要进行第二轮及第二轮以后的运算。因为第一轮运算后的registers值就是sha1(salt)的值，该值你已经知道了。</p>
         <p class="article-more-link">
             <a href="/2019/11/19/%E5%93%88%E5%B8%8C%E9%95%BF%E5%BA%A6%E6%89%A9%E5%B1%95%E6%94%BB%E5%87%BB%E4%BB%A5%E5%8F%8AHashPump%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E5%92%8C%E4%B8%A4%E9%81%93%E9%A2%98%E7%9B%AE/#more">Read More</a>
         </p>
@@ -178,7 +178,7 @@
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <time datetime="2019-11-19T06:23:19.000Z" itemprop="datePublished">19 Nov 2019</time>
+                <time datetime="2019-11-19T06:23:19.000Z" itemprop="datePublished">Nov 19 2019</time>
             
         </span>
         
@@ -197,7 +197,7 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <html><head></head><body><h3 id="MD5&#x7B97;&#x6CD5;&#x5206;&#x6790;MD5&#x7B97;&#x6CD5;&#x5E95;&#x5C42;&#x539F;&#x7406;&#xFF1A;"><a href="#MD5&#x7B97;&#x6CD5;&#x5206;&#x6790;MD5&#x7B97;&#x6CD5;&#x5E95;&#x5C42;&#x539F;&#x7406;&#xFF1A;" class="headerlink" title="MD5&#x7B97;&#x6CD5;&#x5206;&#x6790;MD5&#x7B97;&#x6CD5;&#x5E95;&#x5C42;&#x539F;&#x7406;&#xFF1A;"></a>MD5&#x7B97;&#x6CD5;&#x5206;&#x6790;MD5&#x7B97;&#x6CD5;&#x5E95;&#x5C42;&#x539F;&#x7406;&#xFF1A;</h3><p>&#x7B80;&#x5355;&#x6982;&#x62EC;&#x8D77;&#x6765;&#xFF0C;MD5&#x7B97;&#x6CD5;&#x7684;&#x8FC7;&#x7A0B;&#x5206;&#x4E3A;&#x56DB;&#x6B65;&#xFF1A;&#x5904;&#x7406;&#x539F;&#x6587;&#xFF0C;&#x8BBE;&#x7F6E;&#x521D;&#x59CB;&#x503C;&#xFF0C;&#x5FAA;&#x73AF;&#x52A0;&#x5DE5;&#xFF0C;&#x62FC;&#x63A5;&#x7ED3;&#x679C;&#x3002;</p></body></html>
+        <h3 id="MD5算法分析MD5算法底层原理："><a href="#MD5算法分析MD5算法底层原理：" class="headerlink" title="MD5算法分析MD5算法底层原理："></a>MD5算法分析MD5算法底层原理：</h3><p>简单概括起来，MD5算法的过程分为四步：处理原文，设置初始值，循环加工，拼接结果。</p>
         <p class="article-more-link">
             <a href="/2019/11/19/md5%E7%AE%97%E6%B3%95%E7%9A%84%E5%AD%A6%E4%B9%A0%E5%92%8Cc-python3%E7%9A%84%E5%AE%9E%E7%8E%B0/#more">Read More</a>
         </p>
@@ -420,5 +420,5 @@
 <script src="/js/insight.js"></script>
 
     
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</body>
 </html>

@@ -16,12 +16,12 @@
 
 
 
-    <meta name="description" content="&amp;#x5947;&amp;#x602A;&amp;#x7684;TTL&amp;#x9898;&amp;#x76EE;&amp;#x63CF;&amp;#x8FF0;&amp;#xFF1A;&amp;#x6211;&amp;#x4EEC;&amp;#x622A;&amp;#x83B7;&amp;#x4E86;&amp;#x4E00;&amp;#x4E9B;IP&amp;#x6570;&amp;#x636E;&amp;#x62A5;&amp;#xFF0C;&amp;#x53D1;&amp;#x73B0;&amp;#x62A5;&amp;#x6587;&amp;#x5934;&amp;#x">
+    <meta name="description" content="奇怪的TTL题目描述：我们截获了一些IP数据报，发现报文头中的TTL值特别可疑，怀疑是通信方嵌入了数据到TTL，我们将这些TTL值提取了出来，你能看出什么端倪吗？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019年西湖论剑之维吉尼亚和AutoKey的区别">
 <meta property="og:url" content="http://example.com/2019/04/09/2019%E5%B9%B4%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91%E4%B9%8B%E7%BB%B4%E5%90%89%E5%B0%BC%E4%BA%9A%E5%92%8CAutoKey%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
 <meta property="og:site_name" content="书鱼">
-<meta property="og:description" content="&amp;#x5947;&amp;#x602A;&amp;#x7684;TTL&amp;#x9898;&amp;#x76EE;&amp;#x63CF;&amp;#x8FF0;&amp;#xFF1A;&amp;#x6211;&amp;#x4EEC;&amp;#x622A;&amp;#x83B7;&amp;#x4E86;&amp;#x4E00;&amp;#x4E9B;IP&amp;#x6570;&amp;#x636E;&amp;#x62A5;&amp;#xFF0C;&amp;#x53D1;&amp;#x73B0;&amp;#x62A5;&amp;#x6587;&amp;#x5934;&amp;#x">
+<meta property="og:description" content="奇怪的TTL题目描述：我们截获了一些IP数据报，发现报文头中的TTL值特别可疑，怀疑是通信方嵌入了数据到TTL，我们将这些TTL值提取了出来，你能看出什么端倪吗？">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2019/04/09/2019%E5%B9%B4%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91%E4%B9%8B%E7%BB%B4%E5%90%89%E5%B0%BC%E4%BA%9A%E5%92%8CAutoKey%E7%9A%84%E5%8C%BA%E5%88%AB/2.jpg">
 <meta property="og:image" content="http://example.com/2019/04/09/2019%E5%B9%B4%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91%E4%B9%8B%E7%BB%B4%E5%90%89%E5%B0%BC%E4%BA%9A%E5%92%8CAutoKey%E7%9A%84%E5%8C%BA%E5%88%AB/3.png">
@@ -39,7 +39,7 @@
 
 
 
-<link rel="icon" href="/favicon.png">
+<link rel="icon" href="/images/logo.png">
 
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
@@ -137,7 +137,7 @@
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <time datetime="2019-04-09T11:39:43.000Z" itemprop="datePublished">9 Apr 2019</time>
+                <time datetime="2019-04-09T11:39:43.000Z" itemprop="datePublished">Apr 9 2019</time>
             
         </span>
         
@@ -156,27 +156,27 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <html><head></head><body><h3 id="&#x5947;&#x602A;&#x7684;TTL"><a href="#&#x5947;&#x602A;&#x7684;TTL" class="headerlink" title="&#x5947;&#x602A;&#x7684;TTL"></a>&#x5947;&#x602A;&#x7684;TTL</h3><p>&#x9898;&#x76EE;&#x63CF;&#x8FF0;&#xFF1A;<br>&#x6211;&#x4EEC;&#x622A;&#x83B7;&#x4E86;&#x4E00;&#x4E9B;IP&#x6570;&#x636E;&#x62A5;&#xFF0C;&#x53D1;&#x73B0;&#x62A5;&#x6587;&#x5934;&#x4E2D;&#x7684;TTL&#x503C;&#x7279;&#x522B;&#x53EF;&#x7591;&#xFF0C;&#x6000;&#x7591;&#x662F;&#x901A;&#x4FE1;&#x65B9;&#x5D4C;&#x5165;&#x4E86;&#x6570;&#x636E;&#x5230;TTL&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x8FD9;&#x4E9B;TTL&#x503C;&#x63D0;&#x53D6;&#x4E86;&#x51FA;&#x6765;&#xFF0C;&#x4F60;&#x80FD;&#x770B;&#x51FA;&#x4EC0;&#x4E48;&#x7AEF;&#x502A;&#x5417;&#xFF1F;</p>
+        <h3 id="奇怪的TTL"><a href="#奇怪的TTL" class="headerlink" title="奇怪的TTL"></a>奇怪的TTL</h3><p>题目描述：<br>我们截获了一些IP数据报，发现报文头中的TTL值特别可疑，怀疑是通信方嵌入了数据到TTL，我们将这些TTL值提取了出来，你能看出什么端倪吗？</p>
 <a id="more"></a>
 
 
-<h4 id="1&#x3001;&#x6570;&#x636E;&#x6574;&#x7406;"><a href="#1&#x3001;&#x6570;&#x636E;&#x6574;&#x7406;" class="headerlink" title="1&#x3001;&#x6570;&#x636E;&#x6574;&#x7406;"></a>1&#x3001;&#x6570;&#x636E;&#x6574;&#x7406;</h4><p>&#x9644;&#x4EF6;&#x4E2D;&#x7ED9;&#x4E86;&#x4E2A;&#x6587;&#x4EF6;,&#x53D1;&#x73B0;ttl.txt&#x4E2D;&#x7684;ttl&#x53EA;&#x6709;4&#x4E2A;&#x503C;63,127,191,255&#xFF0C;&#x5199;&#x51FA;&#x4ED6;&#x4EEC;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x8868;&#x793A;&#x540E;&#x53D1;&#x73B0;&#x53EA;&#x6709;&#x6700;&#x9AD8;&#x4E24;&#x4F4D;&#x4E0D;&#x540C;&#xFF0C;&#x628A;&#x524D;&#x4E24;&#x4F4D;&#x63D0;&#x53D6;&#x51FA;&#x6765;&#xFF0C;&#x7136;&#x540E;&#x5341;&#x516D;&#x8FDB;&#x5236;&#x8F6C;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x53D1;&#x73B0;&#x6240;&#x6709;&#x5B57;&#x7B26;&#x4E32;&#x90FD;&#x662F;1<del>9,a</del>f&#x4E4B;&#x95F4;,&#x7136;&#x540E;&#x81EA;&#x7136;&#x8003;&#x8651;&#x8FD9;&#x662F;&#x53C8;&#x662F;&#x5341;&#x516D;&#x8FDB;&#x5236;&#xFF0C;&#x7136;&#x540E;&#x5199;&#x5165;&#x6587;&#x4EF6;&#x4E2D;&#x3002;&#x53D1;&#x73B0;&#x5199;&#x51FA;&#x6765;&#x7684;16&#x8FDB;&#x5236;&#x6570;&#x5F00;&#x5934;&#x662F;ffd8,&#x6253;&#x5F00;&#x662F;&#x8FD9;&#x6837;&#x7684;</p>
+<h4 id="1、数据整理"><a href="#1、数据整理" class="headerlink" title="1、数据整理"></a>1、数据整理</h4><p>附件中给了个文件,发现ttl.txt中的ttl只有4个值63,127,191,255，写出他们的二进制表示后发现只有最高两位不同，把前两位提取出来，然后十六进制转字符串，发现所有字符串都是1<del>9,a</del>f之间,然后自然考虑这是又是十六进制，然后写入文件中。发现写出来的16进制数开头是ffd8,打开是这样的</p>
 <!--more-->
 <p><img src="2.jpg"></p>
-<p>&#x4E07;&#x7269;&#x7686;&#x53EF;binwalk &#x653E;&#x5728;linux&#x4E0B;binwalk&#x5206;&#x79BB;&#x5230;6&#x5F20;&#x6B8B;&#x56FE;</p>
-<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foremost &#x6216;&#x8005;binwalk -e</span><br></pre></td></tr></tbody></table></figure>
-<p>&#x5F97;&#x5230;</p>
+<p>万物皆可binwalk 放在linux下binwalk分离到6张残图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foremost 或者binwalk -e</span><br></pre></td></tr></table></figure>
+<p>得到</p>
 <p><img src="3.png"><br><img src="4.png"></p>
-<p>&#x626B;&#x63CF;&#x5F97;&#x5230;</p>
-<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">key:AutomaticKey cipher:fftu{2028mb39927wn1f96o6e12z03j58002p}</span><br></pre></td></tr></tbody></table></figure>
-<h4 id="2&#x3001;&#x7136;&#x540E;&#x5F00;&#x59CB;&#x5165;&#x5751;"><a href="#2&#x3001;&#x7136;&#x540E;&#x5F00;&#x59CB;&#x5165;&#x5751;" class="headerlink" title="2&#x3001;&#x7136;&#x540E;&#x5F00;&#x59CB;&#x5165;&#x5751;"></a>2&#x3001;&#x7136;&#x540E;&#x5F00;&#x59CB;&#x5165;&#x5751;</h4><p>&#x4E00;&#x5F00;&#x59CB;&#x4EE5;&#x4E3A;&#x662F;&#x7EF4;&#x5409;&#x5C3C;&#x4E9A;&#x52A0;&#x5BC6;&#xFF0C;&#x8FD9;&#x91CC;&#x89E3;&#x91CA;&#x4E00;&#x4E0B;&#x7EF4;&#x5409;&#x5C3C;&#x4E9A;&#x52A0;&#x5BC6;<br>&#x7EF4;&#x5409;&#x5C3C;&#x4E9A;&#x5BC6;&#x7801;(Vigen&#xE8;re Cipher)&#x662F;&#x5728;&#x5355;&#x4E00;&#x607A;&#x6492;&#x5BC6;&#x7801;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x6269;&#x5C55;&#x51FA;&#x591A;&#x8868;&#x4EE3;&#x6362;&#x5BC6;&#x7801;&#xFF0C;&#x6839;&#x636E;&#x5BC6;&#x94A5;(&#x5F53;&#x5BC6;&#x94A5;&#x957F;&#x5EA6;&#x5C0F;&#x4E8E;&#x660E;&#x6587;&#x957F;&#x5EA6;&#x65F6;&#x53EF;&#x4EE5;&#x5FAA;&#x73AF;&#x4F7F;&#x7528;)&#x6765;&#x51B3;&#x5B9A;&#x7528;&#x54EA;&#x4E00;&#x884C;&#x7684;&#x5BC6;&#x8868;&#x6765;&#x8FDB;&#x884C;&#x66FF;&#x6362;&#xFF0C;&#x4EE5;&#x6B64;&#x6765;&#x5BF9;&#x6297;&#x5B57;&#x9891;&#x7EDF;&#x8BA1;<br><img src="1.webp"></p>
-<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x660E;&#x6587;&#xFF1A;THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG</span><br><span class="line">&#x5BC6;&#x94A5;(&#x5FAA;&#x73AF;&#x4F7F;&#x7528;)&#xFF1A;CULTURE</span><br><span class="line">&#x52A0;&#x5BC6;&#x8FC7;&#x7A0B;&#xFF1A;&#x5982;&#x679C;&#x7B2C;&#x4E00;&#x884C;&#x4E3A;&#x660E;&#x6587;&#x5B57;&#x6BCD;&#xFF0C;&#x7B2C;&#x4E00;&#x5217;&#x4E3A;&#x5BC6;&#x94A5;&#x5B57;&#x6BCD;&#xFF0C;&#x90A3;&#x4E48;&#x660E;&#x6587;&#x5B57;&#x6BCD;&apos;T&apos;&#x5217;&#x548C;&#x5BC6;&#x94A5;&#x5B57;&#x6BCD;&apos;C&apos;&#x884C;&#x7684;&#x4EA4;&#x70B9;&#x5C31;&#x662F;&#x5BC6;&#x6587;&#x5B57;&#x6BCD;&apos;V&apos;&#xFF0C;&#x4EE5;&#x6B64;&#x7C7B;&#x63A8;&#x3002;</span><br><span class="line">&#x5BC6;&#x6587;&#xFF1A;VBP JOZGM VCHQE JQR UNGGW QPPK NYI NUKR XFK</span><br></pre></td></tr></tbody></table></figure>
-<p>&#x7136;&#x540E;&#x62FF;&#x7740;&#x672C;&#x9898;&#x7684;&#x5BC6;&#x94A5;&#x548C;&#x5BC6;&#x6587;&#x53BB;&#x89E3;&#x5BC6;&#xFF0C;&#x5F97;&#x5230;&#x7B54;&#x6848;&#x7136;&#x540E;gg<br><img src="5.png"> &#x5176;&#x5B9E;&#x662F;AutoKey Cipher&#xFF0C;&#x4EBA;&#x5BB6;&#x5728;&#x9898;&#x76EE;&#x91CC;&#x90FD;&#x63D0;&#x793A;&#x4E86;&#xFF0C;&#x53EA;&#x80FD;&#x602A;&#x81EA;&#x5DF1;&#x592A;&#x6B7B;&#x8111;&#x7B4B;&#x548C;&#x5B64;&#x964B;&#x5BE1;&#x95FB;</p>
-<h4 id="3&#x3001;&#x5565;&#xB7;&#x662F;AutoKey-Cipher"><a href="#3&#x3001;&#x5565;&#xB7;&#x662F;AutoKey-Cipher" class="headerlink" title="3&#x3001;&#x5565;&#xB7;&#x662F;AutoKey Cipher"></a>3&#x3001;&#x5565;&#xB7;&#x662F;AutoKey Cipher</h4><p>&#x5176;&#x5B9E;&#x539F;&#x7406;&#x548C;&#x7EF4;&#x5409;&#x5C3C;&#x4E9A;&#x57FA;&#x672C;&#x4E00;&#x81F4;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x7EF4;&#x5409;&#x5C3C;&#x4E9A;&#x5F53;&#x5BC6;&#x94A5;&#x957F;&#x5EA6;&#x5C0F;&#x4E8E;&#x660E;&#x6587;&#xFF0C;&#x5C06;&#x4F1A;&#x5FAA;&#x73AF;&#x4F7F;&#x7528;&#x5BC6;&#x94A5;&#xFF0C;&#x800C;Autokey Cipher&#x5F53;&#x5BC6;&#x94A5;&#x957F;&#x5EA6;&#x4E0D;&#x8DB3;&#x65F6;&#xFF0C;&#x5C06;&#x4F1A;&#x5F00;&#x59CB;&#x4F7F;&#x7528;&#x660E;&#x6587;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x6BCD;&#x5F00;&#x59CB;&#x9644;&#x52A0;&#x5728;&#x5BC6;&#x94A5;&#x4E0A;&#x3002;<br>&#x5728;&#x672C;&#x9898;&#x7684;&#x4F53;&#x73B0;&#x662F;&#x5BC6;&#x94A5;12&#x4F4D;&#xFF0C;&#x800C;&#x5BC6;&#x6587;&#x4E2D;&#x5B57;&#x6BCD;&#x6709;14&#x54E5;&#x6240;&#x4EE5;&#x6700;&#x540E;&#x4E24;&#x4E2A;&#x9700;&#x8981;&#x62FF;f l &#x66FF;&#x6362;<br><a target="_blank" rel="noopener" href="https://www.wishingstarmoye.com/ctf/autokey">AutoKey Cipher&#x5728;&#x7EBF;&#x52A0;&#x89E3;&#x5BC6;</a></p>
-<h4 id="4&#x3001;&#x4F7F;&#x7528;Python3&#x89E3;&#x5BC6;"><a href="#4&#x3001;&#x4F7F;&#x7528;Python3&#x89E3;&#x5BC6;" class="headerlink" title="4&#x3001;&#x4F7F;&#x7528;Python3&#x89E3;&#x5BC6;"></a>4&#x3001;&#x4F7F;&#x7528;Python3&#x89E3;&#x5BC6;</h4><h5 id="AutoKey-Cipher"><a href="#AutoKey-Cipher" class="headerlink" title="AutoKey Cipher"></a>AutoKey Cipher</h5><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from pycipher import Autokey</span><br><span class="line">&gt;&gt;&gt; Autokey(&apos;AutomaticKey&apos;).decipher(&apos;fftu{2028mb39927wn1f96o6e12z03j58002p}&apos;)</span><br><span class="line">&apos;FLAGABDFDEABEE&apos;</span><br><span class="line">&gt;&gt;&gt; Autokey(&apos;AutomaticKey&apos;).encipher(&apos;FLAGABDFDEABEE&apos;)</span><br><span class="line">&apos;FFTUMBWNFOEZJP&apos;</span><br></pre></td></tr></tbody></table></figure>
-<h6 id="Vigenere"><a href="#Vigenere" class="headerlink" title="Vigenere"></a>Vigenere</h6><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;from pycipher import Vigenere</span><br><span class="line">&gt;&gt;&gt;Vigenere(&apos;CULTURE&apos;).encipher(&apos;THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG&apos;)</span><br><span class="line">&apos;VBPJOZGMVCHQEJQRUNGGWQPPKNYINUKRXFK&apos;</span><br><span class="line">&gt;&gt;&gt;Vigenere(&apos;CULTURE&apos;).decipher(&apos;VBPJOZGMVCHQEJQRUNGGWQPPKNYINUKRXFK&apos;</span><br><span class="line">&apos;THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG&apos;</span><br></pre></td></tr></tbody></table></figure>
+<p>扫描得到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">key:AutomaticKey cipher:fftu&#123;2028mb39927wn1f96o6e12z03j58002p&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2、然后开始入坑"><a href="#2、然后开始入坑" class="headerlink" title="2、然后开始入坑"></a>2、然后开始入坑</h4><p>一开始以为是维吉尼亚加密，这里解释一下维吉尼亚加密<br>维吉尼亚密码(Vigenère Cipher)是在单一恺撒密码的基础上扩展出多表代换密码，根据密钥(当密钥长度小于明文长度时可以循环使用)来决定用哪一行的密表来进行替换，以此来对抗字频统计<br><img src="1.webp"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">明文：THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG</span><br><span class="line">密钥(循环使用)：CULTURE</span><br><span class="line">加密过程：如果第一行为明文字母，第一列为密钥字母，那么明文字母&#39;T&#39;列和密钥字母&#39;C&#39;行的交点就是密文字母&#39;V&#39;，以此类推。</span><br><span class="line">密文：VBP JOZGM VCHQE JQR UNGGW QPPK NYI NUKR XFK</span><br></pre></td></tr></table></figure>
+<p>然后拿着本题的密钥和密文去解密，得到答案然后gg<br><img src="5.png"> 其实是AutoKey Cipher，人家在题目里都提示了，只能怪自己太死脑筋和孤陋寡闻</p>
+<h4 id="3、啥·是AutoKey-Cipher"><a href="#3、啥·是AutoKey-Cipher" class="headerlink" title="3、啥·是AutoKey Cipher"></a>3、啥·是AutoKey Cipher</h4><p>其实原理和维吉尼亚基本一致的，但是维吉尼亚当密钥长度小于明文，将会循环使用密钥，而Autokey Cipher当密钥长度不足时，将会开始使用明文的第一个字母开始附加在密钥上。<br>在本题的体现是密钥12位，而密文中字母有14哥所以最后两个需要拿f l 替换<br><a target="_blank" rel="noopener" href="https://www.wishingstarmoye.com/ctf/autokey">AutoKey Cipher在线加解密</a></p>
+<h4 id="4、使用Python3解密"><a href="#4、使用Python3解密" class="headerlink" title="4、使用Python3解密"></a>4、使用Python3解密</h4><h5 id="AutoKey-Cipher"><a href="#AutoKey-Cipher" class="headerlink" title="AutoKey Cipher"></a>AutoKey Cipher</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from pycipher import Autokey</span><br><span class="line">&gt;&gt;&gt; Autokey(&#39;AutomaticKey&#39;).decipher(&#39;fftu&#123;2028mb39927wn1f96o6e12z03j58002p&#125;&#39;)</span><br><span class="line">&#39;FLAGABDFDEABEE&#39;</span><br><span class="line">&gt;&gt;&gt; Autokey(&#39;AutomaticKey&#39;).encipher(&#39;FLAGABDFDEABEE&#39;)</span><br><span class="line">&#39;FFTUMBWNFOEZJP&#39;</span><br></pre></td></tr></table></figure>
+<h6 id="Vigenere"><a href="#Vigenere" class="headerlink" title="Vigenere"></a>Vigenere</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;from pycipher import Vigenere</span><br><span class="line">&gt;&gt;&gt;Vigenere(&#39;CULTURE&#39;).encipher(&#39;THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG&#39;)</span><br><span class="line">&#39;VBPJOZGMVCHQEJQRUNGGWQPPKNYINUKRXFK&#39;</span><br><span class="line">&gt;&gt;&gt;Vigenere(&#39;CULTURE&#39;).decipher(&#39;VBPJOZGMVCHQEJQRUNGGWQPPKNYINUKRXFK&#39;</span><br><span class="line">&#39;THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG&#39;</span><br></pre></td></tr></table></figure>
 
-</body></html>
+
     
     </div>
     
@@ -413,5 +413,5 @@
 <script src="/js/insight.js"></script>
 
     
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</body>
 </html>

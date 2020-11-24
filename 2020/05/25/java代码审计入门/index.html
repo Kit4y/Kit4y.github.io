@@ -16,12 +16,12 @@
 
 
 
-    <meta name="description" content="&amp;#x6954;&amp;#x5B50;&amp;#x5F88;&amp;#x4E45;&amp;#x5C31;&amp;#x60F3;&amp;#x5199;&amp;#x548C;java&amp;#x5BA1;&amp;#x8BA1;&amp;#x6709;&amp;#x5173;&amp;#x7684;&amp;#x6587;&amp;#x7AE0;&amp;#x4E86;&amp;#xFF0C;java&amp;#x535A;&amp;#x5927;&amp;#x7CBE;&amp;#x6DF1;&amp;#xFF0C;&amp;#x5B66;&amp;#x5F97;">
+    <meta name="description" content="楔子很久就想写和java审计有关的文章了，java博大精深，学得断断续续，最近来长亭实习，从旁边一个Java大牛师傅学了一下下，还是打算记一下，内容偏易，大牛绕道目录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JAVA1-反射机制">
 <meta property="og:url" content="http://example.com/2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8/index.html">
 <meta property="og:site_name" content="书鱼">
-<meta property="og:description" content="&amp;#x6954;&amp;#x5B50;&amp;#x5F88;&amp;#x4E45;&amp;#x5C31;&amp;#x60F3;&amp;#x5199;&amp;#x548C;java&amp;#x5BA1;&amp;#x8BA1;&amp;#x6709;&amp;#x5173;&amp;#x7684;&amp;#x6587;&amp;#x7AE0;&amp;#x4E86;&amp;#xFF0C;java&amp;#x535A;&amp;#x5927;&amp;#x7CBE;&amp;#x6DF1;&amp;#xFF0C;&amp;#x5B66;&amp;#x5F97;">
+<meta property="og:description" content="楔子很久就想写和java审计有关的文章了，java博大精深，学得断断续续，最近来长亭实习，从旁边一个Java大牛师傅学了一下下，还是打算记一下，内容偏易，大牛绕道目录">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8/1.png">
 <meta property="og:image" content="http://example.com/2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8/2.png">
@@ -41,7 +41,7 @@
 
 
 
-<link rel="icon" href="/favicon.png">
+<link rel="icon" href="/images/logo.png">
 
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
@@ -139,7 +139,7 @@
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <time datetime="2020-05-25T02:29:10.000Z" itemprop="datePublished">25 May 2020</time>
+                <time datetime="2020-05-25T02:29:10.000Z" itemprop="datePublished">May 25 2020</time>
             
         </span>
         
@@ -158,419 +158,421 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <!-- toc --><html><head></head><body><h3 id="&#x6954;&#x5B50;"><a href="#&#x6954;&#x5B50;" class="headerlink" title="&#x6954;&#x5B50;"></a>&#x6954;&#x5B50;</h3><p>&#x5F88;&#x4E45;&#x5C31;&#x60F3;&#x5199;&#x548C;java&#x5BA1;&#x8BA1;&#x6709;&#x5173;&#x7684;&#x6587;&#x7AE0;&#x4E86;&#xFF0C;java&#x535A;&#x5927;&#x7CBE;&#x6DF1;&#xFF0C;&#x5B66;&#x5F97;&#x65AD;&#x65AD;&#x7EED;&#x7EED;&#xFF0C;&#x6700;&#x8FD1;&#x6765;&#x957F;&#x4EAD;&#x5B9E;&#x4E60;&#xFF0C;&#x4ECE;&#x65C1;&#x8FB9;&#x4E00;&#x4E2A;Java&#x5927;&#x725B;&#x5E08;&#x5085;&#x5B66;&#x4E86;&#x4E00;&#x4E0B;&#x4E0B;&#xFF0C;&#x8FD8;&#x662F;&#x6253;&#x7B97;&#x8BB0;&#x4E00;&#x4E0B;&#xFF0C;&#x5185;&#x5BB9;&#x504F;&#x6613;&#xFF0C;&#x5927;&#x725B;&#x7ED5;&#x9053;<br>&#x76EE;&#x5F55;</p>
+        <!-- toc -->
+
+<h3 id="楔子"><a href="#楔子" class="headerlink" title="楔子"></a>楔子</h3><p>很久就想写和java审计有关的文章了，java博大精深，学得断断续续，最近来长亭实习，从旁边一个Java大牛师傅学了一下下，还是打算记一下，内容偏易，大牛绕道<br>目录</p>
 <a id="more"></a>
 
 
-<h3 id="Java&#x53CD;&#x5C04;"><a href="#Java&#x53CD;&#x5C04;" class="headerlink" title="Java&#x53CD;&#x5C04;"></a>Java&#x53CD;&#x5C04;</h3><p>&#x771F;&#x6B63;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x6F0F;&#x6D1E;&#x7684;&#x5229;&#x7528;&#xFF0C;&#x80AF;&#x5B9A;&#x9700;&#x8981;&#x4E86;&#x89E3;java&#x53CD;&#x5C04;&#x539F;&#x7406;&#x3002;&#x56E0;&#x4E3A;java&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x7684;payload&#x5927;&#x591A;&#x4E0E;&#x53CD;&#x5C04;&#x673A;&#x5236;&#x5BC6;&#x5207;&#x76F8;&#x5173;&#x3002;</p>
+<h3 id="Java反射"><a href="#Java反射" class="headerlink" title="Java反射"></a>Java反射</h3><p>真正反序列化漏洞的利用，肯定需要了解java反射原理。因为java反序列化的payload大多与反射机制密切相关。</p>
 <blockquote>
-<p>&#x5728;Java&#x4E2D;&#x7684;&#x53CD;&#x5C04;&#x673A;&#x5236;&#x662F;&#x6307;&#x5728;&#x8FD0;&#x884C;&#x72B6;&#x6001;&#x4E2D;&#xFF0C;&#x5BF9;&#x4E8E;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#x7C7B;&#x90FD;&#x80FD;&#x591F;&#x77E5;&#x9053;&#x8FD9;&#x4E2A;&#x7C7B;&#x6240;&#x6709;&#x7684;&#x5C5E;&#x6027;&#x548C;&#x65B9;&#x6CD5;&#xFF1B;&#x5E76;&#x4E14;&#x5BF9;&#x4E8E;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x90FD;&#x80FD;&#x591F;&#x8C03;&#x7528;&#x5B83;&#x7684;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;&#xFF1B;&#x8FD9;&#x79CD;&#x52A8;&#x6001;&#x83B7;&#x53D6;&#x4FE1;&#x606F;&#x4EE5;&#x53CA;&#x52A8;&#x6001;&#x8C03;&#x7528;&#x5BF9;&#x8C61;&#x65B9;&#x6CD5;&#x7684;&#x529F;&#x80FD;&#x6210;&#x4E3A;Java&#x8BED;&#x8A00;&#x7684;&#x53CD;&#x5C04;&#x673A;&#x5236;&#x3002;<br>&#x603B;&#x7684;&#x6765;&#x8BF4;&#xFF0C;&#x53CD;&#x5C04;&#x8BA9;java&#x53EF;&#x4EE5;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x6839;&#x636E;&#x4F20;&#x5165;&#x7684;&#x7C7B;&#x540D;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x53BB;&#x6267;&#x884C;&#x8FD9;&#x4E2A;&#x7C7B;&#x5B58;&#x5728;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x800C;&#x4E14;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x5C5E;&#x6027;&#x7684;&#x8BBF;&#x95EE;&#x4FEE;&#x9970;&#x7B26;&#xFF08;public&#x3001;private&#x3001;protect&#xFF09;</p>
+<p>在Java中的反射机制是指在运行状态中，对于任意一个类都能够知道这个类所有的属性和方法；并且对于任意一个对象，都能够调用它的任意一个方法；这种动态获取信息以及动态调用对象方法的功能成为Java语言的反射机制。<br>总的来说，反射让java可以在运行时，根据传入的类名字符串，去执行这个类存在的方法，而且可以修改属性的访问修饰符（public、private、protect）</p>
 </blockquote>
-<p>&#x603B;&#x6240;&#x5468;&#x77E5;&#xFF0C;&#x4E00;&#x4E2A;&#x6280;&#x672F;&#x7684;&#x5B58;&#x6D3B;&#xFF0C;&#x4E00;&#x5B9A;&#x6709;&#x4ED6;&#x7684;&#x4EF7;&#x503C;&#xFF0C;&#x5426;&#x5219;&#x5728;&#x81EA;&#x7136;&#x751F;&#x5B58;&#x5B9A;&#x5F8B;&#x4E2D;&#x5FC5;&#x5B9A;&#x88AB;&#x6DD8;&#x6C70;&#xFF0C;&#x6838;&#x5F39;&#x4E4B;&#x4E0B;&#x65E0;&#x51A4;&#x9B42;&#xFF08;&#x72D7;&#x5934;&#xFF09;&#x3002;<br>&#x90A3;&#x4E48;java&#x53CD;&#x5C04;&#x6709;&#x4EC0;&#x4E48;&#x4EF7;&#x503C;&#x4E48;&#xFF1F;</p>
-<p>&#x6211;&#x8BA4;&#x4E3A;&#x5C31;&#x662F;&#x5B9E;&#x73B0;<code>&#x52A8;&#x6001;</code>&#x3002;&#x6211;&#x4EEC;&#x4E3E;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;</p>
+<p>总所周知，一个技术的存活，一定有他的价值，否则在自然生存定律中必定被淘汰，核弹之下无冤魂（狗头）。<br>那么java反射有什么价值么？</p>
+<p>我认为就是实现<code>动态</code>。我们举一个例子</p>
 <hr>
-<h3 id="&#x4F8B;&#x5B50;-&#x53CD;&#x5C04;"><a href="#&#x4F8B;&#x5B50;-&#x53CD;&#x5C04;" class="headerlink" title="&#x4F8B;&#x5B50;-&#x53CD;&#x5C04;"></a>&#x4F8B;&#x5B50;-&#x53CD;&#x5C04;</h3><p>&#x5047;&#x8BBE;&#x6211;&#x4EEC;&#x6765;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x5973;&#x670B;&#x53CB;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x63A5;&#x53E3;&#x5C31;&#x4E3A;&#x60F3;peach&#xFF0C;&#x6211;&#x4EEC;&#x5C3D;&#x91CF;&#x4F7F;&#x7528;implements&#x64CD;&#x4F5C;&#xFF0C;&#x6240;&#x4EE5;&#x62BD;&#x8C61;&#x7684;&#x5973;&#x670B;&#x53CB;&#x5C31;&#x884C;&#xFF0C;&#x53CD;&#x6B63;&#x4E5F;&#x6CA1;&#x6709;&#xFF0C;&#x90A3;&#x4E48;&#x957F;&#x8FD9;&#x6837;&#x3002;</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Girl_friend</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dream_peach</span><span class="hljs-params">()</span></span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>&#x56E0;&#x4E3A;&#x5973;&#x5B69;&#x5B50;&#x79CD;&#x7C7B;&#x4E0D;&#x540C;&#xFF0C;&#x6BD4;&#x5982;&#x5C0F;&#x841D;&#x8389;&#x8FD8;&#x662F;&#x5BCC;&#x5A46;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x4E00;&#x4E0B;&#x4E0D;&#x540C;&#x7684;&#x7C7B;&#x5973;&#x670B;&#x53CB;</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Luoli</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Girl_friend</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dream_peach</span><span class="hljs-params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;I&apos;m your girlFriend, i am Luoli&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Fupo</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Girl_friend</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dream_peach</span><span class="hljs-params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;I&apos;m your girlFriend, i am Fupo&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5728;&#x4E3B;&#x7C7B;&#x4E2D;&#x60F3;peach&#x90A3;&#x5C31;&#x5F97;&#x8FD9;&#x6837;&#x5199;</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Helloworld</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] a)</span></span>{</span><br><span class="line">        Girl_friend f=<span class="hljs-keyword">new</span> Fupo();</span><br><span class="line">        f.dream_peach();</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="hljs-comment">//&#x8F93;&#x51FA;I&apos;m your girlFriend, i am Fupo</span></span><br></pre></td></tr></tbody></table></figure>
-<p>&#x6843;&#x5B50;&#x786E;&#x5B9E;&#x60F3;&#x597D;&#x4E86;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x6837;&#x5C31;&#x6CA1;&#x6709;&#x52A8;&#x6001;&#x7684;&#x6982;&#x5FF5;&#x4E86;&#xFF0C;&#x6211;&#x6240;&#x7406;&#x89E3;&#x7684;&#x52A8;&#x6001;&#x662F;&#x4F60;&#x8981;&#x4FEE;&#x6539;&#x4E00;&#x4E2A;&#x7C7B;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x4EE3;&#x7801;&#xFF0C;&#x800C;&#x662F;&#x901A;&#x8FC7;&#x4F20;&#x53C2;&#x5C31;&#x53EF;</p>
-<p>&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4F20;&#x7EDF;&#x7684;&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x83B7;&#x53D6;&#x5973;&#x670B;&#x53CB;&#x7684;&#x5B9E;&#x4F8B;</p>
+<h3 id="例子-反射"><a href="#例子-反射" class="headerlink" title="例子-反射"></a>例子-反射</h3><p>假设我们来定义一个女朋友的接口，接口就为想peach，我们尽量使用implements操作，所以抽象的女朋友就行，反正也没有，那么长这样。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Girl_friend</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">dream_peach</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为女孩子种类不同，比如小萝莉还是富婆，我们可以实现一下不同的类女朋友</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Luoli</span> <span class="keyword">implements</span> <span class="title">Girl_friend</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dream_peach</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I&#x27;m your girlFriend, i am Luoli&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fupo</span> <span class="keyword">implements</span> <span class="title">Girl_friend</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dream_peach</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I&#x27;m your girlFriend, i am Fupo&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么我们需要在主类中想peach那就得这样写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Helloworld</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] a)</span></span>&#123;</span><br><span class="line">        Girl_friend f=<span class="keyword">new</span> Fupo();</span><br><span class="line">        f.dream_peach();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出I&#x27;m your girlFriend, i am Fupo</span></span><br></pre></td></tr></table></figure>
+<p>桃子确实想好了，但是这样就没有动态的概念了，我所理解的动态是你要修改一个类的时候，不需要修改代码，而是通过传参就可</p>
+<p>那么我们可以使用传统的工厂方法获取女朋友的实例</p>
 <blockquote>
-<p>&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x7406;&#x89E3;&#x4E3A;&#x4F60;&#x628A;&#x5973;&#x670B;&#x53CB;&#x7684;&#x5C5E;&#x6027;&#x4EA4;&#x7ED9;&#x5DE5;&#x5382;&#xFF0C;&#x5DE5;&#x5382;&#x5C31;&#x5E2E;&#x4F60;&#x5236;&#x4F5C;&#x4E00;&#x4E2A;&#x5973;&#x670B;&#x53CB;&#x7684;&#x5B9E;&#x4F8B;</p>
+<p>工厂方法可以理解为你把女朋友的属性交给工厂，工厂就帮你制作一个女朋友的实例</p>
 </blockquote>
-<p>&#x90A3;&#x4E48;&#x5DE5;&#x5382;&#x4EE3;&#x7801;&#x5E94;&#x8BE5;&#x8FD9;&#x6837;&#x8FD9;&#x6837;&#x5199;</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Girl_friend_factory</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Girl_friend <span class="hljs-title">getInstance</span><span class="hljs-params">(String girlName)</span></span>{</span><br><span class="line">        Girl_friend f=<span class="hljs-keyword">null</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;Luoli&quot;</span>.equals(girlName)){</span><br><span class="line">            f=<span class="hljs-keyword">new</span> Luoli();</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;Fupo&quot;</span>.equals(girlName)){</span><br><span class="line">            f=<span class="hljs-keyword">new</span> Fupo();</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">return</span> f;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F20;&#x5165;&#x6211;&#x4EEC;&#x671F;&#x671B;&#x7684;&#x5973;&#x670B;&#x53CB;&#x7684;&#x7C7B;&#x578B;&#x540D;&#x5B57;&#x5C31;&#x83B7;&#x5F97;&#x4E86;&#x8FD9;&#x4E2A;&#x5B9E;&#x4F8B;&#xFF08;&#x53EF;&#x60DC;&#x73B0;&#x5B9E;&#x4E16;&#x754C;&#x5E76;&#x6CA1;&#x6709;&#xFF09;&#x3002;<br>&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x8981;&#x7528;&#x7684;&#x65F6;&#x5019;&#x5148;&#x4F7F;&#x7528;&#x5DE5;&#x5382;&#x62FF;&#x5230;&#x5B9E;&#x4F8B;<code>Girl_friend f=Girl_friend_factory.getInstance(&quot;Luoli&quot;);</code>&#x3002;&#x90A3;&#x4E48;&#x6574;&#x4F53;&#x4EE3;&#x7801;&#x5C31;&#x662F;&#x8FD9;&#x6837;&#x4E86;<br>Helloworld.java</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Girl_friend</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dream_peach</span><span class="hljs-params">()</span></span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Luoli</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Girl_friend</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dream_peach</span><span class="hljs-params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;I&apos;m your girlFriend, i am Luoli&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Fupo</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Girl_friend</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dream_peach</span><span class="hljs-params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;I&apos;m your girlFriend, i am Fupo&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Girl_friend_factory</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Girl_friend <span class="hljs-title">getInstance</span><span class="hljs-params">(String girlName)</span></span>{</span><br><span class="line">        Girl_friend f=<span class="hljs-keyword">null</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;Luoli&quot;</span>.equals(girlName)){</span><br><span class="line">            f=<span class="hljs-keyword">new</span> Luoli();</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;Fupo&quot;</span>.equals(girlName)){</span><br><span class="line">            f=<span class="hljs-keyword">new</span> Fupo();</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">return</span> f;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Helloworld</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] a)</span></span>{</span><br><span class="line">        Girl_friend f=Girl_friend_factory.getInstance(<span class="hljs-string">&quot;Luoli&quot;</span>);</span><br><span class="line">        f.dream_peach();</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="hljs-comment">//&#x8F93;&#x51FA;I&apos;m your girlFriend, i am Luoli</span></span><br></pre></td></tr></tbody></table></figure>
-<p>&#x4F3C;&#x4E4E;&#x4E00;&#x5207;&#x5F88;&#x987A;&#x5229;&#x4E86;<br>&#x4F46;&#x662F;&#x4E0D;&#x77E5;&#x9053;&#x6709;&#x6CA1;&#x6709;&#x53D1;&#x73B0;&#xFF0C;&#x5728;Girl_friend_factory&#x4E2D;&#x6211;&#x4EEC;&#x7528;&#x4E86;&#x5F88;&#x591A;if&#x5224;&#x65AD;&#x7C7B;&#x540D;&#xFF0C;&#x90A3;&#x4E48;&#x4E00;&#x65E6;&#x8FD9;&#x4E2A;type&#x6709;&#x51E0;&#x5341;&#x79CD;&#xFF0C;&#x6211;&#x4EEC;&#x6BCF;&#x589E;&#x52A0;&#x4E00;&#x79CD;&#x90FD;&#x8981;&#x505A;&#x4E09;&#x5E03;&#x6B65;&#x64CD;&#x4F5C;</p>
+<p>那么工厂代码应该这样这样写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Girl_friend_factory</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Girl_friend <span class="title">getInstance</span><span class="params">(String girlName)</span></span>&#123;</span><br><span class="line">        Girl_friend f=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">&quot;Luoli&quot;</span>.equals(girlName))&#123;</span><br><span class="line">            f=<span class="keyword">new</span> Luoli();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">&quot;Fupo&quot;</span>.equals(girlName))&#123;</span><br><span class="line">            f=<span class="keyword">new</span> Fupo();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> f;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以传入我们期望的女朋友的类型名字就获得了这个实例（可惜现实世界并没有）。<br>那么我们要用的时候先使用工厂拿到实例<code>Girl_friend f=Girl_friend_factory.getInstance(&quot;Luoli&quot;);</code>。那么整体代码就是这样了<br>Helloworld.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Girl_friend</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">dream_peach</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Luoli</span> <span class="keyword">implements</span> <span class="title">Girl_friend</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dream_peach</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I&#x27;m your girlFriend, i am Luoli&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fupo</span> <span class="keyword">implements</span> <span class="title">Girl_friend</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dream_peach</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I&#x27;m your girlFriend, i am Fupo&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Girl_friend_factory</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Girl_friend <span class="title">getInstance</span><span class="params">(String girlName)</span></span>&#123;</span><br><span class="line">        Girl_friend f=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">&quot;Luoli&quot;</span>.equals(girlName))&#123;</span><br><span class="line">            f=<span class="keyword">new</span> Luoli();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">&quot;Fupo&quot;</span>.equals(girlName))&#123;</span><br><span class="line">            f=<span class="keyword">new</span> Fupo();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> f;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Helloworld</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] a)</span></span>&#123;</span><br><span class="line">        Girl_friend f=Girl_friend_factory.getInstance(<span class="string">&quot;Luoli&quot;</span>);</span><br><span class="line">        f.dream_peach();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出I&#x27;m your girlFriend, i am Luoli</span></span><br></pre></td></tr></table></figure>
+<p>似乎一切很顺利了<br>但是不知道有没有发现，在Girl_friend_factory中我们用了很多if判断类名，那么一旦这个type有几十种，我们每增加一种都要做三布步操作</p>
 <ul>
-<li>1&#x3001;&#x589E;&#x52A0;&#x65B0;&#x7684;&#x5973;&#x670B;&#x53CB;&#x7C7B;&#x578B;</li>
-<li>2&#x3001;&#x589E;&#x52A0;if&#x5224;&#x65AD;</li>
-<li>3&#x3001;&#x4E3B;&#x7C7B;&#x4E2D;&#x8C03;&#x7528;</li>
+<li>1、增加新的女朋友类型</li>
+<li>2、增加if判断</li>
+<li>3、主类中调用</li>
 </ul>
-<p>&#x90A3;&#x4E48;&#x53CD;&#x5C04;&#x5176;&#x5B9E;&#x89E3;&#x51B3;&#x7684;&#x5C31;&#x662F;&#x8FD9;&#x4E48;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#x3002;<br>&#x53CD;&#x5C04;&#x4E3B;&#x8981;&#x662F;&#x6709;&#x8FD9;&#x4E48;&#x51E0;&#x4E2A;&#x51FD;&#x6570;&#x76F4;&#x63A5;&#x53EF;&#x8C03;&#x7528;</p>
+<p>那么反射其实解决的就是这么一个问题。<br>反射主要是有这么几个函数直接可调用</p>
 <blockquote>
-<p>&#x83B7;&#x53D6;&#x7C7B;&#x7684;&#x2F45;&#x6CD5;&#xFF1A; forName<br>&#x5B9E;&#x4F8B;&#x5316;&#x7C7B;&#x5BF9;&#x8C61;&#x7684;&#x2F45;&#x6CD5;&#xFF1A; newInstance<br>&#x83B7;&#x53D6;&#x51FD;&#x6570;&#x7684;&#x2F45;&#x6CD5;&#xFF1A; getMethod<br>&#x6267;&#x2F8F;&#x51FD;&#x6570;&#x7684;&#x2F45;&#x6CD5;&#xFF1A; invoke</p>
+<p>获取类的⽅法： forName<br>实例化类对象的⽅法： newInstance<br>获取函数的⽅法： getMethod<br>执⾏函数的⽅法： invoke</p>
 </blockquote>
-<p>&#x6211;&#x4EEC;&#x5148;&#x6765;&#x8BF4;&#x4E00;&#x8BF4;forName&#x7684;&#x65B9;&#x6CD5;</p>
+<p>我们先来说一说forName的方法</p>
 <blockquote>
-<p>Class.forName &#x5982;&#x679C;&#x4F60;&#x77E5;&#x9053;&#x67D0;&#x4E2A;&#x7C7B;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x60F3;&#x83B7;&#x53D6;&#x5230;&#x8FD9;&#x4E2A;&#x7C7B;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x2F64; forName &#x6765;&#x83B7;&#x53D6;</p>
+<p>Class.forName 如果你知道某个类的名字，想获取到这个类，就可以使⽤ forName 来获取</p>
 </blockquote>
-<p>&#x6BD4;&#x5982;&#x6211;&#x4EEC;&#x60F3;&#x83B7;&#x5F97;&#x4E0A;&#x9762;&#x7684;&#x841D;&#x8389;&#x7C7B;&#xFF08;Luoli&#xFF09;,&#x5C31;&#x4E0D;&#x9700;&#x8981;<code>f=new Luoli();</code>&#x4E86;,&#x800C;&#x662F;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x53CD;&#x5C04;<br><code>Girl_friend f=(Girl_friend)Class.forName(&quot;Luoli&quot;).newInstance();</code>&#x5C31;&#x83B7;&#x5F97;&#x4E86;&#x841D;&#x8389;&#x7684;&#x5B9E;&#x4F8B;&#xFF0C;&#x4E0D;&#x77E5;&#x9053;&#x73B0;&#x5728;&#x6709;&#x6CA1;&#x6709;&#x952E;&#x76D8;&#x4FA0;&#x7AD9;&#x51FA;&#x6765;&#x8BF4;&#x660E;&#x660E;<code>f=new Luoli();</code>&#x6BD4;&#x540E;&#x9762;&#x7684;&#x77ED;&#x4E0D;&#x662F;&#x4E48;&#x3002;</p>
-<p>&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x8BF4;&#x7684;&#x91CD;&#x70B9;&#x662F;&#x52A8;&#x6001;&#xFF0C;&#x540E;&#x8005;&#x7684;&#x7C7B;&#x540D;&#x53EF;&#x4EE5;&#x52A8;&#x6001;&#x4F20;&#x5165;&#xFF0C;&#x5C82;&#x4E0D;&#x662F;&#x7F8E;&#x6ECB;&#x6ECB;&#x3002;<br>&#x90A3;&#x4E48;&#x5B8C;&#x6574;&#x7684;&#x4EE3;&#x7801;&#x5C31;&#x662F;</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Girl_friend</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dream_peach</span><span class="hljs-params">()</span></span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Luoli</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Girl_friend</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dream_peach</span><span class="hljs-params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;I&apos;m your girlFriend, i am Luoli&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Fupo</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Girl_friend</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dream_peach</span><span class="hljs-params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;I&apos;m your girlFriend, i am Fupo&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Girl_friend_factory</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Girl_friend <span class="hljs-title">getInstance</span><span class="hljs-params">(String girlName)</span></span>{</span><br><span class="line">        Girl_friend f=<span class="hljs-keyword">null</span>;</span><br><span class="line">        <span class="hljs-keyword">try</span>{</span><br><span class="line">            f=(Girl_friend)Class.forName(girlName).newInstance();</span><br><span class="line">        }<span class="hljs-keyword">catch</span> (Exception e) {</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">return</span> f;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Helloworld</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] a)</span></span>{</span><br><span class="line">        Girl_friend f=Girl_friend_factory.getInstance(<span class="hljs-string">&quot;Luoli&quot;</span>);</span><br><span class="line">        f.dream_peach();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>&#x5230;&#x6B64;&#x6211;&#x4EEC;&#x53CD;&#x5C04;&#x83B7;&#x53D6;&#x7C7B;&#x7684;&#x2F45;&#x6CD5;&#xFF1A; forName&#x7684;&#x610F;&#x4E49;&#x5927;&#x6982;&#x5C31;&#x6709;&#x4E86;</p>
+<p>比如我们想获得上面的萝莉类（Luoli）,就不需要<code>f=new Luoli();</code>了,而是直接使用反射<br><code>Girl_friend f=(Girl_friend)Class.forName(&quot;Luoli&quot;).newInstance();</code>就获得了萝莉的实例，不知道现在有没有键盘侠站出来说明明<code>f=new Luoli();</code>比后面的短不是么。</p>
+<p>但是我们现在说的重点是动态，后者的类名可以动态传入，岂不是美滋滋。<br>那么完整的代码就是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Girl_friend</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">dream_peach</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Luoli</span> <span class="keyword">implements</span> <span class="title">Girl_friend</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dream_peach</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I&#x27;m your girlFriend, i am Luoli&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fupo</span> <span class="keyword">implements</span> <span class="title">Girl_friend</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dream_peach</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I&#x27;m your girlFriend, i am Fupo&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Girl_friend_factory</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Girl_friend <span class="title">getInstance</span><span class="params">(String girlName)</span></span>&#123;</span><br><span class="line">        Girl_friend f=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            f=(Girl_friend)Class.forName(girlName).newInstance();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> f;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Helloworld</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] a)</span></span>&#123;</span><br><span class="line">        Girl_friend f=Girl_friend_factory.getInstance(<span class="string">&quot;Luoli&quot;</span>);</span><br><span class="line">        f.dream_peach();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>到此我们反射获取类的⽅法： forName的意义大概就有了</p>
 <hr>
-<p>&#x6211;&#x4EEC;&#x4E00;&#x76F4;&#x8BF4;&#x5230;&#x53CD;&#x5C04;&#x6709;4&#x4E2A;&#x51FD;&#x6570;&#x6BD4;&#x8F83;&#x91CD;&#x8981;</p>
+<p>我们一直说到反射有4个函数比较重要</p>
 <blockquote>
-<p>&#x83B7;&#x53D6;&#x7C7B;&#x7684;&#x2F45;&#x6CD5;&#xFF1A; forName<br>&#x5B9E;&#x4F8B;&#x5316;&#x7C7B;&#x5BF9;&#x8C61;&#x7684;&#x2F45;&#x6CD5;&#xFF1A; newInstance<br>&#x83B7;&#x53D6;&#x51FD;&#x6570;&#x7684;&#x2F45;&#x6CD5;&#xFF1A; getMethod<br>&#x6267;&#x2F8F;&#x51FD;&#x6570;&#x7684;&#x2F45;&#x6CD5;&#xFF1A; invoke</p>
+<p>获取类的⽅法： forName<br>实例化类对象的⽅法： newInstance<br>获取函数的⽅法： getMethod<br>执⾏函数的⽅法： invoke</p>
 </blockquote>
-<p>&#x90A3;&#x4E48;&#x6BD4;&#x8F83;&#x91CD;&#x8981;&#x7684;&#x4F8B;&#x5B50;&#x4E00;&#x822C;&#x5C31;&#x662F;&#x957F;&#x8FD9;&#x6837;</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">(String className, String methodName)</span> <span class="hljs-keyword">throws</span> Exception </span>{</span><br><span class="line">    Class clazz = Class.forName(className);    </span><br><span class="line">    clazz.getMethod(methodName).invoke(clazz.newInstance()); </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>&#x77E5;&#x9053;&#x4E00;&#x70B9;&#x70B9;java-rce&#x7684;&#x540C;&#x5FD7;&#x5E94;&#x8BE5;&#x89C1;&#x8FC7;java&#x547D;&#x4EE4;&#x6267;&#x884C;&#x6700;&#x5E38;&#x89C1;&#x7684;&#x76F4;&#x63A5;&#x8C03;&#x7528;payload</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Runtime.getRuntime().exec(<span class="hljs-string">&quot;calc.exe&quot;</span>);</span><br></pre></td></tr></tbody></table></figure>
+<p>那么比较重要的例子一般就是长这样</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(String className, String methodName)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    Class clazz = Class.forName(className);    </span><br><span class="line">    clazz.getMethod(methodName).invoke(clazz.newInstance()); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>知道一点点java-rce的同志应该见过java命令执行最常见的直接调用payload</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Runtime.getRuntime().exec(<span class="string">&quot;calc.exe&quot;</span>);</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>getRuntime():&#x5176;&#x5B9E;&#x5C31;&#x662F;Runtime&#x7C7B;&#x83B7;&#x53D6;&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x7B49;&#x4E8E;new&#x4E00;&#x4E2A;Runtime&#x7C7B;&#x3002;&#x4E4B;&#x6240;&#x4EE5;&#x5C01;&#x88C5;&#x6210;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x662F;&#x4E3A;&#x4E86;&#x4E0D;&#x8C03;&#x7528;&#x4E00;&#x6B21;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x53EA;&#x83B7;&#x53D6;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x6765;&#x6267;&#x884C;&#x64CD;&#x4F5C;&#x3002;<br>exec():&#x8C03;&#x7528;exec&#x51FD;&#x6570;<br>calc.exe&#xFF1A;&#x8C03;&#x7528;&#x8BA1;&#x7B97;&#x5668;&#x7A0B;&#x5E8F;</p>
+<p>getRuntime():其实就是Runtime类获取对象的方式，等于new一个Runtime类。之所以封装成一个函数是为了不调用一次建立一个对象，只获取一个对象来执行操作。<br>exec():调用exec函数<br>calc.exe：调用计算器程序</p>
 </blockquote>
-<p>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x5C06;&#x8FD9;&#x4E2A;poc&#x62D3;&#x5C55;&#xFF0C;&#x4F7F;&#x7528;&#x53CD;&#x5C04;&#x56DB;&#x4E2A;&#x51FD;&#x6570;&#x6765;&#x5229;&#x7528;&#xFF0C;&#x90A3;&#x4E48;&#x957F;&#x8FD9;&#x6837;</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Helloworld</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] a)</span> <span class="hljs-keyword">throws</span> ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException </span>{</span><br><span class="line">        Class clazz = Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>);</span><br><span class="line">        clazz.getMethod(<span class="hljs-string">&quot;exec&quot;</span>, String.class).invoke(clazz.getMethod(<span class="hljs-string">&quot;getRuntime&quot;</span>).invoke(clazz), <span class="hljs-string">&quot;calc.exe&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p><img src="1.png" alt="java&#x4EE3;&#x7801;&#x5BA1;&#x8BA1;&#x5165;&#x95E8;"></p>
+<p>如果我们将这个poc拓展，使用反射四个函数来利用，那么长这样</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Helloworld</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] a)</span> <span class="keyword">throws</span> ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException </span>&#123;</span><br><span class="line">        Class clazz = Class.forName(<span class="string">&quot;java.lang.Runtime&quot;</span>);</span><br><span class="line">        clazz.getMethod(<span class="string">&quot;exec&quot;</span>, String.class).invoke(clazz.getMethod(<span class="string">&quot;getRuntime&quot;</span>).invoke(clazz), <span class="string">&quot;calc.exe&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="1.png" alt="java代码审计入门"></p>
 <hr>
-<p>&#x6211;&#x4EEC;&#x4E00;&#x6B65;&#x4E00;&#x6B65;&#x6765;&#x804A;&#x4E00;&#x804A;&#x8FD9;&#x4E2A;&#x53CD;&#x5C04;&#x7684;poc&#x4E3A;&#x4F55;&#x80FD;&#x6210;&#x529F;&#x3002;</p>
+<p>我们一步一步来聊一聊这个反射的poc为何能成功。</p>
 <hr>
-<h4 id="forName"><a href="#forName" class="headerlink" title="forName"></a>forName</h4><p>&#x83B7;&#x5F97;&#x4E00;&#x4E2A;class&#x5BF9;&#x8C61;(java.lang.Class)&#x6709;&#x4E09;&#x79CD;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<h4 id="forName"><a href="#forName" class="headerlink" title="forName"></a>forName</h4><p>获得一个class对象(java.lang.Class)有三种方法：</p>
 <ol>
-<li>obj.getClass(): &#x5982;&#x679C;&#x4E0A;&#x4E0B;&#x2F42;&#x4E2D;&#x5B58;&#x5728;&#x67D0;&#x4E2A;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B; obj &#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x901A;&#x8FC7;&#xFF0C;obj.getClass() &#x6765;&#x83B7;&#x53D6;&#x5B83;&#x7684;&#x7C7B;</li>
-<li>Test.class:Test&#x662F;&#x4E00;&#x4E2A;&#x5DF2;&#x7ECF;&#x52A0;&#x8F7D;&#x7684;&#x7C7B;&#xFF0C;&#x60F3;&#x83B7;&#x53D6;&#x5B83;&#x7684;java.lang.Class&#x5BF9;&#x8C61;&#xFF0C;&#x76F4;&#x63A5;&#x62FF;&#x53D6;class&#x53C2;&#x6570;&#x5373;&#x53EF;&#x3002;&#xFF08;&#x8FD9;&#x4E0D;&#x662F;&#x53CD;&#x5C04;&#x673A;&#x5236;&#xFF09;</li>
-<li>Class.forName:&#x5982;&#x679C;&#x77E5;&#x9053;&#x7C7B;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;forname&#x6765;&#x83B7;&#x53D6;</li>
+<li>obj.getClass(): 如果上下⽂中存在某个类的实例 obj ，那么我们可以直接通过，obj.getClass() 来获取它的类</li>
+<li>Test.class:Test是一个已经加载的类，想获取它的java.lang.Class对象，直接拿取class参数即可。（这不是反射机制）</li>
+<li>Class.forName:如果知道类的名字，可以直接使用forname来获取</li>
 </ol>
-<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x7B80;&#x77ED;&#x7684;&#x4EE3;&#x7801;&#x9A8C;&#x8BC1;-&#x5176;&#x4E2D;Runtime&#x662F;&#x4E00;&#x4E2A;&#x5DF2;&#x7ECF;&#x52A0;&#x8F7D;&#x4E86;&#x7684;&#x7C7B;&#xFF0C;getRuntime&#x80FD;&#x83B7;&#x5F97;&#x4E00;&#x4E2A;&#x7C7B;&#x7684;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E;&#x5DE5;&#x5382;&#x4E86;</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Runtime.getRuntime());</span><br><span class="line">System.out.println(Runtime.class);</span><br><span class="line">System.out.println( );</span><br><span class="line">System.out.println(Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>));</span><br></pre></td></tr></tbody></table></figure>
-<p>&#x8F93;&#x51FA;</p>
-<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Runtime@16b98e56</span><br><span class="line">class java.lang.Runtime</span><br><span class="line">class java.lang.Runtime</span><br><span class="line">class java.lang.Runtime</span><br></pre></td></tr></tbody></table></figure>
+<p>可以通过简短的代码验证-其中Runtime是一个已经加载了的类，getRuntime能获得一个类的一个对象，类似于工厂了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Runtime.getRuntime());</span><br><span class="line">System.out.println(Runtime.class);</span><br><span class="line">System.out.println( );</span><br><span class="line">System.out.println(Class.forName(<span class="string">&quot;java.lang.Runtime&quot;</span>));</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Runtime@16b98e56</span><br><span class="line">class java.lang.Runtime</span><br><span class="line">class java.lang.Runtime</span><br><span class="line">class java.lang.Runtime</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h4 id="getMethod"><a href="#getMethod" class="headerlink" title="getMethod"></a>getMethod</h4><p>getMethod &#x7684;&#x4F5C;&#x7528;&#x662F;&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x83B7;&#x53D6;&#x4E00;&#x4E2A;&#x7C7B;&#x7684;&#x67D0;&#x4E2A;&#x7279;&#x5B9A;&#x7684;<code>&#x516C;&#x6709;</code>&#x65B9;&#x6CD5;&#x3002;<br>&#x800C;Java&#x4E2D;&#x652F;&#x6301;&#x7C7B;&#x7684;&#x91CD;&#x8F7D;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x80FD;&#x4EC5;&#x901A;&#x8FC7;&#x51FD;&#x6570;&#x540D;&#x6765;&#x786E;&#x5B9A;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x5728;&#x8C03;&#x7528; getMethod &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x4F20;&#x7ED9;&#x4ED6;&#x4F60;&#x9700;&#x8981;&#x83B7;&#x53D6;&#x7684;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x5217;&#x8868;&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;<br>&#x540E;&#x9762;&#x7684;String.class&#x662F;&#x53C2;&#x6570;</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="hljs-string">&quot;exec&quot;</span>, String.class)</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="getMethod"><a href="#getMethod" class="headerlink" title="getMethod"></a>getMethod</h4><p>getMethod 的作用是通过反射获取一个类的某个特定的<code>公有</code>方法。<br>而Java中支持类的重载，我们不能仅通过函数名来确定一个函数。所以，在调用 getMethod 的时候，我们需要传给他你需要获取的函数的参数类型列表，如下：<br>后面的String.class是参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="string">&quot;exec&quot;</span>, String.class)</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h4 id="invoke"><a href="#invoke" class="headerlink" title="invoke"></a>invoke</h4><p>invoke&#x65B9;&#x6CD5;&#x4F4D;&#x4E8E;Method&#x7C7B;&#x4E0B;&#xFF0C;&#x5176;&#x7684;&#x4F5C;&#x7528;&#x662F;&#x4F20;&#x5165;&#x53C2;&#x6570;&#xFF0C;&#x6267;&#x884C;&#x65B9;&#x6CD5;</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">invoke</span><span class="hljs-params">(Object obj, Object... args)</span></span></span><br></pre></td></tr></tbody></table></figure>
-<p>&#x6CE8;&#x610F;&#x5B83;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x6267;&#x884C;method&#x7684;&#x5BF9;&#x8C61;<br>&#x5B83;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x6267;&#x884C;method&#x7684;&#x5BF9;&#x8C61;&#xFF1A;</p>
+<h4 id="invoke"><a href="#invoke" class="headerlink" title="invoke"></a>invoke</h4><p>invoke方法位于Method类下，其的作用是传入参数，执行方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object obj, Object... args)</span></span></span><br></pre></td></tr></table></figure>
+<p>注意它的第一个参数是执行method的对象<br>它的第一个参数是执行method的对象：</p>
 <ul>
-<li>&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x662F;&#x4E00;&#x4E2A;&#x666E;&#x901A;&#x65B9;&#x6CD5;&#xFF0C;&#x90A3;&#x4E48;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x7C7B;&#x5BF9;&#x8C61;</li>
-<li>&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x662F;&#x4E00;&#x4E2A;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#xFF0C;&#x90A3;&#x4E48;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x7C7B;</li>
+<li>如果这个方法是一个普通方法，那么第一个参数是类对象</li>
+<li>如果这个方法是一个静态方法，那么第一个参数是类</li>
 </ul>
-<p>&#x6211;&#x4EEC;&#x6B63;&#x5E38;&#x6267;&#x884C;&#x65B9;&#x6CD5;&#x662F; <code>[1].method([2], [3], [4]...) </code>&#xFF0C;&#x5176;&#x5B9E;&#x5728;&#x53CD;&#x5C04;&#x91CC;&#x5C31;&#x662F;<br><code>method.invoke([1], [2], [3], [4]...) </code>&#x3002;<br>&#x5BF9;&#x4E8E;&#x6211;&#x4EEC;&#x7684;exec&#xFF0C;&#x662F;&#x4E00;&#x4E2A;&#x666E;&#x901A;&#x65B9;&#x6CD5;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x4F20;&#x5165;&#x7C7B;&#x5BF9;&#x8C61;&#xFF0C;&#x5373;<code>invoke(&#x7C7B;&#x5BF9;&#x8C61;&#xFF0C;exec&#x65B9;&#x6CD5;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570;)</code></p>
+<p>我们正常执行方法是 <code>[1].method([2], [3], [4]...) </code>，其实在反射里就是<br><code>method.invoke([1], [2], [3], [4]...) </code>。<br>对于我们的exec，是一个普通方法，所以需要传入类对象，即<code>invoke(类对象，exec方法传入的参数)</code></p>
 <hr>
-<h3 id="&#x5408;&#x5E76;&#x53CD;&#x5C04;&#x51FD;&#x6570;&#x5F39;&#x8BA1;&#x7B97;&#x5668;"><a href="#&#x5408;&#x5E76;&#x53CD;&#x5C04;&#x51FD;&#x6570;&#x5F39;&#x8BA1;&#x7B97;&#x5668;" class="headerlink" title="&#x5408;&#x5E76;&#x53CD;&#x5C04;&#x51FD;&#x6570;&#x5F39;&#x8BA1;&#x7B97;&#x5668;"></a>&#x5408;&#x5E76;&#x53CD;&#x5C04;&#x51FD;&#x6570;&#x5F39;&#x8BA1;&#x7B97;&#x5668;</h3><p>&#x90A3;&#x4E48;&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x8C03;&#x7528;&#x8BA1;&#x7B97;&#x5668;&#x7684;&#x4E00;&#x53E5;&#x8BDD;&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x4E3A;</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="hljs-string">&quot;exec&quot;</span>, String.class).invoke(Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="hljs-string">&quot;getRuntime&quot;</span>).invoke(Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>)),<span class="hljs-string">&quot;calc.exe&quot;</span>)</span><br></pre></td></tr></tbody></table></figure>
-<p>&#x6211;&#x901A;&#x8FC7;&#x7F29;&#x8FDB;&#x6765;&#x66F4;&#x53CB;&#x597D;&#x7684;&#x4F53;&#x73B0;</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>) </span><br><span class="line">        .getMethod(<span class="hljs-string">&quot;exec&quot;</span>, String.class)</span><br><span class="line">        .invoke(</span><br><span class="line">                Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>)</span><br><span class="line">                        .getMethod(<span class="hljs-string">&quot;getRuntime&quot;</span>)</span><br><span class="line">                        .invoke(Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>))</span><br><span class="line">                ,<span class="hljs-string">&quot;calc.exe&quot;</span></span><br><span class="line">                );</span><br></pre></td></tr></tbody></table></figure>
-<p>&#x5176;&#x5B9E;&#x662F;&#x8C03;&#x7528;&#x4E86;2&#x6B21;invoke&#x51FD;&#x6570;&#xFF0C;&#x91CC;&#x9762;&#x4E00;&#x5C42;&#x662F;&#x4F7F;&#x7528;getRuntime&#x7684;&#x65E0;&#x53C2;&#x51FD;&#x6570;&#x83B7;&#x5F97;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x3002;&#x5916;&#x9762;&#x4E00;&#x5C42;&#x5219;&#x662F;&#x8C03;&#x7528;exec&#x6765;&#x5F39;&#x8BA1;&#x7B97;&#x5668;<br><img src="2.png" alt="java&#x4EE3;&#x7801;&#x5BA1;&#x8BA1;&#x5165;&#x95E8;"><br>&#x5982;&#x679C;&#x505A;&#x62C6;&#x5206;&#xFF0C;&#x90A3;&#x4E48;&#x4E00;&#x6B65;&#x6B65;&#x5C31;&#x662F;&#x8FD9;&#x6837;&#x7684;</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>);</span><br><span class="line">Method execMethod = clazz.getMethod(<span class="hljs-string">&quot;exec&quot;</span>, String.class);</span><br><span class="line">Method getRuntimeMethod = clazz.getMethod(<span class="hljs-string">&quot;getRuntime&quot;</span>);</span><br><span class="line">Object runtime = getRuntimeMethod.invoke(clazz);</span><br><span class="line">execMethod.invoke(runtime, <span class="hljs-string">&quot;calc.exe&quot;</span>);</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="&#x6307;&#x5B9A;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x751F;&#x6210;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;"><a href="#&#x6307;&#x5B9A;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x751F;&#x6210;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;" class="headerlink" title="&#x6307;&#x5B9A;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x751F;&#x6210;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;"></a>&#x6307;&#x5B9A;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x751F;&#x6210;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;</h3><p>&#x5047;&#x8BBE;&#x4E00;&#x4E2A;&#x7C7B;&#x6CA1;&#x6709;getRuntime&#x8FD9;&#x6837;&#x7684;&#x83B7;&#x53D6;&#x5B9E;&#x4F8B;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4E5F;&#x6CA1;&#x6709;&#x516C;&#x5171;&#x7684;&#x65E0;&#x53C2;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C31;&#x8981;&#x7528;&#x5230;getConsturctor()&#x51FD;&#x6570;</p>
+<h3 id="合并反射函数弹计算器"><a href="#合并反射函数弹计算器" class="headerlink" title="合并反射函数弹计算器"></a>合并反射函数弹计算器</h3><p>那么通过反射调用计算器的一句话代码可以为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="string">&quot;exec&quot;</span>, String.class).invoke(Class.forName(<span class="string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="string">&quot;getRuntime&quot;</span>).invoke(Class.forName(<span class="string">&quot;java.lang.Runtime&quot;</span>)),<span class="string">&quot;calc.exe&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>我通过缩进来更友好的体现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="string">&quot;java.lang.Runtime&quot;</span>) </span><br><span class="line">        .getMethod(<span class="string">&quot;exec&quot;</span>, String.class)</span><br><span class="line">        .invoke(</span><br><span class="line">                Class.forName(<span class="string">&quot;java.lang.Runtime&quot;</span>)</span><br><span class="line">                        .getMethod(<span class="string">&quot;getRuntime&quot;</span>)</span><br><span class="line">                        .invoke(Class.forName(<span class="string">&quot;java.lang.Runtime&quot;</span>))</span><br><span class="line">                ,<span class="string">&quot;calc.exe&quot;</span></span><br><span class="line">                );</span><br></pre></td></tr></table></figure>
+<p>其实是调用了2次invoke函数，里面一层是使用getRuntime的无参函数获得一个实例。外面一层则是调用exec来弹计算器<br><img src="2.png" alt="java代码审计入门"><br>如果做拆分，那么一步步就是这样的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Class.forName(<span class="string">&quot;java.lang.Runtime&quot;</span>);</span><br><span class="line">Method execMethod = clazz.getMethod(<span class="string">&quot;exec&quot;</span>, String.class);</span><br><span class="line">Method getRuntimeMethod = clazz.getMethod(<span class="string">&quot;getRuntime&quot;</span>);</span><br><span class="line">Object runtime = getRuntimeMethod.invoke(clazz);</span><br><span class="line">execMethod.invoke(runtime, <span class="string">&quot;calc.exe&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="指定的构造方法生成类的实例"><a href="#指定的构造方法生成类的实例" class="headerlink" title="指定的构造方法生成类的实例"></a>指定的构造方法生成类的实例</h3><p>假设一个类没有getRuntime这样的获取实例的方法，也没有公共的无参构造方法的时候，就要用到getConsturctor()函数</p>
 <blockquote>
-<p>getConsturctor()&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x9009;&#x5B9A;&#x6307;&#x5B9A;&#x63A5;&#x53E3;&#x683C;&#x5F0F;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;(&#x7531;&#x4E8E;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E5F;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x53C2;&#x6570;&#x6765;&#x8FDB;&#x884C;&#x91CD;&#x8F7D;)&#xFF0C;&#x5373;&#xFF1A;getConsturctor(&#x53C2;&#x6570;&#x7C7B;&#x578B;)<br>&#x9009;&#x5B9A;&#x540E;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;newInstance(),&#x5E76;&#x4F20;&#x5165;&#x6784;&#x9020;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x6267;&#x884C;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF0C;&#x5373;newInstance(&#x4F20;&#x5165;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x53C2;&#x6570;)&#x3002;</p>
+<p>getConsturctor()函数可以选定指定接口格式的构造函数(由于构造函数也可以根据参数来进行重载)，即：getConsturctor(参数类型)<br>选定后我们可以通过newInstance(),并传入构造函数的参数执行构造函数，即newInstance(传入的构造函数参数)。</p>
 </blockquote>
-<p>&#x6BD4;&#x5982;ProcessBuilder&#x6709;&#x4E24;&#x4E2A;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF1A;</p>
+<p>比如ProcessBuilder有两个构造函数：</p>
 <blockquote>
-<p>public ProcessBuilder(List<string> command)<br>public ProcessBuilder(String&#x2026; command)(&#x6B64;&#x5904;&#xFF0C;String&#x2026;&#x8FD9;&#x79CD;&#x8BED;&#x6CD5;&#x8868;&#x793A;String&#x53C2;&#x6570;&#x6570;&#x91CF;&#x662F;&#x53EF;&#x53D8;&#x7684;&#xFF0C;&#x4E0E;String[]&#x4E00;&#x6837;)</string></p>
+<p>public ProcessBuilder(List<String> command)<br>public ProcessBuilder(String… command)(此处，String…这种语法表示String参数数量是可变的，与String[]一样)</p>
 </blockquote>
-<p>&#x5BF9;&#x5E94;2&#x79CD;&#x65B9;&#x6CD5;&#x7684;poc&#x5373;&#x957F;&#x8FD9;&#x6837;</p>
+<p>对应2种方法的poc即长这样</p>
 <blockquote>
-<p>Class.forName(&#x201C;java.lang.ProcessBuilder&#x201D;).getConstructor(String.class).newInstance(&#x201C;calc.exe&#x201D;))<br>Class.forName(&#x201C;java.lang.ProcessBuilder&#x201D;).getConstructor(List.class).newInstance(Arrays.asList(&#x201C;calc.exe&#x201D;)))</p>
+<p>Class.forName(“java.lang.ProcessBuilder”).getConstructor(String.class).newInstance(“calc.exe”))<br>Class.forName(“java.lang.ProcessBuilder”).getConstructor(List.class).newInstance(Arrays.asList(“calc.exe”)))</p>
 </blockquote>
-<p>&#x4F5C;&#x4E3A;list&#x7684;&#x6784;&#x9020;&#x90A3;&#x4E48;&#x4EE3;&#x7801;&#x4E3A;</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Class.forName(<span class="hljs-string">&quot;java.lang.ProcessBuilder&quot;</span>);</span><br><span class="line">clazz.getMethod(<span class="hljs-string">&quot;start&quot;</span>).invoke(</span><br><span class="line">    clazz.getConstructor(List.class).newInstance(Arrays.asList(<span class="hljs-string">&quot;calc.exe&quot;</span>))</span><br><span class="line">    );</span><br></pre></td></tr></tbody></table></figure>
-<p>&#x4F5C;&#x4E3A;string&#x7684;&#x6784;&#x9020;&#x4EE3;&#x7801;&#x4E3A;</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Class.forName(<span class="hljs-string">&quot;java.lang.ProcessBuilder&quot;</span>);</span><br><span class="line">clazz.getMethod(<span class="hljs-string">&quot;start&quot;</span>).invoke(</span><br><span class="line">        clazz.getConstructor(String[].class).newInstance(<span class="hljs-keyword">new</span> String[][]{{<span class="hljs-string">&quot;calc.exe&quot;</span>}})</span><br><span class="line">);</span><br></pre></td></tr></tbody></table></figure>
-<p><img src="3.png" alt="java&#x4EE3;&#x7801;&#x5BA1;&#x8BA1;&#x5165;&#x95E8;"></p>
-<h3 id="&#x6267;&#x884C;&#x79C1;&#x6709;&#x65B9;&#x6CD5;"><a href="#&#x6267;&#x884C;&#x79C1;&#x6709;&#x65B9;&#x6CD5;" class="headerlink" title="&#x6267;&#x884C;&#x79C1;&#x6709;&#x65B9;&#x6CD5;"></a>&#x6267;&#x884C;&#x79C1;&#x6709;&#x65B9;&#x6CD5;</h3><p>&#x8FD9;&#x662F;&#x6211;&#x8BA4;&#x4E3A;&#x53CD;&#x5C04;&#x6700;&#x9A9A;&#x7684;<br>&#x6211;&#x4EEC;&#x524D;&#x9762;&#x7528;&#x7684;&#x65B9;&#x6CD5;&#x6216;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x662F;public&#x51FD;&#x6570;&#xFF0C;&#x4F46;&#x662F;&#x5982;&#x679C;&#x662F;&#x79C1;&#x6709;&#x65B9;&#x6CD5;&#xFF0C;&#x6211;&#x4EEC;&#x8BE5;&#x5982;&#x4F55;&#x8C03;&#x7528;&#xFF1F;<br>&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x7528;&#x7684;&#x90FD;&#x662F;getMethod&#x3001;getConstructor&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x9700;&#x8981;&#x4F7F;&#x7528;getDeclaredMethod&#x3001;getDeclaredConstructor</p>
+<p>作为list的构造那么代码为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Class.forName(<span class="string">&quot;java.lang.ProcessBuilder&quot;</span>);</span><br><span class="line">clazz.getMethod(<span class="string">&quot;start&quot;</span>).invoke(</span><br><span class="line">    clazz.getConstructor(List.class).newInstance(Arrays.asList(<span class="string">&quot;calc.exe&quot;</span>))</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+<p>作为string的构造代码为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Class.forName(<span class="string">&quot;java.lang.ProcessBuilder&quot;</span>);</span><br><span class="line">clazz.getMethod(<span class="string">&quot;start&quot;</span>).invoke(</span><br><span class="line">        clazz.getConstructor(String[].class).newInstance(<span class="keyword">new</span> String[][]&#123;&#123;<span class="string">&quot;calc.exe&quot;</span>&#125;&#125;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><img src="3.png" alt="java代码审计入门"></p>
+<h3 id="执行私有方法"><a href="#执行私有方法" class="headerlink" title="执行私有方法"></a>执行私有方法</h3><p>这是我认为反射最骚的<br>我们前面用的方法或构造方法是public函数，但是如果是私有方法，我们该如何调用？<br>之前我们用的都是getMethod、getConstructor，接下来需要使用getDeclaredMethod、getDeclaredConstructor</p>
 <blockquote>
-<p>getMethod&#x7B49;&#x65B9;&#x6CD5;&#x83B7;&#x53D6;&#x7684;&#x662F;&#x5F53;&#x524D;&#x7C7B;&#x4E2D;&#x6240;&#x6709;&#x516C;&#x5171;&#x65B9;&#x6CD5;&#xFF0C;&#x5305;&#x62EC;&#x4ECE;&#x7236;&#x7C7B;&#x7EE7;&#x627F;&#x7684;&#x65B9;&#x6CD5;<br>getDeclared&#x7B49;&#x65B9;&#x6CD5;&#x83B7;&#x53D6;&#x7684;&#x662F;&#x5F53;&#x524D;&#x7C7B;&#x4E2D;&#x201C;&#x58F0;&#x660E;&#x201D;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x662F;&#x5B9E;&#x5728;&#x5199;&#x5728;&#x8FD9;&#x4E2A;&#x7C7B;&#x91CC;&#x7684;&#xFF0C;&#x5305;&#x62EC;&#x79C1;&#x6709;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4F46;&#x4ECE;&#x7236;&#x7C7B;&#x91CC;&#x7EE7;&#x627F;&#x6765;&#x7684;&#x5C31;&#x4E0D;&#x5305;&#x542B;&#x4E86;</p>
+<p>getMethod等方法获取的是当前类中所有公共方法，包括从父类继承的方法<br>getDeclared等方法获取的是当前类中“声明”的方法，是实在写在这个类里的，包括私有的方法，但从父类里继承来的就不包含了</p>
 </blockquote>
-<p>&#x4E4B;&#x524D;&#x8BF4;&#x5230;Runtime&#x7684;&#x6784;&#x9020;&#x65B9;&#x5F0F;&#x662F;&#x4E00;&#x4E2A;&#x79C1;&#x6709;&#x65B9;&#x6CD5;<br><img src="4.png"><br>&#x5982;&#x679C;&#x4EE3;&#x7801;&#x8FD8;&#x662F;&#x6309;&#x4E4B;&#x524D;&#x7684;&#x5199;&#x6CD5;</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>);</span><br><span class="line">Constructor m = clazz.getConstructor();</span><br><span class="line">clazz.getMethod(<span class="hljs-string">&quot;exec&quot;</span>, String.class).invoke(m.newInstance(), <span class="hljs-string">&quot;calc.exe&quot;</span>);</span><br></pre></td></tr></tbody></table></figure>
-<p>&#x5F97;&#x5230;&#x62A5;&#x9519;<br><img src="5.png"><br>&#x5927;&#x6982;&#x610F;&#x601D;&#x5C31;&#x662F;&#x4E0D;&#x80FD;&#x76F4;&#x63A5;&#x4F7F;&#x7528;clazz.getConstructor() &#x51FD;&#x6570;<br>&#x90A3;&#x4E48;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x901A;&#x8FC7;&#x4FEE;&#x6539;&#x4FEE;&#x9970;&#x7B26;&#x6765;&#x8C03;&#x7528;Runtime&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x6765;&#x83B7;&#x53D6;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x6765;&#x6267;&#x884C;calc.exe<br>&#x4EE3;&#x7801;</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>);</span><br><span class="line">Constructor m = clazz.getDeclaredConstructor();</span><br><span class="line">m.setAccessible(<span class="hljs-keyword">true</span>);</span><br><span class="line">clazz.getMethod(<span class="hljs-string">&quot;exec&quot;</span>, String.class).invoke(m.newInstance(), <span class="hljs-string">&quot;calc.exe&quot;</span>);</span><br></pre></td></tr></tbody></table></figure>
-<p>&#x6210;&#x529F;&#x5F39;&#x51FA;&#x8BA1;&#x7B97;&#x5668;<br><img src="7.png"><br>&#x6211;&#x4EEC;&#x5047;&#x8BBE;&#x628A;m.setAccessible(true);&#x6CE8;&#x91CA;&#x8D77;&#x6765;<br>&#x539F;&#x56E0;&#x786E;&#x5B9E;&#x662F;&#x79C1;&#x6709;&#x53D8;&#x91CF;&#x7684;&#x95EE;&#x9898;<br><img src="6.png"></p>
+<p>之前说到Runtime的构造方式是一个私有方法<br><img src="4.png"><br>如果代码还是按之前的写法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Class.forName(<span class="string">&quot;java.lang.Runtime&quot;</span>);</span><br><span class="line">Constructor m = clazz.getConstructor();</span><br><span class="line">clazz.getMethod(<span class="string">&quot;exec&quot;</span>, String.class).invoke(m.newInstance(), <span class="string">&quot;calc.exe&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>得到报错<br><img src="5.png"><br>大概意思就是不能直接使用clazz.getConstructor() 函数<br>那么接下来我们通过修改修饰符来调用Runtime的构造方法来获取一个实例来执行calc.exe<br>代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Class.forName(<span class="string">&quot;java.lang.Runtime&quot;</span>);</span><br><span class="line">Constructor m = clazz.getDeclaredConstructor();</span><br><span class="line">m.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">clazz.getMethod(<span class="string">&quot;exec&quot;</span>, String.class).invoke(m.newInstance(), <span class="string">&quot;calc.exe&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>成功弹出计算器<br><img src="7.png"><br>我们假设把m.setAccessible(true);注释起来<br>原因确实是私有变量的问题<br><img src="6.png"></p>
 <blockquote>
-<p>&#x5728;&#x83B7;&#x53D6;&#x5230;&#x79C1;&#x6709;&#x65B9;&#x6CD5;&#x540E;&#xFF0C;&#x901A;&#x8FC7;setAccessible(true)&#x53EF;&#x4EE5;&#x6253;&#x7834;&#x79C1;&#x6709;&#x65B9;&#x6CD5;&#x8BBF;&#x95EE;&#x9650;&#x5236;&#xFF0C;&#x4ECE;&#x800C;&#x8FDB;&#x884C;&#x8C03;&#x7528;&#x3002;&#x5728;&#x5176;&#x4ED6;&#x5730;&#x65B9;&#x7684;&#x4F7F;&#x7528;&#xFF0C;getDeclaredMethod&#x3001;getDeclaredConstructor&#x548C;getMethod&#x3001;getConstructor&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#x662F;&#x4E00;&#x81F4;&#x7684;</p>
+<p>在获取到私有方法后，通过setAccessible(true)可以打破私有方法访问限制，从而进行调用。在其他地方的使用，getDeclaredMethod、getDeclaredConstructor和getMethod、getConstructor使用方法是一致的</p>
 </blockquote>
-<h3 id="&#x9644;&#x5F55;"><a href="#&#x9644;&#x5F55;" class="headerlink" title="&#x9644;&#x5F55;"></a>&#x9644;&#x5F55;</h3><h4 id="&#x53CD;&#x5C04;&#x673A;&#x5236;&#x7684;&#x76F8;&#x5173;&#x7C7B;"><a href="#&#x53CD;&#x5C04;&#x673A;&#x5236;&#x7684;&#x76F8;&#x5173;&#x7C7B;" class="headerlink" title="&#x53CD;&#x5C04;&#x673A;&#x5236;&#x7684;&#x76F8;&#x5173;&#x7C7B;"></a>&#x53CD;&#x5C04;&#x673A;&#x5236;&#x7684;&#x76F8;&#x5173;&#x7C7B;</h4><p>&#x4E0E;Java&#x53CD;&#x5C04;&#x76F8;&#x5173;&#x7684;&#x7C7B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><h4 id="反射机制的相关类"><a href="#反射机制的相关类" class="headerlink" title="反射机制的相关类"></a>反射机制的相关类</h4><p>与Java反射相关的类如下：</p>
 <table>
 <thead>
 <tr>
-<th>&#x7C7B;&#x540D;</th>
-<th>&#x7528;&#x9014;</th>
+<th>类名</th>
+<th>用途</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>Class&#x7C7B;</td>
-<td>&#x4EE3;&#x8868;&#x7C7B;&#x7684;&#x5B9E;&#x4F53;&#xFF0C;&#x5728;&#x8FD0;&#x884C;&#x7684;Java&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E2D;&#x8868;&#x793A;&#x7C7B;&#x548C;&#x63A5;&#x53E3;</td>
+<td>Class类</td>
+<td>代表类的实体，在运行的Java应用程序中表示类和接口</td>
 </tr>
 <tr>
-<td>Field&#x7C7B;</td>
-<td>&#x4EE3;&#x8868;&#x7C7B;&#x7684;&#x6210;&#x5458;&#x53D8;&#x91CF;&#xFF08;&#x6210;&#x5458;&#x53D8;&#x91CF;&#x4E5F;&#x79F0;&#x4E3A;&#x7C7B;&#x7684;&#x5C5E;&#x6027;&#xFF09;</td>
+<td>Field类</td>
+<td>代表类的成员变量（成员变量也称为类的属性）</td>
 </tr>
 <tr>
-<td>Method&#x7C7B;</td>
-<td>&#x4EE3;&#x8868;&#x7C7B;&#x7684;&#x65B9;&#x6CD5;</td>
+<td>Method类</td>
+<td>代表类的方法</td>
 </tr>
 <tr>
-<td>Constructor&#x7C7B;</td>
-<td>&#x4EE3;&#x8868;&#x7C7B;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;</td>
+<td>Constructor类</td>
+<td>代表类的构造方法</td>
 </tr>
 </tbody></table>
-<h4 id="Class&#x7C7B;"><a href="#Class&#x7C7B;" class="headerlink" title="Class&#x7C7B;"></a>Class&#x7C7B;</h4><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/java/lang/Class">Class</a>&#x4EE3;&#x8868;&#x7C7B;&#x7684;&#x5B9E;&#x4F53;&#xFF0C;&#x5728;&#x8FD0;&#x884C;&#x7684;Java&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E2D;&#x8868;&#x793A;&#x7C7B;&#x548C;&#x63A5;&#x53E3;&#x3002;&#x5728;&#x8FD9;&#x4E2A;&#x7C7B;&#x4E2D;&#x63D0;&#x4F9B;&#x4E86;&#x5F88;&#x591A;&#x6709;&#x7528;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x91CC;&#x5BF9;&#x4ED6;&#x4EEC;&#x7B80;&#x5355;&#x7684;&#x5206;&#x7C7B;&#x4ECB;&#x7ECD;&#x3002;</p>
+<h4 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h4><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/java/lang/Class">Class</a>代表类的实体，在运行的Java应用程序中表示类和接口。在这个类中提供了很多有用的方法，这里对他们简单的分类介绍。</p>
 <ul>
-<li><strong>&#x83B7;&#x5F97;&#x7C7B;&#x76F8;&#x5173;&#x7684;&#x65B9;&#x6CD5;</strong></li>
+<li><strong>获得类相关的方法</strong></li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>&#x65B9;&#x6CD5;</th>
-<th>&#x7528;&#x9014;</th>
+<th>方法</th>
+<th>用途</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>asSubclass(Class<u> clazz)</u></td>
-<td>&#x628A;&#x4F20;&#x9012;&#x7684;&#x7C7B;&#x7684;&#x5BF9;&#x8C61;&#x8F6C;&#x6362;&#x6210;&#x4EE3;&#x8868;&#x5176;&#x5B50;&#x7C7B;&#x7684;&#x5BF9;&#x8C61;</td>
+<td>asSubclass(Class<U> clazz)</td>
+<td>把传递的类的对象转换成代表其子类的对象</td>
 </tr>
 <tr>
 <td>Cast</td>
-<td>&#x628A;&#x5BF9;&#x8C61;&#x8F6C;&#x6362;&#x6210;&#x4EE3;&#x8868;&#x7C7B;&#x6216;&#x662F;&#x63A5;&#x53E3;&#x7684;&#x5BF9;&#x8C61;</td>
+<td>把对象转换成代表类或是接口的对象</td>
 </tr>
 <tr>
 <td>getClassLoader()</td>
-<td>&#x83B7;&#x5F97;&#x7C7B;&#x7684;&#x52A0;&#x8F7D;&#x5668;</td>
+<td>获得类的加载器</td>
 </tr>
 <tr>
 <td>getClasses()</td>
-<td>&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#xFF0C;&#x6570;&#x7EC4;&#x4E2D;&#x5305;&#x542B;&#x8BE5;&#x7C7B;&#x4E2D;&#x6240;&#x6709;&#x516C;&#x5171;&#x7C7B;&#x548C;&#x63A5;&#x53E3;&#x7C7B;&#x7684;&#x5BF9;&#x8C61;</td>
+<td>返回一个数组，数组中包含该类中所有公共类和接口类的对象</td>
 </tr>
 <tr>
 <td>getDeclaredClasses()</td>
-<td>&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#xFF0C;&#x6570;&#x7EC4;&#x4E2D;&#x5305;&#x542B;&#x8BE5;&#x7C7B;&#x4E2D;&#x6240;&#x6709;&#x7C7B;&#x548C;&#x63A5;&#x53E3;&#x7C7B;&#x7684;&#x5BF9;&#x8C61;</td>
+<td>返回一个数组，数组中包含该类中所有类和接口类的对象</td>
 </tr>
 <tr>
 <td>forName(String className)</td>
-<td>&#x6839;&#x636E;&#x7C7B;&#x540D;&#x8FD4;&#x56DE;&#x7C7B;&#x7684;&#x5BF9;&#x8C61;</td>
+<td>根据类名返回类的对象</td>
 </tr>
 <tr>
 <td>getName()</td>
-<td>&#x83B7;&#x5F97;&#x7C7B;&#x7684;&#x5B8C;&#x6574;&#x8DEF;&#x5F84;&#x540D;&#x5B57;</td>
+<td>获得类的完整路径名字</td>
 </tr>
 <tr>
 <td>newInstance()</td>
-<td>&#x521B;&#x5EFA;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;</td>
+<td>创建类的实例</td>
 </tr>
 <tr>
 <td>getPackage()</td>
-<td>&#x83B7;&#x5F97;&#x7C7B;&#x7684;&#x5305;</td>
+<td>获得类的包</td>
 </tr>
 <tr>
 <td>getSimpleName()</td>
-<td>&#x83B7;&#x5F97;&#x7C7B;&#x7684;&#x540D;&#x5B57;</td>
+<td>获得类的名字</td>
 </tr>
 <tr>
 <td>getSuperclass()</td>
-<td>&#x83B7;&#x5F97;&#x5F53;&#x524D;&#x7C7B;&#x7EE7;&#x627F;&#x7684;&#x7236;&#x7C7B;&#x7684;&#x540D;&#x5B57;</td>
+<td>获得当前类继承的父类的名字</td>
 </tr>
 <tr>
 <td>getInterfaces()</td>
-<td>&#x83B7;&#x5F97;&#x5F53;&#x524D;&#x7C7B;&#x5B9E;&#x73B0;&#x7684;&#x7C7B;&#x6216;&#x662F;&#x63A5;&#x53E3;</td>
+<td>获得当前类实现的类或是接口</td>
 </tr>
 </tbody></table>
 <ul>
-<li><strong>&#x83B7;&#x5F97;&#x7C7B;&#x4E2D;&#x5C5E;&#x6027;&#x76F8;&#x5173;&#x7684;&#x65B9;&#x6CD5;</strong></li>
+<li><strong>获得类中属性相关的方法</strong></li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>&#x65B9;&#x6CD5;</th>
-<th>&#x7528;&#x9014;</th>
+<th>方法</th>
+<th>用途</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>getField(String name)</td>
-<td>&#x83B7;&#x5F97;&#x67D0;&#x4E2A;&#x516C;&#x6709;&#x7684;&#x5C5E;&#x6027;&#x5BF9;&#x8C61;</td>
+<td>获得某个公有的属性对象</td>
 </tr>
 <tr>
 <td>getFields()</td>
-<td>&#x83B7;&#x5F97;&#x6240;&#x6709;&#x516C;&#x6709;&#x7684;&#x5C5E;&#x6027;&#x5BF9;&#x8C61;</td>
+<td>获得所有公有的属性对象</td>
 </tr>
 <tr>
 <td>getDeclaredField(String name)</td>
-<td>&#x83B7;&#x5F97;&#x67D0;&#x4E2A;&#x5C5E;&#x6027;&#x5BF9;&#x8C61;</td>
+<td>获得某个属性对象</td>
 </tr>
 <tr>
 <td>getDeclaredFields()</td>
-<td>&#x83B7;&#x5F97;&#x6240;&#x6709;&#x5C5E;&#x6027;&#x5BF9;&#x8C61;</td>
+<td>获得所有属性对象</td>
 </tr>
 </tbody></table>
 <ul>
-<li><strong>&#x83B7;&#x5F97;&#x7C7B;&#x4E2D;&#x6CE8;&#x89E3;&#x76F8;&#x5173;&#x7684;&#x65B9;&#x6CD5;</strong></li>
+<li><strong>获得类中注解相关的方法</strong></li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>&#x65B9;&#x6CD5;</th>
-<th>&#x7528;&#x9014;</th>
+<th>方法</th>
+<th>用途</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>getAnnotation(Class<a> annotationClass)</a></td>
-<td>&#x8FD4;&#x56DE;&#x8BE5;&#x7C7B;&#x4E2D;&#x4E0E;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x5339;&#x914D;&#x7684;&#x516C;&#x6709;&#x6CE8;&#x89E3;&#x5BF9;&#x8C61;</td>
+<td>getAnnotation(Class<A> annotationClass)</td>
+<td>返回该类中与参数类型匹配的公有注解对象</td>
 </tr>
 <tr>
 <td>getAnnotations()</td>
-<td>&#x8FD4;&#x56DE;&#x8BE5;&#x7C7B;&#x6240;&#x6709;&#x7684;&#x516C;&#x6709;&#x6CE8;&#x89E3;&#x5BF9;&#x8C61;</td>
+<td>返回该类所有的公有注解对象</td>
 </tr>
 <tr>
-<td>getDeclaredAnnotation(Class<a> annotationClass)</a></td>
-<td>&#x8FD4;&#x56DE;&#x8BE5;&#x7C7B;&#x4E2D;&#x4E0E;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x5339;&#x914D;&#x7684;&#x6240;&#x6709;&#x6CE8;&#x89E3;&#x5BF9;&#x8C61;</td>
+<td>getDeclaredAnnotation(Class<A> annotationClass)</td>
+<td>返回该类中与参数类型匹配的所有注解对象</td>
 </tr>
 <tr>
 <td>getDeclaredAnnotations()</td>
-<td>&#x8FD4;&#x56DE;&#x8BE5;&#x7C7B;&#x6240;&#x6709;&#x7684;&#x6CE8;&#x89E3;&#x5BF9;&#x8C61;</td>
+<td>返回该类所有的注解对象</td>
 </tr>
 </tbody></table>
 <ul>
-<li><strong>&#x83B7;&#x5F97;&#x7C7B;&#x4E2D;&#x6784;&#x9020;&#x5668;&#x76F8;&#x5173;&#x7684;&#x65B9;&#x6CD5;</strong></li>
+<li><strong>获得类中构造器相关的方法</strong></li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>&#x65B9;&#x6CD5;</th>
-<th>&#x7528;&#x9014;</th>
+<th>方法</th>
+<th>用途</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>getConstructor(Class&#x2026;&lt;?&gt; parameterTypes)</td>
-<td>&#x83B7;&#x5F97;&#x8BE5;&#x7C7B;&#x4E2D;&#x4E0E;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x5339;&#x914D;&#x7684;&#x516C;&#x6709;&#x6784;&#x9020;&#x65B9;&#x6CD5;</td>
+<td>getConstructor(Class…&lt;?&gt; parameterTypes)</td>
+<td>获得该类中与参数类型匹配的公有构造方法</td>
 </tr>
 <tr>
 <td>getConstructors()</td>
-<td>&#x83B7;&#x5F97;&#x8BE5;&#x7C7B;&#x7684;&#x6240;&#x6709;&#x516C;&#x6709;&#x6784;&#x9020;&#x65B9;&#x6CD5;</td>
+<td>获得该类的所有公有构造方法</td>
 </tr>
 <tr>
-<td>getDeclaredConstructor(Class&#x2026;&lt;?&gt; parameterTypes)</td>
-<td>&#x83B7;&#x5F97;&#x8BE5;&#x7C7B;&#x4E2D;&#x4E0E;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x5339;&#x914D;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;</td>
+<td>getDeclaredConstructor(Class…&lt;?&gt; parameterTypes)</td>
+<td>获得该类中与参数类型匹配的构造方法</td>
 </tr>
 <tr>
 <td>getDeclaredConstructors()</td>
-<td>&#x83B7;&#x5F97;&#x8BE5;&#x7C7B;&#x6240;&#x6709;&#x6784;&#x9020;&#x65B9;&#x6CD5;</td>
+<td>获得该类所有构造方法</td>
 </tr>
 </tbody></table>
 <ul>
-<li><strong>&#x83B7;&#x5F97;&#x7C7B;&#x4E2D;&#x65B9;&#x6CD5;&#x76F8;&#x5173;&#x7684;&#x65B9;&#x6CD5;</strong></li>
+<li><strong>获得类中方法相关的方法</strong></li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>&#x65B9;&#x6CD5;</th>
-<th>&#x7528;&#x9014;</th>
+<th>方法</th>
+<th>用途</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>getMethod(String name, Class&#x2026;&lt;?&gt; parameterTypes)</td>
-<td>&#x83B7;&#x5F97;&#x8BE5;&#x7C7B;&#x67D0;&#x4E2A;&#x516C;&#x6709;&#x7684;&#x65B9;&#x6CD5;</td>
+<td>getMethod(String name, Class…&lt;?&gt; parameterTypes)</td>
+<td>获得该类某个公有的方法</td>
 </tr>
 <tr>
 <td>getMethods()</td>
-<td>&#x83B7;&#x5F97;&#x8BE5;&#x7C7B;&#x6240;&#x6709;&#x516C;&#x6709;&#x7684;&#x65B9;&#x6CD5;</td>
+<td>获得该类所有公有的方法</td>
 </tr>
 <tr>
-<td>getDeclaredMethod(String name, Class&#x2026;&lt;?&gt; parameterTypes)</td>
-<td>&#x83B7;&#x5F97;&#x8BE5;&#x7C7B;&#x67D0;&#x4E2A;&#x65B9;&#x6CD5;</td>
+<td>getDeclaredMethod(String name, Class…&lt;?&gt; parameterTypes)</td>
+<td>获得该类某个方法</td>
 </tr>
 <tr>
 <td>getDeclaredMethods()</td>
-<td>&#x83B7;&#x5F97;&#x8BE5;&#x7C7B;&#x6240;&#x6709;&#x65B9;&#x6CD5;</td>
+<td>获得该类所有方法</td>
 </tr>
 </tbody></table>
 <ul>
-<li><strong>&#x7C7B;&#x4E2D;&#x5176;&#x4ED6;&#x91CD;&#x8981;&#x7684;&#x65B9;&#x6CD5;</strong></li>
+<li><strong>类中其他重要的方法</strong></li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>&#x65B9;&#x6CD5;</th>
-<th>&#x7528;&#x9014;</th>
+<th>方法</th>
+<th>用途</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>isAnnotation()</td>
-<td>&#x5982;&#x679C;&#x662F;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x5219;&#x8FD4;&#x56DE;true</td>
+<td>如果是注解类型则返回true</td>
 </tr>
 <tr>
 <td>isAnnotationPresent(Class&lt;? extends Annotation&gt; annotationClass)</td>
-<td>&#x5982;&#x679C;&#x662F;&#x6307;&#x5B9A;&#x7C7B;&#x578B;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x5219;&#x8FD4;&#x56DE;true</td>
+<td>如果是指定类型注解类型则返回true</td>
 </tr>
 <tr>
 <td>isAnonymousClass()</td>
-<td>&#x5982;&#x679C;&#x662F;&#x533F;&#x540D;&#x7C7B;&#x5219;&#x8FD4;&#x56DE;true</td>
+<td>如果是匿名类则返回true</td>
 </tr>
 <tr>
 <td>isArray()</td>
-<td>&#x5982;&#x679C;&#x662F;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x7C7B;&#x5219;&#x8FD4;&#x56DE;true</td>
+<td>如果是一个数组类则返回true</td>
 </tr>
 <tr>
 <td>isEnum()</td>
-<td>&#x5982;&#x679C;&#x662F;&#x679A;&#x4E3E;&#x7C7B;&#x5219;&#x8FD4;&#x56DE;true</td>
+<td>如果是枚举类则返回true</td>
 </tr>
 <tr>
 <td>isInstance(Object obj)</td>
-<td>&#x5982;&#x679C;obj&#x662F;&#x8BE5;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#x5219;&#x8FD4;&#x56DE;true</td>
+<td>如果obj是该类的实例则返回true</td>
 </tr>
 <tr>
 <td>isInterface()</td>
-<td>&#x5982;&#x679C;&#x662F;&#x63A5;&#x53E3;&#x7C7B;&#x5219;&#x8FD4;&#x56DE;true</td>
+<td>如果是接口类则返回true</td>
 </tr>
 <tr>
 <td>isLocalClass()</td>
-<td>&#x5982;&#x679C;&#x662F;&#x5C40;&#x90E8;&#x7C7B;&#x5219;&#x8FD4;&#x56DE;true</td>
+<td>如果是局部类则返回true</td>
 </tr>
 <tr>
 <td>isMemberClass()</td>
-<td>&#x5982;&#x679C;&#x662F;&#x5185;&#x90E8;&#x7C7B;&#x5219;&#x8FD4;&#x56DE;true</td>
+<td>如果是内部类则返回true</td>
 </tr>
 </tbody></table>
-<h4 id="Field&#x7C7B;"><a href="#Field&#x7C7B;" class="headerlink" title="Field&#x7C7B;"></a>Field&#x7C7B;</h4><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/java/lang/reflect/Field">Field</a>&#x4EE3;&#x8868;&#x7C7B;&#x7684;&#x6210;&#x5458;&#x53D8;&#x91CF;&#xFF08;&#x6210;&#x5458;&#x53D8;&#x91CF;&#x4E5F;&#x79F0;&#x4E3A;&#x7C7B;&#x7684;&#x5C5E;&#x6027;&#xFF09;&#x3002;</p>
+<h4 id="Field类"><a href="#Field类" class="headerlink" title="Field类"></a>Field类</h4><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/java/lang/reflect/Field">Field</a>代表类的成员变量（成员变量也称为类的属性）。</p>
 <table>
 <thead>
 <tr>
-<th>&#x65B9;&#x6CD5;</th>
-<th>&#x7528;&#x9014;</th>
+<th>方法</th>
+<th>用途</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>equals(Object obj)</td>
-<td>&#x5C5E;&#x6027;&#x4E0E;obj&#x76F8;&#x7B49;&#x5219;&#x8FD4;&#x56DE;true</td>
+<td>属性与obj相等则返回true</td>
 </tr>
 <tr>
 <td>get(Object obj)</td>
-<td>&#x83B7;&#x5F97;obj&#x4E2D;&#x5BF9;&#x5E94;&#x7684;&#x5C5E;&#x6027;&#x503C;</td>
+<td>获得obj中对应的属性值</td>
 </tr>
 <tr>
 <td>set(Object obj, Object value)</td>
-<td>&#x8BBE;&#x7F6E;obj&#x4E2D;&#x5BF9;&#x5E94;&#x5C5E;&#x6027;&#x503C;</td>
+<td>设置obj中对应属性值</td>
 </tr>
 </tbody></table>
-<h4 id="Method&#x7C7B;"><a href="#Method&#x7C7B;" class="headerlink" title="Method&#x7C7B;"></a>Method&#x7C7B;</h4><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/java/lang/reflect/Method">Method</a>&#x4EE3;&#x8868;&#x7C7B;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<h4 id="Method类"><a href="#Method类" class="headerlink" title="Method类"></a>Method类</h4><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/java/lang/reflect/Method">Method</a>代表类的方法。</p>
 <table>
 <thead>
 <tr>
-<th>&#x65B9;&#x6CD5;</th>
-<th>&#x7528;&#x9014;</th>
+<th>方法</th>
+<th>用途</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>invoke(Object obj, Object&#x2026; args)</td>
-<td>&#x4F20;&#x9012;object&#x5BF9;&#x8C61;&#x53CA;&#x53C2;&#x6570;&#x8C03;&#x7528;&#x8BE5;&#x5BF9;&#x8C61;&#x5BF9;&#x5E94;&#x7684;&#x65B9;&#x6CD5;</td>
+<td>invoke(Object obj, Object… args)</td>
+<td>传递object对象及参数调用该对象对应的方法</td>
 </tr>
 </tbody></table>
-<h4 id="Constructor&#x7C7B;"><a href="#Constructor&#x7C7B;" class="headerlink" title="Constructor&#x7C7B;"></a>Constructor&#x7C7B;</h4><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/java/lang/reflect/Constructor">Constructor</a>&#x4EE3;&#x8868;&#x7C7B;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x3002;</p>
+<h4 id="Constructor类"><a href="#Constructor类" class="headerlink" title="Constructor类"></a>Constructor类</h4><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/java/lang/reflect/Constructor">Constructor</a>代表类的构造方法。</p>
 <table>
 <thead>
 <tr>
-<th>&#x65B9;&#x6CD5;</th>
-<th>&#x7528;&#x9014;</th>
+<th>方法</th>
+<th>用途</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>newInstance(Object&#x2026; initargs)</td>
-<td>&#x6839;&#x636E;&#x4F20;&#x9012;&#x7684;&#x53C2;&#x6570;&#x521B;&#x5EFA;&#x7C7B;&#x7684;&#x5BF9;&#x8C61;</td>
+<td>newInstance(Object… initargs)</td>
+<td>根据传递的参数创建类的对象</td>
 </tr>
 </tbody></table>
-<p>&#x6D4B;&#x8BD5;</p>
-<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Runtime.class.getName());</span><br><span class="line">System.out.println(Runtime.class.getClasses());</span><br><span class="line">System.out.println(Runtime.class.getPackage());</span><br></pre></td></tr></tbody></table></figure>
-<p>&#x8F93;&#x51FA;</p>
-<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Runtime</span><br><span class="line">[Ljava.lang.Class;@7ef20235</span><br><span class="line">package java.lang</span><br></pre></td></tr></tbody></table></figure></body></html>
+<p>测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Runtime.class.getName());</span><br><span class="line">System.out.println(Runtime.class.getClasses());</span><br><span class="line">System.out.println(Runtime.class.getPackage());</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Runtime</span><br><span class="line">[Ljava.lang.Class;@7ef20235</span><br><span class="line">package java.lang</span><br></pre></td></tr></table></figure>
     
     </div>
     
@@ -807,5 +809,5 @@
 <script src="/js/insight.js"></script>
 
     
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</body>
 </html>

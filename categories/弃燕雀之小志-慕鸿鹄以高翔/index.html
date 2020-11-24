@@ -30,7 +30,7 @@
 
 
 
-<link rel="icon" href="/favicon.png">
+<link rel="icon" href="/images/logo.png">
 
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
@@ -136,7 +136,7 @@
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <time datetime="2019-08-10T11:19:41.000Z" itemprop="datePublished">10 Aug 2019</time>
+                <time datetime="2019-08-10T11:19:41.000Z" itemprop="datePublished">Aug 10 2019</time>
             
         </span>
         
@@ -155,8 +155,8 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <html><head></head><body><h4 id="&#x4E00;&#x3001;&#x7EA6;&#x675F;&#x653B;&#x51FB;&#xFF0C;&#x5565;&#x73A9;&#x610F;&#xFF1F;"><a href="#&#x4E00;&#x3001;&#x7EA6;&#x675F;&#x653B;&#x51FB;&#xFF0C;&#x5565;&#x73A9;&#x610F;&#xFF1F;" class="headerlink" title="&#x4E00;&#x3001;&#x7EA6;&#x675F;&#x653B;&#x51FB;&#xFF0C;&#x5565;&#x73A9;&#x610F;&#xFF1F;"></a>&#x4E00;&#x3001;&#x7EA6;&#x675F;&#x653B;&#x51FB;&#xFF0C;&#x5565;&#x73A9;&#x610F;&#xFF1F;</h4><p>&#x5047;&#x5982;&#x6709;&#x8FD9;&#x4E48;&#x4E00;&#x4E2A;&#x767B;&#x5F55;&#x6CE8;&#x518C;&#x4E1A;&#x52A1;<br>&#x6CE8;&#x518C;</p>
-<figure class="highlight php hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?php</span></span><br><span class="line"><span class="hljs-comment">// Checking whether a user with the same username exists</span></span><br><span class="line"><span class="hljs-variable">$username</span> = mysql_real_escape_string(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&apos;username&apos;</span>]);</span><br><span class="line"><span class="hljs-variable">$password</span> = mysql_real_escape_string(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&apos;password&apos;</span>]);</span><br><span class="line"><span class="hljs-variable">$query</span> = <span class="hljs-string">&quot;SELECT * FROM users  WHERE username=&apos;<span class="hljs-subst">$username</span>&apos;&quot;</span>;</span><br><span class="line"><span class="hljs-variable">$res</span> = mysql_query(<span class="hljs-variable">$query</span>, <span class="hljs-variable">$database</span>);</span><br><span class="line"><span class="hljs-keyword">if</span>(<span class="hljs-variable">$res</span>) {</span><br><span class="line">  <span class="hljs-keyword">if</span>(mysql_num_rows(<span class="hljs-variable">$res</span>) &gt; <span class="hljs-number">0</span>) {</span><br><span class="line">    <span class="hljs-comment">// User exists, exit gracefully</span></span><br><span class="line">  }</span><br><span class="line">  <span class="hljs-keyword">else</span> {</span><br><span class="line">    <span class="hljs-comment">// If not, only then insert a new entry</span></span><br><span class="line">    <span class="hljs-variable">$query</span> = <span class="hljs-string">&quot;INSERT INTO users(username, password) VALUES (&apos;<span class="hljs-subst">$username</span>&apos;,&apos;<span class="hljs-subst">$password</span>&apos;)&quot;</span>;</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></body></html>
+        <h4 id="一、约束攻击，啥玩意？"><a href="#一、约束攻击，啥玩意？" class="headerlink" title="一、约束攻击，啥玩意？"></a>一、约束攻击，啥玩意？</h4><p>假如有这么一个登录注册业务<br>注册</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// Checking whether a user with the same username exists</span></span><br><span class="line"><span class="variable">$username</span> = mysql_real_escape_string(<span class="variable">$_GET</span>[<span class="string">&#x27;username&#x27;</span>]);</span><br><span class="line"><span class="variable">$password</span> = mysql_real_escape_string(<span class="variable">$_GET</span>[<span class="string">&#x27;password&#x27;</span>]);</span><br><span class="line"><span class="variable">$query</span> = <span class="string">&quot;SELECT * FROM users  WHERE username=&#x27;<span class="subst">$username</span>&#x27;&quot;</span>;</span><br><span class="line"><span class="variable">$res</span> = mysql_query(<span class="variable">$query</span>, <span class="variable">$database</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$res</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span>(mysql_num_rows(<span class="variable">$res</span>) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// User exists, exit gracefully</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// If not, only then insert a new entry</span></span><br><span class="line">    <span class="variable">$query</span> = <span class="string">&quot;INSERT INTO users(username, password) VALUES (&#x27;<span class="subst">$username</span>&#x27;,&#x27;<span class="subst">$password</span>&#x27;)&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         <p class="article-more-link">
             <a href="/2019/08/10/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84%E7%99%BB%E5%BD%95%E9%A2%98/#more">Read More</a>
         </p>
@@ -379,5 +379,5 @@
 <script src="/js/insight.js"></script>
 
     
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</body>
 </html>
