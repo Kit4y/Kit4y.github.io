@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/friends">Friends</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2019/11/19/%E5%93%88%E5%B8%8C%E9%95%BF%E5%BA%A6%E6%89%A9%E5%B1%95%E6%94%BB%E5%87%BB%E4%BB%A5%E5%8F%8AHashPump%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E5%92%8C%E4%B8%A4%E9%81%93%E9%A2%98%E7%9B%AE/" itemprop="url">哈希长度扩展攻击以及HashPump安装使用和两道题目</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-11-19T06:25:51.000Z" itemprop="datePublished">19 Nov 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/CTF/">CTF</a><span>></span><a class="article-category-link" href="/categories/CTF/Crypto/">Crypto</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            14 minutes read (About 2125 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="&#x80FD;&#x505A;&#x4EC0;&#x4E48;"><a href="#&#x80FD;&#x505A;&#x4EC0;&#x4E48;" class="headerlink" title="&#x80FD;&#x505A;&#x4EC0;&#x4E48;"></a>&#x80FD;&#x505A;&#x4EC0;&#x4E48;</h3><p>&#x5982;&#x679C;salt&#x7684;&#x503C;&#x4F60;&#x4E0D;&#x77E5;&#x9053;&#xFF0C;&#x4F46;&#x662F;&#x4F60;&#x77E5;&#x9053;&#x957F;&#x5EA6;&#xFF0C;&#x53C8;&#x77E5;&#x9053;sha1(salt+&#x201C;&#x4E00;&#x7EC4;&#x6B63;&#x786E;&#x6570;&#x636E;&#x201D;)&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8BA9;sha1(salt+&#x201C;&#x586B;&#x5145;&#x6570;&#x636E;&#x201D;+&#x201C;&#x4EFB;&#x610F;&#x53EF;&#x63A7;&#x6570;&#x636E;&#x201D;)&#x7B49;&#x4E8E;&#x6211;&#x4EEC;&#x7684;sha1(salt+&#x201C;&#x4E00;&#x7EC4;&#x6B63;&#x786E;&#x6570;&#x636E;&#x201D;).&#x8FD9;&#x91CC;&#x7684;salt+&#x201C;&#x586B;&#x5145;&#x6570;&#x636E;&#x201D;&#x5C31;&#x662F;&#x5BF9;salt&#x8FDB;&#x884C;sha1&#x65F6;&#x6240;&#x8865;&#x5168;&#x7684;&#x6570;&#x636E;+&#x6700;&#x540E;8&#x4F4D;&#x7684;&#x957F;&#x5EA6;&#x63CF;&#x8FF0;&#x7B26;&#x3002;&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;salt+&#x201D;&#x586B;&#x5145;&#x6570;&#x636E;&#x201D;&#x7684;&#x957F;&#x5EA6;&#x5C31;&#x662F;64&#x5B57;&#x8282;&#xFF0C;&#x6B63;&#x597D;&#x662F;&#x4E00;&#x4E2A;&#x5206;&#x7EC4;&#x3002;&#x5982;&#x679C;salt&#x7684;&#x957F;&#x5EA6;&#x5C31;&#x5927;&#x4E8E;&#x4E86;56&#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x90A3;&#x4E48;&#x52A0;&#x5165;&#x586B;&#x5145;&#x6570;&#x636E;&#x540E;&#x7684;&#x957F;&#x5EA6;&#x5E94;&#x8BE5;&#x662F;N&#x4E2A;64&#x5B57;&#x8282;&#xFF0C;&#x7B49;&#x4E8E;N&#x4E2A;&#x5206;&#x7EC4;&#x3002;<br>&#x4E3A;&#x4EC0;&#x4E48;&#xFF1F;&#x4F60;&#x53EF;&#x4EE5;&#x60F3;&#x8C61;&#xFF0C;sha1&#x7A0B;&#x5E8F;&#x518D;&#x5BF9;&#xFF08;salt+&#x201C;&#x586B;&#x5145;&#x6570;&#x636E;&#x201D;+&#x201C;&#x4EFB;&#x610F;&#x53EF;&#x63A7;&#x6570;&#x636E;&#x201D;&#xFF09;&#x8FDB;&#x884C;hash&#x65F6;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x7B2C;&#x4E8C;&#x8F6E;&#x53CA;&#x7B2C;&#x4E8C;&#x8F6E;&#x4EE5;&#x540E;&#x7684;&#x8FD0;&#x7B97;&#x3002;&#x56E0;&#x4E3A;&#x7B2C;&#x4E00;&#x8F6E;&#x8FD0;&#x7B97;&#x540E;&#x7684;registers&#x503C;&#x5C31;&#x662F;sha1(salt)&#x7684;&#x503C;&#xFF0C;&#x8BE5;&#x503C;&#x4F60;&#x5DF2;&#x7ECF;&#x77E5;&#x9053;&#x4E86;&#x3002;</p></body></html>
+        <p class="article-more-link">
+            <a href="/2019/11/19/%E5%93%88%E5%B8%8C%E9%95%BF%E5%BA%A6%E6%89%A9%E5%B1%95%E6%94%BB%E5%87%BB%E4%BB%A5%E5%8F%8AHashPump%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E5%92%8C%E4%B8%A4%E9%81%93%E9%A2%98%E7%9B%AE/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2019/11/19/md5%E7%AE%97%E6%B3%95%E7%9A%84%E5%AD%A6%E4%B9%A0%E5%92%8Cc-python3%E7%9A%84%E5%AE%9E%E7%8E%B0/" itemprop="url"></a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-11-19T06:23:19.000Z" itemprop="datePublished">19 Nov 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/CTF/">CTF</a><span>></span><a class="article-category-link" href="/categories/CTF/Crypto/">Crypto</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            32 minutes read (About 4831 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="MD5&#x7B97;&#x6CD5;&#x5206;&#x6790;MD5&#x7B97;&#x6CD5;&#x5E95;&#x5C42;&#x539F;&#x7406;&#xFF1A;"><a href="#MD5&#x7B97;&#x6CD5;&#x5206;&#x6790;MD5&#x7B97;&#x6CD5;&#x5E95;&#x5C42;&#x539F;&#x7406;&#xFF1A;" class="headerlink" title="MD5&#x7B97;&#x6CD5;&#x5206;&#x6790;MD5&#x7B97;&#x6CD5;&#x5E95;&#x5C42;&#x539F;&#x7406;&#xFF1A;"></a>MD5&#x7B97;&#x6CD5;&#x5206;&#x6790;MD5&#x7B97;&#x6CD5;&#x5E95;&#x5C42;&#x539F;&#x7406;&#xFF1A;</h3><p>&#x7B80;&#x5355;&#x6982;&#x62EC;&#x8D77;&#x6765;&#xFF0C;MD5&#x7B97;&#x6CD5;&#x7684;&#x8FC7;&#x7A0B;&#x5206;&#x4E3A;&#x56DB;&#x6B65;&#xFF1A;&#x5904;&#x7406;&#x539F;&#x6587;&#xFF0C;&#x8BBE;&#x7F6E;&#x521D;&#x59CB;&#x503C;&#xFF0C;&#x5FAA;&#x73AF;&#x52A0;&#x5DE5;&#xFF0C;&#x62FC;&#x63A5;&#x7ED3;&#x679C;&#x3002;</p></body></html>
+        <p class="article-more-link">
+            <a href="/2019/11/19/md5%E7%AE%97%E6%B3%95%E7%9A%84%E5%AD%A6%E4%B9%A0%E5%92%8Cc-python3%E7%9A%84%E5%AE%9E%E7%8E%B0/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2019/11/19/XSS%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB%E5%89%96%E6%9E%90%E4%B8%8E%E9%98%B2%E5%BE%A1/" itemprop="url">XSS跨站脚本攻击剖析与防御</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-11-19T06:22:15.000Z" itemprop="datePublished">19 Nov 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Web/">Web</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            2 minutes read (About 280 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h4 id="cookie&#x6B3A;&#x9A97;&#x653B;&#x51FB;"><a href="#cookie&#x6B3A;&#x9A97;&#x653B;&#x51FB;" class="headerlink" title="cookie&#x6B3A;&#x9A97;&#x653B;&#x51FB;"></a>cookie&#x6B3A;&#x9A97;&#x653B;&#x51FB;</h4><p>index.php</p></body></html>
+        <p class="article-more-link">
+            <a href="/2019/11/19/XSS%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB%E5%89%96%E6%9E%90%E4%B8%8E%E9%98%B2%E5%BE%A1/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2019/10/03/PHP%E6%96%87%E6%A1%A3%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/" itemprop="url">PHP文档的一些笔记</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-10-03T13:35:36.000Z" itemprop="datePublished">3 Oct 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Web/">Web</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            18 minutes read (About 2769 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h4 id="1-php&#x77ED;&#x6807;&#x8BB0;"><a href="#1-php&#x77ED;&#x6807;&#x8BB0;" class="headerlink" title="1.php&#x77ED;&#x6807;&#x8BB0;"></a>1.php&#x77ED;&#x6807;&#x8BB0;</h4><p>PHP &#x4E5F;&#x5141;&#x8BB8;&#x4F7F;&#x7528;&#x77ED;&#x6807;&#x8BB0; <!--? 和 ?-->&#xFF0C;&#x4F46;&#x4E0D;&#x9F13;&#x52B1;&#x4F7F;&#x7528;&#x3002;&#x53EA;&#x6709;&#x901A;&#x8FC7;&#x6FC0;&#x6D3B; php.ini &#x4E2D;&#x7684; short_open_tag &#x914D;&#x7F6E;&#x6307;&#x4EE4;&#x6216;&#x8005;&#x5728;&#x7F16;&#x8BD1; PHP &#x65F6;&#x4F7F;&#x7528;&#x4E86;&#x914D;&#x7F6E;&#x9009;&#x9879; &#x2013;enable-short-tags &#x65F6;&#x624D;&#x80FD;&#x4F7F;&#x7528;&#x77ED;&#x6807;&#x8BB0;&#x3002;<br>&#x77ED;&#x6807;&#x8BB0;&#x65B9;&#x5F0F; &#x5F00;&#x59CB;<code>&lt;? </code> &#x548C; &#x7ED3;&#x675F;<code>?&gt;</code>  (&#x4E0D;&#x63A8;&#x8350;&#x4F7F;&#x7528;)  &#x9700;&#x8981;&#x5728;php.ini&#x6587;&#x4EF6;&#x4E2D;&#x5F00;&#x542F;<br>SCRIPT&#x98CE;&#x683C;  &#x5F00;&#x59CB;<code>&lt;script language=&quot;php&quot;&gt;  &#x7ED3;&#x675F; &lt;/script&gt; </code> (&#x4E0D;&#x63A8;&#x8350;&#x4F7F;&#x7528;) &#x4E0D;&#x9700;&#x8981;&#x5F00;&#x542F; &#x53EF;&#x76F4;&#x63A5;&#x4F7F;&#x7528;</p></body></html>
+        <p class="article-more-link">
+            <a href="/2019/10/03/PHP%E6%96%87%E6%A1%A3%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2019/09/21/Python%E6%8B%BC%E5%9B%BE/" itemprop="url">Python拼图</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-09-20T16:07:28.000Z" itemprop="datePublished">21 Sep 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Misc/">Misc</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            4 minutes read (About 572 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="&#x4E4B;&#x524D;&#x4E00;&#x76F4;&#x4F1A;&#x78B0;&#x5230;&#x62FC;&#x4E8C;&#x7EF4;&#x7801;&#x4EC0;&#x4E48;&#x7684;&#xFF0C;&#x603B;&#x662F;&#x6D6A;&#x8D39;&#x5F88;&#x591A;&#x65F6;&#x95F4;&#x6700;&#x8FD1;&#x770B;&#x5230;&#x4E00;&#x4E2A;&#x5927;&#x5E08;&#x5085;&#x7684;&#x4E00;&#x4E2A;&#x60F3;&#x6CD5;&#xFF0C;&#x901A;&#x8FC7;&#x56FE;&#x7247;&#x7684;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#x6765;&#x62FC;&#x56FE;Orz"><a href="#&#x4E4B;&#x524D;&#x4E00;&#x76F4;&#x4F1A;&#x78B0;&#x5230;&#x62FC;&#x4E8C;&#x7EF4;&#x7801;&#x4EC0;&#x4E48;&#x7684;&#xFF0C;&#x603B;&#x662F;&#x6D6A;&#x8D39;&#x5F88;&#x591A;&#x65F6;&#x95F4;&#x6700;&#x8FD1;&#x770B;&#x5230;&#x4E00;&#x4E2A;&#x5927;&#x5E08;&#x5085;&#x7684;&#x4E00;&#x4E2A;&#x60F3;&#x6CD5;&#xFF0C;&#x901A;&#x8FC7;&#x56FE;&#x7247;&#x7684;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#x6765;&#x62FC;&#x56FE;Orz" class="headerlink" title="&#x4E4B;&#x524D;&#x4E00;&#x76F4;&#x4F1A;&#x78B0;&#x5230;&#x62FC;&#x4E8C;&#x7EF4;&#x7801;&#x4EC0;&#x4E48;&#x7684;&#xFF0C;&#x603B;&#x662F;&#x6D6A;&#x8D39;&#x5F88;&#x591A;&#x65F6;&#x95F4;&#x6700;&#x8FD1;&#x770B;&#x5230;&#x4E00;&#x4E2A;&#x5927;&#x5E08;&#x5085;&#x7684;&#x4E00;&#x4E2A;&#x60F3;&#x6CD5;&#xFF0C;&#x901A;&#x8FC7;&#x56FE;&#x7247;&#x7684;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#x6765;&#x62FC;&#x56FE;Orz"></a>&#x4E4B;&#x524D;&#x4E00;&#x76F4;&#x4F1A;&#x78B0;&#x5230;&#x62FC;&#x4E8C;&#x7EF4;&#x7801;&#x4EC0;&#x4E48;&#x7684;&#xFF0C;&#x603B;&#x662F;&#x6D6A;&#x8D39;&#x5F88;&#x591A;&#x65F6;&#x95F4;&#x6700;&#x8FD1;&#x770B;&#x5230;&#x4E00;&#x4E2A;&#x5927;&#x5E08;&#x5085;&#x7684;&#x4E00;&#x4E2A;&#x60F3;&#x6CD5;&#xFF0C;&#x901A;&#x8FC7;&#x56FE;&#x7247;&#x7684;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#x6765;&#x62FC;&#x56FE;Orz</h3><p>&#x4E3B;&#x8981;&#x662F;os&#x6A21;&#x5757;&#x5BF9;&#x6587;&#x4EF6;&#x7684;&#x64CD;&#x4F5C;</p></body></html>
+        <p class="article-more-link">
+            <a href="/2019/09/21/Python%E6%8B%BC%E5%9B%BE/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2019/09/18/%E4%BB%8Eret2libc%E4%B8%AD%E5%AD%A6%E4%B9%A0GOT%E8%A1%A8%E5%92%8CPLT%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%8A%A8%E6%80%81%E8%AE%A1%E7%AE%97%E5%81%8F%E7%A7%BB/" itemprop="url">从ret2libc中学习GOT表和PLT表以及动态计算偏移</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-09-17T19:11:38.000Z" itemprop="datePublished">18 Sep 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Pwn/">Pwn</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            16 minutes read (About 2415 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="&#x6240;&#x8C13;&#x6559;&#x6750;-&#x5C31;&#x662F;&#x628A;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x6613;&#x61C2;&#x7684;&#x540D;&#x8BCD;-&#x6269;&#x5199;&#x6210;&#x4E00;&#x5806;&#x8C01;&#x4E5F;&#x770B;&#x4E0D;&#x61C2;&#x7684;&#x53E5;&#x5B50;&#xFF08;&#x5047;&#x7684;"><a href="#&#x6240;&#x8C13;&#x6559;&#x6750;-&#x5C31;&#x662F;&#x628A;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x6613;&#x61C2;&#x7684;&#x540D;&#x8BCD;-&#x6269;&#x5199;&#x6210;&#x4E00;&#x5806;&#x8C01;&#x4E5F;&#x770B;&#x4E0D;&#x61C2;&#x7684;&#x53E5;&#x5B50;&#xFF08;&#x5047;&#x7684;" class="headerlink" title="&#x6240;&#x8C13;&#x6559;&#x6750;:&#x5C31;&#x662F;&#x628A;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x6613;&#x61C2;&#x7684;&#x540D;&#x8BCD;,&#x6269;&#x5199;&#x6210;&#x4E00;&#x5806;&#x8C01;&#x4E5F;&#x770B;&#x4E0D;&#x61C2;&#x7684;&#x53E5;&#x5B50;&#xFF08;&#x5047;&#x7684;"></a>&#x6240;&#x8C13;&#x6559;&#x6750;:&#x5C31;&#x662F;&#x628A;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x6613;&#x61C2;&#x7684;&#x540D;&#x8BCD;,&#x6269;&#x5199;&#x6210;&#x4E00;&#x5806;&#x8C01;&#x4E5F;&#x770B;&#x4E0D;&#x61C2;&#x7684;&#x53E5;&#x5B50;&#xFF08;&#x5047;&#x7684;</h3><h4 id="1-&#x91CD;&#x5B9A;&#x4F4D;"><a href="#1-&#x91CD;&#x5B9A;&#x4F4D;" class="headerlink" title="1.&#x91CD;&#x5B9A;&#x4F4D;"></a>1.&#x91CD;&#x5B9A;&#x4F4D;</h4><p>&#x786E;&#x5B9A;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x65F6;&#x5730;&#x5740;&#x7684;&#x8FC7;&#x7A0B;&#x5C31;&#x662F;&#x8FD9;&#x91CC;&#x91CD;&#x5B9A;&#x4F4D;(Relocation)&#x3002;</p>
+<h4 id="2-&#x94FE;&#x63A5;&#x65F6;&#x91CD;&#x5B9A;&#x4F4D;"><a href="#2-&#x94FE;&#x63A5;&#x65F6;&#x91CD;&#x5B9A;&#x4F4D;" class="headerlink" title="2.&#x94FE;&#x63A5;&#x65F6;&#x91CD;&#x5B9A;&#x4F4D;"></a>2.&#x94FE;&#x63A5;&#x65F6;&#x91CD;&#x5B9A;&#x4F4D;</h4><p>&#x94FE;&#x63A5;&#x9636;&#x6BB5;&#x662F;&#x5C06;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x4E2D;&#x95F4;&#x6587;&#x4EF6;(.o&#x6587;&#x4EF6;)&#x901A;&#x8FC7;&#x94FE;&#x63A5;&#x5668;&#x5C06;&#x5B83;&#x4EEC;&#x94FE;&#x63A5;&#x6210;&#x4E00;&#x4E2A;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#xFF0C;&#x4E3B;&#x8981;&#x505A;&#x7684;&#x4E8B;&#x60C5;&#x6709;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x5BF9;&#x5404;&#x4E2A;&#x4E2D;&#x95F4;&#x6587;&#x4EF6;&#x7684;&#x540C;&#x540D;section&#x8FDB;&#x884C;&#x5408;&#x5E76;</span><br><span class="line">&#x5BF9;&#x4EE3;&#x7801;&#x6BB5;&#xFF0C;&#x6570;&#x636E;&#x6BB5;&#x7B49;&#x8FDB;&#x884C;&#x5730;&#x5740;&#x5206;&#x914D;</span><br><span class="line">&#x8FDB;&#x884C;&#x94FE;&#x63A5;&#x65F6;&#x91CD;&#x5B9A;&#x4F4D;</span><br></pre></td></tr></tbody></table></figure></body></html>
+        <p class="article-more-link">
+            <a href="/2019/09/18/%E4%BB%8Eret2libc%E4%B8%AD%E5%AD%A6%E4%B9%A0GOT%E8%A1%A8%E5%92%8CPLT%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%8A%A8%E6%80%81%E8%AE%A1%E7%AE%97%E5%81%8F%E7%A7%BB/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2019/09/14/pwn%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/" itemprop="url">pwn入门基础</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-09-14T12:13:47.000Z" itemprop="datePublished">14 Sep 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Pwn/">Pwn</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            11 minutes read (About 1724 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="&#x4E00;&#x3001;ROP&#x601D;&#x60F3;"><a href="#&#x4E00;&#x3001;ROP&#x601D;&#x60F3;" class="headerlink" title="&#x4E00;&#x3001;ROP&#x601D;&#x60F3;"></a>&#x4E00;&#x3001;ROP&#x601D;&#x60F3;</h3><p>&#x5728;&#x6808;&#x7F13;&#x51B2;&#x533A;&#x6EA2;&#x51FA;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x5229;&#x7528;&#x7A0B;&#x5E8F;&#x4E2D;&#x5DF2;&#x6709;&#x7684;&#x5C0F;&#x7247;&#x6BB5;( gadgets )&#x6765;&#x6539;&#x53D8;&#x67D0;&#x4E9B;&#x5BC4;&#x5B58;&#x5668;&#x6216;&#x8005;&#x53D8;&#x91CF;&#x7684;&#x503C;&#xFF0C;&#x4ECE;&#x800C;&#x63A7;&#x5236;&#x7A0B;&#x5E8F;&#x7684;&#x6267;&#x884C;&#x6D41;&#x7A0B;&#xFF0C;&#x6240;&#x8C13;gadgets &#x5C31;&#x662F;&#x4EE5; ret &#x7ED3;&#x5C3E;&#x7684;&#x6307;&#x4EE4;&#x5E8F;&#x5217;&#xFF0C;&#x901A;&#x8FC7;&#x8FD9;&#x4E9B;&#x6307;&#x4EE4;&#x5E8F;&#x5217;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x67D0;&#x4E9B;&#x5730;&#x5740;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x65B9;&#x4FBF;&#x63A7;&#x5236;&#x7A0B;&#x5E8F;&#x7684;&#x6267;&#x884C;&#x6D41;&#x7A0B;<br>&#x4E4B;&#x6240;&#x4EE5;&#x79F0;&#x4E4B;&#x4E3A; ROP&#xFF0C;&#x662F;&#x56E0;&#x4E3A;&#x6838;&#x5FC3;&#x5728;&#x4E8E;&#x5229;&#x7528;&#x4E86;&#x6307;&#x4EE4;&#x96C6;&#x4E2D;&#x7684; ret &#x6307;&#x4EE4;&#xFF0C;&#x6539;&#x53D8;&#x4E86;&#x6307;&#x4EE4;&#x6D41;&#x7684;&#x6267;&#x884C;&#x987A;&#x5E8F;&#x3002;ROP &#x653B;&#x51FB;&#x4E00;&#x822C;&#x5F97;&#x6EE1;&#x8DB3;&#x5982;&#x4E0B;&#x6761;&#x4EF6;</p>
+<ol>
+<li>&#x7A0B;&#x5E8F;&#x5B58;&#x5728;&#x6EA2;&#x51FA;&#xFF0C;&#x5E76;&#x4E14;&#x53EF;&#x4EE5;&#x63A7;&#x5236;&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x3002;</li>
+<li>&#x53EF;&#x4EE5;&#x627E;&#x5230;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#x7684; gadgets &#x4EE5;&#x53CA;&#x76F8;&#x5E94; gadgets &#x7684;&#x5730;&#x5740;&#x3002;</li>
+</ol></body></html>
+        <p class="article-more-link">
+            <a href="/2019/09/14/pwn%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2019/09/01/Upload-labs/" itemprop="url">Upload-labs</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-09-01T11:42:34.000Z" itemprop="datePublished">1 Sep 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Web/">Web</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            44 minutes read (About 6631 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="&#x4E00;&#x3001;&#x7B80;&#x5355;&#x4E0A;&#x4F20;&#x7ED5;&#x8FC7;&#x59FF;&#x52BF;"><a href="#&#x4E00;&#x3001;&#x7B80;&#x5355;&#x4E0A;&#x4F20;&#x7ED5;&#x8FC7;&#x59FF;&#x52BF;" class="headerlink" title="&#x4E00;&#x3001;&#x7B80;&#x5355;&#x4E0A;&#x4F20;&#x7ED5;&#x8FC7;&#x59FF;&#x52BF;"></a>&#x4E00;&#x3001;&#x7B80;&#x5355;&#x4E0A;&#x4F20;&#x7ED5;&#x8FC7;&#x59FF;&#x52BF;</h3><h5 id="1-1&#x3001;&#x524D;&#x7AEF;&#x68C0;&#x67E5;&#x6269;&#x5C55;&#x540D;"><a href="#1-1&#x3001;&#x524D;&#x7AEF;&#x68C0;&#x67E5;&#x6269;&#x5C55;&#x540D;" class="headerlink" title="1.1&#x3001;&#x524D;&#x7AEF;&#x68C0;&#x67E5;&#x6269;&#x5C55;&#x540D;"></a>1.1&#x3001;&#x524D;&#x7AEF;&#x68C0;&#x67E5;&#x6269;&#x5C55;&#x540D;</h5><p>&#x6293;&#x5305;&#x7ED5;&#x8FC7;&#x5373;&#x53EF;&#x3002;</p>
+<h5 id="1-2&#x3001;Content-Type-&#x68C0;&#x6D4B;&#x6587;&#x4EF6;&#x7C7B;&#x578B;"><a href="#1-2&#x3001;Content-Type-&#x68C0;&#x6D4B;&#x6587;&#x4EF6;&#x7C7B;&#x578B;" class="headerlink" title="1.2&#x3001;Content-Type &#x68C0;&#x6D4B;&#x6587;&#x4EF6;&#x7C7B;&#x578B;"></a>1.2&#x3001;Content-Type &#x68C0;&#x6D4B;&#x6587;&#x4EF6;&#x7C7B;&#x578B;</h5></body></html>
+        <p class="article-more-link">
+            <a href="/2019/09/01/Upload-labs/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2019/09/01/XXE%E7%AC%94%E8%AE%B0/" itemprop="url">XXE笔记</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-08-31T23:05:07.000Z" itemprop="datePublished">1 Sep 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Web/">Web</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            3 minutes read (About 468 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="XML&#x7684;&#x5C0F;&#x77E5;&#x8BC6;"><a href="#XML&#x7684;&#x5C0F;&#x77E5;&#x8BC6;" class="headerlink" title="XML&#x7684;&#x5C0F;&#x77E5;&#x8BC6;"></a>XML&#x7684;&#x5C0F;&#x77E5;&#x8BC6;</h3><p><img src="1.png"></p>
+<h4 id="1&#xFF0C;&#x5143;&#x7D20;"><a href="#1&#xFF0C;&#x5143;&#x7D20;" class="headerlink" title="1&#xFF0C;&#x5143;&#x7D20;"></a>1&#xFF0C;&#x5143;&#x7D20;</h4><p>&#x5143;&#x7D20;&#x662F; XML &#x4EE5;&#x53CA; HTML &#x6587;&#x6863;&#x7684;&#x4E3B;&#x8981;&#x6784;&#x5EFA;&#x6A21;&#x5757;&#xFF0C;&#x5143;&#x7D20;&#x53EF;&#x5305;&#x542B;&#x6587;&#x672C;&#x3001;&#x5176;&#x4ED6;&#x5143;&#x7D20;&#x6216;&#x8005;&#x662F;&#x7A7A;&#x7684;&#x3002;<br>&#x5B9E;&#x4F8B;:</p>
+<figure class="highlight xml hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>body text in between<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">message</span>&gt;</span>some message in between<span class="hljs-tag">&lt;/<span class="hljs-name">message</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure></body></html>
+        <p class="article-more-link">
+            <a href="/2019/09/01/XXE%E7%AC%94%E8%AE%B0/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2019/08/16/S-DES%E8%AF%A6%E8%A7%A3/" itemprop="url">S-DES详解</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-08-16T06:30:07.000Z" itemprop="datePublished">16 Aug 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Crypto/">Crypto</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            10 minutes read (About 1569 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="&#x4E00;&#x3001;S-DES&#x4ECB;&#x7ECD;"><a href="#&#x4E00;&#x3001;S-DES&#x4ECB;&#x7ECD;" class="headerlink" title="&#x4E00;&#x3001;S-DES&#x4ECB;&#x7ECD;"></a>&#x4E00;&#x3001;S-DES&#x4ECB;&#x7ECD;</h3><p>S-DES&#x662F;DES&#x7B97;&#x6CD5;&#x7684;&#x7B80;&#x5316;&#x7248;,&#x5E76;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x7684;&#x4EF7;&#x503C;,&#x53EA;&#x7528;&#x4E8E;&#x6559;&#x5B66;&#x6765;&#x7406;&#x89E3;DES&#x7B97;&#x6CD5;&#x7684;&#x52A0;&#x5BC6;&#x65B9;&#x6CD5;,&#x90A3;&#x4E48;&#x53EF;&#x80FD;&#x5C31;&#x6709;&#x5C0F;&#x670B;&#x53CB;&#x4F1A;&#x95EE;&#x4E86;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x4E0D;&#x662F;&#x76F4;&#x63A5;&#x8BB2;DES&#x5462;,Orz&#x5BF9;&#x4E8E;&#x975E;&#x4FE1;&#x5B89;&#x7684;&#x840C;&#x65B0;&#x6765;&#x8BF4;,DES&#x786E;&#x5B9E;&#x96BE;,&#x6240;&#x4EE5;&#x5148;&#x770B;&#x4E00;&#x4E0B;&#x7B80;&#x6D01;&#x7248;&#x7684;S-DES&#x7684;&#x7B97;&#x6CD5;&#x5148;&#x9884;&#x70ED;&#x9884;&#x70ED;&#x3002;</p>
+<h3 id="&#x4E8C;&#x3001;&#x6574;&#x4F53;&#x52A0;&#x5BC6;&#x6D41;&#x7A0B;"><a href="#&#x4E8C;&#x3001;&#x6574;&#x4F53;&#x52A0;&#x5BC6;&#x6D41;&#x7A0B;" class="headerlink" title="&#x4E8C;&#x3001;&#x6574;&#x4F53;&#x52A0;&#x5BC6;&#x6D41;&#x7A0B;"></a>&#x4E8C;&#x3001;&#x6574;&#x4F53;&#x52A0;&#x5BC6;&#x6D41;&#x7A0B;</h3></body></html>
+        <p class="article-more-link">
+            <a href="/2019/08/16/S-DES%E8%AF%A6%E8%A7%A3/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+    
+        
+<nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">
+    <div class="pagination-previous">
+        <a href="/page/3/">Prev</a>
+    </div>
+    <div class="pagination-next">
+        <a href="/page/5/">Next</a>
+    </div>
+    <ul class="pagination-list is-hidden-mobile">
+        
+        <li><a class="pagination-link" href="/">1</a></li>
+        
+        <li><a class="pagination-link" href="/page/2/">2</a></li>
+        
+        <li><a class="pagination-link" href="/page/3/">3</a></li>
+        
+        <li><a class="pagination-link is-current" href="/page/4/">4</a></li>
+        
+        <li><a class="pagination-link" href="/page/5/">5</a></li>
+        
+        <li><span class="pagination-ellipsis">&hellip;</span></li>
+        
+        <li><a class="pagination-link" href="/page/9/">9</a></li>
+        
+    </ul>
+</nav>
+    
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2020 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-epsilon2_1"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

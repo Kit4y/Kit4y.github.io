@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>Ubuntu16环境配置-换源 - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+
+    <meta name="description" content="&amp;#x4E00;&amp;#x3001;windows1&amp;#x3001;windows&amp;#x73AF;&amp;#x5883;&amp;#x4E0B; pip&amp;#x6362;&amp;#x56FD;&amp;#x5185;&amp;#x955C;&amp;#x50CF;1&amp;#x3001;&amp;#x6253;&amp;#x5F00;user&amp;#x76EE;&amp;#x5F55;&amp;#xFF0C;user&amp;#x76EE;&amp;#x5F55;&amp;#x53EF;&amp;#x4EE5;&amp;#x9">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu16环境配置-换源">
+<meta property="og:url" content="http://example.com/2018/12/20/%E5%90%84%E7%A7%8D%E6%BA%90%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x4E00;&amp;#x3001;windows1&amp;#x3001;windows&amp;#x73AF;&amp;#x5883;&amp;#x4E0B; pip&amp;#x6362;&amp;#x56FD;&amp;#x5185;&amp;#x955C;&amp;#x50CF;1&amp;#x3001;&amp;#x6253;&amp;#x5F00;user&amp;#x76EE;&amp;#x5F55;&amp;#xFF0C;user&amp;#x76EE;&amp;#x5F55;&amp;#x53EF;&amp;#x4EE5;&amp;#x9">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2018/12/20/%E5%90%84%E7%A7%8D%E6%BA%90%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/1.PNG">
+<meta property="og:image" content="http://example.com/2018/12/20/%E5%90%84%E7%A7%8D%E6%BA%90%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/2.PNG">
+<meta property="article:published_time" content="2018-12-19T23:55:48.000Z">
+<meta property="article:modified_time" content="2020-11-24T04:54:08.753Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="换源">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2018/12/20/%E5%90%84%E7%A7%8D%E6%BA%90%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/1.PNG">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/friends">Friends</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Ubuntu16环境配置-换源
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-12-19T23:55:48.000Z" itemprop="datePublished">20 Dec 2018</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/">计算机杂七杂八</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            6 minutes read (About 894 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="&#x4E00;&#x3001;windows"><a href="#&#x4E00;&#x3001;windows" class="headerlink" title="&#x4E00;&#x3001;windows"></a>&#x4E00;&#x3001;windows</h3><h4 id="1&#x3001;windows&#x73AF;&#x5883;&#x4E0B;-pip&#x6362;&#x56FD;&#x5185;&#x955C;&#x50CF;"><a href="#1&#x3001;windows&#x73AF;&#x5883;&#x4E0B;-pip&#x6362;&#x56FD;&#x5185;&#x955C;&#x50CF;" class="headerlink" title="1&#x3001;windows&#x73AF;&#x5883;&#x4E0B; pip&#x6362;&#x56FD;&#x5185;&#x955C;&#x50CF;"></a>1&#x3001;windows&#x73AF;&#x5883;&#x4E0B; pip&#x6362;&#x56FD;&#x5185;&#x955C;&#x50CF;</h4><p>1&#x3001;&#x6253;&#x5F00;user&#x76EE;&#x5F55;&#xFF0C;user&#x76EE;&#x5F55;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;win+R &#x7136;&#x540E;&#x6DFB;&#x52A0; %APPDATA% (&#x4E0D;&#x533A;&#x5206;&#x5927;&#x5C0F;&#x5199;)</p>
+<a id="more"></a>
+
+
+<p><img src="1.PNG"><br>2&#x3001;&#x76F4;&#x63A5;&#x5728;&#x4E2D;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;pip&#x76EE;&#x5F55;&#xFF0C;&#x5982;&#xFF1A;C:\Users\xx\pip&#xFF0C;&#x65B0;&#x5EFA;&#x6587;&#x4EF6;pip.ini&#xFF1A;<br><img src="2.PNG"><br>3&#x3001;&#x62FF;&#x4EFB;&#x610F;&#x6587;&#x672C;&#x7F16;&#x8F91;&#x5668;&#x6253;&#x5F00;&#xFF0C;&#x6DFB;&#x52A0;&#x4EE5;&#x4E0B;&#x5185;&#x5BB9;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">timeout = 6000</span><br><span class="line">index-url = http://pypi.douban.com/simple</span><br><span class="line">trusted-host = pypi.douban.com</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x4FDD;&#x5B58;&#x5373;&#x53EF;</p>
+<h4 id="1-2&#x3001;win10-&#x6362;npm-&#x6E90;"><a href="#1-2&#x3001;win10-&#x6362;npm-&#x6E90;" class="headerlink" title="1.2&#x3001;win10 &#x6362;npm &#x6E90;"></a>1.2&#x3001;win10 &#x6362;npm &#x6E90;</h4><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npm.taobao.org</span><br><span class="line">npm install gulp less --save-dev</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x7136;&#x540E;&#x8F93;&#x5165;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config list</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x51FA;&#x73B0;&#x4E00;&#x6761;<code>registry = &quot;https://registry.npm.taobao.org/&quot;</code>&#x5219;&#x6210;&#x529F;</p>
+<h3 id="&#x4E8C;&#x3001;Ubuntu"><a href="#&#x4E8C;&#x3001;Ubuntu" class="headerlink" title="&#x4E8C;&#x3001;Ubuntu"></a>&#x4E8C;&#x3001;Ubuntu</h3><h4 id="2-1&#x3001;Ubuntu&#x73AF;&#x5883;&#x4E0B;-pip&#x6362;&#x56FD;&#x5185;&#x955C;&#x50CF;"><a href="#2-1&#x3001;Ubuntu&#x73AF;&#x5883;&#x4E0B;-pip&#x6362;&#x56FD;&#x5185;&#x955C;&#x50CF;" class="headerlink" title="2.1&#x3001;Ubuntu&#x73AF;&#x5883;&#x4E0B; pip&#x6362;&#x56FD;&#x5185;&#x955C;&#x50CF;"></a>2.1&#x3001;Ubuntu&#x73AF;&#x5883;&#x4E0B; pip&#x6362;&#x56FD;&#x5185;&#x955C;&#x50CF;</h4><p>1&#x3001;&#x5728;&#x4E3B;&#x76EE;&#x5F55;&#x4E0B;&#x521B;&#x5EFA;.pip&#x6587;&#x4EF6;&#x5939;,&#x7136;&#x540E;&#x5728;&#x8BE5;&#x76EE;&#x5F55;&#x4E0B;&#x521B;&#x5EFA;pip.conf&#x6587;&#x4EF6;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.pip</span><br><span class="line">vim ~/.pip/pip.conf</span><br></pre></td></tr></tbody></table></figure>
+<p>2&#x3001;pip.conf&#x6587;&#x4EF6;&#x7F16;&#x5199;&#x5982;&#x4E0B;&#x5185;&#x5BB9;&#xFF08;&#x66F4;&#x6362;&#x4E3A;&#x6E05;&#x534E;&#x5927;&#x5B66;&#x955C;&#x50CF;&#x6E90;&#xFF09;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = https://pypi.tuna.tsinghua.edu.cn/simple </span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="2-2&#x3001;Ubuntu&#x66F4;&#x6362;&#x7CFB;&#x7EDF;&#x6E90;-apt-get"><a href="#2-2&#x3001;Ubuntu&#x66F4;&#x6362;&#x7CFB;&#x7EDF;&#x6E90;-apt-get" class="headerlink" title="2.2&#x3001;Ubuntu&#x66F4;&#x6362;&#x7CFB;&#x7EDF;&#x6E90; apt-get"></a>2.2&#x3001;Ubuntu&#x66F4;&#x6362;&#x7CFB;&#x7EDF;&#x6E90; apt-get</h4><p>1&#x3001;&#x590D;&#x5236;&#x539F;&#x6587;&#x4EF6;&#x5907;&#x4EFD;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak</span><br></pre></td></tr></tbody></table></figure>
+<p>2&#x3001;&#x7F16;&#x8F91;&#x6E90;&#x5217;&#x8868;&#x6587;&#x4EF6;(&#x5BF9;vim&#x4E0D;&#x719F;&#x53EF;&#x4F7F;&#x7528;gedit)</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/apt/sources.list</span><br></pre></td></tr></tbody></table></figure>
+<p>3&#x3001;&#x5C06;&#x539F;&#x6765;&#x7684;&#x5217;&#x8868;&#x5220;&#x9664;&#xFF0C;&#x6DFB;&#x52A0;&#x5982;&#x4E0B;&#x5185;&#x5BB9;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br></pre></td></tr></tbody></table></figure>
+<p>4&#x3001;&#x66F4;&#x65B0;&#x672C;&#x5730;&#x7D22;&#x5F15;&#x5217;&#x8868;&#x8FD0;&#x884C;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update #&#x66F4;&#x65B0;&#x672C;&#x5730;&#x7D22;&#x5F15;&#x5217;&#x8868;</span><br><span class="line">#sudo apt-get upgrade # &#x53EF;&#x9009;/&#x6839;&#x636E;&#x66F4;&#x65B0;&#x7684;&#x7D22;&#x5F15;&#x5347;&#x7EA7;&#x5DF2;&#x5B89;&#x88C5;&#x7684;&#x6240;&#x6709;&#x8F6F;&#x4EF6;&#x5305;</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="2-3&#x3001;ubuntu-&#x6362;npm-&#x6E90;"><a href="#2-3&#x3001;ubuntu-&#x6362;npm-&#x6E90;" class="headerlink" title="2.3&#x3001;ubuntu &#x6362;npm &#x6E90;"></a>2.3&#x3001;ubuntu &#x6362;npm &#x6E90;</h4><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npm.taobao.org</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="2-4&#x3001;ubuntu&#x6253;&#x5F00;&#x7EC8;&#x7AEF;&#x81EA;&#x52A8;&#x5B9A;&#x4F4D;&#x5230;&#x684C;&#x9762;"><a href="#2-4&#x3001;ubuntu&#x6253;&#x5F00;&#x7EC8;&#x7AEF;&#x81EA;&#x52A8;&#x5B9A;&#x4F4D;&#x5230;&#x684C;&#x9762;" class="headerlink" title="2.4&#x3001;ubuntu&#x6253;&#x5F00;&#x7EC8;&#x7AEF;&#x81EA;&#x52A8;&#x5B9A;&#x4F4D;&#x5230;&#x684C;&#x9762;"></a>2.4&#x3001;ubuntu&#x6253;&#x5F00;&#x7EC8;&#x7AEF;&#x81EA;&#x52A8;&#x5B9A;&#x4F4D;&#x5230;&#x684C;&#x9762;</h4><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~/.bashrc</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>&#x540E;&#x9762;&#x52A0;&#x5165;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if [[ $PWD == $(realpath ~) ]]; then</span><br><span class="line">    cd ~/Desktop/</span><br><span class="line">fi</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x5982;&#x679C;&#x662F;&#x4E2D;&#x6587;&#x7CFB;&#x7EDF;&#x628A;Desktop&#x6539;&#x4E3A;&#x684C;&#x9762;</p>
+<h4 id="2-5&#x3001;32&#x4F4D;&#x8FD0;&#x884C;&#x5E93;"><a href="#2-5&#x3001;32&#x4F4D;&#x8FD0;&#x884C;&#x5E93;" class="headerlink" title="2.5&#x3001;32&#x4F4D;&#x8FD0;&#x884C;&#x5E93;"></a>2.5&#x3001;32&#x4F4D;&#x8FD0;&#x884C;&#x5E93;</h4><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gcc-multilib</span><br><span class="line">sudo apt-get install libc6:i386</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="2-6&#x3001;&#x4E00;&#x4E9B;&#x63A8;&#x8350;&#x7684;&#x8F6F;&#x4EF6;"><a href="#2-6&#x3001;&#x4E00;&#x4E9B;&#x63A8;&#x8350;&#x7684;&#x8F6F;&#x4EF6;" class="headerlink" title="2.6&#x3001;&#x4E00;&#x4E9B;&#x63A8;&#x8350;&#x7684;&#x8F6F;&#x4EF6;"></a>2.6&#x3001;&#x4E00;&#x4E9B;&#x63A8;&#x8350;&#x7684;&#x8F6F;&#x4EF6;</h4><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gdebi</span><br><span class="line">#&#x5B89;&#x88C5;deb</span><br><span class="line">sudo apt-get install synaptic</span><br><span class="line">#&#x65B0;&#x7ACB;&#x5F97;&#x8F6F;&#x4EF6;&#x5305;&#x7BA1;&#x7406;&#x5668;</span><br><span class="line">sudo apt install python-pip</span><br><span class="line">sudo apt install python3-pip</span><br><span class="line">#python&#x5305;&#x7BA1;&#x7406;&#x5668;</span><br><span class="line">sudo apt-get install vim</span><br><span class="line">sudo apt-get install git</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="2-7&#x3001;pwn&#x73AF;&#x5883;&#x914D;&#x7F6E;"><a href="#2-7&#x3001;pwn&#x73AF;&#x5883;&#x914D;&#x7F6E;" class="headerlink" title="2.7&#x3001;pwn&#x73AF;&#x5883;&#x914D;&#x7F6E;"></a>2.7&#x3001;pwn&#x73AF;&#x5883;&#x914D;&#x7F6E;</h4><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/pwndbg/pwndbg</span><br><span class="line">cd pwndbg</span><br><span class="line">./setup.sh</span><br><span class="line">#pwngdb,&#x8C03;&#x8BD5;&#x795E;&#x5668;</span><br><span class="line">sudo apt-get install gcc-multilib</span><br><span class="line">sudo apt-get install libc6:i386</span><br><span class="line">#64&#x4F4D;&#x7CFB;&#x7EDF;&#x8DD1;32&#x4F4D;&#x7A0B;&#x5E8F;</span><br><span class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pwntools</span><br><span class="line">#pwntools</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="3&#x3001;&#x663E;&#x5361;&#x95EE;&#x9898;&#x5BFC;&#x81F4;&#x5F00;&#x673A;&#x5361;&#x4F4F;"><a href="#3&#x3001;&#x663E;&#x5361;&#x95EE;&#x9898;&#x5BFC;&#x81F4;&#x5F00;&#x673A;&#x5361;&#x4F4F;" class="headerlink" title="3&#x3001;&#x663E;&#x5361;&#x95EE;&#x9898;&#x5BFC;&#x81F4;&#x5F00;&#x673A;&#x5361;&#x4F4F;"></a>3&#x3001;&#x663E;&#x5361;&#x95EE;&#x9898;&#x5BFC;&#x81F4;&#x5F00;&#x673A;&#x5361;&#x4F4F;</h3><p>&#x5B89;&#x88C5;Linux &#x53CC;&#x7CFB;&#x7EDF;&#xFF08;&#x4E00;&#x822C;&#x662F;Nvidia&#x663E;&#x5361;&#xFF0C;1080p&#x52A0;&#x6838;&#x663E;&#x7684;&#x7535;&#x8111;&#xFF09;&#x65F6;&#xFF0C;&#x7ECF;&#x5E38;&#x4F1A;&#x51FA;&#x73B0;&#x5361;&#x5728;&#x5B89;&#x88C5;logo&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x8FD9;&#x79CD;&#x539F;&#x56E0;&#x4E00;&#x822C;&#x662F;&#x7531;&#x4E8E;linux&#x53D1;&#x884C;&#x5546;&#x6536;&#x5F55;&#x7684;nouveau &#x7684;&#x5F00;&#x6E90;&#x663E;&#x5361;&#x7684;&#x95EE;&#x9898;&#x3002;&#x9488;&#x5BF9;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x5982;&#x4E0B;&#xFF1A;<br>&#x5728;&#x8FDB;&#x5165;grub&#x5B89;&#x88C5;&#x754C;&#x9762;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5728;Install Ubuntu&#x9009;&#x9879;&#xFF0C;&#x6309;e,&#x8FDB;&#x5165;&#x547D;&#x4EE4;&#x884C;&#x6A21;&#x5F0F;&#xFF0C;&#x7136;&#x540E;&#x5728;quiet slash &#x2013; &#x540E;&#x9762;(&#x4E5F;&#x53EF;&#x80FD;&#x6CA1;&#x6709; &#x2013; )&#xFF0C;&#x6DFB;&#x52A0;&#x4EE5;&#x4E0B;&#x5185;&#x5BB9;&#xFF0C;&#x7136;&#x540E;&#x6309;F10&#x91CD;&#x65B0;&#x5F15;&#x5BFC;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acpi_osi=linux nomodeset</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x7136;&#x540E;&#x80FD;&#x5F00;&#x673A;&#xFF0C;&#x4F46;&#x662F;&#x6BCF;&#x6B21;&#x91CD;&#x542F;&#x90FD;&#x8981;&#x6765;&#x4E00;&#x6B21;&#xFF0C;&#x6240;&#x4EE5;&#x89E3;&#x51B3;&#x65B9;&#x6CD5;&#x662F;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/modprobe.d/blacklist.conf</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x5728;&#x6587;&#x672C;&#x6700;&#x540E;&#x6DFB;&#x52A0;&#xFF1A;&#xFF08;&#x7981;&#x7528;nouveau&#x7B2C;&#x4E09;&#x65B9;&#x9A71;&#x52A8;&#xFF0C;&#x4E4B;&#x540E;&#x4E5F;&#x4E0D;&#x9700;&#x8981;&#x6539;&#x56DE;&#x6765;&#xFF09;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">blacklist nouveau</span><br><span class="line">options nouveau modeset=0</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x7136;&#x540E;&#x6267;&#x884C;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-initramfs -u</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x5373;&#x53EF;</p>
+<h3 id="4&#x3001;&#x589E;&#x52A0;&#x7528;&#x6237;&#x4FEE;&#x6539;&#x5BC6;&#x7801;&#x65E0;&#x4EA4;&#x4E92;"><a href="#4&#x3001;&#x589E;&#x52A0;&#x7528;&#x6237;&#x4FEE;&#x6539;&#x5BC6;&#x7801;&#x65E0;&#x4EA4;&#x4E92;" class="headerlink" title="4&#x3001;&#x589E;&#x52A0;&#x7528;&#x6237;&#x4FEE;&#x6539;&#x5BC6;&#x7801;&#x65E0;&#x4EA4;&#x4E92;"></a>4&#x3001;&#x589E;&#x52A0;&#x7528;&#x6237;&#x4FEE;&#x6539;&#x5BC6;&#x7801;&#x65E0;&#x4EA4;&#x4E92;</h3><p>kail</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd guest;echo &quot;guest:123qwe&quot; |sudo chpasswd</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x901A;&#x7528;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;123456&quot; | passwd --stdin &quot;root&quot;</span><br></pre></td></tr></tbody></table></figure></body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/%E6%8D%A2%E6%BA%90/">#换源</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2018/12/21/CSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B%E6%A0%88%E5%B8%A7%E7%9A%84%E5%8F%98%E5%8C%96/">CSAPP又双叒叕来一遍之函数调用过程栈帧的变化</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2018/12/14/%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E4%B8%A4%E4%BD%8D%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E6%8D%A2%E5%AD%97%E7%AC%A6%E4%B8%B2/">利用python进行两位十六进制换字符串</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2020 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-epsilon2_1"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

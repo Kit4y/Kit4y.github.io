@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>计算机网络自顶向下-链路层 - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+
+    <meta name="description" content="&amp;#x4E00;&amp;#x3001;&amp;#x94FE;&amp;#x8DEF;&amp;#x5C42;&amp;#x63D0;&amp;#x4F9B;&amp;#x7684;&amp;#x670D;&amp;#x52A1;1&amp;#x3001;&amp;#x6210;&amp;#x5E27;&amp;#x3002;&amp;#x5728;&amp;#x6BCF;&amp;#x4E2A;&amp;#x7F51;&amp;#x7EDC;&amp;#x5C42;&amp;#x6570;&amp;#x636E;&amp;#x62A5;&amp;#x7ECF;&amp;#x94FE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络自顶向下-链路层">
+<meta property="og:url" content="http://example.com/2019/03/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B-%E9%93%BE%E8%B7%AF%E5%B1%82/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x4E00;&amp;#x3001;&amp;#x94FE;&amp;#x8DEF;&amp;#x5C42;&amp;#x63D0;&amp;#x4F9B;&amp;#x7684;&amp;#x670D;&amp;#x52A1;1&amp;#x3001;&amp;#x6210;&amp;#x5E27;&amp;#x3002;&amp;#x5728;&amp;#x6BCF;&amp;#x4E2A;&amp;#x7F51;&amp;#x7EDC;&amp;#x5C42;&amp;#x6570;&amp;#x636E;&amp;#x62A5;&amp;#x7ECF;&amp;#x94FE">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2019/03/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B-%E9%93%BE%E8%B7%AF%E5%B1%82/1.webp">
+<meta property="og:image" content="http://example.com/2019/03/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B-%E9%93%BE%E8%B7%AF%E5%B1%82/2.webp">
+<meta property="og:image" content="http://example.com/2019/03/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B-%E9%93%BE%E8%B7%AF%E5%B1%82/3.webp">
+<meta property="article:published_time" content="2019-03-15T04:59:51.000Z">
+<meta property="article:modified_time" content="2020-11-24T04:55:24.552Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2019/03/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B-%E9%93%BE%E8%B7%AF%E5%B1%82/1.webp">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/friends">Friends</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            计算机网络自顶向下-链路层
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-03-15T04:59:51.000Z" itemprop="datePublished">15 Mar 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B/">计算机网络自顶向下</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            18 minutes read (About 2646 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="&#x4E00;&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x63D0;&#x4F9B;&#x7684;&#x670D;&#x52A1;"><a href="#&#x4E00;&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x63D0;&#x4F9B;&#x7684;&#x670D;&#x52A1;" class="headerlink" title="&#x4E00;&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x63D0;&#x4F9B;&#x7684;&#x670D;&#x52A1;"></a>&#x4E00;&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x63D0;&#x4F9B;&#x7684;&#x670D;&#x52A1;</h3><p>1&#x3001;&#x6210;&#x5E27;&#x3002;&#x5728;&#x6BCF;&#x4E2A;&#x7F51;&#x7EDC;&#x5C42;&#x6570;&#x636E;&#x62A5;&#x7ECF;&#x94FE;&#x8DEF;&#x4F20;&#x9001;&#x4E4B;&#x524D;&#xFF0C;&#x51E0;&#x4E4E;&#x6240;&#x6709;&#x94FE;&#x8DEF;&#x5C42;&#x534F;&#x8BAE;&#x90FD;&#x8981;&#x5C06;&#x5176;&#x7528;&#x94FE;&#x8DEF;&#x5C42;&#x5E27;&#x5C01;&#x88C5;&#x8D77;&#x6765;&#x3002;<br>2&#x3001;&#x94FE;&#x8DEF;&#x63A5;&#x5165;&#x3002;&#x5A92;&#x4F53;&#x8BBF;&#x95EE;&#x63A7;&#x5236;(Medium Access Control, MAC)&#x534F;&#x8BAE;&#x89C4;&#x5B9A;&#x4E86;&#x5E27;&#x5728;&#x94FE;&#x8DEF;&#x4E0A;&#x4F20;&#x8F93;&#x7684;&#x89C4;&#x5219;&#x3002;<br>3&#x3001;&#x53EF;&#x9760;&#x4EA4;&#x4ED8;&#x3002;&#x4FDD;&#x8BC1;&#x65E0;&#x5DEE;&#x9519;&#x5730;&#x7ECF;&#x94FE;&#x8DEF;&#x5C42;&#x79FB;&#x52A8;&#x6BCF;&#x4E2A;&#x7F51;&#x7EDC;&#x5C42;&#x6570;&#x636E;&#x62A5;&#x3002;<br>4&#x3001;&#x5DEE;&#x9519;&#x68C0;&#x6D4B;&#x548C;&#x7EA0;&#x6B63;&#x3002;&#x5F53;&#x5E27;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x6BD4;&#x7279;&#x4F5C;&#x4E3A;1&#x4F20;&#x8F93;&#x65F6;&#xFF0C;&#x63A5;&#x6536;&#x65B9;&#x7ED3;&#x70B9;&#x4E2D;&#x7684;&#x94FE;&#x8DEF;&#x5C42;&#x786C;&#x4EF6;&#x53EF;&#x80FD;&#x4E0D;&#x6B63;&#x786E;&#x5730;&#x5C06;&#x5176;&#x5224;&#x65AD;&#x4E3A;0&#xFF0C;&#x53CD;&#x4E4B;&#x4EA6;&#x7136;&#x3002;&#x8FD9;&#x79CD;&#x6BD4;&#x7279;&#x5DEE;&#x9519;&#x662F;&#x7531;&#x4FE1;&#x53F7;&#x8870;&#x51CF;&#x548C;&#x7535;&#x78C1;&#x566A;&#x58F0;&#x5BFC;&#x81F4;&#x7684;&#x3002;</p>
+<a id="more"></a>
+
+
+<h3 id="&#x4E8C;&#x3001;&#x5DEE;&#x9519;&#x68C0;&#x6D4B;&#x548C;&#x7EA0;&#x6B63;&#x6280;&#x672F;"><a href="#&#x4E8C;&#x3001;&#x5DEE;&#x9519;&#x68C0;&#x6D4B;&#x548C;&#x7EA0;&#x6B63;&#x6280;&#x672F;" class="headerlink" title="&#x4E8C;&#x3001;&#x5DEE;&#x9519;&#x68C0;&#x6D4B;&#x548C;&#x7EA0;&#x6B63;&#x6280;&#x672F;"></a>&#x4E8C;&#x3001;&#x5DEE;&#x9519;&#x68C0;&#x6D4B;&#x548C;&#x7EA0;&#x6B63;&#x6280;&#x672F;</h3><p>&#x5DEE;&#x9519;&#x68C0;&#x6D4B;&#x548C;&#x7EA0;&#x9519;&#x6280;&#x672F;&#x8D8A;&#x590D;&#x6742;&#xFF0C;&#x5BFC;&#x81F4;&#x7684;&#x5F00;&#x9500;&#x5C31;&#x8D8A;&#x5927;&#xFF0C;&#x8FD9;&#x5C31;&#x662F;&#x610F;&#x5473;&#x7740;&#x9700;&#x8981;&#x66F4;&#x591A;&#x7684;&#x8BA1;&#x7B97;&#x91CF;&#x53CA;&#x66F4;&#x591A;&#x7684;&#x5DEE;&#x9519;&#x68C0;&#x6D4B;&#x548C;&#x7EA0;&#x9519;&#x6BD4;&#x7279;&#x3002;</p>
+<h4 id="2-1&#x3001;&#x4E09;&#x79CD;&#x68C0;&#x6D4B;&#x5DEE;&#x9519;&#x7684;&#x6280;&#x672F;&#xFF1A;"><a href="#2-1&#x3001;&#x4E09;&#x79CD;&#x68C0;&#x6D4B;&#x5DEE;&#x9519;&#x7684;&#x6280;&#x672F;&#xFF1A;" class="headerlink" title="2.1&#x3001;&#x4E09;&#x79CD;&#x68C0;&#x6D4B;&#x5DEE;&#x9519;&#x7684;&#x6280;&#x672F;&#xFF1A;"></a>2.1&#x3001;&#x4E09;&#x79CD;&#x68C0;&#x6D4B;&#x5DEE;&#x9519;&#x7684;&#x6280;&#x672F;&#xFF1A;</h4><ol>
+<li>&#x5947;&#x5076;&#x6821;&#x9A8C;&#xFF08;&#x4E00;&#x7EF4;&#x5947;&#x5076;&#x6821;&#x9A8C;&#x5341;&#x5206;&#x7B80;&#x5355;&#xFF0C;&#x4F46;&#x672A;&#x68C0;&#x51FA;&#x5DEE;&#x9519;&#x7684;&#x51E0;&#x7387;&#x8F83;&#x9AD8;&#xFF1B;&#x4E8C;&#x7EF4;&#x5947;&#x5076;&#x6821;&#x9A8C;&#x53EF;&#x68C0;&#x6D4B;&#x5DEE;&#x9519;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x7EA0;&#x6B63;&#x5DEE;&#x9519;&#xFF09;</li>
+<li>&#x68C0;&#x9A8C;&#x548C;&#x65B9;&#x6CD5;&#xFF08;&#x4E0E;&#x8FD0;&#x8F93;&#x5C42;&#x7684;&#x68C0;&#x9A8C;&#x548C;&#x65B9;&#x6CD5;&#x7C7B;&#x4F3C;&#xFF09;</li>
+<li>&#x5FAA;&#x73AF;&#x5197;&#x4F59;&#x68C0;&#x6D4B;(Cyclic Redundancy Check, CRC)</li>
+</ol>
+<h4 id="2-2&#x3001;&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x7F51;&#x7EDC;&#x94FE;&#x8DEF;"><a href="#2-2&#x3001;&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x7F51;&#x7EDC;&#x94FE;&#x8DEF;" class="headerlink" title="2.2&#x3001;&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x7F51;&#x7EDC;&#x94FE;&#x8DEF;"></a>2.2&#x3001;&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x7F51;&#x7EDC;&#x94FE;&#x8DEF;</h4><p>1&#x3001;&#x70B9;&#x5BF9;&#x70B9;&#x94FE;&#x8DEF;&#x3002;&#x7531;&#x94FE;&#x8DEF;&#x4E00;&#x7AEF;&#x7684;&#x5355;&#x4E2A;&#x53D1;&#x9001;&#x65B9;&#x548C;&#x94FE;&#x8DEF;&#x53E6;&#x4E00;&#x7AEF;&#x7684;&#x5355;&#x4E2A;&#x63A5;&#x6536;&#x65B9;&#x7EC4;&#x6210;&#x3002;&#x8BB8;&#x591A;&#x94FE;&#x8DEF;&#x5C42;&#x534F;&#x8BAE;&#x90FD;&#x4E3A;&#x70B9;&#x5BF9;&#x70B9;&#x94FE;&#x8DEF;&#x8BBE;&#x8BA1;&#xFF0C;&#x5982;&#x70B9;&#x5BF9;&#x70B9;&#x534F;&#x8BAE;(point-to-point protocol, PPP)&#x548C;&#x9AD8;&#x7EA7;&#x6570;&#x636E;&#x94FE;&#x8DEF;&#x63A7;&#x5236;(high-level data link control, HDLC)&#x534F;&#x8BAE;&#x3002;<br>2&#x3001;&#x5E7F;&#x64AD;&#x94FE;&#x8DEF;&#x3002;&#x80FD;&#x591F;&#x8BA9;&#x591A;&#x4E2A;&#x53D1;&#x9001;&#x548C;&#x63A5;&#x6536;&#x7ED3;&#x70B9;&#x90FD;&#x8FDE;&#x63A5;&#x5230;&#x76F8;&#x540C;&#x7684;&#x3001;&#x5355;&#x4E00;&#x7684;&#x3001;&#x5171;&#x4EAB;&#x7684;&#x5E7F;&#x64AD;&#x4FE1;&#x9053;&#x4E0A;&#x3002;&#x5E7F;&#x64AD;&#x4FE1;&#x9053;&#x901A;&#x5E38;&#x7528;&#x4E8E;&#x5C40;&#x57DF;&#x7F51;&#x4E2D;&#x3002;</p>
+<h3 id="&#x4E09;&#x3001;&#x591A;&#x8DEF;&#x8BBF;&#x95EE;&#x95EE;&#x9898;"><a href="#&#x4E09;&#x3001;&#x591A;&#x8DEF;&#x8BBF;&#x95EE;&#x95EE;&#x9898;" class="headerlink" title="&#x4E09;&#x3001;&#x591A;&#x8DEF;&#x8BBF;&#x95EE;&#x95EE;&#x9898;"></a>&#x4E09;&#x3001;&#x591A;&#x8DEF;&#x8BBF;&#x95EE;&#x95EE;&#x9898;</h3><p>&#x534F;&#x8C03;&#x591A;&#x4E2A;&#x53D1;&#x9001;/&#x63A5;&#x6536;&#x70B9;&#x5BF9;&#x4E00;&#x4E2A;&#x5171;&#x4EAB;&#x5E7F;&#x64AD;&#x4FE1;&#x9053;&#x7684;&#x8BBF;&#x95EE;&#xFF0C;&#x907F;&#x514D;&#x78B0;&#x649E;&#xFF0C;&#x6709;&#x5982;&#x4E0B;&#x51E0;&#x79CD;&#x534F;&#x8BAE;&#xFF1A;<br>&#xA0; &#xA0; &#xFF08;1&#xFF09;&#x4FE1;&#x9053;&#x5212;&#x5206;&#x534F;&#x8BAE;&#xFF1A;&#x65F6;&#x5206;&#x3001;&#x9891;&#x5206;&#x3001;&#x7801;&#x5206;&#x7B49;&#xFF0C;&#x91C7;&#x7528;&#x65F6;&#x5206;&#x591A;&#x8DEF;&#x590D;&#x7528;(TDM)&#x548C;&#x9891;&#x5206;&#x591A;&#x8DEF;&#x590D;&#x7528;(FDM)<br>&#xA0; &#xA0; &#xFF08;2&#xFF09;&#x968F;&#x673A;&#x63A5;&#x5165;&#x534F;&#x8BAE;&#xFF1A;&#x78B0;&#x649E;&#x540E;&#xFF0C;&#x91CD;&#x53D1;&#x8BE5;&#x5E27;&#x524D;&#x7B49;&#x5F85;&#x4E00;&#x4E2A;&#x968F;&#x673A;&#x65F6;&#x5EF6;&#xFF0C;&#x6709;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;(&#x65F6;&#x9699;ALOHA,ALOHA,&#x8F7D;&#x6CE2;&#x4FA6;&#x542C;&#x591A;&#x8DEF;&#x8BBF;&#x95EE;(CSMA)&#x5177;&#x6709;&#x78B0;&#x649E;&#x68C0;&#x6D4B;&#x7684;&#x8F7D;&#x6CE2;&#x4FA6;&#x542C;&#x591A;&#x8DEF;&#x8BBF;&#x95EE;(CSMA/CD))<br>&#xA0;&#xA0;&#xA0;&#xA0;&#x4F8B;&#x5982;CSMA&#x8F7D;&#x6CE2;&#x4FA6;&#x542C;&#x591A;&#x8DEF;&#x8BBF;&#x95EE;&#x534F;&#x8BAE;&#xFF0C;&#x8282;&#x70B9;&#x5728;&#x4F20;&#x64AD;&#x524D;&#x5148;&#x4FA6;&#x542C;&#x4FE1;&#x9053;&#xFF0C;&#x76F4;&#x5230;&#x68C0;&#x6D4B;&#x5230;&#x4E00;&#x5C0F;&#x6BB5;&#x65F6;&#x95F4;&#x5185;&#x6CA1;&#x6709;&#x4FE1;&#x53F7;&#x4F20;&#x8F93;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x5F00;&#x59CB;&#x4F20;&#x8F93;&#xFF0C;&#x5982;&#x679C;&#x68C0;&#x6D4B;&#x5230;&#x78B0;&#x649E;&#x5C31;&#x505C;&#x6B62;&#x4F20;&#x8F93;&#xFF0C;&#x7EE7;&#x7EED;&#x4FA6;&#x542C;&#x3002;<br>&#xA0; &#xA0; &#xFF08;3&#xFF09;&#x8F6E;&#x6D41;&#x534F;&#x8BAE;&#xFF1A;&#x3010;1&#x3011;&#x8F6E;&#x8BE2;&#x534F;&#x8BAE;&#xFF0C;&#x6709;&#x4E00;&#x4E2A;&#x4E3B;&#x8282;&#x70B9;&#xFF0C;&#x8F6E;&#x8BE2;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#xA0;&#xA0;&#xA0;&#xA0;&#x3010;2&#x3011;&#x4EE4;&#x724C;&#x4F20;&#x9012;&#x534F;&#x8BAE;&#xFF0C;&#x65E0;&#x4E3B;&#x8282;&#x70B9;<br>1&#x3001;&#x4FE1;&#x9053;&#x5212;&#x5206;&#x534F;&#x8BAE;&#x3002;&#x91C7;&#x7528;&#x65F6;&#x5206;&#x591A;&#x8DEF;&#x590D;&#x7528;(TDM)&#x548C;&#x9891;&#x5206;&#x591A;&#x8DEF;&#x590D;&#x7528;(FDM)&#xFF0C;&#x5728;&#x6240;&#x6709;&#x5171;&#x4EAB;&#x4FE1;&#x9053;&#x7684;&#x7ED3;&#x70B9;&#x4E4B;&#x95F4;&#x5212;&#x5206;&#x5E7F;&#x64AD;&#x4FE1;&#x9053;&#x5E26;&#x5BBD;&#x7684;&#x6280;&#x672F;&#x3002;<br>2&#x3001;&#x968F;&#x673A;&#x63A5;&#x5165;&#x534F;&#x8BAE;&#x3002;&#x4E00;&#x4E2A;&#x4F20;&#x8F93;&#x7ED3;&#x70B9;&#x603B;&#x662F;&#x4EE5;&#x4FE1;&#x9053;&#x7684;&#x5168;&#x90E8;&#x901F;&#x7387;&#x8FDB;&#x884C;&#x53D1;&#x9001;&#x3001;&#x5F53;&#x6709;&#x78B0;&#x649E;&#x65F6;&#xFF0C;&#x6D89;&#x53CA;&#x78B0;&#x649E;&#x7684;&#x6BCF;&#x4E2A;&#x7ED3;&#x70B9;&#x53CD;&#x590D;&#x5730;&#x91CD;&#x53D1;&#x5B83;&#x7684;&#x5E27;(&#x4E5F;&#x5C31;&#x662F;&#x5206;&#x7EC4;)&#xFF0C;&#x5230;&#x8BE5;&#x5E27;&#x65E0;&#x78B0;&#x649E;&#x5730;&#x901A;&#x8FC7;&#x4E3A;&#x6B62;&#x3002;&#x5728;&#x91CD;&#x53D1;&#x6D89;&#x53CA;&#x78B0;&#x649E;&#x7684;&#x5E27;&#x4E4B;&#x524D;&#xFF0C;&#x4F1A;&#x7B49;&#x5F85;&#x4E00;&#x4E2A;&#x968F;&#x673A;&#x65F6;&#x5EF6;&#x3002;&#x6D89;&#x53CA;&#x78B0;&#x649E;&#x7684;&#x6BCF;&#x4E2A;&#x7ED3;&#x70B9;&#x72EC;&#x7ACB;&#x5730;&#x9009;&#x62E9;&#x968F;&#x673A;&#x65F6;&#x5EF6;&#x3002;&#x968F;&#x673A;&#x63A5;&#x5165;&#x534F;&#x8BAE;&#x53C8;&#x6709;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;&#xFF1A;</p>
+<h3 id="&#x56DB;&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x5730;&#x5740;"><a href="#&#x56DB;&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x5730;&#x5740;" class="headerlink" title="&#x56DB;&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x5730;&#x5740;"></a>&#x56DB;&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x5730;&#x5740;</h3><p>&#x4E3A;&#x4EC0;&#x4E48;&#x6211;&#x4EEC;&#x5728;&#x7F51;&#x7EDC;&#x5C42;&#x548C;&#x94FE;&#x8DEF;&#x5C42;&#x90FD;&#x9700;&#x8981;&#x5730;&#x5740;&#x5462;&#xFF1F;</p>
+<ol>
+<li>&#x5C40;&#x57DF;&#x7F51;&#x662F;&#x4E3A;&#x4EFB;&#x610F;&#x7F51;&#x7EDC;&#x5C42;&#x534F;&#x8BAE;&#x800C;&#x8BBE;&#x8BA1;&#xFF0C;&#x800C;&#x4E0D;&#x53EA;&#x662F;&#x7528;&#x4E8E;IP&#x548C;&#x56E0;&#x7279;&#x7F51;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x9002;&#x914D;&#x5668;&#x4F7F;&#x7528;&#x7F51;&#x7EDC;&#x5C42;&#x5730;&#x5740;&#x800C;&#x4E0D;&#x662F;MAC&#x5730;&#x5740;&#xFF0C;&#x7F51;&#x7EDC;&#x5C42;&#x5730;&#x5740;&#x5FC5;&#x987B;&#x5B58;&#x50A8;&#x5728;&#x9002;&#x914D;&#x5668;&#x7684;RAM&#x4E2D;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x6BCF;&#x6B21;&#x9002;&#x914D;&#x5668;&#x79FB;&#x52A8;(&#x6216;&#x52A0;&#x7535;)&#x65F6;&#x8981;&#x91CD;&#x65B0;&#x914D;&#x7F6E;&#x3002;</li>
+</ol>
+<p>&#x4E3B;&#x673A;&#x548C;&#x8DEF;&#x7531;&#x5668;&#x4E2D;&#x7684;&#x9002;&#x914D;&#x5668;(&#x5373;&#x7F51;&#x7EDC;&#x63A5;&#x53E3;)&#x5177;&#x6709;&#x94FE;&#x8DEF;&#x5C42;&#x5730;&#x5740;&#x3002;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x94FE;&#x8DEF;&#x5C42;&#x4EA4;&#x6362;&#x673A;&#x6CA1;&#x6709;&#x94FE;&#x8DEF;&#x5C42;&#x5730;&#x5740;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x7684;&#x4EFB;&#x52A1;&#x662F;&#x5728;&#x4E3B;&#x673A;&#x4E0E;&#x8DEF;&#x7531;&#x5668;&#x4E4B;&#x95F4;&#x627F;&#x8F7D;&#x6570;&#x636E;&#x62A5;&#xFF0C;&#x5B83;&#x900F;&#x660E;&#x5730;&#x6267;&#x884C;&#x8BE5;&#x9879;&#x4EFB;&#x52A1;&#xFF0C;&#x4E3B;&#x673A;&#x6216;&#x8DEF;&#x7531;&#x5668;&#x4E0D;&#x5FC5;&#x660E;&#x786E;&#x5730;&#x5C06;&#x5E27;&#x5BFB;&#x5740;&#x5230;&#x5176;&#x95F4;&#x7684;&#x4EA4;&#x6362;&#x673A;&#x3002;<br>&#x94FE;&#x8DEF;&#x5C42;&#x5730;&#x5740;&#x6709;&#x51E0;&#x79CD;&#x4E0D;&#x540C;&#x7684;&#x79F0;&#x547C;&#xFF1A;<br>1&#x3001;LAN&#x5730;&#x5740;<br>2&#x3001;&#x7269;&#x7406;&#x5730;&#x5740;<br>3&#x3001;MAC&#x5730;&#x5740;<br>&#x5927;&#x591A;&#x6570;&#x5C40;&#x57DF;&#x7F51;&#xFF0C;MAC&#x5730;&#x5740;&#x957F;&#x5EA6;&#x4E3A;6&#x5B57;&#x8282;&#x3002;&#x5C3D;&#x7BA1;MAC&#x5730;&#x5740;&#x88AB;&#x8BBE;&#x8BA1;&#x4E3A;&#x6C38;&#x4E45;&#xFF0C;&#x4F46;&#x53EF;&#x4EE5;&#x505A;&#x5230;&#x7528;&#x8F6F;&#x4EF6;&#x6539;&#x53D8;&#x4E00;&#x5757;&#x9002;&#x914D;&#x5668;&#x7684;MAC&#x5730;&#x5740;&#x3002;&#x6CA1;&#x6709;&#x4E24;&#x5757;&#x9002;&#x914D;&#x5668;&#x5177;&#x6709;&#x76F8;&#x540C;&#x7684;MAC&#x5730;&#x5740;&#x3002;</p>
+<h4 id="4-1&#x3001;&#x5730;&#x5740;&#x89E3;&#x6790;&#x534F;&#x8BAE;-Address-Resolution-Protocol-ARP"><a href="#4-1&#x3001;&#x5730;&#x5740;&#x89E3;&#x6790;&#x534F;&#x8BAE;-Address-Resolution-Protocol-ARP" class="headerlink" title="4.1&#x3001;&#x5730;&#x5740;&#x89E3;&#x6790;&#x534F;&#x8BAE;(Address Resolution Protocol, ARP)"></a>4.1&#x3001;&#x5730;&#x5740;&#x89E3;&#x6790;&#x534F;&#x8BAE;(Address Resolution Protocol, ARP)</h4><p>ARP&#x5C06;&#x4E00;&#x4E2A;IP&#x5730;&#x5740;&#x89E3;&#x6790;&#x4E3A;&#x4E00;&#x4E2A;MAC&#x5730;&#x5740;&#x3002;&#x5728;&#x5F88;&#x591A;&#x65B9;&#x9762;&#x5B83;&#x548C;DNS&#x7C7B;&#x4F3C;&#xFF0C;DNS&#x5C06;&#x4E3B;&#x673A;&#x540D;&#x89E3;&#x6790;&#x4E3A;IP&#x5730;&#x5740;&#x3002;<br>&#x5B83;&#x4EEC;&#x4E4B;&#x95F4;&#x7684;&#x91CD;&#x8981;&#x533A;&#x522B;&#x662F;&#xFF1A;<strong>DNS&#x4E3A;&#x5728;&#x56E0;&#x7279;&#x7F51;&#x4E2D;&#x4EFB;&#x4F55;&#x5730;&#x65B9;&#x7684;&#x4E3B;&#x673A;&#x89E3;&#x6790;&#x4E3B;&#x673A;&#x540D;&#xFF0C;&#x800C;ARP&#x53EA;&#x4E3A;&#x5728;&#x540C;&#x4E00;&#x4E2A;&#x5B50;&#x7F51;&#x4E0A;&#x7684;&#x4E3B;&#x673A;&#x548C;&#x8DEF;&#x7531;&#x5668;&#x63A5;&#x53E3;&#x89E3;&#x6790;IP&#x5730;&#x5740;&#x3002;</strong><br>&#x6BCF;&#x53F0;&#x4E3B;&#x673A;&#x6216;&#x8DEF;&#x7531;&#x5668;&#x5728;&#x5176;&#x5185;&#x5B58;&#x4E2D;&#x6709;&#x4E00;&#x4E2A;ARP&#x8868;&#xFF0C;&#x5305;&#x542B;IP&#x5730;&#x5740;&#x5230;MAC&#x5730;&#x5740;&#x7684;&#x6620;&#x5C04;&#x5173;&#x7CFB;&#x3002;&#x5982;&#x679C;&#x4E00;&#x53F0;&#x4E3B;&#x673A;&#x8981;&#x53D1;&#x9001;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x62A5;&#x5230;&#x5B50;&#x7F51;&#x4E2D;&#x7684;&#x53E6;&#x4E00;&#x53F0;&#x4E3B;&#x673A;&#xFF0C;&#x53D1;&#x9001;&#x65B9;&#x9700;&#x8981;&#x83B7;&#x5F97;&#x7ED9;&#x5B9A;IP&#x5730;&#x5740;&#x7684;&#x76EE;&#x7684;&#x4E3B;&#x673A;&#x7684;MAC&#x5730;&#x5740;&#xFF0C;&#x5982;&#x679C;&#x53D1;&#x9001;&#x65B9;ARP&#x8868;&#x5177;&#x6709;&#x8BE5;&#x76EE;&#x7684;&#x7ED3;&#x70B9;&#x7684;&#x8868;&#x9879;&#xFF0C;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#x5F88;&#x5BB9;&#x6613;&#x5B8C;&#x6210;&#x4E86;&#x5982;&#x679C;&#x6CA1;&#x6709;&#xFF0C;&#x53D1;&#x9001;&#x65B9;&#x4F1A;&#x5411;&#x5B83;&#x7684;&#x9002;&#x914D;&#x5668;&#x4F20;&#x9012;&#x4E00;&#x4E2A;ARP&#x67E5;&#x8BE2;&#x5206;&#x7EC4;&#xFF0C;&#x5E76;&#x4E14;&#x6307;&#x793A;&#x9002;&#x914D;&#x5668;&#x5E94;&#x8BE5;&#x7528;MAC&#x5E7F;&#x64AD;&#x5730;&#x5740;(&#x5373;FF-FF-FF-FF-FF-FF)&#x6765;&#x53D1;&#x9001;&#x8FD9;&#x4E2A;&#x5206;&#x7EC4;&#x3002;</p>
+<p>ARP&#x534F;&#x8BAE;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x4E24;&#x4EF6;&#x4E8B;<br>1&#x3001;&#x67E5;&#x8BE2;ARP&#x62A5;&#x6587;&#x662F;&#x5728;&#x5E7F;&#x64AD;&#x5E27;&#x4E2D;&#x53D1;&#x9001;&#x7684;&#xFF0C;&#x800C;&#x54CD;&#x5E94;ARP&#x62A5;&#x6587;&#x5728;&#x4E00;&#x4E2A;&#x6807;&#x51C6;&#x5E27;&#x4E2D;&#x53D1;&#x9001;<br>2&#x3001;ARP&#x662F;&#x5373;&#x63D2;&#x5373;&#x7528;&#x7684;&#xFF0C;&#x610F;&#x601D;&#x662F;&#x4E00;&#x4E2A;ARP&#x8868;&#x662F;&#x81EA;&#x52A8;&#x5EFA;&#x7ACB;&#x7684;&#xFF0C;&#x5B83;&#x4E0D;&#x9700;&#x8981;&#x7CFB;&#x7EDF;&#x7BA1;&#x7406;&#x5458;&#x6765;&#x914D;&#x7F6E;&#x3002;&#x5E76;&#x4E14;&#x5982;&#x679C;&#x67D0;&#x4E3B;&#x673A;&#x4E0E;&#x5B50;&#x7F51;&#x65AD;&#x5F00;&#x8FDE;&#x63A5;&#xFF0C;&#x5B83;&#x7684;&#x8868;&#x9879;&#x6700;&#x7EC8;&#x4F1A;&#x4ECE;&#x7559;&#x5728;&#x5B50;&#x7F51;&#x4E2D;&#x7684;&#x7ED3;&#x70B9;&#x7684;&#x8868;&#x4E2D;&#x5220;&#x9664;&#x6389;&#x3002;</p>
+<h4 id="4-2&#x3001;&#x4EE5;&#x592A;&#x7F51;"><a href="#4-2&#x3001;&#x4EE5;&#x592A;&#x7F51;" class="headerlink" title="4.2&#x3001;&#x4EE5;&#x592A;&#x7F51;"></a>4.2&#x3001;&#x4EE5;&#x592A;&#x7F51;</h4><p>&#x4EE5;&#x592A;&#x7F51;&#x5E27;&#x7ED3;&#x6784;<br><img src="1.webp"></p>
+<ol>
+<li>&#x524D;&#x540C;&#x6B65;&#x7801;(8&#x5B57;&#x8282;)&#x3002;&#x524D;&#x540C;&#x6B65;&#x7801;&#x7684;&#x524D;7&#x4E2A;&#x5B57;&#x8282;&#x503C;&#x90FD;&#x4E3A;10101010&#xFF0C;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x4E3A;10101011&#x3002;&#x524D;7&#x4E2A;&#x5B57;&#x8282;&#x7528;&#x4E8E;&#x201C;&#x5524;&#x9192;&#x201D;&#x63A5;&#x6536;&#x9002;&#x914D;&#x5668;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5B83;&#x4EEC;&#x7684;&#x65F6;&#x949F;&#x548C;&#x53D1;&#x9001;&#x65B9;&#x7684;&#x65F6;&#x949F;&#x540C;&#x6B65;&#x3002;</li>
+<li>&#x76EE;&#x7684;&#x5730;&#x5740;(6&#x5B57;&#x8282;)&#x3002;&#x76EE;&#x7684;&#x9002;&#x914D;&#x5668;&#x7684;MAC&#x5730;&#x5740;&#x3002;</li>
+<li>&#x6E90;&#x5730;&#x5740;(6&#x5B57;&#x8282;)&#x3002;&#x6E90;&#x9002;&#x914D;&#x5668;&#x7684;MAC&#x5730;&#x5740;&#x3002;</li>
+<li>&#x7C7B;&#x578B;(2&#x5B57;&#x8282;)&#x3002;&#x8BE5;&#x5B57;&#x6BB5;&#x5141;&#x8BB8;&#x4EE5;&#x592A;&#x7F51;&#x590D;&#x7528;&#x591A;&#x79CD;&#x7F51;&#x7EDC;&#x5C42;&#x534F;&#x8BAE;&#x3002;&#x8981;&#x8BB0;&#x4F4F;&#x4E3B;&#x673A;&#x80FD;&#x591F;&#x4F7F;&#x7528;&#x9664;&#x4E86;IP&#x4EE5;&#x5916;&#x7684;&#x5176;&#x4ED6;&#x7F51;&#x7EDC;&#x5C42;&#x534F;&#x8BAE;&#x3002;</li>
+<li>&#x6570;&#x636E;(46~1500&#x5B57;&#x8282;)&#x3002;&#x627F;&#x8F7D;IP&#x6570;&#x636E;&#x62A5;&#x3002;&#x4EE5;&#x592A;&#x7F51;&#x6700;&#x5927;&#x4F20;&#x8F93;&#x5355;&#x5143;(MTU)&#x4E3A;1500&#x5B57;&#x8282;&#xFF0C;&#x5982;&#x679C;&#x8D85;&#x8FC7;1500&#x5B57;&#x8282;&#xFF0C;&#x4E3B;&#x673A;&#x5FC5;&#x987B;&#x5C06;&#x8BE5;&#x6570;&#x636E;&#x62A5;&#x5206;&#x7247;&#x3002;&#x6570;&#x636E;&#x5B57;&#x6BB5;&#x7684;&#x6700;&#x5C0F;&#x957F;&#x5EA6;&#x4E3A;46&#x5B57;&#x8282;&#xFF0C;&#x5C11;&#x4E8E;&#x5219;&#x88AB;&#x586B;&#x5145;&#x5230;46&#x5B57;&#x8282;&#x3002;</li>
+<li>CRC(4&#x5B57;&#x8282;)&#x3002;&#x5FAA;&#x73AF;&#x5197;&#x4F59;&#x68C0;&#x6D4B;&#x5B57;&#x6BB5;&#xFF0C;&#x68C0;&#x6D4B;&#x5E27;&#x662F;&#x5426;&#x5F15;&#x5165;&#x4E86;&#x5DEE;&#x9519;&#x3002;<br>&#x6240;&#x4EE5;&#x4EE5;&#x592A;&#x7F51;&#x6280;&#x672F;&#x90FD;&#x5411;&#x7F51;&#x7EDC;&#x5C42;&#x63D0;&#x4F9B;&#x65E0;&#x8FDE;&#x63A5;&#x670D;&#x52A1;&#x3002;&#x5373;&#x9002;&#x914D;&#x5668;A&#x5411;&#x9002;&#x914D;&#x5668;B&#x53D1;&#x9001;&#x6570;&#x636E;&#x62A5;&#x65F6;&#x4E0D;&#x9700;&#x8981;&#x5148;&#x4E0E;&#x9002;&#x914D;&#x5668;B&#x201C;&#x63E1;&#x624B;&#x201D;&#x3002;&#x8FD9;&#x79CD;&#x65E0;&#x8FDE;&#x63A5;&#x670D;&#x52A1;&#x7C7B;&#x4F3C;&#x4E8E;IP&#x7684;&#x7B2C;&#x4E09;&#x5C42;&#x6570;&#x636E;&#x62A5;&#x670D;&#x52A1;&#x548C;UDP&#x7684;&#x7B2C;&#x56DB;&#x5C42;&#x65E0;&#x8FDE;&#x63A5;&#x670D;&#x52A1;&#x3002;</li>
+</ol>
+<h4 id="4-3&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x4EA4;&#x6362;&#x673A;"><a href="#4-3&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x4EA4;&#x6362;&#x673A;" class="headerlink" title="4.3&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x4EA4;&#x6362;&#x673A;"></a>4.3&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x4EA4;&#x6362;&#x673A;</h4><p>&#x4EA4;&#x6362;&#x673A;&#x7684;&#x8FC7;&#x6EE4;&#x548C;&#x8F6C;&#x53D1;<br>1&#x3001;&#x8FC7;&#x6EE4;&#x662F;&#x51B3;&#x5B9A;&#x4E00;&#x4E2A;&#x5E27;&#x5E94;&#x8BE5;&#x8F6C;&#x53D1;&#x5230;&#x67D0;&#x4E2A;&#x63A5;&#x53E3;&#x8FD8;&#x662F;&#x5E94;&#x5F53;&#x5C06;&#x5176;&#x4E22;&#x5F03;<br>2&#x3001;&#x8F6C;&#x53D1;&#x662F;&#x51B3;&#x5B9A;&#x4E00;&#x4E2A;&#x5E27;&#x5E94;&#x8BE5;&#x88AB;&#x5BFC;&#x5411;&#x54EA;&#x4E2A;&#x63A5;&#x53E3;&#xFF0C;&#x5E76;&#x628A;&#x8BE5;&#x5E27;&#x79FB;&#x52A8;&#x5230;&#x90A3;&#x4E9B;&#x63A5;&#x53E3;</p>
+<p>&#x94FE;&#x8DEF;&#x5C42;&#x4EA4;&#x6362;&#x673A;&#x7684;&#x8FC7;&#x6EE4;&#x548C;&#x8F6C;&#x53D1;&#x529F;&#x80FD;&#x501F;&#x52A9;&#x4E8E;&#x4EA4;&#x6362;&#x673A;&#x8868;&#x3002;&#x8F6C;&#x53D1;&#x5206;&#x7EC4;&#x57FA;&#x4E8E;MAC&#x5730;&#x5740;&#x3002;</p>
+<h4 id="4-4&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x4EA4;&#x6362;&#x673A;&#x7684;&#x81EA;&#x5B66;&#x4E60;"><a href="#4-4&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x4EA4;&#x6362;&#x673A;&#x7684;&#x81EA;&#x5B66;&#x4E60;" class="headerlink" title="4.4&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x4EA4;&#x6362;&#x673A;&#x7684;&#x81EA;&#x5B66;&#x4E60;"></a>4.4&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x4EA4;&#x6362;&#x673A;&#x7684;&#x81EA;&#x5B66;&#x4E60;</h4><p>1&#x3001;&#x4EA4;&#x6362;&#x673A;&#x8868;&#x521D;&#x59CB;&#x4E3A;&#x7A7A;<br>2&#x3001;&#x5F53;&#x5728;&#x6BCF;&#x4E2A;&#x63A5;&#x53E3;&#x63A5;&#x6536;&#x5230;&#x7684;&#x6BCF;&#x4E2A;&#x5165;&#x5E27;&#xFF0C;&#x8BE5;&#x4EA4;&#x6362;&#x673A;&#x5728;&#x5176;&#x8868;&#x4E2D;&#x5B58;&#x50A8;&#xFF1A;&#xFF08;1&#xFF09;&#x5728;&#x8BE5;&#x5E27;&#x6E90;&#x5730;&#x5740;&#x5B57;&#x6BB5;&#x4E2D;&#x7684;MAC&#x5730;&#x5740;&#xFF08;2&#xFF09;&#x8BE5;&#x5E27;&#x5230;&#x8FBE;&#x7684;&#x63A5;&#x53E3;&#xFF08;3&#xFF09;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x3002;<br>3&#x3001;&#x5982;&#x679C;&#x5728;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x5185;&#xFF0C;&#x4EA4;&#x6362;&#x673A;&#x6CA1;&#x6709;&#x63A5;&#x6536;&#x5230;&#x4EE5;&#x8BE5;&#x5730;&#x5740;&#x4F5C;&#x4E3A;&#x6E90;&#x5730;&#x5740;&#x7684;&#x5E27;&#xFF0C;&#x5C31;&#x5728;&#x8868;&#x4E2D;&#x5220;&#x9664;&#x8FD9;&#x4E2A;&#x5730;&#x5740;&#x3002;<br>&#x94FE;&#x8DEF;&#x5C42;&#x4EA4;&#x6362;&#x673A;&#x662F;&#x5168;&#x53CC;&#x5DE5;&#x7684;&#xFF0C;&#x4EFB;&#x4F55;&#x4EA4;&#x6362;&#x673A;&#x63A5;&#x53E3;&#x80FD;&#x591F;&#x540C;&#x65F6;&#x53D1;&#x9001;&#x548C;&#x63A5;&#x6536;&#x3002;</p>
+<h4 id="4-5&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x4EA4;&#x6362;&#x673A;&#x548C;&#x8DEF;&#x7531;&#x5668;&#x7684;&#x6BD4;&#x8F83;"><a href="#4-5&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x4EA4;&#x6362;&#x673A;&#x548C;&#x8DEF;&#x7531;&#x5668;&#x7684;&#x6BD4;&#x8F83;" class="headerlink" title="4.5&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x4EA4;&#x6362;&#x673A;&#x548C;&#x8DEF;&#x7531;&#x5668;&#x7684;&#x6BD4;&#x8F83;"></a>4.5&#x3001;&#x94FE;&#x8DEF;&#x5C42;&#x4EA4;&#x6362;&#x673A;&#x548C;&#x8DEF;&#x7531;&#x5668;&#x7684;&#x6BD4;&#x8F83;</h4><p>1&#x3001;&#x4EA4;&#x6362;&#x673A;<br>&#x4F18;&#x70B9;&#xFF1A;<br>&#xFF08;1&#xFF09;&#x5373;&#x63D2;&#x5373;&#x7528;<br>&#xFF08;2&#xFF09;&#x76F8;&#x5BF9;&#x9AD8;&#x7684;&#x5206;&#x7EC4;&#x8FC7;&#x6EE4;&#x548C;&#x8F6C;&#x53D1;&#x901F;&#x7387;<br>&#x7F3A;&#x70B9;&#xFF1A;<br>&#xFF08;1&#xFF09;&#x4E3A;&#x4E86;&#x9632;&#x6B62;&#x5E7F;&#x64AD;&#x5E27;&#x7684;&#x5FAA;&#x73AF;&#xFF0C;&#x4EA4;&#x6362;&#x7F51;&#x7EDC;&#x7684;&#x6D3B;&#x8DC3;&#x62D3;&#x6251;&#x9650;&#x5236;&#x4E3A;&#x4E00;&#x68F5;&#x751F;&#x6210;&#x6811;<br>&#xFF08;2&#xFF09;&#x4E00;&#x4E2A;&#x5927;&#x578B;&#x4EA4;&#x6362;&#x7F51;&#x7EDC;&#x8981;&#x6C42;&#x5728;&#x4E3B;&#x673A;&#x548C;&#x8DEF;&#x7531;&#x5668;&#x4E2D;&#x6709;&#x5927;&#x7684;ARP&#x8868;&#xFF0C;&#x8FD9;&#x5C06;&#x751F;&#x6210;&#x53EF;&#x89C2;&#x7684;ARP&#x6D41;&#x91CF;&#x548C;&#x5904;&#x7406;&#x91CF;<br>&#xFF08;3&#xFF09;&#x5BF9;&#x5E7F;&#x64AD;&#x98CE;&#x66B4;&#x4E0D;&#x63D0;&#x4F9B;&#x4EFB;&#x4F55;&#x4FDD;&#x62A4;&#x63AA;&#x65BD;&#xFF0C;&#x5982;&#x679C;&#x67D0;&#x4E3B;&#x673A;&#x51FA;&#x4E86;&#x6545;&#x969C;&#x5E76;&#x4F20;&#x8F93;&#x51FA;&#x6CA1;&#x5B8C;&#x6CA1;&#x4E86;&#x7684;&#x4EE5;&#x592A;&#x7F51;&#x5E7F;&#x64AD;&#x5E27;&#x6D41;&#xFF0C;&#x8BE5;&#x4EA4;&#x6362;&#x673A;&#x5C06;&#x8F6C;&#x53D1;&#x6240;&#x6709;&#x8FD9;&#x4E9B;&#x5E27;&#xFF0C;&#x4F7F;&#x5F97;&#x6574;&#x4E2A;&#x4EE5;&#x592A;&#x7F51;&#x5D29;&#x6E83;<br>2&#x3001;&#x8DEF;&#x7531;&#x5668;<br>&#x4F18;&#x70B9;&#xFF1A;<br>&#xFF08;1&#xFF09;&#x7F51;&#x7EDC;&#x5BFB;&#x5740;&#x901A;&#x5E38;&#x662F;&#x5206;&#x5C42;&#x6B21;&#x7684;(&#x4E0D;&#x50CF;MAC&#x5BFB;&#x5740;&#x662F;&#x6241;&#x5E73;&#x7684;)&#x3002;&#x5373;&#x4F7F;&#x7F51;&#x7EDC;&#x4E2D;&#x5B58;&#x5728;&#x5197;&#x4F59;&#x8DEF;&#x5F84;&#x65F6;&#xFF0C;&#x5206;&#x7EC4;&#x901A;&#x5E38;&#x4E5F;&#x4E0D;&#x4F1A;&#x901A;&#x8FC7;&#x8DEF;&#x7531;&#x5668;&#x5FAA;&#x73AF;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x5206;&#x7EC4;&#x4E0D;&#x4F1A;&#x88AB;&#x9650;&#x5236;&#x5230;&#x4E00;&#x68F5;&#x751F;&#x6210;&#x6811;&#x4E0A;&#xFF0C;&#x5E76;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x6E90;&#x548C;&#x76EE;&#x7684;&#x5730;&#x4E4B;&#x95F4;&#x7684;&#x6700;&#x4F73;&#x8DEF;&#x5F84;&#x3002;&#x56E0;&#x4E3A;&#x6CA1;&#x6709;&#x751F;&#x6210;&#x6811;&#x7684;&#x9650;&#x5236;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x4EEC;&#x5141;&#x8BB8;&#x4EE5;&#x4E30;&#x5BCC;&#x7684;&#x62D3;&#x6251;&#x7ED3;&#x6784;&#x6784;&#x4EF6;&#x56E0;&#x7279;&#x7F51;&#xFF0C;&#x5982;&#x5305;&#x62EC;&#x6B27;&#x6D32;&#x548C;&#x5317;&#x7F8E;&#x4E4B;&#x95F4;&#x7684;&#x591A;&#x6761;&#x6D3B;&#x8DC3;&#x94FE;&#x8DEF;<br>&#xFF08;2&#xFF09;&#x5BF9;&#x7B2C;&#x4E8C;&#x5C42;&#x7684;&#x5E7F;&#x64AD;&#x98CE;&#x66B4;&#x63D0;&#x4F9B;&#x4E86;&#x9632;&#x706B;&#x5899;&#x4FDD;&#x62A4;<br>&#x7F3A;&#x70B9;&#xFF1A;<br>&#xFF08;1&#xFF09;&#x4E0D;&#x662F;&#x5373;&#x63D2;&#x5373;&#x7528;<br>&#xFF08;2&#xFF09;&#x5BF9;&#x6BCF;&#x4E2A;&#x5206;&#x7EC4;&#x7684;&#x5904;&#x7406;&#x65F6;&#x95F4;&#x901A;&#x5E38;&#x6BD4;&#x4EA4;&#x6362;&#x673A;&#x66F4;&#x957F;</p>
+<p><img src="2.webp"></p>
+<h4 id="4-6&#x3001;&#x865A;&#x62DF;&#x5C40;&#x57DF;&#x7F51;"><a href="#4-6&#x3001;&#x865A;&#x62DF;&#x5C40;&#x57DF;&#x7F51;" class="headerlink" title="4.6&#x3001;&#x865A;&#x62DF;&#x5C40;&#x57DF;&#x7F51;"></a>4.6&#x3001;&#x865A;&#x62DF;&#x5C40;&#x57DF;&#x7F51;</h4><p>&#x4E0A;&#x8FF0;&#x7684;&#x5C40;&#x57DF;&#x7F51;&#x6709;&#x4E09;&#x4E2A;&#x7F3A;&#x70B9;<br>1&#x3001;&#x7F3A;&#x4E4F;&#x6D41;&#x91CF;&#x9694;&#x79BB;<br>2&#x3001;&#x4EA4;&#x6362;&#x673A;&#x7684;&#x65E0;&#x6548;&#x4F7F;&#x7528;<br>3&#x3001;&#x4E0D;&#x65B9;&#x4FBF;&#x7BA1;&#x7406;&#x7528;&#x6237;</p>
+<p>&#x652F;&#x6301;VLAN&#x7684;&#x4EA4;&#x6362;&#x673A;&#x5141;&#x8BB8;&#x7ECF;&#x4E00;&#x4E2A;&#x5355;&#x4E00;&#x7684;&#x7269;&#x7406;&#x5C40;&#x57DF;&#x7F51;&#x57FA;&#x7840;&#x8BBE;&#x65BD;&#x5B9A;&#x4E49;&#x591A;&#x4E2A;&#x865A;&#x62DF;&#x5C40;&#x57DF;&#x7F51;&#x3002;&#x5728;&#x4E00;&#x4E2A;VLAN&#x5185;&#x7684;&#x4E3B;&#x673A;&#x5F7C;&#x6B64;&#x901A;&#x4FE1;&#xFF0C;&#x4EFF;&#x4F5B;&#x5B83;&#x4EEC;&#x4E0E;&#x4EA4;&#x6362;&#x673A;&#x76F8;&#x8FDE;&#x3002;</p>
+<h5 id="&#x4EE5;&#x592A;&#x7F51;VLAN&#x5E27;"><a href="#&#x4EE5;&#x592A;&#x7F51;VLAN&#x5E27;" class="headerlink" title="&#x4EE5;&#x592A;&#x7F51;VLAN&#x5E27;"></a>&#x4EE5;&#x592A;&#x7F51;VLAN&#x5E27;</h5><p><img src="3.webp"></p>
+</body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">#计算机网络</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/03/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B-Web%E7%BD%91%E9%A1%B5%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B/">计算机网络自顶向下-Web网页请求过程</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/03/13/%E4%BB%8E%E4%B8%80%E6%AC%A1%E5%88%A0%E9%99%A4%E5%B8%A6%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6%E6%96%87%E4%BB%B6%E5%90%8D%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%AD%E5%AD%A6%E4%B9%A0Linux%E7%B4%A2%E5%BC%95%E8%8A%82%E7%82%B9inode/">从一次删除带特殊字符文件名的文件中学习Linux索引节点inode</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2020 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-epsilon2_1"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

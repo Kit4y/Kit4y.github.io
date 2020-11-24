@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>如何建立huffmanTree - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+
+    <meta name="description" content="1&amp;#x3001;&amp;#x4E00;&amp;#x4E9B;&amp;#x57FA;&amp;#x672C;&amp;#x6982;&amp;#x5FF5;1.1&amp;#x3001;&amp;#x5B9A;&amp;#x4E49;&amp;#x54C8;&amp;#x592B;&amp;#x66FC;&amp;#x6811;&amp;#xFF0C;&amp;#x53C8;&amp;#x79F0;&amp;#x6700;&amp;#x4F18;&amp;#x6811;&amp;#xFF0C;&amp;#x662F;&amp;#x4E00;&amp;#x7C7B;&amp;#x5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何建立huffmanTree">
+<meta property="og:url" content="http://example.com/2018/12/27/%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8BhuffmanTree/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1&amp;#x3001;&amp;#x4E00;&amp;#x4E9B;&amp;#x57FA;&amp;#x672C;&amp;#x6982;&amp;#x5FF5;1.1&amp;#x3001;&amp;#x5B9A;&amp;#x4E49;&amp;#x54C8;&amp;#x592B;&amp;#x66FC;&amp;#x6811;&amp;#xFF0C;&amp;#x53C8;&amp;#x79F0;&amp;#x6700;&amp;#x4F18;&amp;#x6811;&amp;#xFF0C;&amp;#x662F;&amp;#x4E00;&amp;#x7C7B;&amp;#x5">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2018/12/27/%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8BhuffmanTree/1.png">
+<meta property="og:image" content="http://example.com/2018/12/27/%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8BhuffmanTree/4.png">
+<meta property="og:image" content="http://example.com/2018/12/27/%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8BhuffmanTree/5.png">
+<meta property="og:image" content="http://example.com/2018/12/27/%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8BhuffmanTree/2.png">
+<meta property="og:image" content="http://example.com/2018/12/27/%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8BhuffmanTree/3.png">
+<meta property="article:published_time" content="2018-12-26T17:17:20.000Z">
+<meta property="article:modified_time" content="2020-11-24T04:54:18.198Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2018/12/27/%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8BhuffmanTree/1.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/friends">Friends</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            如何建立huffmanTree
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-12-26T17:17:20.000Z" itemprop="datePublished">27 Dec 2018</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            6 minutes read (About 882 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="1&#x3001;&#x4E00;&#x4E9B;&#x57FA;&#x672C;&#x6982;&#x5FF5;"><a href="#1&#x3001;&#x4E00;&#x4E9B;&#x57FA;&#x672C;&#x6982;&#x5FF5;" class="headerlink" title="1&#x3001;&#x4E00;&#x4E9B;&#x57FA;&#x672C;&#x6982;&#x5FF5;"></a>1&#x3001;&#x4E00;&#x4E9B;&#x57FA;&#x672C;&#x6982;&#x5FF5;</h3><h4 id="1-1&#x3001;&#x5B9A;&#x4E49;"><a href="#1-1&#x3001;&#x5B9A;&#x4E49;" class="headerlink" title="1.1&#x3001;&#x5B9A;&#x4E49;"></a>1.1&#x3001;&#x5B9A;&#x4E49;</h4><p>&#x54C8;&#x592B;&#x66FC;&#x6811;&#xFF0C;&#x53C8;&#x79F0;&#x6700;&#x4F18;&#x6811;&#xFF0C;&#x662F;&#x4E00;&#x7C7B;&#x5E26;&#x6743;&#x8DEF;&#x5F84;&#x957F;&#x5EA6;&#x6700;&#x77ED;&#x7684;&#x6811;(&#x4E3A;&#x4E86;&#x9632;&#x6B62;&#x524D;&#x7F00;&#x91CD;&#x590D;&#xFF0C;&#x6240;&#x6709;&#x6570;&#x636E;&#x4E00;&#x5B9A;&#x4E3A;&#x6811;&#x53F6;)&#x3002;</p>
+<h4 id="1-2&#x3001;&#x8DEF;&#x5F84;&#x548C;&#x8DEF;&#x5F84;&#x957F;&#x5EA6;"><a href="#1-2&#x3001;&#x8DEF;&#x5F84;&#x548C;&#x8DEF;&#x5F84;&#x957F;&#x5EA6;" class="headerlink" title="1.2&#x3001;&#x8DEF;&#x5F84;&#x548C;&#x8DEF;&#x5F84;&#x957F;&#x5EA6;"></a>1.2&#x3001;&#x8DEF;&#x5F84;&#x548C;&#x8DEF;&#x5F84;&#x957F;&#x5EA6;</h4><p>&#x4ECE;&#x6811;&#x4E2D;&#x4E00;&#x4E2A;&#x7ED3;&#x70B9;&#x5230;&#x53E6;&#x4E00;&#x4E2A;&#x7ED3;&#x70B9;&#x4E4B;&#x95F4;&#x7684;&#x5206;&#x652F;&#x6784;&#x6210;&#x4E24;&#x4E2A;&#x7ED3;&#x70B9;&#x7684;&#x8DEF;&#x5F84;&#xFF0C;&#x8DEF;&#x5F84;&#x4E0A;&#x7684;&#x5206;&#x652F;&#x6570;&#x76EE;&#x53EB;&#x505A;&#x8DEF;&#x5F84;&#x957F;&#x5EA6;&#x3002;&#x6811;&#x7684;&#x8DEF;&#x5F84;&#x957F;&#x5EA6;&#x662F;&#x4ECE;&#x6811;&#x6839;&#x5230;&#x6BCF;&#x4E00;&#x4E2A;&#x7ED3;&#x70B9;&#x7684;&#x8DEF;&#x5F84;&#x957F;&#x5EA6;&#x4E4B;&#x548C;&#x3002;</p>
+<a id="more"></a>
+
+
+<h4 id="1-3&#x3001;&#x5E26;&#x6743;&#x8DEF;&#x5F84;&#x957F;&#x5EA6;"><a href="#1-3&#x3001;&#x5E26;&#x6743;&#x8DEF;&#x5F84;&#x957F;&#x5EA6;" class="headerlink" title="1.3&#x3001;&#x5E26;&#x6743;&#x8DEF;&#x5F84;&#x957F;&#x5EA6;"></a>1.3&#x3001;&#x5E26;&#x6743;&#x8DEF;&#x5F84;&#x957F;&#x5EA6;</h4><p>&#x7ED3;&#x70B9;&#x7684;&#x5E26;&#x6743;&#x8DEF;&#x5F84;&#x957F;&#x5EA6;&#x4E3A;&#x4ECE;&#x8BE5;&#x7ED3;&#x70B9;&#x5230;&#x6811;&#x6839;&#x4E4B;&#x95F4;&#x7684;&#x8DEF;&#x5F84;&#x957F;&#x5EA6;&#x4E0E;&#x7ED3;&#x70B9;&#x4E0A;&#x6743;&#x7684;&#x4E58;&#x79EF;&#x3002;&#x6811;&#x7684;&#x5E26;&#x6743;&#x8DEF;&#x5F84;&#x957F;&#x5EA6;&#x4E3A;&#x6811;&#x4E2D;&#x6240;&#x6709;&#x53F6;&#x5B50;&#x7ED3;&#x70B9;&#x7684;&#x5E26;&#x6743;&#x8DEF;&#x5F84;&#x957F;&#x5EA6;&#x4E4B;&#x548C;&#xFF0C;&#x901A;&#x5E38;&#x8BB0;&#x4F5C;WPL&#x3002;</p>
+<p>&#x82E5;&#x6709;n&#x4E2A;&#x6743;&#x503C;&#x4E3A;w1,w2,&#x2026;,wn&#x7684;&#x7ED3;&#x70B9;&#x6784;&#x6210;&#x4E00;&#x68F5;&#x6709;n&#x4E2A;&#x53F6;&#x5B50;&#x7ED3;&#x70B9;&#x7684;&#x4E8C;&#x53C9;&#x6811;&#xFF0C;&#x5219;&#x6811;&#x7684;&#x5E26;&#x6743;&#x8DEF;&#x5F84;&#x6700;&#x5C0F;&#x7684;&#x4E8C;&#x53C9;&#x6811;&#x53EB;&#x505A;&#x54C8;&#x592B;&#x66FC;&#x6811;&#x6216;&#x6700;&#x4F18;&#x4E8C;&#x53C9;&#x6811;&#x3002;<br><img src="1.png"><br>&#x5728;&#x4E0A;&#x56FE;&#x4E2D;&#xFF0C;3&#x68F5;&#x4E8C;&#x53C9;&#x6811;&#x90FD;&#x6709;4&#x4E2A;&#x53F6;&#x5B50;&#x7ED3;&#x70B9;a&#x3001;b&#x3001;c&#x3001;d&#xFF0C;&#x5206;&#x522B;&#x5E26;&#x6743;7&#x3001;5&#x3001;2&#x3001;4&#xFF0C;&#x5219;&#x5B83;&#x4EEC;&#x7684;&#x5E26;&#x6743;&#x8DEF;&#x5F84;&#x957F;&#x5EA6;&#x4E3A;</p>
+<p>&#xFF08;a&#xFF09;WPL = 7 &#xD7; 2 + 5 &#xD7; 2 + 2 &#xD7; 2 + 4 &#xD7; 2 = 36</p>
+<p>&#xFF08;b&#xFF09;WPL = 4 &#xD7; 2 + 7 &#xD7; 3 + 5 &#xD7; 3 + 2 &#xD7; 1 = 46</p>
+<p>&#xFF08;c&#xFF09;WPL = 7 &#xD7; 1 + 5 &#xD7; 2 + 2 &#xD7; 3 + 4 &#xD7; 3 = 35</p>
+<p>&#x5176;&#x4E2D;&#xFF08;c&#xFF09;&#x7684;WPL&#x6700;&#x5C0F;&#xFF0C;&#x53EF;&#x4EE5;&#x9A8C;&#x8BC1;&#xFF0C;&#xFF08;c&#xFF09;&#x6070;&#x4E3A;&#x54C8;&#x592B;&#x66FC;&#x6811;&#x3002;</p>
+<h3 id="2&#x3001;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8868;&#x793A;"><a href="#2&#x3001;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8868;&#x793A;" class="headerlink" title="2&#x3001;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8868;&#x793A;"></a>2&#x3001;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8868;&#x793A;</h3><h4 id="2-1&#x3001;&#x7ED3;&#x70B9;&#x8868;&#x793A;"><a href="#2-1&#x3001;&#x7ED3;&#x70B9;&#x8868;&#x793A;" class="headerlink" title="2.1&#x3001;&#x7ED3;&#x70B9;&#x8868;&#x793A;"></a>2.1&#x3001;&#x7ED3;&#x70B9;&#x8868;&#x793A;</h4><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">typedef struct{</span><br><span class="line">	int weight;</span><br><span class="line">	int parent;</span><br><span class="line">	int lchild,rchild;</span><br><span class="line">}HuffmanTreeNode;</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="2-2&#x3001;&#x4E00;&#x4E9B;&#x6570;&#x636E;&#x5173;&#x7CFB;"><a href="#2-2&#x3001;&#x4E00;&#x4E9B;&#x6570;&#x636E;&#x5173;&#x7CFB;" class="headerlink" title="2.2&#x3001;&#x4E00;&#x4E9B;&#x6570;&#x636E;&#x5173;&#x7CFB;"></a>2.2&#x3001;&#x4E00;&#x4E9B;&#x6570;&#x636E;&#x5173;&#x7CFB;</h4><p>1&#x3001;&#x54C8;&#x592B;&#x66FC;&#x6811;&#x9664;&#x4E86;&#x6839;&#x7ED3;&#x70B9;&#xFF0C;&#x5176;&#x4ED6;&#x7ED3;&#x70B9;&#x5EA6;&#x6570;&#x90FD;&#x4E3A;<strong>2</strong><br>2&#x3001;m=2<em>n-1(m&#x4EE3;&#x8868;&#x603B;&#x7ED3;&#x70B9;&#x4E2A;&#x6570;&#xFF0C;n&#x4EE3;&#x8868;&#x6811;&#x53F6;&#x7ED3;&#x70B9;&#x4E2A;&#x6570;)<br>&#x8BC1;&#x660E;:<br>&#x56E0;&#x4E3A; &#x7ED3;&#x70B9;&#x603B;&#x6570;=&#x5EA6;&#x6570;&#x4E3A;0 1 2&#x4E4B;&#x548C;=&#x5EA6;&#x6570;&#x4E3A;1+ 2</em>&#x5EA6;&#x6570;&#x4E3A;2 +1&#xFF08;&#x6839;&#x8282;&#x70B9;&#xFF09;<br>&#x6240;&#x4EE5; &#x53F6;&#x5B50;&#x7ED3;&#x70B9;&#x6570;=&#x5EA6;&#x6570;&#x4E3A;2&#x7684;&#x7ED3;&#x70B9;&#x6570;+1<br>&#x6240;&#x4EE5;total=&#x53F6;&#x5B50;+&#x5EA6;&#x6570;&#x4E3A;2=2*n-1 &#x5F97;&#x8BC1;</p>
+<h4 id="2-3&#x3001;&#x521D;&#x59CB;&#x72B6;&#x6001;"><a href="#2-3&#x3001;&#x521D;&#x59CB;&#x72B6;&#x6001;" class="headerlink" title="2.3&#x3001;&#x521D;&#x59CB;&#x72B6;&#x6001;"></a>2.3&#x3001;&#x521D;&#x59CB;&#x72B6;&#x6001;</h4><p><img src="4.png"></p>
+<h4 id="2-4&#x3001;&#x6700;&#x7EC8;&#x72B6;&#x6001;"><a href="#2-4&#x3001;&#x6700;&#x7EC8;&#x72B6;&#x6001;" class="headerlink" title="2.4&#x3001;&#x6700;&#x7EC8;&#x72B6;&#x6001;"></a>2.4&#x3001;&#x6700;&#x7EC8;&#x72B6;&#x6001;</h4><p><img src="5.png"></p>
+<h3 id="3&#x3001;&#x521B;&#x5EFA;&#x54C8;&#x592B;&#x66FC;&#x6811;&#x6B65;&#x9AA4;"><a href="#3&#x3001;&#x521B;&#x5EFA;&#x54C8;&#x592B;&#x66FC;&#x6811;&#x6B65;&#x9AA4;" class="headerlink" title="3&#x3001;&#x521B;&#x5EFA;&#x54C8;&#x592B;&#x66FC;&#x6811;&#x6B65;&#x9AA4;"></a>3&#x3001;&#x521B;&#x5EFA;&#x54C8;&#x592B;&#x66FC;&#x6811;&#x6B65;&#x9AA4;</h3><p><img src="2.png"><br>&#x5047;&#x8BBE;&#x6709;n&#x4E2A;&#x7ED3;&#x70B9;&#xFF0C;n&#x4E2A;&#x7ED3;&#x70B9;&#x7684;&#x6743;&#x503C;&#x5206;&#x522B;&#x4E3A;w1,w2,&#x2026;,wn&#xFF0C;&#x6784;&#x6210;&#x7684;&#x4E8C;&#x53C9;&#x6811;&#x7684;&#x96C6;&#x5408;&#x4E3A;F={T1,T2,&#x2026;,Tn}&#xFF0C;&#x5219;&#x53EF;&#x6784;&#x9020;&#x4E00;&#x68F5;&#x542B;&#x6709;n&#x4E2A;&#x53F6;&#x5B50;&#x7ED3;&#x70B9;&#x7684;&#x54C8;&#x592B;&#x66FC;&#x6811;&#x3002;&#x6B65;&#x9AA4;&#x5982;&#x4E0B;&#xFF1A;<br>&#xFF08;1&#xFF09;&#x4ECE;F&#x4E2D;&#x9009;&#x53D6;&#x4E24;&#x68F5;&#x6839;&#x7ED3;&#x70B9;&#x6743;&#x503C;&#x6700;&#x5C0F;&#x7684;&#x6811;&#x4F5C;&#x4E3A;&#x5DE6;&#x53F3;&#x5B50;&#x6811;&#x6784;&#x9020;&#x4E00;&#x68F5;&#x65B0;&#x7684;&#x4E8C;&#x53C9;&#x6811;&#xFF0C;&#x5176;&#x65B0;&#x7684;&#x4E8C;&#x53C9;&#x6811;&#x7684;&#x6743;&#x503C;&#x4E3A;&#x5176;&#x5DE6;&#x53F3;&#x5B50;&#x6811;&#x6839;&#x7ED3;&#x70B9;&#x6743;&#x503C;&#x4E4B;&#x548C;&#xFF1B;</p>
+<p>&#xFF08;2&#xFF09;&#x4ECE;F&#x4E2D;&#x5220;&#x9664;&#x4E0A;&#x4E00;&#x6B65;&#x9009;&#x53D6;&#x7684;&#x4E24;&#x68F5;&#x4E8C;&#x53C9;&#x6811;&#xFF0C;&#x5C06;&#x65B0;&#x6784;&#x9020;&#x7684;&#x6811;&#x653E;&#x5230;F&#x4E2D;&#xFF1B;</p>
+<p>&#xFF08;3&#xFF09;&#x91CD;&#x590D;&#xFF08;1&#xFF09;&#xFF08;2&#xFF09;&#xFF0C;&#x76F4;&#x5230;F&#x53EA;&#x542B;&#x4E00;&#x68F5;&#x6811;&#x4E3A;&#x6B62;&#x3002;</p>
+<h3 id="4&#x3001;&#x54C8;&#x592B;&#x66FC;&#x7F16;&#x7801;"><a href="#4&#x3001;&#x54C8;&#x592B;&#x66FC;&#x7F16;&#x7801;" class="headerlink" title="4&#x3001;&#x54C8;&#x592B;&#x66FC;&#x7F16;&#x7801;"></a>4&#x3001;&#x54C8;&#x592B;&#x66FC;&#x7F16;&#x7801;</h3><p>&#x6211;&#x4EEC;&#x7EA6;&#x5B9A;&#x5DE6;&#x5206;&#x652F;&#x8868;&#x793A;&#x5B57;&#x7B26;&#x2019;0&#x2019;&#xFF0C;&#x53F3;&#x5206;&#x652F;&#x8868;&#x793A;&#x5B57;&#x7B26;&#x2019;1&#x2019;&#xFF0C;&#x5728;&#x54C8;&#x592B;&#x66FC;&#x6811;&#x4E2D;&#x4ECE;&#x6839;&#x7ED3;&#x70B9;&#x5F00;&#x59CB;&#xFF0C;&#x5230;&#x53F6;&#x5B50;&#x7ED3;&#x70B9;&#x7684;&#x8DEF;&#x5F84;&#x4E0A;&#x5206;&#x652F;&#x5B57;&#x7B26;&#x7EC4;&#x6210;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x4E3A;&#x8BE5;&#x53F6;&#x5B50;&#x7ED3;&#x70B9;&#x7684;&#x54C8;&#x592B;&#x66FC;&#x7F16;&#x7801;&#x3002;&#x4E0A;&#x9762;&#x4EE3;&#x7801;&#x6240;&#x521B;&#x5EFA;&#x7684;&#x54C8;&#x592B;&#x66FC;&#x6811;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;<br><img src="3.png"><br>&#x53EF;&#x4EE5;&#x770B;&#x51FA;3&#x88AB;&#x7F16;&#x7801;&#x4E3A;00&#xFF0C;1&#x4E3A;010&#xFF0C;2&#x4E3A;011,4&#x4E3A;10,5&#x4E3A;11&#x3002;&#x5728;&#x8FD9;&#x4E9B;&#x7F16;&#x7801;&#x4E2D;&#xFF0C;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x7684;&#x7F16;&#x7801;&#x5747;&#x4E0D;&#x662F;&#x53E6;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x7F16;&#x7801;&#x7684;&#x524D;&#x7F00;&#x3002;</p>
+<h3 id="5&#x3001;C-&#x5EFA;&#x7ACB;haffmanTree"><a href="#5&#x3001;C-&#x5EFA;&#x7ACB;haffmanTree" class="headerlink" title="5&#x3001;C++&#x5EFA;&#x7ACB;haffmanTree"></a>5&#x3001;C++&#x5EFA;&#x7ACB;haffmanTree</h3><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;stack&gt;</span><br><span class="line">#include&lt;cstdlib&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct{</span><br><span class="line">	int weight;</span><br><span class="line">	int parent;</span><br><span class="line">	int lchild,rchild;</span><br><span class="line">}HuffmanTreeNode;</span><br><span class="line">int min(HuffmanTreeNode* &amp;tree,int k){</span><br><span class="line">	int minnum,min_weight;</span><br><span class="line">	int i=0;</span><br><span class="line">	while(tree[i].parent!=-1)</span><br><span class="line">	i++;//&#x5148;&#x5C06;&#x7B2C;&#x4E00;&#x4E2A;parent&#x4E3A;-1&#x7684;&#x5143;&#x7D20;&#x7684;weight&#x503C;&#x8D4B;&#x7ED9;min_weight,&#x7559;&#x4F5C;&#x4EE5;&#x540E;&#x6BD4;&#x8F83;&#x7528;&#x3002;</span><br><span class="line">	min_weight=tree[i].weight;</span><br><span class="line">	minnum=i;</span><br><span class="line">	for(;i&lt;k;i++)</span><br><span class="line">	{</span><br><span class="line">		if(tree[i].weight&lt;min_weight&amp;&amp;tree[i].parent==-1)</span><br><span class="line">		{</span><br><span class="line">			min_weight=tree[i].weight;</span><br><span class="line">			minnum=i;</span><br><span class="line">		 } </span><br><span class="line">	}</span><br><span class="line">	tree[minnum].parent=1;</span><br><span class="line">	return minnum;</span><br><span class="line">}</span><br><span class="line">void Select(HuffmanTreeNode * &amp;tree,int k ,int &amp; i1,int &amp; i2){</span><br><span class="line">	i1=min(tree,k);</span><br><span class="line">	i2=min(tree,k);</span><br><span class="line">}</span><br><span class="line">void HaffmanTree(HuffmanTreeNode * &amp; tree,int w[],int n){</span><br><span class="line">	for(int i=0;i&lt;2*n-1;i++)</span><br><span class="line">	{</span><br><span class="line">		tree[i].parent=-1;</span><br><span class="line">		tree[i].lchild=-1;</span><br><span class="line">		tree[i].rchild=-1;</span><br><span class="line">	}</span><br><span class="line">	for(int i=0;i&lt;n;i++)</span><br><span class="line">	tree[i].weight=w[i];</span><br><span class="line">	int i1,i2;</span><br><span class="line">	for(int k=n;k&lt;2*n-1;k++)</span><br><span class="line">	{</span><br><span class="line">		Select(tree,k,i1,i2);//&#x524D;K&#x4E2A;&#x627E;&#x6700;&#x5C0F;&#x548C;&#x7B2C;&#x4E8C;&#x5C0F; </span><br><span class="line">		tree[k].weight=tree[i1].weight+tree[i2].weight;</span><br><span class="line">		tree[i1].parent=k;</span><br><span class="line">		tree[i2].parent=k;</span><br><span class="line">		tree[k].lchild=i1;</span><br><span class="line">		tree[k].rchild=i2;</span><br><span class="line">	}</span><br><span class="line">	cout&lt;&lt;&quot;&#x5EFA;&#x54C8;&#x592B;&#x66FC;&#x6811;&#x6210;&#x529F;:\n&quot;;</span><br><span class="line">	for (int i=0; i&lt;2*n-1; i++) {</span><br><span class="line">		cout&lt;&lt;tree[i].weight&lt;&lt;&quot; &quot;&lt;&lt;tree[i].parent&lt;&lt;&quot; &quot;&lt;&lt;tree[i].lchild&lt;&lt;&quot; &quot;&lt;&lt;tree[i].rchild&lt;&lt;endl;</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line">void ShowHaffmanCoding(HuffmanTreeNode* tree,int n){</span><br><span class="line">	int w=2*n-1;</span><br><span class="line">	vector&lt;stack &lt;char&gt; &gt;HuffmanCode;</span><br><span class="line">	stack&lt;char&gt;temp;</span><br><span class="line">	cout&lt;&lt;&quot;debug1&quot;&lt;&lt;endl;</span><br><span class="line">	//&#x4ECE;&#x7ED3;&#x70B9;&#x5F00;&#x59CB;&#x627E;&#x53CC;&#x4EB2;</span><br><span class="line">	for(int i=0;i&lt;n;i++){</span><br><span class="line">			cout&lt;&lt;&quot;debug2&quot;&lt;&lt;endl;</span><br><span class="line">		int j=i;</span><br><span class="line">		int parent= tree[i].parent;//&#x627E;&#x5230;&#x53CC;&#x4EB2;</span><br><span class="line">		while(parent!=-1)</span><br><span class="line">		{ </span><br><span class="line">			if(tree[parent].lchild==j) temp.push(&apos;0&apos;);//&#x5982;&#x679C;&#x662F;&#x5DE6;&#x5B69;&#x5B50;</span><br><span class="line">			else temp.push(&apos;1&apos;);//&#x53F3;&#x5B69;&#x5B50;</span><br><span class="line">			int j=parent;</span><br><span class="line">			parent=tree[j].parent;//&#x76F4;&#x5230;&#x6839;&#x7ED3;&#x70B9;&#x7ED3;&#x675F; </span><br><span class="line">		 } </span><br><span class="line">		 HuffmanCode.push_back(temp);</span><br><span class="line">		 while(!temp.empty()) temp.pop();</span><br><span class="line">	} </span><br><span class="line">	for(int i=0;i&lt;n;i++)</span><br><span class="line">	{</span><br><span class="line">		cout&lt;&lt;&quot;&#x7B2C;&quot;&lt;&lt;i+1&lt;&lt;&quot;&#x4E2A;&#x6570;&#x7684;&#x6743;&#x503C;&#x4E3A; : &quot;&lt;&lt;tree[i].weight&lt;&lt;&quot; &#x7F16;&#x7801;&#x4E3A;&#xFF1A; &quot;;</span><br><span class="line">		while(!HuffmanCode[i].empty())</span><br><span class="line">		{</span><br><span class="line">			cout&lt;&lt;HuffmanCode[i].top();</span><br><span class="line">			HuffmanCode[i].pop();</span><br><span class="line">		 } </span><br><span class="line">		 cout&lt;&lt;endl;</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line">int main(){</span><br><span class="line">	cout&lt;&lt;&quot;&#x8BF7;&#x8F93;&#x5165;&#x6743;&#x503C;&#x4E2A;&#x6570;n\n&quot;;</span><br><span class="line">	int n=0;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	int m=2*n-1;</span><br><span class="line">	HuffmanTreeNode * tree=(HuffmanTreeNode *)malloc(sizeof(HuffmanTreeNode)*m);</span><br><span class="line">	for(int i=0;i&lt;m;i++){</span><br><span class="line">		tree[i].weight=tree[i].parent=tree[i].lchild=tree[i].rchild=0;</span><br><span class="line">	}</span><br><span class="line">	cout&lt;&lt;&quot;&#x8BF7;&#x8F93;&#x5165;&#x6743;&#x503C;: \n&quot;;</span><br><span class="line">	int w[n];</span><br><span class="line">	for(int i=0;i&lt;n;i++)</span><br><span class="line">	cin&gt;&gt;w[i];</span><br><span class="line">	HaffmanTree(tree,w,n);</span><br><span class="line">	ShowHaffmanCoding(tree,n);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">#数据结构</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2018/12/27/%E4%B8%87%E7%89%A9%E7%BE%8E%E5%A5%BD%EF%BC%8C%E4%B8%96%E9%97%B4%E6%B8%A9%E6%9F%94/">万物美好，世间温柔</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2018/12/21/CSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E9%93%BE%E6%8E%A5/">CSAPP又双叒叕来一遍之链接</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2020 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-epsilon2_1"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

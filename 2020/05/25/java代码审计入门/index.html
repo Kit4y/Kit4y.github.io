@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>JAVA1-反射机制 - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+
+    <meta name="description" content="&amp;#x6954;&amp;#x5B50;&amp;#x5F88;&amp;#x4E45;&amp;#x5C31;&amp;#x60F3;&amp;#x5199;&amp;#x548C;java&amp;#x5BA1;&amp;#x8BA1;&amp;#x6709;&amp;#x5173;&amp;#x7684;&amp;#x6587;&amp;#x7AE0;&amp;#x4E86;&amp;#xFF0C;java&amp;#x535A;&amp;#x5927;&amp;#x7CBE;&amp;#x6DF1;&amp;#xFF0C;&amp;#x5B66;&amp;#x5F97;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA1-反射机制">
+<meta property="og:url" content="http://example.com/2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x6954;&amp;#x5B50;&amp;#x5F88;&amp;#x4E45;&amp;#x5C31;&amp;#x60F3;&amp;#x5199;&amp;#x548C;java&amp;#x5BA1;&amp;#x8BA1;&amp;#x6709;&amp;#x5173;&amp;#x7684;&amp;#x6587;&amp;#x7AE0;&amp;#x4E86;&amp;#xFF0C;java&amp;#x535A;&amp;#x5927;&amp;#x7CBE;&amp;#x6DF1;&amp;#xFF0C;&amp;#x5B66;&amp;#x5F97;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8/1.png">
+<meta property="og:image" content="http://example.com/2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8/2.png">
+<meta property="og:image" content="http://example.com/2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8/3.png">
+<meta property="og:image" content="http://example.com/2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8/4.png">
+<meta property="og:image" content="http://example.com/2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8/5.png">
+<meta property="og:image" content="http://example.com/2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8/7.png">
+<meta property="og:image" content="http://example.com/2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8/6.png">
+<meta property="article:published_time" content="2020-05-25T02:29:10.000Z">
+<meta property="article:modified_time" content="2020-11-24T04:50:29.923Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8/1.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/friends">Friends</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            JAVA1-反射机制
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2020-05-25T02:29:10.000Z" itemprop="datePublished">25 May 2020</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/java%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6/">java安全研究</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            26 minutes read (About 3945 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <!-- toc --><html><head></head><body><h3 id="&#x6954;&#x5B50;"><a href="#&#x6954;&#x5B50;" class="headerlink" title="&#x6954;&#x5B50;"></a>&#x6954;&#x5B50;</h3><p>&#x5F88;&#x4E45;&#x5C31;&#x60F3;&#x5199;&#x548C;java&#x5BA1;&#x8BA1;&#x6709;&#x5173;&#x7684;&#x6587;&#x7AE0;&#x4E86;&#xFF0C;java&#x535A;&#x5927;&#x7CBE;&#x6DF1;&#xFF0C;&#x5B66;&#x5F97;&#x65AD;&#x65AD;&#x7EED;&#x7EED;&#xFF0C;&#x6700;&#x8FD1;&#x6765;&#x957F;&#x4EAD;&#x5B9E;&#x4E60;&#xFF0C;&#x4ECE;&#x65C1;&#x8FB9;&#x4E00;&#x4E2A;Java&#x5927;&#x725B;&#x5E08;&#x5085;&#x5B66;&#x4E86;&#x4E00;&#x4E0B;&#x4E0B;&#xFF0C;&#x8FD8;&#x662F;&#x6253;&#x7B97;&#x8BB0;&#x4E00;&#x4E0B;&#xFF0C;&#x5185;&#x5BB9;&#x504F;&#x6613;&#xFF0C;&#x5927;&#x725B;&#x7ED5;&#x9053;<br>&#x76EE;&#x5F55;</p>
+<a id="more"></a>
+
+
+<h3 id="Java&#x53CD;&#x5C04;"><a href="#Java&#x53CD;&#x5C04;" class="headerlink" title="Java&#x53CD;&#x5C04;"></a>Java&#x53CD;&#x5C04;</h3><p>&#x771F;&#x6B63;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x6F0F;&#x6D1E;&#x7684;&#x5229;&#x7528;&#xFF0C;&#x80AF;&#x5B9A;&#x9700;&#x8981;&#x4E86;&#x89E3;java&#x53CD;&#x5C04;&#x539F;&#x7406;&#x3002;&#x56E0;&#x4E3A;java&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x7684;payload&#x5927;&#x591A;&#x4E0E;&#x53CD;&#x5C04;&#x673A;&#x5236;&#x5BC6;&#x5207;&#x76F8;&#x5173;&#x3002;</p>
+<blockquote>
+<p>&#x5728;Java&#x4E2D;&#x7684;&#x53CD;&#x5C04;&#x673A;&#x5236;&#x662F;&#x6307;&#x5728;&#x8FD0;&#x884C;&#x72B6;&#x6001;&#x4E2D;&#xFF0C;&#x5BF9;&#x4E8E;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#x7C7B;&#x90FD;&#x80FD;&#x591F;&#x77E5;&#x9053;&#x8FD9;&#x4E2A;&#x7C7B;&#x6240;&#x6709;&#x7684;&#x5C5E;&#x6027;&#x548C;&#x65B9;&#x6CD5;&#xFF1B;&#x5E76;&#x4E14;&#x5BF9;&#x4E8E;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x90FD;&#x80FD;&#x591F;&#x8C03;&#x7528;&#x5B83;&#x7684;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;&#xFF1B;&#x8FD9;&#x79CD;&#x52A8;&#x6001;&#x83B7;&#x53D6;&#x4FE1;&#x606F;&#x4EE5;&#x53CA;&#x52A8;&#x6001;&#x8C03;&#x7528;&#x5BF9;&#x8C61;&#x65B9;&#x6CD5;&#x7684;&#x529F;&#x80FD;&#x6210;&#x4E3A;Java&#x8BED;&#x8A00;&#x7684;&#x53CD;&#x5C04;&#x673A;&#x5236;&#x3002;<br>&#x603B;&#x7684;&#x6765;&#x8BF4;&#xFF0C;&#x53CD;&#x5C04;&#x8BA9;java&#x53EF;&#x4EE5;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x6839;&#x636E;&#x4F20;&#x5165;&#x7684;&#x7C7B;&#x540D;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x53BB;&#x6267;&#x884C;&#x8FD9;&#x4E2A;&#x7C7B;&#x5B58;&#x5728;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x800C;&#x4E14;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x5C5E;&#x6027;&#x7684;&#x8BBF;&#x95EE;&#x4FEE;&#x9970;&#x7B26;&#xFF08;public&#x3001;private&#x3001;protect&#xFF09;</p>
+</blockquote>
+<p>&#x603B;&#x6240;&#x5468;&#x77E5;&#xFF0C;&#x4E00;&#x4E2A;&#x6280;&#x672F;&#x7684;&#x5B58;&#x6D3B;&#xFF0C;&#x4E00;&#x5B9A;&#x6709;&#x4ED6;&#x7684;&#x4EF7;&#x503C;&#xFF0C;&#x5426;&#x5219;&#x5728;&#x81EA;&#x7136;&#x751F;&#x5B58;&#x5B9A;&#x5F8B;&#x4E2D;&#x5FC5;&#x5B9A;&#x88AB;&#x6DD8;&#x6C70;&#xFF0C;&#x6838;&#x5F39;&#x4E4B;&#x4E0B;&#x65E0;&#x51A4;&#x9B42;&#xFF08;&#x72D7;&#x5934;&#xFF09;&#x3002;<br>&#x90A3;&#x4E48;java&#x53CD;&#x5C04;&#x6709;&#x4EC0;&#x4E48;&#x4EF7;&#x503C;&#x4E48;&#xFF1F;</p>
+<p>&#x6211;&#x8BA4;&#x4E3A;&#x5C31;&#x662F;&#x5B9E;&#x73B0;<code>&#x52A8;&#x6001;</code>&#x3002;&#x6211;&#x4EEC;&#x4E3E;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;</p>
+<hr>
+<h3 id="&#x4F8B;&#x5B50;-&#x53CD;&#x5C04;"><a href="#&#x4F8B;&#x5B50;-&#x53CD;&#x5C04;" class="headerlink" title="&#x4F8B;&#x5B50;-&#x53CD;&#x5C04;"></a>&#x4F8B;&#x5B50;-&#x53CD;&#x5C04;</h3><p>&#x5047;&#x8BBE;&#x6211;&#x4EEC;&#x6765;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x5973;&#x670B;&#x53CB;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x63A5;&#x53E3;&#x5C31;&#x4E3A;&#x60F3;peach&#xFF0C;&#x6211;&#x4EEC;&#x5C3D;&#x91CF;&#x4F7F;&#x7528;implements&#x64CD;&#x4F5C;&#xFF0C;&#x6240;&#x4EE5;&#x62BD;&#x8C61;&#x7684;&#x5973;&#x670B;&#x53CB;&#x5C31;&#x884C;&#xFF0C;&#x53CD;&#x6B63;&#x4E5F;&#x6CA1;&#x6709;&#xFF0C;&#x90A3;&#x4E48;&#x957F;&#x8FD9;&#x6837;&#x3002;</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Girl_friend</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dream_peach</span><span class="hljs-params">()</span></span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x56E0;&#x4E3A;&#x5973;&#x5B69;&#x5B50;&#x79CD;&#x7C7B;&#x4E0D;&#x540C;&#xFF0C;&#x6BD4;&#x5982;&#x5C0F;&#x841D;&#x8389;&#x8FD8;&#x662F;&#x5BCC;&#x5A46;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x4E00;&#x4E0B;&#x4E0D;&#x540C;&#x7684;&#x7C7B;&#x5973;&#x670B;&#x53CB;</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Luoli</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Girl_friend</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dream_peach</span><span class="hljs-params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;I&apos;m your girlFriend, i am Luoli&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Fupo</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Girl_friend</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dream_peach</span><span class="hljs-params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;I&apos;m your girlFriend, i am Fupo&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5728;&#x4E3B;&#x7C7B;&#x4E2D;&#x60F3;peach&#x90A3;&#x5C31;&#x5F97;&#x8FD9;&#x6837;&#x5199;</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Helloworld</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] a)</span></span>{</span><br><span class="line">        Girl_friend f=<span class="hljs-keyword">new</span> Fupo();</span><br><span class="line">        f.dream_peach();</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="hljs-comment">//&#x8F93;&#x51FA;I&apos;m your girlFriend, i am Fupo</span></span><br></pre></td></tr></tbody></table></figure>
+<p>&#x6843;&#x5B50;&#x786E;&#x5B9E;&#x60F3;&#x597D;&#x4E86;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x6837;&#x5C31;&#x6CA1;&#x6709;&#x52A8;&#x6001;&#x7684;&#x6982;&#x5FF5;&#x4E86;&#xFF0C;&#x6211;&#x6240;&#x7406;&#x89E3;&#x7684;&#x52A8;&#x6001;&#x662F;&#x4F60;&#x8981;&#x4FEE;&#x6539;&#x4E00;&#x4E2A;&#x7C7B;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x4EE3;&#x7801;&#xFF0C;&#x800C;&#x662F;&#x901A;&#x8FC7;&#x4F20;&#x53C2;&#x5C31;&#x53EF;</p>
+<p>&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4F20;&#x7EDF;&#x7684;&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x83B7;&#x53D6;&#x5973;&#x670B;&#x53CB;&#x7684;&#x5B9E;&#x4F8B;</p>
+<blockquote>
+<p>&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x7406;&#x89E3;&#x4E3A;&#x4F60;&#x628A;&#x5973;&#x670B;&#x53CB;&#x7684;&#x5C5E;&#x6027;&#x4EA4;&#x7ED9;&#x5DE5;&#x5382;&#xFF0C;&#x5DE5;&#x5382;&#x5C31;&#x5E2E;&#x4F60;&#x5236;&#x4F5C;&#x4E00;&#x4E2A;&#x5973;&#x670B;&#x53CB;&#x7684;&#x5B9E;&#x4F8B;</p>
+</blockquote>
+<p>&#x90A3;&#x4E48;&#x5DE5;&#x5382;&#x4EE3;&#x7801;&#x5E94;&#x8BE5;&#x8FD9;&#x6837;&#x8FD9;&#x6837;&#x5199;</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Girl_friend_factory</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Girl_friend <span class="hljs-title">getInstance</span><span class="hljs-params">(String girlName)</span></span>{</span><br><span class="line">        Girl_friend f=<span class="hljs-keyword">null</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;Luoli&quot;</span>.equals(girlName)){</span><br><span class="line">            f=<span class="hljs-keyword">new</span> Luoli();</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;Fupo&quot;</span>.equals(girlName)){</span><br><span class="line">            f=<span class="hljs-keyword">new</span> Fupo();</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">return</span> f;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F20;&#x5165;&#x6211;&#x4EEC;&#x671F;&#x671B;&#x7684;&#x5973;&#x670B;&#x53CB;&#x7684;&#x7C7B;&#x578B;&#x540D;&#x5B57;&#x5C31;&#x83B7;&#x5F97;&#x4E86;&#x8FD9;&#x4E2A;&#x5B9E;&#x4F8B;&#xFF08;&#x53EF;&#x60DC;&#x73B0;&#x5B9E;&#x4E16;&#x754C;&#x5E76;&#x6CA1;&#x6709;&#xFF09;&#x3002;<br>&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x8981;&#x7528;&#x7684;&#x65F6;&#x5019;&#x5148;&#x4F7F;&#x7528;&#x5DE5;&#x5382;&#x62FF;&#x5230;&#x5B9E;&#x4F8B;<code>Girl_friend f=Girl_friend_factory.getInstance(&quot;Luoli&quot;);</code>&#x3002;&#x90A3;&#x4E48;&#x6574;&#x4F53;&#x4EE3;&#x7801;&#x5C31;&#x662F;&#x8FD9;&#x6837;&#x4E86;<br>Helloworld.java</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Girl_friend</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dream_peach</span><span class="hljs-params">()</span></span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Luoli</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Girl_friend</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dream_peach</span><span class="hljs-params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;I&apos;m your girlFriend, i am Luoli&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Fupo</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Girl_friend</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dream_peach</span><span class="hljs-params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;I&apos;m your girlFriend, i am Fupo&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Girl_friend_factory</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Girl_friend <span class="hljs-title">getInstance</span><span class="hljs-params">(String girlName)</span></span>{</span><br><span class="line">        Girl_friend f=<span class="hljs-keyword">null</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;Luoli&quot;</span>.equals(girlName)){</span><br><span class="line">            f=<span class="hljs-keyword">new</span> Luoli();</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;Fupo&quot;</span>.equals(girlName)){</span><br><span class="line">            f=<span class="hljs-keyword">new</span> Fupo();</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">return</span> f;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Helloworld</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] a)</span></span>{</span><br><span class="line">        Girl_friend f=Girl_friend_factory.getInstance(<span class="hljs-string">&quot;Luoli&quot;</span>);</span><br><span class="line">        f.dream_peach();</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="hljs-comment">//&#x8F93;&#x51FA;I&apos;m your girlFriend, i am Luoli</span></span><br></pre></td></tr></tbody></table></figure>
+<p>&#x4F3C;&#x4E4E;&#x4E00;&#x5207;&#x5F88;&#x987A;&#x5229;&#x4E86;<br>&#x4F46;&#x662F;&#x4E0D;&#x77E5;&#x9053;&#x6709;&#x6CA1;&#x6709;&#x53D1;&#x73B0;&#xFF0C;&#x5728;Girl_friend_factory&#x4E2D;&#x6211;&#x4EEC;&#x7528;&#x4E86;&#x5F88;&#x591A;if&#x5224;&#x65AD;&#x7C7B;&#x540D;&#xFF0C;&#x90A3;&#x4E48;&#x4E00;&#x65E6;&#x8FD9;&#x4E2A;type&#x6709;&#x51E0;&#x5341;&#x79CD;&#xFF0C;&#x6211;&#x4EEC;&#x6BCF;&#x589E;&#x52A0;&#x4E00;&#x79CD;&#x90FD;&#x8981;&#x505A;&#x4E09;&#x5E03;&#x6B65;&#x64CD;&#x4F5C;</p>
+<ul>
+<li>1&#x3001;&#x589E;&#x52A0;&#x65B0;&#x7684;&#x5973;&#x670B;&#x53CB;&#x7C7B;&#x578B;</li>
+<li>2&#x3001;&#x589E;&#x52A0;if&#x5224;&#x65AD;</li>
+<li>3&#x3001;&#x4E3B;&#x7C7B;&#x4E2D;&#x8C03;&#x7528;</li>
+</ul>
+<p>&#x90A3;&#x4E48;&#x53CD;&#x5C04;&#x5176;&#x5B9E;&#x89E3;&#x51B3;&#x7684;&#x5C31;&#x662F;&#x8FD9;&#x4E48;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#x3002;<br>&#x53CD;&#x5C04;&#x4E3B;&#x8981;&#x662F;&#x6709;&#x8FD9;&#x4E48;&#x51E0;&#x4E2A;&#x51FD;&#x6570;&#x76F4;&#x63A5;&#x53EF;&#x8C03;&#x7528;</p>
+<blockquote>
+<p>&#x83B7;&#x53D6;&#x7C7B;&#x7684;&#x2F45;&#x6CD5;&#xFF1A; forName<br>&#x5B9E;&#x4F8B;&#x5316;&#x7C7B;&#x5BF9;&#x8C61;&#x7684;&#x2F45;&#x6CD5;&#xFF1A; newInstance<br>&#x83B7;&#x53D6;&#x51FD;&#x6570;&#x7684;&#x2F45;&#x6CD5;&#xFF1A; getMethod<br>&#x6267;&#x2F8F;&#x51FD;&#x6570;&#x7684;&#x2F45;&#x6CD5;&#xFF1A; invoke</p>
+</blockquote>
+<p>&#x6211;&#x4EEC;&#x5148;&#x6765;&#x8BF4;&#x4E00;&#x8BF4;forName&#x7684;&#x65B9;&#x6CD5;</p>
+<blockquote>
+<p>Class.forName &#x5982;&#x679C;&#x4F60;&#x77E5;&#x9053;&#x67D0;&#x4E2A;&#x7C7B;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x60F3;&#x83B7;&#x53D6;&#x5230;&#x8FD9;&#x4E2A;&#x7C7B;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x2F64; forName &#x6765;&#x83B7;&#x53D6;</p>
+</blockquote>
+<p>&#x6BD4;&#x5982;&#x6211;&#x4EEC;&#x60F3;&#x83B7;&#x5F97;&#x4E0A;&#x9762;&#x7684;&#x841D;&#x8389;&#x7C7B;&#xFF08;Luoli&#xFF09;,&#x5C31;&#x4E0D;&#x9700;&#x8981;<code>f=new Luoli();</code>&#x4E86;,&#x800C;&#x662F;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x53CD;&#x5C04;<br><code>Girl_friend f=(Girl_friend)Class.forName(&quot;Luoli&quot;).newInstance();</code>&#x5C31;&#x83B7;&#x5F97;&#x4E86;&#x841D;&#x8389;&#x7684;&#x5B9E;&#x4F8B;&#xFF0C;&#x4E0D;&#x77E5;&#x9053;&#x73B0;&#x5728;&#x6709;&#x6CA1;&#x6709;&#x952E;&#x76D8;&#x4FA0;&#x7AD9;&#x51FA;&#x6765;&#x8BF4;&#x660E;&#x660E;<code>f=new Luoli();</code>&#x6BD4;&#x540E;&#x9762;&#x7684;&#x77ED;&#x4E0D;&#x662F;&#x4E48;&#x3002;</p>
+<p>&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x8BF4;&#x7684;&#x91CD;&#x70B9;&#x662F;&#x52A8;&#x6001;&#xFF0C;&#x540E;&#x8005;&#x7684;&#x7C7B;&#x540D;&#x53EF;&#x4EE5;&#x52A8;&#x6001;&#x4F20;&#x5165;&#xFF0C;&#x5C82;&#x4E0D;&#x662F;&#x7F8E;&#x6ECB;&#x6ECB;&#x3002;<br>&#x90A3;&#x4E48;&#x5B8C;&#x6574;&#x7684;&#x4EE3;&#x7801;&#x5C31;&#x662F;</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Girl_friend</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dream_peach</span><span class="hljs-params">()</span></span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Luoli</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Girl_friend</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dream_peach</span><span class="hljs-params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;I&apos;m your girlFriend, i am Luoli&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Fupo</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Girl_friend</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dream_peach</span><span class="hljs-params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;I&apos;m your girlFriend, i am Fupo&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Girl_friend_factory</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Girl_friend <span class="hljs-title">getInstance</span><span class="hljs-params">(String girlName)</span></span>{</span><br><span class="line">        Girl_friend f=<span class="hljs-keyword">null</span>;</span><br><span class="line">        <span class="hljs-keyword">try</span>{</span><br><span class="line">            f=(Girl_friend)Class.forName(girlName).newInstance();</span><br><span class="line">        }<span class="hljs-keyword">catch</span> (Exception e) {</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">return</span> f;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Helloworld</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] a)</span></span>{</span><br><span class="line">        Girl_friend f=Girl_friend_factory.getInstance(<span class="hljs-string">&quot;Luoli&quot;</span>);</span><br><span class="line">        f.dream_peach();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x5230;&#x6B64;&#x6211;&#x4EEC;&#x53CD;&#x5C04;&#x83B7;&#x53D6;&#x7C7B;&#x7684;&#x2F45;&#x6CD5;&#xFF1A; forName&#x7684;&#x610F;&#x4E49;&#x5927;&#x6982;&#x5C31;&#x6709;&#x4E86;</p>
+<hr>
+<p>&#x6211;&#x4EEC;&#x4E00;&#x76F4;&#x8BF4;&#x5230;&#x53CD;&#x5C04;&#x6709;4&#x4E2A;&#x51FD;&#x6570;&#x6BD4;&#x8F83;&#x91CD;&#x8981;</p>
+<blockquote>
+<p>&#x83B7;&#x53D6;&#x7C7B;&#x7684;&#x2F45;&#x6CD5;&#xFF1A; forName<br>&#x5B9E;&#x4F8B;&#x5316;&#x7C7B;&#x5BF9;&#x8C61;&#x7684;&#x2F45;&#x6CD5;&#xFF1A; newInstance<br>&#x83B7;&#x53D6;&#x51FD;&#x6570;&#x7684;&#x2F45;&#x6CD5;&#xFF1A; getMethod<br>&#x6267;&#x2F8F;&#x51FD;&#x6570;&#x7684;&#x2F45;&#x6CD5;&#xFF1A; invoke</p>
+</blockquote>
+<p>&#x90A3;&#x4E48;&#x6BD4;&#x8F83;&#x91CD;&#x8981;&#x7684;&#x4F8B;&#x5B50;&#x4E00;&#x822C;&#x5C31;&#x662F;&#x957F;&#x8FD9;&#x6837;</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">(String className, String methodName)</span> <span class="hljs-keyword">throws</span> Exception </span>{</span><br><span class="line">    Class clazz = Class.forName(className);    </span><br><span class="line">    clazz.getMethod(methodName).invoke(clazz.newInstance()); </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x77E5;&#x9053;&#x4E00;&#x70B9;&#x70B9;java-rce&#x7684;&#x540C;&#x5FD7;&#x5E94;&#x8BE5;&#x89C1;&#x8FC7;java&#x547D;&#x4EE4;&#x6267;&#x884C;&#x6700;&#x5E38;&#x89C1;&#x7684;&#x76F4;&#x63A5;&#x8C03;&#x7528;payload</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Runtime.getRuntime().exec(<span class="hljs-string">&quot;calc.exe&quot;</span>);</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>getRuntime():&#x5176;&#x5B9E;&#x5C31;&#x662F;Runtime&#x7C7B;&#x83B7;&#x53D6;&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x7B49;&#x4E8E;new&#x4E00;&#x4E2A;Runtime&#x7C7B;&#x3002;&#x4E4B;&#x6240;&#x4EE5;&#x5C01;&#x88C5;&#x6210;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x662F;&#x4E3A;&#x4E86;&#x4E0D;&#x8C03;&#x7528;&#x4E00;&#x6B21;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x53EA;&#x83B7;&#x53D6;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x6765;&#x6267;&#x884C;&#x64CD;&#x4F5C;&#x3002;<br>exec():&#x8C03;&#x7528;exec&#x51FD;&#x6570;<br>calc.exe&#xFF1A;&#x8C03;&#x7528;&#x8BA1;&#x7B97;&#x5668;&#x7A0B;&#x5E8F;</p>
+</blockquote>
+<p>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x5C06;&#x8FD9;&#x4E2A;poc&#x62D3;&#x5C55;&#xFF0C;&#x4F7F;&#x7528;&#x53CD;&#x5C04;&#x56DB;&#x4E2A;&#x51FD;&#x6570;&#x6765;&#x5229;&#x7528;&#xFF0C;&#x90A3;&#x4E48;&#x957F;&#x8FD9;&#x6837;</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Helloworld</span></span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] a)</span> <span class="hljs-keyword">throws</span> ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException </span>{</span><br><span class="line">        Class clazz = Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>);</span><br><span class="line">        clazz.getMethod(<span class="hljs-string">&quot;exec&quot;</span>, String.class).invoke(clazz.getMethod(<span class="hljs-string">&quot;getRuntime&quot;</span>).invoke(clazz), <span class="hljs-string">&quot;calc.exe&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="1.png" alt="java&#x4EE3;&#x7801;&#x5BA1;&#x8BA1;&#x5165;&#x95E8;"></p>
+<hr>
+<p>&#x6211;&#x4EEC;&#x4E00;&#x6B65;&#x4E00;&#x6B65;&#x6765;&#x804A;&#x4E00;&#x804A;&#x8FD9;&#x4E2A;&#x53CD;&#x5C04;&#x7684;poc&#x4E3A;&#x4F55;&#x80FD;&#x6210;&#x529F;&#x3002;</p>
+<hr>
+<h4 id="forName"><a href="#forName" class="headerlink" title="forName"></a>forName</h4><p>&#x83B7;&#x5F97;&#x4E00;&#x4E2A;class&#x5BF9;&#x8C61;(java.lang.Class)&#x6709;&#x4E09;&#x79CD;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<ol>
+<li>obj.getClass(): &#x5982;&#x679C;&#x4E0A;&#x4E0B;&#x2F42;&#x4E2D;&#x5B58;&#x5728;&#x67D0;&#x4E2A;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B; obj &#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x901A;&#x8FC7;&#xFF0C;obj.getClass() &#x6765;&#x83B7;&#x53D6;&#x5B83;&#x7684;&#x7C7B;</li>
+<li>Test.class:Test&#x662F;&#x4E00;&#x4E2A;&#x5DF2;&#x7ECF;&#x52A0;&#x8F7D;&#x7684;&#x7C7B;&#xFF0C;&#x60F3;&#x83B7;&#x53D6;&#x5B83;&#x7684;java.lang.Class&#x5BF9;&#x8C61;&#xFF0C;&#x76F4;&#x63A5;&#x62FF;&#x53D6;class&#x53C2;&#x6570;&#x5373;&#x53EF;&#x3002;&#xFF08;&#x8FD9;&#x4E0D;&#x662F;&#x53CD;&#x5C04;&#x673A;&#x5236;&#xFF09;</li>
+<li>Class.forName:&#x5982;&#x679C;&#x77E5;&#x9053;&#x7C7B;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;forname&#x6765;&#x83B7;&#x53D6;</li>
+</ol>
+<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x7B80;&#x77ED;&#x7684;&#x4EE3;&#x7801;&#x9A8C;&#x8BC1;-&#x5176;&#x4E2D;Runtime&#x662F;&#x4E00;&#x4E2A;&#x5DF2;&#x7ECF;&#x52A0;&#x8F7D;&#x4E86;&#x7684;&#x7C7B;&#xFF0C;getRuntime&#x80FD;&#x83B7;&#x5F97;&#x4E00;&#x4E2A;&#x7C7B;&#x7684;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E;&#x5DE5;&#x5382;&#x4E86;</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Runtime.getRuntime());</span><br><span class="line">System.out.println(Runtime.class);</span><br><span class="line">System.out.println( );</span><br><span class="line">System.out.println(Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>));</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x8F93;&#x51FA;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Runtime@16b98e56</span><br><span class="line">class java.lang.Runtime</span><br><span class="line">class java.lang.Runtime</span><br><span class="line">class java.lang.Runtime</span><br></pre></td></tr></tbody></table></figure>
+
+<hr>
+<h4 id="getMethod"><a href="#getMethod" class="headerlink" title="getMethod"></a>getMethod</h4><p>getMethod &#x7684;&#x4F5C;&#x7528;&#x662F;&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x83B7;&#x53D6;&#x4E00;&#x4E2A;&#x7C7B;&#x7684;&#x67D0;&#x4E2A;&#x7279;&#x5B9A;&#x7684;<code>&#x516C;&#x6709;</code>&#x65B9;&#x6CD5;&#x3002;<br>&#x800C;Java&#x4E2D;&#x652F;&#x6301;&#x7C7B;&#x7684;&#x91CD;&#x8F7D;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x80FD;&#x4EC5;&#x901A;&#x8FC7;&#x51FD;&#x6570;&#x540D;&#x6765;&#x786E;&#x5B9A;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x5728;&#x8C03;&#x7528; getMethod &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x4F20;&#x7ED9;&#x4ED6;&#x4F60;&#x9700;&#x8981;&#x83B7;&#x53D6;&#x7684;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x5217;&#x8868;&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;<br>&#x540E;&#x9762;&#x7684;String.class&#x662F;&#x53C2;&#x6570;</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="hljs-string">&quot;exec&quot;</span>, String.class)</span><br></pre></td></tr></tbody></table></figure>
+
+<hr>
+<h4 id="invoke"><a href="#invoke" class="headerlink" title="invoke"></a>invoke</h4><p>invoke&#x65B9;&#x6CD5;&#x4F4D;&#x4E8E;Method&#x7C7B;&#x4E0B;&#xFF0C;&#x5176;&#x7684;&#x4F5C;&#x7528;&#x662F;&#x4F20;&#x5165;&#x53C2;&#x6570;&#xFF0C;&#x6267;&#x884C;&#x65B9;&#x6CD5;</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">invoke</span><span class="hljs-params">(Object obj, Object... args)</span></span></span><br></pre></td></tr></tbody></table></figure>
+<p>&#x6CE8;&#x610F;&#x5B83;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x6267;&#x884C;method&#x7684;&#x5BF9;&#x8C61;<br>&#x5B83;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x6267;&#x884C;method&#x7684;&#x5BF9;&#x8C61;&#xFF1A;</p>
+<ul>
+<li>&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x662F;&#x4E00;&#x4E2A;&#x666E;&#x901A;&#x65B9;&#x6CD5;&#xFF0C;&#x90A3;&#x4E48;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x7C7B;&#x5BF9;&#x8C61;</li>
+<li>&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x662F;&#x4E00;&#x4E2A;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#xFF0C;&#x90A3;&#x4E48;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x7C7B;</li>
+</ul>
+<p>&#x6211;&#x4EEC;&#x6B63;&#x5E38;&#x6267;&#x884C;&#x65B9;&#x6CD5;&#x662F; <code>[1].method([2], [3], [4]...) </code>&#xFF0C;&#x5176;&#x5B9E;&#x5728;&#x53CD;&#x5C04;&#x91CC;&#x5C31;&#x662F;<br><code>method.invoke([1], [2], [3], [4]...) </code>&#x3002;<br>&#x5BF9;&#x4E8E;&#x6211;&#x4EEC;&#x7684;exec&#xFF0C;&#x662F;&#x4E00;&#x4E2A;&#x666E;&#x901A;&#x65B9;&#x6CD5;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x4F20;&#x5165;&#x7C7B;&#x5BF9;&#x8C61;&#xFF0C;&#x5373;<code>invoke(&#x7C7B;&#x5BF9;&#x8C61;&#xFF0C;exec&#x65B9;&#x6CD5;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570;)</code></p>
+<hr>
+<h3 id="&#x5408;&#x5E76;&#x53CD;&#x5C04;&#x51FD;&#x6570;&#x5F39;&#x8BA1;&#x7B97;&#x5668;"><a href="#&#x5408;&#x5E76;&#x53CD;&#x5C04;&#x51FD;&#x6570;&#x5F39;&#x8BA1;&#x7B97;&#x5668;" class="headerlink" title="&#x5408;&#x5E76;&#x53CD;&#x5C04;&#x51FD;&#x6570;&#x5F39;&#x8BA1;&#x7B97;&#x5668;"></a>&#x5408;&#x5E76;&#x53CD;&#x5C04;&#x51FD;&#x6570;&#x5F39;&#x8BA1;&#x7B97;&#x5668;</h3><p>&#x90A3;&#x4E48;&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x8C03;&#x7528;&#x8BA1;&#x7B97;&#x5668;&#x7684;&#x4E00;&#x53E5;&#x8BDD;&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x4E3A;</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="hljs-string">&quot;exec&quot;</span>, String.class).invoke(Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>).getMethod(<span class="hljs-string">&quot;getRuntime&quot;</span>).invoke(Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>)),<span class="hljs-string">&quot;calc.exe&quot;</span>)</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x6211;&#x901A;&#x8FC7;&#x7F29;&#x8FDB;&#x6765;&#x66F4;&#x53CB;&#x597D;&#x7684;&#x4F53;&#x73B0;</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>) </span><br><span class="line">        .getMethod(<span class="hljs-string">&quot;exec&quot;</span>, String.class)</span><br><span class="line">        .invoke(</span><br><span class="line">                Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>)</span><br><span class="line">                        .getMethod(<span class="hljs-string">&quot;getRuntime&quot;</span>)</span><br><span class="line">                        .invoke(Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>))</span><br><span class="line">                ,<span class="hljs-string">&quot;calc.exe&quot;</span></span><br><span class="line">                );</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x5176;&#x5B9E;&#x662F;&#x8C03;&#x7528;&#x4E86;2&#x6B21;invoke&#x51FD;&#x6570;&#xFF0C;&#x91CC;&#x9762;&#x4E00;&#x5C42;&#x662F;&#x4F7F;&#x7528;getRuntime&#x7684;&#x65E0;&#x53C2;&#x51FD;&#x6570;&#x83B7;&#x5F97;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x3002;&#x5916;&#x9762;&#x4E00;&#x5C42;&#x5219;&#x662F;&#x8C03;&#x7528;exec&#x6765;&#x5F39;&#x8BA1;&#x7B97;&#x5668;<br><img src="2.png" alt="java&#x4EE3;&#x7801;&#x5BA1;&#x8BA1;&#x5165;&#x95E8;"><br>&#x5982;&#x679C;&#x505A;&#x62C6;&#x5206;&#xFF0C;&#x90A3;&#x4E48;&#x4E00;&#x6B65;&#x6B65;&#x5C31;&#x662F;&#x8FD9;&#x6837;&#x7684;</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>);</span><br><span class="line">Method execMethod = clazz.getMethod(<span class="hljs-string">&quot;exec&quot;</span>, String.class);</span><br><span class="line">Method getRuntimeMethod = clazz.getMethod(<span class="hljs-string">&quot;getRuntime&quot;</span>);</span><br><span class="line">Object runtime = getRuntimeMethod.invoke(clazz);</span><br><span class="line">execMethod.invoke(runtime, <span class="hljs-string">&quot;calc.exe&quot;</span>);</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="&#x6307;&#x5B9A;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x751F;&#x6210;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;"><a href="#&#x6307;&#x5B9A;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x751F;&#x6210;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;" class="headerlink" title="&#x6307;&#x5B9A;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x751F;&#x6210;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;"></a>&#x6307;&#x5B9A;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x751F;&#x6210;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;</h3><p>&#x5047;&#x8BBE;&#x4E00;&#x4E2A;&#x7C7B;&#x6CA1;&#x6709;getRuntime&#x8FD9;&#x6837;&#x7684;&#x83B7;&#x53D6;&#x5B9E;&#x4F8B;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4E5F;&#x6CA1;&#x6709;&#x516C;&#x5171;&#x7684;&#x65E0;&#x53C2;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C31;&#x8981;&#x7528;&#x5230;getConsturctor()&#x51FD;&#x6570;</p>
+<blockquote>
+<p>getConsturctor()&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x9009;&#x5B9A;&#x6307;&#x5B9A;&#x63A5;&#x53E3;&#x683C;&#x5F0F;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;(&#x7531;&#x4E8E;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E5F;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x53C2;&#x6570;&#x6765;&#x8FDB;&#x884C;&#x91CD;&#x8F7D;)&#xFF0C;&#x5373;&#xFF1A;getConsturctor(&#x53C2;&#x6570;&#x7C7B;&#x578B;)<br>&#x9009;&#x5B9A;&#x540E;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;newInstance(),&#x5E76;&#x4F20;&#x5165;&#x6784;&#x9020;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x6267;&#x884C;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF0C;&#x5373;newInstance(&#x4F20;&#x5165;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x53C2;&#x6570;)&#x3002;</p>
+</blockquote>
+<p>&#x6BD4;&#x5982;ProcessBuilder&#x6709;&#x4E24;&#x4E2A;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF1A;</p>
+<blockquote>
+<p>public ProcessBuilder(List<string> command)<br>public ProcessBuilder(String&#x2026; command)(&#x6B64;&#x5904;&#xFF0C;String&#x2026;&#x8FD9;&#x79CD;&#x8BED;&#x6CD5;&#x8868;&#x793A;String&#x53C2;&#x6570;&#x6570;&#x91CF;&#x662F;&#x53EF;&#x53D8;&#x7684;&#xFF0C;&#x4E0E;String[]&#x4E00;&#x6837;)</string></p>
+</blockquote>
+<p>&#x5BF9;&#x5E94;2&#x79CD;&#x65B9;&#x6CD5;&#x7684;poc&#x5373;&#x957F;&#x8FD9;&#x6837;</p>
+<blockquote>
+<p>Class.forName(&#x201C;java.lang.ProcessBuilder&#x201D;).getConstructor(String.class).newInstance(&#x201C;calc.exe&#x201D;))<br>Class.forName(&#x201C;java.lang.ProcessBuilder&#x201D;).getConstructor(List.class).newInstance(Arrays.asList(&#x201C;calc.exe&#x201D;)))</p>
+</blockquote>
+<p>&#x4F5C;&#x4E3A;list&#x7684;&#x6784;&#x9020;&#x90A3;&#x4E48;&#x4EE3;&#x7801;&#x4E3A;</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Class.forName(<span class="hljs-string">&quot;java.lang.ProcessBuilder&quot;</span>);</span><br><span class="line">clazz.getMethod(<span class="hljs-string">&quot;start&quot;</span>).invoke(</span><br><span class="line">    clazz.getConstructor(List.class).newInstance(Arrays.asList(<span class="hljs-string">&quot;calc.exe&quot;</span>))</span><br><span class="line">    );</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x4F5C;&#x4E3A;string&#x7684;&#x6784;&#x9020;&#x4EE3;&#x7801;&#x4E3A;</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Class.forName(<span class="hljs-string">&quot;java.lang.ProcessBuilder&quot;</span>);</span><br><span class="line">clazz.getMethod(<span class="hljs-string">&quot;start&quot;</span>).invoke(</span><br><span class="line">        clazz.getConstructor(String[].class).newInstance(<span class="hljs-keyword">new</span> String[][]{{<span class="hljs-string">&quot;calc.exe&quot;</span>}})</span><br><span class="line">);</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="3.png" alt="java&#x4EE3;&#x7801;&#x5BA1;&#x8BA1;&#x5165;&#x95E8;"></p>
+<h3 id="&#x6267;&#x884C;&#x79C1;&#x6709;&#x65B9;&#x6CD5;"><a href="#&#x6267;&#x884C;&#x79C1;&#x6709;&#x65B9;&#x6CD5;" class="headerlink" title="&#x6267;&#x884C;&#x79C1;&#x6709;&#x65B9;&#x6CD5;"></a>&#x6267;&#x884C;&#x79C1;&#x6709;&#x65B9;&#x6CD5;</h3><p>&#x8FD9;&#x662F;&#x6211;&#x8BA4;&#x4E3A;&#x53CD;&#x5C04;&#x6700;&#x9A9A;&#x7684;<br>&#x6211;&#x4EEC;&#x524D;&#x9762;&#x7528;&#x7684;&#x65B9;&#x6CD5;&#x6216;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x662F;public&#x51FD;&#x6570;&#xFF0C;&#x4F46;&#x662F;&#x5982;&#x679C;&#x662F;&#x79C1;&#x6709;&#x65B9;&#x6CD5;&#xFF0C;&#x6211;&#x4EEC;&#x8BE5;&#x5982;&#x4F55;&#x8C03;&#x7528;&#xFF1F;<br>&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x7528;&#x7684;&#x90FD;&#x662F;getMethod&#x3001;getConstructor&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x9700;&#x8981;&#x4F7F;&#x7528;getDeclaredMethod&#x3001;getDeclaredConstructor</p>
+<blockquote>
+<p>getMethod&#x7B49;&#x65B9;&#x6CD5;&#x83B7;&#x53D6;&#x7684;&#x662F;&#x5F53;&#x524D;&#x7C7B;&#x4E2D;&#x6240;&#x6709;&#x516C;&#x5171;&#x65B9;&#x6CD5;&#xFF0C;&#x5305;&#x62EC;&#x4ECE;&#x7236;&#x7C7B;&#x7EE7;&#x627F;&#x7684;&#x65B9;&#x6CD5;<br>getDeclared&#x7B49;&#x65B9;&#x6CD5;&#x83B7;&#x53D6;&#x7684;&#x662F;&#x5F53;&#x524D;&#x7C7B;&#x4E2D;&#x201C;&#x58F0;&#x660E;&#x201D;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x662F;&#x5B9E;&#x5728;&#x5199;&#x5728;&#x8FD9;&#x4E2A;&#x7C7B;&#x91CC;&#x7684;&#xFF0C;&#x5305;&#x62EC;&#x79C1;&#x6709;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4F46;&#x4ECE;&#x7236;&#x7C7B;&#x91CC;&#x7EE7;&#x627F;&#x6765;&#x7684;&#x5C31;&#x4E0D;&#x5305;&#x542B;&#x4E86;</p>
+</blockquote>
+<p>&#x4E4B;&#x524D;&#x8BF4;&#x5230;Runtime&#x7684;&#x6784;&#x9020;&#x65B9;&#x5F0F;&#x662F;&#x4E00;&#x4E2A;&#x79C1;&#x6709;&#x65B9;&#x6CD5;<br><img src="4.png"><br>&#x5982;&#x679C;&#x4EE3;&#x7801;&#x8FD8;&#x662F;&#x6309;&#x4E4B;&#x524D;&#x7684;&#x5199;&#x6CD5;</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>);</span><br><span class="line">Constructor m = clazz.getConstructor();</span><br><span class="line">clazz.getMethod(<span class="hljs-string">&quot;exec&quot;</span>, String.class).invoke(m.newInstance(), <span class="hljs-string">&quot;calc.exe&quot;</span>);</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x5F97;&#x5230;&#x62A5;&#x9519;<br><img src="5.png"><br>&#x5927;&#x6982;&#x610F;&#x601D;&#x5C31;&#x662F;&#x4E0D;&#x80FD;&#x76F4;&#x63A5;&#x4F7F;&#x7528;clazz.getConstructor() &#x51FD;&#x6570;<br>&#x90A3;&#x4E48;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x901A;&#x8FC7;&#x4FEE;&#x6539;&#x4FEE;&#x9970;&#x7B26;&#x6765;&#x8C03;&#x7528;Runtime&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x6765;&#x83B7;&#x53D6;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x6765;&#x6267;&#x884C;calc.exe<br>&#x4EE3;&#x7801;</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Class.forName(<span class="hljs-string">&quot;java.lang.Runtime&quot;</span>);</span><br><span class="line">Constructor m = clazz.getDeclaredConstructor();</span><br><span class="line">m.setAccessible(<span class="hljs-keyword">true</span>);</span><br><span class="line">clazz.getMethod(<span class="hljs-string">&quot;exec&quot;</span>, String.class).invoke(m.newInstance(), <span class="hljs-string">&quot;calc.exe&quot;</span>);</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x6210;&#x529F;&#x5F39;&#x51FA;&#x8BA1;&#x7B97;&#x5668;<br><img src="7.png"><br>&#x6211;&#x4EEC;&#x5047;&#x8BBE;&#x628A;m.setAccessible(true);&#x6CE8;&#x91CA;&#x8D77;&#x6765;<br>&#x539F;&#x56E0;&#x786E;&#x5B9E;&#x662F;&#x79C1;&#x6709;&#x53D8;&#x91CF;&#x7684;&#x95EE;&#x9898;<br><img src="6.png"></p>
+<blockquote>
+<p>&#x5728;&#x83B7;&#x53D6;&#x5230;&#x79C1;&#x6709;&#x65B9;&#x6CD5;&#x540E;&#xFF0C;&#x901A;&#x8FC7;setAccessible(true)&#x53EF;&#x4EE5;&#x6253;&#x7834;&#x79C1;&#x6709;&#x65B9;&#x6CD5;&#x8BBF;&#x95EE;&#x9650;&#x5236;&#xFF0C;&#x4ECE;&#x800C;&#x8FDB;&#x884C;&#x8C03;&#x7528;&#x3002;&#x5728;&#x5176;&#x4ED6;&#x5730;&#x65B9;&#x7684;&#x4F7F;&#x7528;&#xFF0C;getDeclaredMethod&#x3001;getDeclaredConstructor&#x548C;getMethod&#x3001;getConstructor&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#x662F;&#x4E00;&#x81F4;&#x7684;</p>
+</blockquote>
+<h3 id="&#x9644;&#x5F55;"><a href="#&#x9644;&#x5F55;" class="headerlink" title="&#x9644;&#x5F55;"></a>&#x9644;&#x5F55;</h3><h4 id="&#x53CD;&#x5C04;&#x673A;&#x5236;&#x7684;&#x76F8;&#x5173;&#x7C7B;"><a href="#&#x53CD;&#x5C04;&#x673A;&#x5236;&#x7684;&#x76F8;&#x5173;&#x7C7B;" class="headerlink" title="&#x53CD;&#x5C04;&#x673A;&#x5236;&#x7684;&#x76F8;&#x5173;&#x7C7B;"></a>&#x53CD;&#x5C04;&#x673A;&#x5236;&#x7684;&#x76F8;&#x5173;&#x7C7B;</h4><p>&#x4E0E;Java&#x53CD;&#x5C04;&#x76F8;&#x5173;&#x7684;&#x7C7B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x7C7B;&#x540D;</th>
+<th>&#x7528;&#x9014;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Class&#x7C7B;</td>
+<td>&#x4EE3;&#x8868;&#x7C7B;&#x7684;&#x5B9E;&#x4F53;&#xFF0C;&#x5728;&#x8FD0;&#x884C;&#x7684;Java&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E2D;&#x8868;&#x793A;&#x7C7B;&#x548C;&#x63A5;&#x53E3;</td>
+</tr>
+<tr>
+<td>Field&#x7C7B;</td>
+<td>&#x4EE3;&#x8868;&#x7C7B;&#x7684;&#x6210;&#x5458;&#x53D8;&#x91CF;&#xFF08;&#x6210;&#x5458;&#x53D8;&#x91CF;&#x4E5F;&#x79F0;&#x4E3A;&#x7C7B;&#x7684;&#x5C5E;&#x6027;&#xFF09;</td>
+</tr>
+<tr>
+<td>Method&#x7C7B;</td>
+<td>&#x4EE3;&#x8868;&#x7C7B;&#x7684;&#x65B9;&#x6CD5;</td>
+</tr>
+<tr>
+<td>Constructor&#x7C7B;</td>
+<td>&#x4EE3;&#x8868;&#x7C7B;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;</td>
+</tr>
+</tbody></table>
+<h4 id="Class&#x7C7B;"><a href="#Class&#x7C7B;" class="headerlink" title="Class&#x7C7B;"></a>Class&#x7C7B;</h4><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/java/lang/Class">Class</a>&#x4EE3;&#x8868;&#x7C7B;&#x7684;&#x5B9E;&#x4F53;&#xFF0C;&#x5728;&#x8FD0;&#x884C;&#x7684;Java&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E2D;&#x8868;&#x793A;&#x7C7B;&#x548C;&#x63A5;&#x53E3;&#x3002;&#x5728;&#x8FD9;&#x4E2A;&#x7C7B;&#x4E2D;&#x63D0;&#x4F9B;&#x4E86;&#x5F88;&#x591A;&#x6709;&#x7528;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x91CC;&#x5BF9;&#x4ED6;&#x4EEC;&#x7B80;&#x5355;&#x7684;&#x5206;&#x7C7B;&#x4ECB;&#x7ECD;&#x3002;</p>
+<ul>
+<li><strong>&#x83B7;&#x5F97;&#x7C7B;&#x76F8;&#x5173;&#x7684;&#x65B9;&#x6CD5;</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>&#x65B9;&#x6CD5;</th>
+<th>&#x7528;&#x9014;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>asSubclass(Class<u> clazz)</u></td>
+<td>&#x628A;&#x4F20;&#x9012;&#x7684;&#x7C7B;&#x7684;&#x5BF9;&#x8C61;&#x8F6C;&#x6362;&#x6210;&#x4EE3;&#x8868;&#x5176;&#x5B50;&#x7C7B;&#x7684;&#x5BF9;&#x8C61;</td>
+</tr>
+<tr>
+<td>Cast</td>
+<td>&#x628A;&#x5BF9;&#x8C61;&#x8F6C;&#x6362;&#x6210;&#x4EE3;&#x8868;&#x7C7B;&#x6216;&#x662F;&#x63A5;&#x53E3;&#x7684;&#x5BF9;&#x8C61;</td>
+</tr>
+<tr>
+<td>getClassLoader()</td>
+<td>&#x83B7;&#x5F97;&#x7C7B;&#x7684;&#x52A0;&#x8F7D;&#x5668;</td>
+</tr>
+<tr>
+<td>getClasses()</td>
+<td>&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#xFF0C;&#x6570;&#x7EC4;&#x4E2D;&#x5305;&#x542B;&#x8BE5;&#x7C7B;&#x4E2D;&#x6240;&#x6709;&#x516C;&#x5171;&#x7C7B;&#x548C;&#x63A5;&#x53E3;&#x7C7B;&#x7684;&#x5BF9;&#x8C61;</td>
+</tr>
+<tr>
+<td>getDeclaredClasses()</td>
+<td>&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#xFF0C;&#x6570;&#x7EC4;&#x4E2D;&#x5305;&#x542B;&#x8BE5;&#x7C7B;&#x4E2D;&#x6240;&#x6709;&#x7C7B;&#x548C;&#x63A5;&#x53E3;&#x7C7B;&#x7684;&#x5BF9;&#x8C61;</td>
+</tr>
+<tr>
+<td>forName(String className)</td>
+<td>&#x6839;&#x636E;&#x7C7B;&#x540D;&#x8FD4;&#x56DE;&#x7C7B;&#x7684;&#x5BF9;&#x8C61;</td>
+</tr>
+<tr>
+<td>getName()</td>
+<td>&#x83B7;&#x5F97;&#x7C7B;&#x7684;&#x5B8C;&#x6574;&#x8DEF;&#x5F84;&#x540D;&#x5B57;</td>
+</tr>
+<tr>
+<td>newInstance()</td>
+<td>&#x521B;&#x5EFA;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;</td>
+</tr>
+<tr>
+<td>getPackage()</td>
+<td>&#x83B7;&#x5F97;&#x7C7B;&#x7684;&#x5305;</td>
+</tr>
+<tr>
+<td>getSimpleName()</td>
+<td>&#x83B7;&#x5F97;&#x7C7B;&#x7684;&#x540D;&#x5B57;</td>
+</tr>
+<tr>
+<td>getSuperclass()</td>
+<td>&#x83B7;&#x5F97;&#x5F53;&#x524D;&#x7C7B;&#x7EE7;&#x627F;&#x7684;&#x7236;&#x7C7B;&#x7684;&#x540D;&#x5B57;</td>
+</tr>
+<tr>
+<td>getInterfaces()</td>
+<td>&#x83B7;&#x5F97;&#x5F53;&#x524D;&#x7C7B;&#x5B9E;&#x73B0;&#x7684;&#x7C7B;&#x6216;&#x662F;&#x63A5;&#x53E3;</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>&#x83B7;&#x5F97;&#x7C7B;&#x4E2D;&#x5C5E;&#x6027;&#x76F8;&#x5173;&#x7684;&#x65B9;&#x6CD5;</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>&#x65B9;&#x6CD5;</th>
+<th>&#x7528;&#x9014;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>getField(String name)</td>
+<td>&#x83B7;&#x5F97;&#x67D0;&#x4E2A;&#x516C;&#x6709;&#x7684;&#x5C5E;&#x6027;&#x5BF9;&#x8C61;</td>
+</tr>
+<tr>
+<td>getFields()</td>
+<td>&#x83B7;&#x5F97;&#x6240;&#x6709;&#x516C;&#x6709;&#x7684;&#x5C5E;&#x6027;&#x5BF9;&#x8C61;</td>
+</tr>
+<tr>
+<td>getDeclaredField(String name)</td>
+<td>&#x83B7;&#x5F97;&#x67D0;&#x4E2A;&#x5C5E;&#x6027;&#x5BF9;&#x8C61;</td>
+</tr>
+<tr>
+<td>getDeclaredFields()</td>
+<td>&#x83B7;&#x5F97;&#x6240;&#x6709;&#x5C5E;&#x6027;&#x5BF9;&#x8C61;</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>&#x83B7;&#x5F97;&#x7C7B;&#x4E2D;&#x6CE8;&#x89E3;&#x76F8;&#x5173;&#x7684;&#x65B9;&#x6CD5;</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>&#x65B9;&#x6CD5;</th>
+<th>&#x7528;&#x9014;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>getAnnotation(Class<a> annotationClass)</a></td>
+<td>&#x8FD4;&#x56DE;&#x8BE5;&#x7C7B;&#x4E2D;&#x4E0E;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x5339;&#x914D;&#x7684;&#x516C;&#x6709;&#x6CE8;&#x89E3;&#x5BF9;&#x8C61;</td>
+</tr>
+<tr>
+<td>getAnnotations()</td>
+<td>&#x8FD4;&#x56DE;&#x8BE5;&#x7C7B;&#x6240;&#x6709;&#x7684;&#x516C;&#x6709;&#x6CE8;&#x89E3;&#x5BF9;&#x8C61;</td>
+</tr>
+<tr>
+<td>getDeclaredAnnotation(Class<a> annotationClass)</a></td>
+<td>&#x8FD4;&#x56DE;&#x8BE5;&#x7C7B;&#x4E2D;&#x4E0E;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x5339;&#x914D;&#x7684;&#x6240;&#x6709;&#x6CE8;&#x89E3;&#x5BF9;&#x8C61;</td>
+</tr>
+<tr>
+<td>getDeclaredAnnotations()</td>
+<td>&#x8FD4;&#x56DE;&#x8BE5;&#x7C7B;&#x6240;&#x6709;&#x7684;&#x6CE8;&#x89E3;&#x5BF9;&#x8C61;</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>&#x83B7;&#x5F97;&#x7C7B;&#x4E2D;&#x6784;&#x9020;&#x5668;&#x76F8;&#x5173;&#x7684;&#x65B9;&#x6CD5;</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>&#x65B9;&#x6CD5;</th>
+<th>&#x7528;&#x9014;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>getConstructor(Class&#x2026;&lt;?&gt; parameterTypes)</td>
+<td>&#x83B7;&#x5F97;&#x8BE5;&#x7C7B;&#x4E2D;&#x4E0E;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x5339;&#x914D;&#x7684;&#x516C;&#x6709;&#x6784;&#x9020;&#x65B9;&#x6CD5;</td>
+</tr>
+<tr>
+<td>getConstructors()</td>
+<td>&#x83B7;&#x5F97;&#x8BE5;&#x7C7B;&#x7684;&#x6240;&#x6709;&#x516C;&#x6709;&#x6784;&#x9020;&#x65B9;&#x6CD5;</td>
+</tr>
+<tr>
+<td>getDeclaredConstructor(Class&#x2026;&lt;?&gt; parameterTypes)</td>
+<td>&#x83B7;&#x5F97;&#x8BE5;&#x7C7B;&#x4E2D;&#x4E0E;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x5339;&#x914D;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;</td>
+</tr>
+<tr>
+<td>getDeclaredConstructors()</td>
+<td>&#x83B7;&#x5F97;&#x8BE5;&#x7C7B;&#x6240;&#x6709;&#x6784;&#x9020;&#x65B9;&#x6CD5;</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>&#x83B7;&#x5F97;&#x7C7B;&#x4E2D;&#x65B9;&#x6CD5;&#x76F8;&#x5173;&#x7684;&#x65B9;&#x6CD5;</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>&#x65B9;&#x6CD5;</th>
+<th>&#x7528;&#x9014;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>getMethod(String name, Class&#x2026;&lt;?&gt; parameterTypes)</td>
+<td>&#x83B7;&#x5F97;&#x8BE5;&#x7C7B;&#x67D0;&#x4E2A;&#x516C;&#x6709;&#x7684;&#x65B9;&#x6CD5;</td>
+</tr>
+<tr>
+<td>getMethods()</td>
+<td>&#x83B7;&#x5F97;&#x8BE5;&#x7C7B;&#x6240;&#x6709;&#x516C;&#x6709;&#x7684;&#x65B9;&#x6CD5;</td>
+</tr>
+<tr>
+<td>getDeclaredMethod(String name, Class&#x2026;&lt;?&gt; parameterTypes)</td>
+<td>&#x83B7;&#x5F97;&#x8BE5;&#x7C7B;&#x67D0;&#x4E2A;&#x65B9;&#x6CD5;</td>
+</tr>
+<tr>
+<td>getDeclaredMethods()</td>
+<td>&#x83B7;&#x5F97;&#x8BE5;&#x7C7B;&#x6240;&#x6709;&#x65B9;&#x6CD5;</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>&#x7C7B;&#x4E2D;&#x5176;&#x4ED6;&#x91CD;&#x8981;&#x7684;&#x65B9;&#x6CD5;</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>&#x65B9;&#x6CD5;</th>
+<th>&#x7528;&#x9014;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>isAnnotation()</td>
+<td>&#x5982;&#x679C;&#x662F;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x5219;&#x8FD4;&#x56DE;true</td>
+</tr>
+<tr>
+<td>isAnnotationPresent(Class&lt;? extends Annotation&gt; annotationClass)</td>
+<td>&#x5982;&#x679C;&#x662F;&#x6307;&#x5B9A;&#x7C7B;&#x578B;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x5219;&#x8FD4;&#x56DE;true</td>
+</tr>
+<tr>
+<td>isAnonymousClass()</td>
+<td>&#x5982;&#x679C;&#x662F;&#x533F;&#x540D;&#x7C7B;&#x5219;&#x8FD4;&#x56DE;true</td>
+</tr>
+<tr>
+<td>isArray()</td>
+<td>&#x5982;&#x679C;&#x662F;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x7C7B;&#x5219;&#x8FD4;&#x56DE;true</td>
+</tr>
+<tr>
+<td>isEnum()</td>
+<td>&#x5982;&#x679C;&#x662F;&#x679A;&#x4E3E;&#x7C7B;&#x5219;&#x8FD4;&#x56DE;true</td>
+</tr>
+<tr>
+<td>isInstance(Object obj)</td>
+<td>&#x5982;&#x679C;obj&#x662F;&#x8BE5;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#x5219;&#x8FD4;&#x56DE;true</td>
+</tr>
+<tr>
+<td>isInterface()</td>
+<td>&#x5982;&#x679C;&#x662F;&#x63A5;&#x53E3;&#x7C7B;&#x5219;&#x8FD4;&#x56DE;true</td>
+</tr>
+<tr>
+<td>isLocalClass()</td>
+<td>&#x5982;&#x679C;&#x662F;&#x5C40;&#x90E8;&#x7C7B;&#x5219;&#x8FD4;&#x56DE;true</td>
+</tr>
+<tr>
+<td>isMemberClass()</td>
+<td>&#x5982;&#x679C;&#x662F;&#x5185;&#x90E8;&#x7C7B;&#x5219;&#x8FD4;&#x56DE;true</td>
+</tr>
+</tbody></table>
+<h4 id="Field&#x7C7B;"><a href="#Field&#x7C7B;" class="headerlink" title="Field&#x7C7B;"></a>Field&#x7C7B;</h4><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/java/lang/reflect/Field">Field</a>&#x4EE3;&#x8868;&#x7C7B;&#x7684;&#x6210;&#x5458;&#x53D8;&#x91CF;&#xFF08;&#x6210;&#x5458;&#x53D8;&#x91CF;&#x4E5F;&#x79F0;&#x4E3A;&#x7C7B;&#x7684;&#x5C5E;&#x6027;&#xFF09;&#x3002;</p>
+<table>
+<thead>
+<tr>
+<th>&#x65B9;&#x6CD5;</th>
+<th>&#x7528;&#x9014;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>equals(Object obj)</td>
+<td>&#x5C5E;&#x6027;&#x4E0E;obj&#x76F8;&#x7B49;&#x5219;&#x8FD4;&#x56DE;true</td>
+</tr>
+<tr>
+<td>get(Object obj)</td>
+<td>&#x83B7;&#x5F97;obj&#x4E2D;&#x5BF9;&#x5E94;&#x7684;&#x5C5E;&#x6027;&#x503C;</td>
+</tr>
+<tr>
+<td>set(Object obj, Object value)</td>
+<td>&#x8BBE;&#x7F6E;obj&#x4E2D;&#x5BF9;&#x5E94;&#x5C5E;&#x6027;&#x503C;</td>
+</tr>
+</tbody></table>
+<h4 id="Method&#x7C7B;"><a href="#Method&#x7C7B;" class="headerlink" title="Method&#x7C7B;"></a>Method&#x7C7B;</h4><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/java/lang/reflect/Method">Method</a>&#x4EE3;&#x8868;&#x7C7B;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<table>
+<thead>
+<tr>
+<th>&#x65B9;&#x6CD5;</th>
+<th>&#x7528;&#x9014;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>invoke(Object obj, Object&#x2026; args)</td>
+<td>&#x4F20;&#x9012;object&#x5BF9;&#x8C61;&#x53CA;&#x53C2;&#x6570;&#x8C03;&#x7528;&#x8BE5;&#x5BF9;&#x8C61;&#x5BF9;&#x5E94;&#x7684;&#x65B9;&#x6CD5;</td>
+</tr>
+</tbody></table>
+<h4 id="Constructor&#x7C7B;"><a href="#Constructor&#x7C7B;" class="headerlink" title="Constructor&#x7C7B;"></a>Constructor&#x7C7B;</h4><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/java/lang/reflect/Constructor">Constructor</a>&#x4EE3;&#x8868;&#x7C7B;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x3002;</p>
+<table>
+<thead>
+<tr>
+<th>&#x65B9;&#x6CD5;</th>
+<th>&#x7528;&#x9014;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>newInstance(Object&#x2026; initargs)</td>
+<td>&#x6839;&#x636E;&#x4F20;&#x9012;&#x7684;&#x53C2;&#x6570;&#x521B;&#x5EFA;&#x7C7B;&#x7684;&#x5BF9;&#x8C61;</td>
+</tr>
+</tbody></table>
+<p>&#x6D4B;&#x8BD5;</p>
+<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Runtime.class.getName());</span><br><span class="line">System.out.println(Runtime.class.getClasses());</span><br><span class="line">System.out.println(Runtime.class.getPackage());</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x8F93;&#x51FA;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Runtime</span><br><span class="line">[Ljava.lang.Class;@7ef20235</span><br><span class="line">package java.lang</span><br></pre></td></tr></tbody></table></figure></body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Java/">#Java</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2020/05/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A82-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8CRMI/">JAVA2-反序列化和RMI</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2020/04/26/%E8%81%8A%E4%B8%80%E8%81%8APHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E9%80%83%E9%80%B8/">聊一聊PHP反序列化中的字符逃逸</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2020 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-epsilon2_1"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

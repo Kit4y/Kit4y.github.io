@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>遇到的编码漏洞问题 - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+
+    <meta name="description" content="1.idna&amp;#x4E0E;utf-8&amp;#x7F16;&amp;#x7801;&amp;#x6F0F;&amp;#x6D1E;&amp;#x53C2;&amp;#x8003;https:&#x2F;&#x2F;www.cnblogs.com&#x2F;cimuhuashuimu&#x2F;p&#x2F;11490431.htmlhttps:&#x2F;&#x2F;github.com&#x2F;python-hyper&#x2F;hyperlink&#x2F;issues&#x2F;19">
+<meta property="og:type" content="article">
+<meta property="og:title" content="遇到的编码漏洞问题">
+<meta property="og:url" content="http://example.com/2020/01/06/%E9%81%87%E5%88%B0%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%BC%8F%E6%B4%9E/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.idna&amp;#x4E0E;utf-8&amp;#x7F16;&amp;#x7801;&amp;#x6F0F;&amp;#x6D1E;&amp;#x53C2;&amp;#x8003;https:&#x2F;&#x2F;www.cnblogs.com&#x2F;cimuhuashuimu&#x2F;p&#x2F;11490431.htmlhttps:&#x2F;&#x2F;github.com&#x2F;python-hyper&#x2F;hyperlink&#x2F;issues&#x2F;19">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2020/01/06/%E9%81%87%E5%88%B0%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%BC%8F%E6%B4%9E/1.png">
+<meta property="og:image" content="http://example.com/2020/01/06/%E9%81%87%E5%88%B0%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%BC%8F%E6%B4%9E/2.png">
+<meta property="article:published_time" content="2020-01-06T05:25:13.000Z">
+<meta property="article:modified_time" content="2020-11-24T04:55:27.501Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="服务器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/01/06/%E9%81%87%E5%88%B0%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%BC%8F%E6%B4%9E/1.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/friends">Friends</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            遇到的编码漏洞问题
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2020-01-06T05:25:13.000Z" itemprop="datePublished">6 Jan 2020</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Web/">Web</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            12 minutes read (About 1854 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h4 id="1-idna&#x4E0E;utf-8&#x7F16;&#x7801;&#x6F0F;&#x6D1E;"><a href="#1-idna&#x4E0E;utf-8&#x7F16;&#x7801;&#x6F0F;&#x6D1E;" class="headerlink" title="1.idna&#x4E0E;utf-8&#x7F16;&#x7801;&#x6F0F;&#x6D1E;"></a>1.idna&#x4E0E;utf-8&#x7F16;&#x7801;&#x6F0F;&#x6D1E;</h4><p>&#x53C2;&#x8003;<a target="_blank" rel="noopener" href="https://www.cnblogs.com/cimuhuashuimu/p/11490431.html">https://www.cnblogs.com/cimuhuashuimu/p/11490431.html</a><br><a target="_blank" rel="noopener" href="https://github.com/python-hyper/hyperlink/issues/19">https://github.com/python-hyper/hyperlink/issues/19</a></p>
+<a id="more"></a>
+
+
+<p><img src="1.png"></p>
+<p>suctf-python-nginx<br>&#x6E90;&#x7801;</p>
+<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask, Blueprint, request, Response, escape ,render_template</span><br><span class="line"><span class="hljs-keyword">from</span> urllib.parse <span class="hljs-keyword">import</span> urlsplit, urlunsplit, unquote</span><br><span class="line"><span class="hljs-keyword">from</span> urllib <span class="hljs-keyword">import</span> parse</span><br><span class="line"><span class="hljs-keyword">import</span> urllib.request</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Index</span></span><br><span class="line"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&apos;/&apos;</span>, methods=[<span class="hljs-string">&apos;GET&apos;</span>]</span>)</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">app_index</span>():</span></span><br><span class="line">    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&apos;index.html&apos;</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&apos;/getUrl&apos;</span>, methods=[<span class="hljs-string">&apos;GET&apos;</span>, <span class="hljs-string">&apos;POST&apos;</span>]</span>)</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getUrl</span>():</span></span><br><span class="line">    url = request.args.get(<span class="hljs-string">&quot;url&quot;</span>)</span><br><span class="line">    host = parse.urlparse(url).hostname</span><br><span class="line">    <span class="hljs-keyword">if</span> host == <span class="hljs-string">&apos;suctf.cc&apos;</span>:</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&#x6211;&#x624C; your problem? 111&quot;</span></span><br><span class="line">    parts = <span class="hljs-built_in">list</span>(urlsplit(url))</span><br><span class="line">    host = parts[<span class="hljs-number">1</span>]</span><br><span class="line">    <span class="hljs-keyword">if</span> host == <span class="hljs-string">&apos;suctf.cc&apos;</span>:</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&#x6211;&#x624C; your problem? 222 &quot;</span> + host</span><br><span class="line">    newhost = []</span><br><span class="line">    <span class="hljs-keyword">for</span> h <span class="hljs-keyword">in</span> host.split(<span class="hljs-string">&apos;.&apos;</span>):</span><br><span class="line">        newhost.append(h.encode(<span class="hljs-string">&apos;idna&apos;</span>).decode(<span class="hljs-string">&apos;utf-8&apos;</span>))</span><br><span class="line">    parts[<span class="hljs-number">1</span>] = <span class="hljs-string">&apos;.&apos;</span>.join(newhost)</span><br><span class="line">    <span class="hljs-comment">#&#x53BB;&#x6389; url &#x4E2D;&#x7684;&#x7A7A;&#x683C;</span></span><br><span class="line">    finalUrl = urlunsplit(parts).split(<span class="hljs-string">&apos; &apos;</span>)[<span class="hljs-number">0</span>]</span><br><span class="line">    host = parse.urlparse(finalUrl).hostname</span><br><span class="line">    <span class="hljs-keyword">if</span> host == <span class="hljs-string">&apos;suctf.cc&apos;</span>:</span><br><span class="line">        <span class="hljs-keyword">return</span> urllib.request.urlopen(finalUrl, timeout=<span class="hljs-number">2</span>).read()</span><br><span class="line">    <span class="hljs-keyword">else</span>:</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&#x6211;&#x624C; your problem? 333&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:</span><br><span class="line">    app.run(host=<span class="hljs-string">&apos;0.0.0.0&apos;</span>, port=<span class="hljs-number">80</span>)</span><br></pre></td></tr></tbody></table></figure>
+<p>payload</p>
+<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> urllib</span><br><span class="line"><span class="hljs-keyword">from</span> urllib <span class="hljs-keyword">import</span> parse</span><br><span class="line"><span class="hljs-keyword">from</span> urllib.parse <span class="hljs-keyword">import</span> urlsplit, urlunsplit</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#url = []</span></span><br><span class="line">url = <span class="hljs-string">&quot;file://suctf.c&#x2102;/../../../etc/passwd&quot;</span></span><br><span class="line">host = parse.urlparse(url).hostname</span><br><span class="line"><span class="hljs-keyword">if</span> host == <span class="hljs-string">&apos;suctf.cc&apos;</span>:</span><br><span class="line">    print(<span class="hljs-string">&apos;first&apos;</span>)</span><br><span class="line">    exit(<span class="hljs-number">1</span>)</span><br><span class="line">print(<span class="hljs-string">&apos;1 &apos;</span>+host)</span><br><span class="line">parts = <span class="hljs-built_in">list</span>(urlsplit(url))</span><br><span class="line">host = parts[<span class="hljs-number">1</span>]</span><br><span class="line"><span class="hljs-keyword">if</span> host == <span class="hljs-string">&apos;suctf.cc&apos;</span>:</span><br><span class="line">    print(<span class="hljs-string">&apos;sec&apos;</span>)</span><br><span class="line">    exit(<span class="hljs-number">2</span>)</span><br><span class="line">print(<span class="hljs-string">&apos;2 &apos;</span>+host)</span><br><span class="line">newhost = []</span><br><span class="line"><span class="hljs-keyword">for</span> h <span class="hljs-keyword">in</span> host.split(<span class="hljs-string">&apos;.&apos;</span>):</span><br><span class="line">    newhost.append(h.encode(<span class="hljs-string">&apos;idna&apos;</span>).decode(<span class="hljs-string">&apos;utf-8&apos;</span>))</span><br><span class="line">parts[<span class="hljs-number">1</span>] = <span class="hljs-string">&apos;.&apos;</span>.join(newhost)</span><br><span class="line"><span class="hljs-comment">#&#x53BB;&#x6389; url &#x4E2D;&#x7684;&#x7A7A;&#x683C;</span></span><br><span class="line">finalUrl = urlunsplit(parts).split(<span class="hljs-string">&apos; &apos;</span>)[<span class="hljs-number">0</span>]</span><br><span class="line">host = parse.urlparse(finalUrl).hostname</span><br><span class="line"><span class="hljs-keyword">if</span> host == <span class="hljs-string">&apos;suctf.cc&apos;</span>:</span><br><span class="line">    print(<span class="hljs-string">&apos;3 &apos;</span>+host)</span><br><span class="line">    print(finalUrl)</span><br><span class="line">    <span class="hljs-comment">#print(urllib.request.urlopen(finalUrl).read())</span></span><br><span class="line"><span class="hljs-keyword">else</span>:</span><br><span class="line">    print(<span class="hljs-string">&apos;???&apos;</span>)</span><br><span class="line">    exit(<span class="hljs-number">3</span>)</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="2.png"><br>&#x89E3;&#x6CD5;2<a target="_blank" rel="noopener" href="https://www.cnblogs.com/20175211lyz/p/11470200.html">https://www.cnblogs.com/20175211lyz/p/11470200.html</a></p>
+<h4 id="Unicode&#x5B89;&#x5168;&#x95EE;&#x9898;"><a href="#Unicode&#x5B89;&#x5168;&#x95EE;&#x9898;" class="headerlink" title="Unicode&#x5B89;&#x5168;&#x95EE;&#x9898;"></a>Unicode&#x5B89;&#x5168;&#x95EE;&#x9898;</h4><p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/5402">https://xz.aliyun.com/t/5402</a><br><a target="_blank" rel="noopener" href="https://www.blackhat.com/presentations/bh-usa-09/WEBER/BHUSA09-Weber-UnicodeSecurityPreview-PAPER.pdf">https://www.blackhat.com/presentations/bh-usa-09/WEBER/BHUSA09-Weber-UnicodeSecurityPreview-PAPER.pdf</a><br>&#x5728;&#x7EBF;&#x641C;&#x7D22;unicode<a target="_blank" rel="noopener" href="https://www.compart.com/en/unicode/">https://www.compart.com/en/unicode/</a><br>python2&#x6784;&#x9020;&#x5B57;&#x7B26;&#x5BF9;&#x5E94;&#x7684;&#x7B49;&#x6548;&#x7801;&#x8868;&#x811A;&#x672C;</p>
+<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="hljs-comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> json</span><br><span class="line"><span class="hljs-keyword">from</span> unicodedata <span class="hljs-keyword">import</span> normalize</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span>():</span></span><br><span class="line">    debug = <span class="hljs-literal">False</span></span><br><span class="line">    tables = {}</span><br><span class="line">    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0x10000</span>):</span><br><span class="line">        src = unichr(i)</span><br><span class="line">        dst = normalize(<span class="hljs-string">&apos;NFKC&apos;</span>, src)[<span class="hljs-number">0</span>]</span><br><span class="line">        <span class="hljs-keyword">try</span>:</span><br><span class="line">            <span class="hljs-keyword">if</span> <span class="hljs-built_in">ord</span>(dst) &lt; <span class="hljs-number">128</span> <span class="hljs-keyword">and</span> dst != src:</span><br><span class="line">                <span class="hljs-keyword">if</span> debug:</span><br><span class="line">                    print(<span class="hljs-string">&quot;%s (\\u%s) -- normalize --&gt; %s (\\x%s)&quot;</span> % (</span><br><span class="line">                        src, <span class="hljs-built_in">hex</span>(i)[<span class="hljs-number">2</span>:].rjust(<span class="hljs-number">4</span>, <span class="hljs-string">&apos;0&apos;</span>),</span><br><span class="line">                        dst, <span class="hljs-built_in">hex</span>(dst.charAt(<span class="hljs-number">0</span>))[<span class="hljs-number">2</span>:]</span><br><span class="line">                    ))</span><br><span class="line">                <span class="hljs-keyword">if</span> dst <span class="hljs-keyword">in</span> tables:</span><br><span class="line">                    tables[dst].append(src)</span><br><span class="line">                <span class="hljs-keyword">else</span>:</span><br><span class="line">                    tables[dst] = [src]</span><br><span class="line">        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:</span><br><span class="line">            print(<span class="hljs-built_in">repr</span>(e))</span><br><span class="line">    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;nfctable.txt&quot;</span>, <span class="hljs-string">&quot;wb&quot;</span>) <span class="hljs-keyword">as</span> fh:</span><br><span class="line">        json.dump(tables, fh)</span><br><span class="line">        print(tables)</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:</span><br><span class="line">    main()</span><br><span class="line">``` </span><br><span class="line">&#x5F97;&#x5230;</span><br></pre></td></tr></tbody></table></figure>
+<p>{&#x201C; &#x201C;: [&#x201C;\u00a0&#x201D;, &#x201C;\u00a8&#x201D;, &#x201C;\u00af&#x201D;, &#x201C;\u00b4&#x201D;, &#x201C;\u00b8&#x201D;, &#x201C;\u02d8&#x201D;, &#x201C;\u02d9&#x201D;, &#x201C;\u02da&#x201D;, &#x201C;\u02db&#x201D;, &#x201C;\u02dc&#x201D;, &#x201C;\u02dd&#x201D;, &#x201C;\u037a&#x201D;, &#x201C;\u0384&#x201D;, &#x201C;\u0385&#x201D;, &#x201C;\u1fbd&#x201D;, &#x201C;\u1fbf&#x201D;, &#x201C;\u1fc0&#x201D;, &#x201C;\u1fc1&#x201D;, &#x201C;\u1fcd&#x201D;, &#x201C;\u1fce&#x201D;, &#x201C;\u1fcf&#x201D;, &#x201C;\u1fdd&#x201D;, &#x201C;\u1fde&#x201D;, &#x201C;\u1fdf&#x201D;, &#x201C;\u1fed&#x201D;, &#x201C;\u1fee&#x201D;, &#x201C;\u1ffd&#x201D;, &#x201C;\u1ffe&#x201D;, &#x201C;\u2000&#x201D;, &#x201C;\u2001&#x201D;, &#x201C;\u2002&#x201D;, &#x201C;\u2003&#x201D;, &#x201C;\u2004&#x201D;, &#x201C;\u2005&#x201D;, &#x201C;\u2006&#x201D;, &#x201C;\u2007&#x201D;, &#x201C;\u2008&#x201D;, &#x201C;\u2009&#x201D;, &#x201C;\u200a&#x201D;, &#x201C;\u2017&#x201D;, &#x201C;\u202f&#x201D;, &#x201C;\u203e&#x201D;, &#x201C;\u205f&#x201D;, &#x201C;\u3000&#x201D;, &#x201C;\u309b&#x201D;, &#x201C;\u309c&#x201D;, &#x201C;\ufc5e&#x201D;, &#x201C;\ufc5f&#x201D;, &#x201C;\ufc60&#x201D;, &#x201C;\ufc61&#x201D;, &#x201C;\ufc62&#x201D;, &#x201C;\ufc63&#x201D;, &#x201C;\ufe49&#x201D;, &#x201C;\ufe4a&#x201D;, &#x201C;\ufe4b&#x201D;, &#x201C;\ufe4c&#x201D;, &#x201C;\ufe70&#x201D;, &#x201C;\ufe72&#x201D;, &#x201C;\ufe74&#x201D;, &#x201C;\ufe76&#x201D;, &#x201C;\ufe78&#x201D;, &#x201C;\ufe7a&#x201D;, &#x201C;\ufe7c&#x201D;, &#x201C;\ufe7e&#x201D;, &#x201C;\uffe3&#x201D;], &#x201C;$&#x201D;: [&#x201C;\ufe69&#x201D;, &#x201C;\uff04&#x201D;], &#x201C;(&#x201C;: [&#x201C;\u207d&#x201D;, &#x201C;\u208d&#x201D;, &#x201C;\u2474&#x201D;, &#x201C;\u2475&#x201D;, &#x201C;\u2476&#x201D;, &#x201C;\u2477&#x201D;, &#x201C;\u2478&#x201D;, &#x201C;\u2479&#x201D;, &#x201C;\u247a&#x201D;, &#x201C;\u247b&#x201D;, &#x201C;\u247c&#x201D;, &#x201C;\u247d&#x201D;, &#x201C;\u247e&#x201D;, &#x201C;\u247f&#x201D;, &#x201C;\u2480&#x201D;, &#x201C;\u2481&#x201D;, &#x201C;\u2482&#x201D;, &#x201C;\u2483&#x201D;, &#x201C;\u2484&#x201D;, &#x201C;\u2485&#x201D;, &#x201C;\u2486&#x201D;, &#x201C;\u2487&#x201D;, &#x201C;\u249c&#x201D;, &#x201C;\u249d&#x201D;, &#x201C;\u249e&#x201D;, &#x201C;\u249f&#x201D;, &#x201C;\u24a0&#x201D;, &#x201C;\u24a1&#x201D;, &#x201C;\u24a2&#x201D;, &#x201C;\u24a3&#x201D;, &#x201C;\u24a4&#x201D;, &#x201C;\u24a5&#x201D;, &#x201C;\u24a6&#x201D;, &#x201C;\u24a7&#x201D;, &#x201C;\u24a8&#x201D;, &#x201C;\u24a9&#x201D;, &#x201C;\u24aa&#x201D;, &#x201C;\u24ab&#x201D;, &#x201C;\u24ac&#x201D;, &#x201C;\u24ad&#x201D;, &#x201C;\u24ae&#x201D;, &#x201C;\u24af&#x201D;, &#x201C;\u24b0&#x201D;, &#x201C;\u24b1&#x201D;, &#x201C;\u24b2&#x201D;, &#x201C;\u24b3&#x201D;, &#x201C;\u24b4&#x201D;, &#x201C;\u24b5&#x201D;, &#x201C;\u3200&#x201D;, &#x201C;\u3201&#x201D;, &#x201C;\u3202&#x201D;, &#x201C;\u3203&#x201D;, &#x201C;\u3204&#x201D;, &#x201C;\u3205&#x201D;, &#x201C;\u3206&#x201D;, &#x201C;\u3207&#x201D;, &#x201C;\u3208&#x201D;, &#x201C;\u3209&#x201D;, &#x201C;\u320a&#x201D;, &#x201C;\u320b&#x201D;, &#x201C;\u320c&#x201D;, &#x201C;\u320d&#x201D;, &#x201C;\u320e&#x201D;, &#x201C;\u320f&#x201D;, &#x201C;\u3210&#x201D;, &#x201C;\u3211&#x201D;, &#x201C;\u3212&#x201D;, &#x201C;\u3213&#x201D;, &#x201C;\u3214&#x201D;, &#x201C;\u3215&#x201D;, &#x201C;\u3216&#x201D;, &#x201C;\u3217&#x201D;, &#x201C;\u3218&#x201D;, &#x201C;\u3219&#x201D;, &#x201C;\u321a&#x201D;, &#x201C;\u321b&#x201D;, &#x201C;\u321c&#x201D;, &#x201C;\u321d&#x201D;, &#x201C;\u321e&#x201D;, &#x201C;\u3220&#x201D;, &#x201C;\u3221&#x201D;, &#x201C;\u3222&#x201D;, &#x201C;\u3223&#x201D;, &#x201C;\u3224&#x201D;, &#x201C;\u3225&#x201D;, &#x201C;\u3226&#x201D;, &#x201C;\u3227&#x201D;, &#x201C;\u3228&#x201D;, &#x201C;\u3229&#x201D;, &#x201C;\u322a&#x201D;, &#x201C;\u322b&#x201D;, &#x201C;\u322c&#x201D;, &#x201C;\u322d&#x201D;, &#x201C;\u322e&#x201D;, &#x201C;\u322f&#x201D;, &#x201C;\u3230&#x201D;, &#x201C;\u3231&#x201D;, &#x201C;\u3232&#x201D;, &#x201C;\u3233&#x201D;, &#x201C;\u3234&#x201D;, &#x201C;\u3235&#x201D;, &#x201C;\u3236&#x201D;, &#x201C;\u3237&#x201D;, &#x201C;\u3238&#x201D;, &#x201C;\u3239&#x201D;, &#x201C;\u323a&#x201D;, &#x201C;\u323b&#x201D;, &#x201C;\u323c&#x201D;, &#x201C;\u323d&#x201D;, &#x201C;\u323e&#x201D;, &#x201C;\u323f&#x201D;, &#x201C;\u3240&#x201D;, &#x201C;\u3241&#x201D;, &#x201C;\u3242&#x201D;, &#x201C;\u3243&#x201D;, &#x201C;\ufe35&#x201D;, &#x201C;\ufe59&#x201D;, &#x201C;\uff08&#x201D;], &#x201C;,&#x201D;: [&#x201C;\ufe10&#x201D;, &#x201C;\ufe50&#x201D;, &#x201C;\uff0c&#x201D;], &#x201C;0&#x201D;: [&#x201C;\u2070&#x201D;, &#x201C;\u2080&#x201D;, &#x201C;\u2189&#x201D;, &#x201C;\u24ea&#x201D;, &#x201C;\u3358&#x201D;, &#x201C;\uff10&#x201D;], &#x201C;4&#x201D;: [&#x201C;\u2074&#x201D;, &#x201C;\u2084&#x201D;, &#x201C;\u2158&#x201D;, &#x201C;\u2463&#x201D;, &#x201C;\u248b&#x201D;, &#x201C;\u32b5&#x201D;, &#x201C;\u32b6&#x201D;, &#x201C;\u32b7&#x201D;, &#x201C;\u32b8&#x201D;, &#x201C;\u32b9&#x201D;, &#x201C;\u32ba&#x201D;, &#x201C;\u32bb&#x201D;, &#x201C;\u32bc&#x201D;, &#x201C;\u32bd&#x201D;, &#x201C;\u32be&#x201D;, &#x201C;\u32c3&#x201D;, &#x201C;\u335c&#x201D;, &#x201C;\u33e3&#x201D;, &#x201C;\uff14&#x201D;], &#x201C;8&#x201D;: [&#x201C;\u2078&#x201D;, &#x201C;\u2088&#x201D;, &#x201C;\u2467&#x201D;, &#x201C;\u248f&#x201D;, &#x201C;\u32c7&#x201D;, &#x201C;\u3360&#x201D;, &#x201C;\u33e7&#x201D;, &#x201C;\uff18&#x201D;], &#x201C;&lt;&#x201D;: [&#x201C;\ufe64&#x201D;, &#x201C;\uff1c&#x201D;], &#x201C;@&#x201D;: [&#x201C;\ufe6b&#x201D;, &#x201C;\uff20&#x201D;], &#x201C;D&#x201D;: [&#x201C;\u01c4&#x201D;, &#x201C;\u01c5&#x201D;, &#x201C;\u01f1&#x201D;, &#x201C;\u01f2&#x201D;, &#x201C;\u1d30&#x201D;, &#x201C;\u2145&#x201D;, &#x201C;\u216e&#x201D;, &#x201C;\u24b9&#x201D;, &#x201C;\uff24&#x201D;], &#x201C;H&#x201D;: [&#x201C;\u1d34&#x201D;, &#x201C;\u210b&#x201D;, &#x201C;\u210c&#x201D;, &#x201C;\u210d&#x201D;, &#x201C;\u24bd&#x201D;, &#x201C;\u32cc&#x201D;, &#x201C;\u3390&#x201D;, &#x201C;\u33cb&#x201D;, &#x201C;\uff28&#x201D;], &#x201C;L&#x201D;: [&#x201C;\u013f&#x201D;, &#x201C;\u01c7&#x201D;, &#x201C;\u01c8&#x201D;, &#x201C;\u1d38&#x201D;, &#x201C;\u2112&#x201D;, &#x201C;\u216c&#x201D;, &#x201C;\u24c1&#x201D;, &#x201C;\u32cf&#x201D;, &#x201C;\uff2c&#x201D;], &#x201C;P&#x201D;: [&#x201C;\u1d3e&#x201D;, &#x201C;\u2119&#x201D;, &#x201C;\u24c5&#x201D;, &#x201C;\u3250&#x201D;, &#x201C;\u33a9&#x201D;, &#x201C;\u33d7&#x201D;, &#x201C;\u33d9&#x201D;, &#x201C;\u33da&#x201D;, &#x201C;\uff30&#x201D;], &#x201C;T&#x201D;: [&#x201C;\u1d40&#x201D;, &#x201C;\u2121&#x201D;, &#x201C;\u2122&#x201D;, &#x201C;\u24c9&#x201D;, &#x201C;\u3394&#x201D;, &#x201C;\uff34&#x201D;], &#x201C;X&#x201D;: [&#x201C;\u2169&#x201D;, &#x201C;\u216a&#x201D;, &#x201C;\u216b&#x201D;, &#x201C;\u24cd&#x201D;, &#x201C;\uff38&#x201D;], &#x201C;\&#x201C;: [&#x201C;\ufe68&#x201D;, &#x201C;\uff3c&#x201D;], &#x201C;`&#x201D;: [&#x201C;\u1fef&#x201D;, &#x201C;\uff40&#x201D;], &#x201C;d&#x201D;: [&#x201C;\u01c6&#x201D;, &#x201C;\u01f3&#x201D;, &#x201C;\u1d48&#x201D;, &#x201C;\u2146&#x201D;, &#x201C;\u217e&#x201D;, &#x201C;\u24d3&#x201D;, &#x201C;\u3372&#x201D;, &#x201C;\u3377&#x201D;, &#x201C;\u3378&#x201D;, &#x201C;\u3379&#x201D;, &#x201C;\u3397&#x201D;, &#x201C;\u33c8&#x201D;, &#x201C;\uff44&#x201D;], &#x201C;h&#x201D;: [&#x201C;\u02b0&#x201D;, &#x201C;\u210e&#x201D;, &#x201C;\u24d7&#x201D;, &#x201C;\u3371&#x201D;, &#x201C;\u33ca&#x201D;, &#x201C;\uff48&#x201D;], &#x201C;l&#x201D;: [&#x201C;\u0140&#x201D;, &#x201C;\u01c9&#x201D;, &#x201C;\u02e1&#x201D;, &#x201C;\u2113&#x201D;, &#x201C;\u217c&#x201D;, &#x201C;\u24db&#x201D;, &#x201C;\u33d0&#x201D;, &#x201C;\u33d1&#x201D;, &#x201C;\u33d2&#x201D;, &#x201C;\u33d3&#x201D;, &#x201C;\uff4c&#x201D;], &#x201C;p&#x201D;: [&#x201C;\u1d56&#x201D;, &#x201C;\u24df&#x201D;, &#x201C;\u3376&#x201D;, &#x201C;\u3380&#x201D;, &#x201C;\u338a&#x201D;, &#x201C;\u33b0&#x201D;, &#x201C;\u33b4&#x201D;, &#x201C;\u33ba&#x201D;, &#x201C;\u33d8&#x201D;, &#x201C;\uff50&#x201D;], &#x201C;t&#x201D;: [&#x201C;\u1d57&#x201D;, &#x201C;\u24e3&#x201D;, &#x201C;\uff54&#x201D;], &#x201C;x&#x201D;: [&#x201C;\u02e3&#x201D;, &#x201C;\u2093&#x201D;, &#x201C;\u2179&#x201D;, &#x201C;\u217a&#x201D;, &#x201C;\u217b&#x201D;, &#x201C;\u24e7&#x201D;, &#x201C;\uff58&#x201D;], &#x201C;|&#x201D;: [&#x201C;\uff5c&#x201D;], &#x201C;#&#x201D;: [&#x201C;\ufe5f&#x201D;, &#x201C;\uff03&#x201D;], &#x201C;&#x2018;&#x201C;: [&#x201C;\uff07&#x201D;], &#x201C;+&#x201D;: [&#x201C;\u207a&#x201D;, &#x201C;\u208a&#x201D;, &#x201C;\ufb29&#x201D;, &#x201C;\ufe62&#x201D;, &#x201C;\uff0b&#x201D;], &#x201C;/&#x201C;: [&#x201C;\uff0f&#x201D;], &#x201C;3&#x201D;: [&#x201C;\u00b3&#x201D;, &#x201C;\u00be&#x201D;, &#x201C;\u2083&#x201D;, &#x201C;\u2157&#x201D;, &#x201C;\u215c&#x201D;, &#x201C;\u2462&#x201D;, &#x201C;\u248a&#x201D;, &#x201C;\u325a&#x201D;, &#x201C;\u325b&#x201D;, &#x201C;\u325c&#x201D;, &#x201C;\u325d&#x201D;, &#x201C;\u325e&#x201D;, &#x201C;\u325f&#x201D;, &#x201C;\u32b1&#x201D;, &#x201C;\u32b2&#x201D;, &#x201C;\u32b3&#x201D;, &#x201C;\u32b4&#x201D;, &#x201C;\u32c2&#x201D;, &#x201C;\u335b&#x201D;, &#x201C;\u33e2&#x201D;, &#x201C;\u33fd&#x201D;, &#x201C;\u33fe&#x201D;, &#x201C;\uff13&#x201D;], &#x201C;7&#x201D;: [&#x201C;\u2077&#x201D;, &#x201C;\u2087&#x201D;, &#x201C;\u215e&#x201D;, &#x201C;\u2466&#x201D;, &#x201C;\u248e&#x201D;, &#x201C;\u32c6&#x201D;, &#x201C;\u335f&#x201D;, &#x201C;\u33e6&#x201D;, &#x201C;\uff17&#x201D;], &#x201C;;&#x201D;: [&#x201C;\u037e&#x201D;, &#x201C;\ufe14&#x201D;, &#x201C;\ufe54&#x201D;, &#x201C;\uff1b&#x201D;], &#x201C;?&#x201D;: [&#x201C;\u2047&#x201D;, &#x201C;\u2048&#x201D;, &#x201C;\ufe16&#x201D;, &#x201C;\ufe56&#x201D;, &#x201C;\uff1f&#x201D;], &#x201C;C&#x201D;: [&#x201C;\u2102&#x201D;, &#x201C;\u212d&#x201D;, &#x201C;\u216d&#x201D;, &#x201C;\u24b8&#x201D;, &#x201C;\u33c6&#x201D;, &#x201C;\u33c7&#x201D;, &#x201C;\uff23&#x201D;], &#x201C;G&#x201D;: [&#x201C;\u1d33&#x201D;, &#x201C;\u24bc&#x201D;, &#x201C;\u3387&#x201D;, &#x201C;\u3393&#x201D;, &#x201C;\u33ac&#x201D;, &#x201C;\u33c9&#x201D;, &#x201C;\uff27&#x201D;], &#x201C;K&#x201D;: [&#x201C;\u1d37&#x201D;, &#x201C;\u212a&#x201D;, &#x201C;\u24c0&#x201D;, &#x201C;\u3385&#x201D;, &#x201C;\u33cd&#x201D;, &#x201C;\u33ce&#x201D;, &#x201C;\uff2b&#x201D;], &#x201C;O&#x201D;: [&#x201C;\u1d3c&#x201D;, &#x201C;\u24c4&#x201D;, &#x201C;\uff2f&#x201D;], &#x201C;S&#x201D;: [&#x201C;\u2120&#x201D;, &#x201C;\u24c8&#x201D;, &#x201C;\u33dc&#x201D;, &#x201C;\uff33&#x201D;], &#x201C;W&#x201D;: [&#x201C;\u1d42&#x201D;, &#x201C;\u24cc&#x201D;, &#x201C;\u33dd&#x201D;, &#x201C;\uff37&#x201D;], &#x201C;[&#x201C;: [&#x201C;\ufe47&#x201D;, &#x201C;\uff3b&#x201D;], &#x201C;_&#x201D;: [&#x201C;\ufe33&#x201D;, &#x201C;\ufe34&#x201D;, &#x201C;\ufe4d&#x201D;, &#x201C;\ufe4e&#x201D;, &#x201C;\ufe4f&#x201D;, &#x201C;\uff3f&#x201D;], &#x201C;c&#x201D;: [&#x201C;\u1d9c&#x201D;, &#x201C;\u2105&#x201D;, &#x201C;\u2106&#x201D;, &#x201C;\u217d&#x201D;, &#x201C;\u24d2&#x201D;, &#x201C;\u3388&#x201D;, &#x201C;\u339d&#x201D;, &#x201C;\u33a0&#x201D;, &#x201C;\u33a4&#x201D;, &#x201C;\u33c4&#x201D;, &#x201C;\u33c5&#x201D;, &#x201C;\uff43&#x201D;], &#x201C;g&#x201D;: [&#x201C;\u1d4d&#x201D;, &#x201C;\u210a&#x201D;, &#x201C;\u24d6&#x201D;, &#x201C;\u33ff&#x201D;, &#x201C;\uff47&#x201D;], &#x201C;k&#x201D;: [&#x201C;\u1d4f&#x201D;, &#x201C;\u24da&#x201D;, &#x201C;\u3384&#x201D;, &#x201C;\u3389&#x201D;, &#x201C;\u338f&#x201D;, &#x201C;\u3391&#x201D;, &#x201C;\u3398&#x201D;, &#x201C;\u339e&#x201D;, &#x201C;\u33a2&#x201D;, &#x201C;\u33a6&#x201D;, &#x201C;\u33aa&#x201D;, &#x201C;\u33b8&#x201D;, &#x201C;\u33be&#x201D;, &#x201C;\u33c0&#x201D;, &#x201C;\u33cf&#x201D;, &#x201C;\uff4b&#x201D;], &#x201C;o&#x201D;: [&#x201C;\u00ba&#x201D;, &#x201C;\u1d52&#x201D;, &#x201C;\u2092&#x201D;, &#x201C;\u2134&#x201D;, &#x201C;\u24de&#x201D;, &#x201C;\u3375&#x201D;, &#x201C;\uff4f&#x201D;], &#x201C;s&#x201D;: [&#x201C;\u017f&#x201D;, &#x201C;\u02e2&#x201D;, &#x201C;\u24e2&#x201D;, &#x201C;\u33db&#x201D;, &#x201C;\ufb05&#x201D;, &#x201C;\ufb06&#x201D;, &#x201C;\uff53&#x201D;], &#x201C;w&#x201D;: [&#x201C;\u02b7&#x201D;, &#x201C;\u24e6&#x201D;, &#x201C;\uff57&#x201D;], &#x201C;{&#x201C;: [&#x201C;\ufe37&#x201D;, &#x201C;\ufe5b&#x201D;, &#x201C;\uff5b&#x201D;], &#x201C;&quot;&#x201C;: [&#x201C;\uff02&#x201D;], &#x201C;&amp;&#x201D;: [&#x201C;\ufe60&#x201D;, &#x201C;\uff06&#x201D;], &#x201C;*&#x201D;: [&#x201C;\ufe61&#x201D;, &#x201C;\uff0a&#x201D;], &#x201C;.&#x201D;: [&#x201C;\u2024&#x201D;, &#x201C;\u2025&#x201D;, &#x201C;\u2026&#x201D;, &#x201C;\ufe19&#x201D;, &#x201C;\ufe30&#x201D;, &#x201C;\ufe52&#x201D;, &#x201C;\uff0e&#x201D;], &#x201C;2&#x201D;: [&#x201C;\u00b2&#x201D;, &#x201C;\u2082&#x201D;, &#x201C;\u2154&#x201D;, &#x201C;\u2156&#x201D;, &#x201C;\u2461&#x201D;, &#x201C;\u2473&#x201D;, &#x201C;\u2489&#x201D;, &#x201C;\u249b&#x201D;, &#x201C;\u3251&#x201D;, &#x201C;\u3252&#x201D;, &#x201C;\u3253&#x201D;, &#x201C;\u3254&#x201D;, &#x201C;\u3255&#x201D;, &#x201C;\u3256&#x201D;, &#x201C;\u3257&#x201D;, &#x201C;\u3258&#x201D;, &#x201C;\u3259&#x201D;, &#x201C;\u32c1&#x201D;, &#x201C;\u335a&#x201D;, &#x201C;\u336c&#x201D;, &#x201C;\u336d&#x201D;, &#x201C;\u336e&#x201D;, &#x201C;\u336f&#x201D;, &#x201C;\u3370&#x201D;, &#x201C;\u33e1&#x201D;, &#x201C;\u33f3&#x201D;, &#x201C;\u33f4&#x201D;, &#x201C;\u33f5&#x201D;, &#x201C;\u33f6&#x201D;, &#x201C;\u33f7&#x201D;, &#x201C;\u33f8&#x201D;, &#x201C;\u33f9&#x201D;, &#x201C;\u33fa&#x201D;, &#x201C;\u33fb&#x201D;, &#x201C;\u33fc&#x201D;, &#x201C;\uff12&#x201D;], &#x201C;6&#x201D;: [&#x201C;\u2076&#x201D;, &#x201C;\u2086&#x201D;, &#x201C;\u2465&#x201D;, &#x201C;\u248d&#x201D;, &#x201C;\u32c5&#x201D;, &#x201C;\u335e&#x201D;, &#x201C;\u33e5&#x201D;, &#x201C;\uff16&#x201D;], &#x201C;:&#x201D;: [&#x201C;\u2a74&#x201D;, &#x201C;\ufe13&#x201D;, &#x201C;\ufe55&#x201D;, &#x201C;\uff1a&#x201D;], &#x201C;&gt;&#x201D;: [&#x201C;\ufe65&#x201D;, &#x201C;\uff1e&#x201D;], &#x201C;B&#x201D;: [&#x201C;\u1d2e&#x201D;, &#x201C;\u212c&#x201D;, &#x201C;\u24b7&#x201D;, &#x201C;\u33c3&#x201D;, &#x201C;\uff22&#x201D;], &#x201C;F&#x201D;: [&#x201C;\u2131&#x201D;, &#x201C;\u213b&#x201D;, &#x201C;\u24bb&#x201D;, &#x201C;\uff26&#x201D;], &#x201C;J&#x201D;: [&#x201C;\u1d36&#x201D;, &#x201C;\u24bf&#x201D;, &#x201C;\uff2a&#x201D;], &#x201C;N&#x201D;: [&#x201C;\u01ca&#x201D;, &#x201C;\u01cb&#x201D;, &#x201C;\u1d3a&#x201D;, &#x201C;\u2115&#x201D;, &#x201C;\u2116&#x201D;, &#x201C;\u24c3&#x201D;, &#x201C;\uff2e&#x201D;], &#x201C;R&#x201D;: [&#x201C;\u1d3f&#x201D;, &#x201C;\u20a8&#x201D;, &#x201C;\u211b&#x201D;, &#x201C;\u211c&#x201D;, &#x201C;\u211d&#x201D;, &#x201C;\u24c7&#x201D;, &#x201C;\uff32&#x201D;], &#x201C;V&#x201D;: [&#x201C;\u2164&#x201D;, &#x201C;\u2165&#x201D;, &#x201C;\u2166&#x201D;, &#x201C;\u2167&#x201D;, &#x201C;\u24cb&#x201D;, &#x201C;\u2c7d&#x201D;, &#x201C;\u33de&#x201D;, &#x201C;\uff36&#x201D;], &#x201C;Z&#x201D;: [&#x201C;\u2124&#x201D;, &#x201C;\u2128&#x201D;, &#x201C;\u24cf&#x201D;, &#x201C;\uff3a&#x201D;], &#x201C;^&#x201D;: [&#x201C;\uff3e&#x201D;], &#x201C;b&#x201D;: [&#x201C;\u1d47&#x201D;, &#x201C;\u24d1&#x201D;, &#x201C;\u3374&#x201D;, &#x201C;\uff42&#x201D;], &#x201C;f&#x201D;: [&#x201C;\u1da0&#x201D;, &#x201C;\u24d5&#x201D;, &#x201C;\u3399&#x201D;, &#x201C;\ufb00&#x201D;, &#x201C;\ufb01&#x201D;, &#x201C;\ufb02&#x201D;, &#x201C;\ufb03&#x201D;, &#x201C;\ufb04&#x201D;, &#x201C;\uff46&#x201D;], &#x201C;j&#x201D;: [&#x201C;\u02b2&#x201D;, &#x201C;\u2149&#x201D;, &#x201C;\u24d9&#x201D;, &#x201C;\u2c7c&#x201D;, &#x201C;\uff4a&#x201D;], &#x201C;n&#x201D;: [&#x201C;\u01cc&#x201D;, &#x201C;\u207f&#x201D;, &#x201C;\u24dd&#x201D;, &#x201C;\u3381&#x201D;, &#x201C;\u338b&#x201D;, &#x201C;\u339a&#x201D;, &#x201C;\u33b1&#x201D;, &#x201C;\u33b5&#x201D;, &#x201C;\u33bb&#x201D;, &#x201C;\uff4e&#x201D;], &#x201C;r&#x201D;: [&#x201C;\u02b3&#x201D;, &#x201C;\u1d63&#x201D;, &#x201C;\u24e1&#x201D;, &#x201C;\u33ad&#x201D;, &#x201C;\u33ae&#x201D;, &#x201C;\u33af&#x201D;, &#x201C;\uff52&#x201D;], &#x201C;v&#x201D;: [&#x201C;\u1d5b&#x201D;, &#x201C;\u1d65&#x201D;, &#x201C;\u2174&#x201D;, &#x201C;\u2175&#x201D;, &#x201C;\u2176&#x201D;, &#x201C;\u2177&#x201D;, &#x201C;\u24e5&#x201D;, &#x201C;\uff56&#x201D;], &#x201C;z&#x201D;: [&#x201C;\u1dbb&#x201D;, &#x201C;\u24e9&#x201D;, &#x201C;\uff5a&#x201D;], &#x201C;~&#x201D;: [&#x201C;\uff5e&#x201D;], &#x201C;!&#x201D;: [&#x201C;\u203c&#x201D;, &#x201C;\u2049&#x201D;, &#x201C;\ufe15&#x201D;, &#x201C;\ufe57&#x201D;, &#x201C;\uff01&#x201D;], &#x201C;%&#x201D;: [&#x201C;\ufe6a&#x201D;, &#x201C;\uff05&#x201D;], &#x201C;)&#x201D;: [&#x201C;\u207e&#x201D;, &#x201C;\u208e&#x201D;, &#x201C;\ufe36&#x201D;, &#x201C;\ufe5a&#x201D;, &#x201C;\uff09&#x201D;], &#x201C;-&#x201C;: [&#x201C;\ufe63&#x201D;, &#x201C;\uff0d&#x201D;], &#x201C;1&#x201D;: [&#x201C;\u00b9&#x201D;, &#x201C;\u00bc&#x201D;, &#x201C;\u00bd&#x201D;, &#x201C;\u2081&#x201D;, &#x201C;\u2150&#x201D;, &#x201C;\u2151&#x201D;, &#x201C;\u2152&#x201D;, &#x201C;\u2153&#x201D;, &#x201C;\u2155&#x201D;, &#x201C;\u2159&#x201D;, &#x201C;\u215b&#x201D;, &#x201C;\u215f&#x201D;, &#x201C;\u2460&#x201D;, &#x201C;\u2469&#x201D;, &#x201C;\u246a&#x201D;, &#x201C;\u246b&#x201D;, &#x201C;\u246c&#x201D;, &#x201C;\u246d&#x201D;, &#x201C;\u246e&#x201D;, &#x201C;\u246f&#x201D;, &#x201C;\u2470&#x201D;, &#x201C;\u2471&#x201D;, &#x201C;\u2472&#x201D;, &#x201C;\u2488&#x201D;, &#x201C;\u2491&#x201D;, &#x201C;\u2492&#x201D;, &#x201C;\u2493&#x201D;, &#x201C;\u2494&#x201D;, &#x201C;\u2495&#x201D;, &#x201C;\u2496&#x201D;, &#x201C;\u2497&#x201D;, &#x201C;\u2498&#x201D;, &#x201C;\u2499&#x201D;, &#x201C;\u249a&#x201D;, &#x201C;\u32c0&#x201D;, &#x201C;\u32c9&#x201D;, &#x201C;\u32ca&#x201D;, &#x201C;\u32cb&#x201D;, &#x201C;\u3359&#x201D;, &#x201C;\u3362&#x201D;, &#x201C;\u3363&#x201D;, &#x201C;\u3364&#x201D;, &#x201C;\u3365&#x201D;, &#x201C;\u3366&#x201D;, &#x201C;\u3367&#x201D;, &#x201C;\u3368&#x201D;, &#x201C;\u3369&#x201D;, &#x201C;\u336a&#x201D;, &#x201C;\u336b&#x201D;, &#x201C;\u33e0&#x201D;, &#x201C;\u33e9&#x201D;, &#x201C;\u33ea&#x201D;, &#x201C;\u33eb&#x201D;, &#x201C;\u33ec&#x201D;, &#x201C;\u33ed&#x201D;, &#x201C;\u33ee&#x201D;, &#x201C;\u33ef&#x201D;, &#x201C;\u33f0&#x201D;, &#x201C;\u33f1&#x201D;, &#x201C;\u33f2&#x201D;, &#x201C;\uff11&#x201D;], &#x201C;5&#x201D;: [&#x201C;\u2075&#x201D;, &#x201C;\u2085&#x201D;, &#x201C;\u215a&#x201D;, &#x201C;\u215d&#x201D;, &#x201C;\u2464&#x201D;, &#x201C;\u248c&#x201D;, &#x201C;\u32bf&#x201D;, &#x201C;\u32c4&#x201D;, &#x201C;\u335d&#x201D;, &#x201C;\u33e4&#x201D;, &#x201C;\uff15&#x201D;], &#x201C;9&#x201D;: [&#x201C;\u2079&#x201D;, &#x201C;\u2089&#x201D;, &#x201C;\u2468&#x201D;, &#x201C;\u2490&#x201D;, &#x201C;\u32c8&#x201D;, &#x201C;\u3361&#x201D;, &#x201C;\u33e8&#x201D;, &#x201C;\uff19&#x201D;], &#x201C;=&#x201D;: [&#x201C;\u207c&#x201D;, &#x201C;\u208c&#x201D;, &#x201C;\u2a75&#x201D;, &#x201C;\u2a76&#x201D;, &#x201C;\ufe66&#x201D;, &#x201C;\uff1d&#x201D;], &#x201C;A&#x201D;: [&#x201C;\u1d2c&#x201D;, &#x201C;\u24b6&#x201D;, &#x201C;\u3373&#x201D;, &#x201C;\u33df&#x201D;, &#x201C;\uff21&#x201D;], &#x201C;E&#x201D;: [&#x201C;\u1d31&#x201D;, &#x201C;\u2130&#x201D;, &#x201C;\u24ba&#x201D;, &#x201C;\uff25&#x201D;], &#x201C;I&#x201D;: [&#x201C;\u0132&#x201D;, &#x201C;\u1d35&#x201D;, &#x201C;\u2110&#x201D;, &#x201C;\u2111&#x201D;, &#x201C;\u2160&#x201D;, &#x201C;\u2161&#x201D;, &#x201C;\u2162&#x201D;, &#x201C;\u2163&#x201D;, &#x201C;\u2168&#x201D;, &#x201C;\u24be&#x201D;, &#x201C;\u337a&#x201D;, &#x201C;\uff29&#x201D;], &#x201C;M&#x201D;: [&#x201C;\u1d39&#x201D;, &#x201C;\u2133&#x201D;, &#x201C;\u216f&#x201D;, &#x201C;\u24c2&#x201D;, &#x201C;\u3386&#x201D;, &#x201C;\u3392&#x201D;, &#x201C;\u33ab&#x201D;, &#x201C;\u33b9&#x201D;, &#x201C;\u33bf&#x201D;, &#x201C;\u33c1&#x201D;, &#x201C;\uff2d&#x201D;], &#x201C;Q&#x201D;: [&#x201C;\u211a&#x201D;, &#x201C;\u24c6&#x201D;, &#x201C;\uff31&#x201D;], &#x201C;U&#x201D;: [&#x201C;\u1d41&#x201D;, &#x201C;\u24ca&#x201D;, &#x201C;\uff35&#x201D;], &#x201C;Y&#x201D;: [&#x201C;\u24ce&#x201D;, &#x201C;\uff39&#x201D;], &#x201C;]&#x201D;: [&#x201C;\ufe48&#x201D;, &#x201C;\uff3d&#x201D;], &#x201C;a&#x201D;: [&#x201C;\u00aa&#x201D;, &#x201C;\u1d43&#x201D;, &#x201C;\u1e9a&#x201D;, &#x201C;\u2090&#x201D;, &#x201C;\u2100&#x201D;, &#x201C;\u2101&#x201D;, &#x201C;\u24d0&#x201D;, &#x201C;\u33c2&#x201D;, &#x201C;\uff41&#x201D;], &#x201C;e&#x201D;: [&#x201C;\u1d49&#x201D;, &#x201C;\u2091&#x201D;, &#x201C;\u212f&#x201D;, &#x201C;\u2147&#x201D;, &#x201C;\u24d4&#x201D;, &#x201C;\u32cd&#x201D;, &#x201C;\u32ce&#x201D;, &#x201C;\uff45&#x201D;], &#x201C;i&#x201D;: [&#x201C;\u0133&#x201D;, &#x201C;\u1d62&#x201D;, &#x201C;\u2071&#x201D;, &#x201C;\u2139&#x201D;, &#x201C;\u2148&#x201D;, &#x201C;\u2170&#x201D;, &#x201C;\u2171&#x201D;, &#x201C;\u2172&#x201D;, &#x201C;\u2173&#x201D;, &#x201C;\u2178&#x201D;, &#x201C;\u24d8&#x201D;, &#x201C;\u33cc&#x201D;, &#x201C;\uff49&#x201D;], &#x201C;m&#x201D;: [&#x201C;\u1d50&#x201D;, &#x201C;\u217f&#x201D;, &#x201C;\u24dc&#x201D;, &#x201C;\u3383&#x201D;, &#x201C;\u338e&#x201D;, &#x201C;\u3396&#x201D;, &#x201C;\u339c&#x201D;, &#x201C;\u339f&#x201D;, &#x201C;\u33a1&#x201D;, &#x201C;\u33a3&#x201D;, &#x201C;\u33a5&#x201D;, &#x201C;\u33a7&#x201D;, &#x201C;\u33a8&#x201D;, &#x201C;\u33b3&#x201D;, &#x201C;\u33b7&#x201D;, &#x201C;\u33bd&#x201D;, &#x201C;\u33d4&#x201D;, &#x201C;\u33d5&#x201D;, &#x201C;\u33d6&#x201D;, &#x201C;\ufad1&#x201D;, &#x201C;\uff4d&#x201D;], &#x201C;q&#x201D;: [&#x201C;\u24e0&#x201D;, &#x201C;\uff51&#x201D;], &#x201C;u&#x201D;: [&#x201C;\u1d58&#x201D;, &#x201C;\u1d64&#x201D;, &#x201C;\u24e4&#x201D;, &#x201C;\uff55&#x201D;], &#x201C;y&#x201D;: [&#x201C;\u02b8&#x201D;, &#x201C;\u24e8&#x201D;, &#x201C;\uff59&#x201D;], &#x201C;}&#x201D;: [&#x201C;\ufe38&#x201D;, &#x201C;\ufe5c&#x201D;, &#x201C;\uff5d&#x201D;]}</p>
+<p>```<br>&#x9898;&#x76EE;[ASIS 2019]Unicorn shop-&gt;wp<a target="_blank" rel="noopener" href="https://github.com/hyperreality/ctf-writeups/tree/master/2019-asis">https://github.com/hyperreality/ctf-writeups/tree/master/2019-asis</a></p>
+</body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">#服务器</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2020/03/21/%E4%B8%80%E6%AC%A1%E6%9C%89%E8%B6%A3%E7%9A%84%E5%AE%89%E5%85%A8%E4%BA%8B%E6%95%85-%E8%83%8C%E9%94%85%E4%BE%A0/">一次有趣的安全事故-背锅侠</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2020/01/06/Python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/">Python沙箱和反序列化漏洞</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2020 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-epsilon2_1"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

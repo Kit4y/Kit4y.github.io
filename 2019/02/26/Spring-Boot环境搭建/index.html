@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>Spring Boot环境搭建 - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+
+    <meta name="description" content="&amp;#x4EBA;&amp;#x7EC8;&amp;#x7A76;&amp;#x6CA1;&amp;#x6709;&amp;#x81EA;&amp;#x5DF1;&amp;#x60F3;&amp;#x8C61;&amp;#x7684;&amp;#x90A3;&amp;#x4E48;&amp;#x5389;&amp;#x5BB3;&amp;#xFF0C;&amp;#x4E4B;&amp;#x524D;&amp;#x6709;&amp;#x8FC7;spring&amp;#x7684;&amp;#x57FA;&amp;#x7840;&amp;#xFF0C;&amp;#x73B0;&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot环境搭建">
+<meta property="og:url" content="http://example.com/2019/02/26/Spring-Boot%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x4EBA;&amp;#x7EC8;&amp;#x7A76;&amp;#x6CA1;&amp;#x6709;&amp;#x81EA;&amp;#x5DF1;&amp;#x60F3;&amp;#x8C61;&amp;#x7684;&amp;#x90A3;&amp;#x4E48;&amp;#x5389;&amp;#x5BB3;&amp;#xFF0C;&amp;#x4E4B;&amp;#x524D;&amp;#x6709;&amp;#x8FC7;spring&amp;#x7684;&amp;#x57FA;&amp;#x7840;&amp;#xFF0C;&amp;#x73B0;&amp;#">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2019/02/26/Spring-Boot%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/1.png">
+<meta property="og:image" content="http://example.com/2019/02/26/Spring-Boot%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/2.png">
+<meta property="og:image" content="http://example.com/2019/02/26/Spring-Boot%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/3.png">
+<meta property="og:image" content="http://example.com/2019/02/26/Spring-Boot%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/4.png">
+<meta property="og:image" content="http://example.com/2019/02/26/Spring-Boot%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/5.png">
+<meta property="og:image" content="http://example.com/2019/02/26/Spring-Boot%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/6.png">
+<meta property="og:image" content="http://example.com/2019/02/26/Spring-Boot%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/7.png">
+<meta property="article:published_time" content="2019-02-25T20:51:59.000Z">
+<meta property="article:modified_time" content="2020-11-24T04:52:30.006Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Spring Boot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2019/02/26/Spring-Boot%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/1.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/friends">Friends</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Spring Boot环境搭建
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-02-25T20:51:59.000Z" itemprop="datePublished">26 Feb 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/%E9%9B%81%E5%84%BF%E5%87%A0%E5%BA%A6%E6%81%8B%E5%BC%80%E5%8F%91-%E6%84%BF%E5%BE%97%E4%B8%80%E7%AB%99%E5%85%A5%E4%B8%87%E5%AE%B6/">雁儿几度恋开发-愿得一站入万家</a><span>></span><a class="article-category-link" href="/categories/%E9%9B%81%E5%84%BF%E5%87%A0%E5%BA%A6%E6%81%8B%E5%BC%80%E5%8F%91-%E6%84%BF%E5%BE%97%E4%B8%80%E7%AB%99%E5%85%A5%E4%B8%87%E5%AE%B6/Spring-boot/">Spring boot</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            5 minutes read (About 696 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><p>&#x4EBA;&#x7EC8;&#x7A76;&#x6CA1;&#x6709;&#x81EA;&#x5DF1;&#x60F3;&#x8C61;&#x7684;&#x90A3;&#x4E48;&#x5389;&#x5BB3;&#xFF0C;&#x4E4B;&#x524D;&#x6709;&#x8FC7;spring&#x7684;&#x57FA;&#x7840;&#xFF0C;&#x73B0;&#x5728;&#x4EC5;&#x4EC5;&#x662F;&#x56DE;&#x5FC6;Spring&#x7684;&#x914D;&#x7F6E;&#x95EE;&#x9898;&#x4EE5;&#x53CA;&#x8F6C;&#x5411;spring boot,&#x4ECE;&#x6628;&#x665A;&#x809D;&#x5230;&#x6B64;&#x523B;&#xFF08;Orz&#x53EA;&#x80FD;&#x62FF;&#x65F6;&#x95F4;&#x6765;&#x5F25;&#x8865;&#x81EA;&#x5DF1;&#x7684;&#x5929;&#x8D4B;&#x4E0D;&#x8DB3;&#xFF09;&#xFF0C;&#x53C8;&#x4E00;&#x6B21;&#x89C1;&#x5230;&#x4E86;5&#x70B9;&#x949F;&#x7684;&#x5357;&#x822A;&#xFF0C;&#x4EFB;&#x4F55;&#x706B;&#x70ED;&#x6280;&#x672F;&#x7684;&#x53D1;&#x5C55;&#x90FD;&#x662F;&#x80FD;&#x591F;&#x4E3A;&#x4E86;&#x89E3;&#x51B3;&#x4EBA;&#x7C7B;&#x5F53;&#x524D;&#x7684;&#x4E00;&#x4E2A;&#x75DB;&#x70B9;&#xFF0C;Spring&#x548C;Spring MVC&#x7684;&#x914D;&#x7F6E;&#x95EE;&#x9898;&#x5E94;&#x8BE5;&#x662F;Spring&#x6700;&#x5927;&#x7684;&#x95E8;&#x69DB;&#x6216;&#x8005;&#x8BF4;&#x8D25;&#x7B14;&#xFF0C;&#x800C;Spring boot&#x5B8C;&#x7F8E;&#x7684;&#x89E3;&#x51B3;&#x4E86;&#x8FD9;&#x4E00;&#x95EE;&#x9898;&#xFF0C;&#x751A;&#x81F3;&#x5E2E;&#x4F60;&#x628A;&#x6C64;&#x59C6;&#x732B;&#xFF08;Tomcat&#xFF09;&#x5C01;&#x88C5;&#x8FDB;&#x53BB;&#x4E86;&#xFF0C;&#x4E00;&#x665A;&#x4E0A;&#x5927;&#x6982;&#x5B66;&#x4E86;&#x70B9;Maven &#x914D;&#x7F6E;&#xFF0C;Spring boot&#x7684;&#x53C2;&#x6570;&#x8BF7;&#x6C42;&#xFF0C;&#x6574;&#x5408;swagger,&#x8DEF;&#x7531;&#x8BBE;&#x5B9A;&#x7B49;&#xFF0C;&#x867D;&#x7136;&#x8BF4;&#x5199;&#x535A;&#x5BA2;&#x633A;&#x82B1;&#x65F6;&#x95F4;&#x7684;&#xFF0C;&#x800C;&#x4E14;&#x8FD8;&#x662F;&#x6CA1;&#x6709;&#x6C34;&#x5E73;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x8FD8;&#x662F;&#x60F3;&#x8BB0;&#x4E00;&#x4E0B;&#x535A;&#x5BA2;&#xFF0C;&#x4E3B;&#x8981;&#x662F;&#x4EE5;&#x4FBF;&#x4E8E;&#x4E4B;&#x540E;&#x7684;&#x81EA;&#x5DF1;&#x56DE;&#x5FC6;&#x5FEB;&#x4E00;&#x4E9B;</p>
+<a id="more"></a>
+
+
+<h4 id="&#x4E00;&#x3001;SpringBoot2-0&#x73AF;&#x5883;&#x51C6;&#x5907;"><a href="#&#x4E00;&#x3001;SpringBoot2-0&#x73AF;&#x5883;&#x51C6;&#x5907;" class="headerlink" title="&#x4E00;&#x3001;SpringBoot2.0&#x73AF;&#x5883;&#x51C6;&#x5907;"></a>&#x4E00;&#x3001;SpringBoot2.0&#x73AF;&#x5883;&#x51C6;&#x5907;</h4><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jdk1.8+&#xFF1B;java version &#x201C;1.8.0_112&#x201D;</span><br><span class="line">A favorite text editor or IDE&#xFF1A;IntelliJ IDEA 2018.2.6</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="&#x4E8C;&#x3001;Maven&#x914D;&#x7F6E;"><a href="#&#x4E8C;&#x3001;Maven&#x914D;&#x7F6E;" class="headerlink" title="&#x4E8C;&#x3001;Maven&#x914D;&#x7F6E;"></a>&#x4E8C;&#x3001;Maven&#x914D;&#x7F6E;</h4><p>Maven&#x7684;&#x6838;&#x5FC3;&#x529F;&#x80FD;&#x4FBF;&#x662F;&#x5408;&#x7406;&#x53D9;&#x8FF0;&#x9879;&#x76EE;&#x95F4;&#x7684;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF0C;&#x901A;&#x4FD7;&#x70B9;&#x8BB2;&#xFF0C;&#x5C31;&#x662F;&#x901A;&#x8FC7;XXXX.xml&#x8FD9;&#x6837;&#x7684;&#x6587;&#x4EF6;&#x7684;&#x914D;&#x7F6E;&#x83B7;&#x53D6;jar&#x5305;&#xFF0C;&#x800C;&#x4E0D;&#x7528;&#x624B;&#x52A8;&#x53BB;&#x6DFB;&#x52A0;jar&#x5305;&#xFF0C;&#x5C31;&#x597D;&#x6BD4;&#x524D;&#x7AEF;&#x5F00;&#x53D1;&#x7684;package.json<br>IDEA&#x5185;&#x90E8;&#x81EA;&#x5E26;&#x4E00;Maven2&#xFF0C;&#x4E00;&#x4E2A;Maven3&#xFF0C;&#x6211;&#x4EEC;&#x5F53;&#x7136;&#x7528;&#x7684;&#x662F;Maven3&#xFF0C;&#x5F53;&#x521D;&#x5B66;spring mvc&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x73AF;&#x5883;&#x771F;&#x8981;&#x6298;&#x817E;&#x6B7B;&#x4E86;&#xFF0C;&#x4E3B;&#x8981;&#x662F;&#x5F53;&#x521D;&#x81EA;&#x5DF1;&#x4E0D;&#x6562;&#x5C1D;&#x8BD5;&#xFF0C;&#x5BB3;&#x6015;&#x5931;&#x8D25;&#x540E;&#x91CD;&#x88C5;&#x7684;&#x6298;&#x817E;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x73A9;&#x610F;&#x6298;&#x817E;&#x6298;&#x817E;&#x51E0;&#x6B21;&#x624D;&#x771F;&#x7684;&#x4F1A;&#x4E86;&#xFF0C;&#x6240;&#x4EE5;&#x81EA;&#x7136;&#x8981;&#x914D;&#x7F6E;&#x56FD;&#x5185;maven&#x4ED3;&#x5E93;&#x955C;&#x50CF;<br>IDEA&#x7684;Maven&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#x4E3A;&#xFF1A;{&#x4F60;IDEA&#x8F6F;&#x4EF6;&#x5B89;&#x88C5;&#x76EE;&#x5F55;}&#x3001;IDEA\IntelliJ IDEA 2018.3.1\plugins\maven\lib\maven3\conf<br>&#x8FD9;&#x4E2A;&#x91CC;&#x9762;&#x6709;&#x4E00;&#x4E2A;setting.xml,&#x5728;mirrors&#x6807;&#x7B7E;&#x7684;&#x5B50;&#x6807;&#x7B7E;<code>&lt;mirror&gt;</code>&#x4E2D;&#x7684;&#x4EE3;&#x7801;&#x6539;&#x4E3A;&#xFF1A;</p>
+<!--more-->
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;mirror&gt;</span><br><span class="line">    &lt;id&gt;alimaven&lt;/id&gt;</span><br><span class="line">    &lt;name&gt;aliyun maven&lt;/name&gt;</span><br><span class="line">    &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;</span><br><span class="line">    &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;        </span><br><span class="line">&lt;/mirror&gt;</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x5176;&#x5B9E;&#x5F88;&#x7B80;&#x5355;&#x5BF9;&#x4E0D;&#x5BF9;</p>
+<h4 id="&#x4E09;&#x3001;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x9879;&#x76EE;"><a href="#&#x4E09;&#x3001;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x9879;&#x76EE;" class="headerlink" title="&#x4E09;&#x3001;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x9879;&#x76EE;"></a>&#x4E09;&#x3001;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x9879;&#x76EE;</h4><ol>
+<li>&#x65B0;&#x5EFA;Spring Initializr &#x9879;&#x76EE;&#xFF0C;&#x5982;&#x56FE;&#xFF1A;<br><img src="1.png"></li>
+<li>&#x586B;&#x5199;&#x9879;&#x76EE;&#x4FE1;&#x606F;&#xFF0C;&#x5982;&#x56FE;&#xFF1A;<br><img src="2.png"></li>
+<li>&#x9009;&#x62E9;&#x9879;&#x76EE;&#x4F7F;&#x7528;&#x7684;&#x6280;&#x672F;&#xFF0C;&#x5982;&#x56FE;&#xFF1A;<br><img src="3.png"></li>
+<li>&#x586B;&#x5199;&#x9879;&#x76EE;&#x540D;&#x79F0;&#xFF1A;&#x5982;&#x56FE;&#xFF1A;<br><img src="4.png"></li>
+<li>&#x9879;&#x76EE;&#x67B6;&#x6784;&#x53CA;&#x4F9D;&#x8D56;&#xFF0C;&#x5982;&#x56FE;&#xFF1A;<br><img src="5.png"></li>
+<li>&#x6DFB;&#x52A0;&#x6D4B;&#x8BD5;&#x63A7;&#x5236;&#x5668;&#x3002;&#x76F4;&#x63A5;&#x5728;&#x5165;&#x53E3;&#x7C7B;&#x4E2D;&#x7F16;&#x5199;&#x3002;<figure class="highlight java hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.springboot.first;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"><span class="hljs-meta">@RestController</span></span><br><span class="line"><span class="hljs-meta">@SpringBootApplication</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FirstApplication</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@RequestMapping(&quot;/&quot;)</span></span><br><span class="line">    <span class="hljs-function">String <span class="hljs-title">index</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello Spring Boot&quot;</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{</span><br><span class="line">        SpringApplication.run(FirstApplication.class, args);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></li>
+<li>&#x8FD0;&#x884C;&#x9879;&#x76EE;&#xFF0C;&#x628A;&#x5B83;&#x5F53;&#x6210;&#x4E00;&#x4E2A;java&#x7C7B;&#x8FD0;&#x884C;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#xFF0C;&#x53F3;&#x952E;&#x83DC;&#x5355;&#x4E2D;&#x9009;&#x62E9;&#xFF0C;&#x5982;&#x56FE;&#xFF1A;<br><img src="6.png"><br>&#x8FD0;&#x884C;&#x4FE1;&#x606F;&#xFF1A;<br><img src="7.png"></li>
+<li>&#x8BBF;&#x95EE;localhost:8080&#x5373;&#x53EF;<h4 id="&#x56DB;&#x3001;&#x65F6;&#x533A;&#x8BBE;&#x7F6E;"><a href="#&#x56DB;&#x3001;&#x65F6;&#x533A;&#x8BBE;&#x7F6E;" class="headerlink" title="&#x56DB;&#x3001;&#x65F6;&#x533A;&#x8BBE;&#x7F6E;"></a>&#x56DB;&#x3001;&#x65F6;&#x533A;&#x8BBE;&#x7F6E;</h4><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jdbc:mysql://XXXX:3306/xxxx?characterEncoding=utf8&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC</span><br></pre></td></tr></tbody></table></figure></li>
+</ol>
+</body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Spring-Boot/">#Spring Boot</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/02/27/Spring%E4%B8%89%E5%A4%A7%E6%80%9D%E6%83%B3/">Spring三大思想</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/02/25/%E7%B2%BE%E9%80%9APython%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB-%E4%B8%80%E4%BA%8C%E4%B8%89%E7%AB%A0%E5%9F%BA%E7%A1%80/">精通Python网络爬虫-一二三章基础</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2020 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-epsilon2_1"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

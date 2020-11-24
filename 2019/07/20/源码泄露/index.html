@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>源码泄露 - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+
+    <meta name="description" content="&amp;#x6587;&amp;#x4EF6;&amp;#x6E90;&amp;#x7801;&amp;#x6CC4;&amp;#x9732;&amp;#x9996;&amp;#x5148;&amp;#x901A;&amp;#x8FC7;dirsearch&amp;#x770B;&amp;#x4E00;&amp;#x4E0B;&amp;#x662F;&amp;#x5426;&amp;#x662F;&amp;#x6CC4;&amp;#x9732;https:&#x2F;&#x2F;github.com&#x2F;maurosoria&#x2F;dirsearch 1&amp;#x300">
+<meta property="og:type" content="article">
+<meta property="og:title" content="源码泄露">
+<meta property="og:url" content="http://example.com/2019/07/20/%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x6587;&amp;#x4EF6;&amp;#x6E90;&amp;#x7801;&amp;#x6CC4;&amp;#x9732;&amp;#x9996;&amp;#x5148;&amp;#x901A;&amp;#x8FC7;dirsearch&amp;#x770B;&amp;#x4E00;&amp;#x4E0B;&amp;#x662F;&amp;#x5426;&amp;#x662F;&amp;#x6CC4;&amp;#x9732;https:&#x2F;&#x2F;github.com&#x2F;maurosoria&#x2F;dirsearch 1&amp;#x300">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-07-19T22:58:42.000Z">
+<meta property="article:modified_time" content="2020-11-24T04:54:35.783Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="PHP">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/friends">Friends</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            源码泄露
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-07-19T22:58:42.000Z" itemprop="datePublished">20 Jul 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Web/">Web</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            7 minutes read (About 987 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="&#x6587;&#x4EF6;&#x6E90;&#x7801;&#x6CC4;&#x9732;"><a href="#&#x6587;&#x4EF6;&#x6E90;&#x7801;&#x6CC4;&#x9732;" class="headerlink" title="&#x6587;&#x4EF6;&#x6E90;&#x7801;&#x6CC4;&#x9732;"></a>&#x6587;&#x4EF6;&#x6E90;&#x7801;&#x6CC4;&#x9732;</h3><p>&#x9996;&#x5148;&#x901A;&#x8FC7;dirsearch&#x770B;&#x4E00;&#x4E0B;&#x662F;&#x5426;&#x662F;&#x6CC4;&#x9732;<br><a target="_blank" rel="noopener" href="https://github.com/maurosoria/dirsearch">https://github.com/maurosoria/dirsearch</a></p>
+<h5 id="1&#x3001;hg-&#x6E90;&#x7801;&#x6CC4;&#x9732;-&#xB6;"><a href="#1&#x3001;hg-&#x6E90;&#x7801;&#x6CC4;&#x9732;-&#xB6;" class="headerlink" title="1&#x3001;hg &#x6E90;&#x7801;&#x6CC4;&#x9732; &#xB6;"></a>1&#x3001;hg &#x6E90;&#x7801;&#x6CC4;&#x9732; <a target="_blank" rel="noopener" href="https://ctf-wiki.github.io/ctf-wiki/web/php/php-zh/#hg">&#xB6;</a></h5><p><code>hg init</code> &#x65F6;&#x4F1A;&#x4EA7;&#x751F; <code>.hg</code> &#x6587;&#x4EF6;&#x3002;</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/kost/dvcs-ripper">&#x5229;&#x7528;&#x5DE5;&#x5177; dvcs-ripper</a></p>
+<a id="more"></a>
+
+
+<h5 id="2&#x3001;Git-&#x6E90;&#x7801;&#x6CC4;&#x9732;-&#xB6;"><a href="#2&#x3001;Git-&#x6E90;&#x7801;&#x6CC4;&#x9732;-&#xB6;" class="headerlink" title="2&#x3001;Git &#x6E90;&#x7801;&#x6CC4;&#x9732; &#xB6;"></a>2&#x3001;Git &#x6E90;&#x7801;&#x6CC4;&#x9732; <a target="_blank" rel="noopener" href="https://ctf-wiki.github.io/ctf-wiki/web/php/php-zh/#git">&#xB6;</a></h5><p><code>.git</code> &#x76EE;&#x5F55;&#x5185;&#x6709;&#x4EE3;&#x7801;&#x7684;&#x53D8;&#x66F4;&#x8BB0;&#x5F55;&#x7B49;&#x6587;&#x4EF6;&#xFF0C;&#x5982;&#x679C;&#x90E8;&#x7F72;&#x65F6;&#x8BE5;&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x6587;&#x4EF6;&#x53EF;&#x88AB;&#x8BBF;&#x95EE;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x88AB;&#x5229;&#x7528;&#x6765;&#x6062;&#x590D;&#x6E90;&#x4EE3;&#x7801;&#x3002;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/.git</span><br><span class="line">/.git/HEAD</span><br><span class="line">/.git/index</span><br><span class="line">/.git/config</span><br><span class="line">/.git/description</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x8C8C;&#x4F3C;&#x8FD9;&#x4E24;&#x4E2A;&#x811A;&#x672C;&#x53EA;&#x80FD;&#x5728;linux&#x4E0B;&#x8DD1;&#xFF1F;&#x6211;win10&#x672C;&#x5730;&#x4E0D;&#x884C;<br><a target="_blank" rel="noopener" href="https://github.com/lijiejie/GitHack">python2-GitHack</a></p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python GitHack.py http://www.openssl.org/.git/</span><br></pre></td></tr></tbody></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/WangYihang/GitHacker">python2-GitHacker&#xFF08;&#x53EF;&#x6062;&#x590D;&#x5B8C;&#x6574; Git &#x4ED3;&#x5E93;&#xFF09;</a></p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python GitHacker.py http://www.openssl.org/.git/</span><br></pre></td></tr></tbody></table></figure>
+<p><a target="_blank" rel="noopener" href="https://github.com/gakki429/Git_Extract">python2-https://github.com/gakki429/Git_Extract</a></p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python git_extract.py http://example.com/.git/ &#x4E00;&#x4E2A;&#x5B58;&#x5728; .git &#x6CC4;&#x9732;&#x7684;&#x7F51;&#x7AD9;</span><br><span class="line">$ python git_extract.py example/.git/ &#x4E00;&#x4E2A;&#x672C;&#x5730;&#x7684; .git &#x8DEF;&#x5F84;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x4F8B;&#x9898;jarvios&#x7684;babyphp</p>
+<h5 id="3&#x3001;-DS-Store-&#x6587;&#x4EF6;&#x6CC4;&#x9732;-&#xB6;"><a href="#3&#x3001;-DS-Store-&#x6587;&#x4EF6;&#x6CC4;&#x9732;-&#xB6;" class="headerlink" title="3&#x3001;.DS_Store &#x6587;&#x4EF6;&#x6CC4;&#x9732; &#xB6;"></a>3&#x3001;<code>.DS_Store</code> &#x6587;&#x4EF6;&#x6CC4;&#x9732; <a target="_blank" rel="noopener" href="https://ctf-wiki.github.io/ctf-wiki/web/php/php-zh/#ds_store">&#xB6;</a></h5><p>Mac OS &#x4E2D;&#x4F1A;&#x5305;&#x542B;&#x6709; <code>.DS_Store</code> &#x6587;&#x4EF6;&#xFF0C;&#x5305;&#x542B;&#x6587;&#x4EF6;&#x540D;&#x7B49;&#x4FE1;&#x606F;&#x3002;</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/lijiejie/ds_store_exp">&#x5229;&#x7528;&#x5DE5;&#x5177; ds&#xFF3F;store&#xFF3F;exp</a><br>&#x4F8B;&#x9898;bugku ctf sql&#x6CE8;&#x5165;2</p>
+<h5 id="4&#x3001;&#x7F51;&#x7AD9;&#x5907;&#x4EFD;&#x6587;&#x4EF6;-&#xB6;"><a href="#4&#x3001;&#x7F51;&#x7AD9;&#x5907;&#x4EFD;&#x6587;&#x4EF6;-&#xB6;" class="headerlink" title="4&#x3001;&#x7F51;&#x7AD9;&#x5907;&#x4EFD;&#x6587;&#x4EF6; &#xB6;"></a>4&#x3001;&#x7F51;&#x7AD9;&#x5907;&#x4EFD;&#x6587;&#x4EF6; <a target="_blank" rel="noopener" href="https://ctf-wiki.github.io/ctf-wiki/web/php/php-zh/#_20">&#xB6;</a></h5><p>&#x7BA1;&#x7406;&#x5458;&#x5907;&#x4EFD;&#x7F51;&#x7AD9;&#x6587;&#x4EF6;&#x540E;&#x9519;&#x8BEF;&#x5730;&#x5C06;&#x5907;&#x4EFD;&#x653E;&#x5728; Web &#x76EE;&#x5F55;&#x4E0B;&#x3002;</p>
+<p>&#x5E38;&#x89C1;&#x7684;&#x540E;&#x7F00;&#x540D;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.rar</span><br><span class="line">.zip</span><br><span class="line">.7z</span><br><span class="line">.tar</span><br><span class="line">.tar.gz</span><br><span class="line">.bak</span><br><span class="line">.txt</span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="5&#x3001;SVN-&#x6CC4;&#x9732;-&#xB6;"><a href="#5&#x3001;SVN-&#x6CC4;&#x9732;-&#xB6;" class="headerlink" title="5&#x3001;SVN &#x6CC4;&#x9732; &#xB6;"></a>5&#x3001;SVN &#x6CC4;&#x9732; <a target="_blank" rel="noopener" href="https://ctf-wiki.github.io/ctf-wiki/web/php/php-zh/#svn">&#xB6;</a></h5><p>&#x654F;&#x611F;&#x6587;&#x4EF6;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/.svn</span><br><span class="line">/.svn/wc.db</span><br><span class="line">/.svn/entries</span><br></pre></td></tr></tbody></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/admintony/svnExploit">https://github.com/admintony/svnExploit</a><br>&#x68C0;&#x6D4B;SVN&#x6E90;&#x4EE3;&#x7801;&#x6CC4;&#x9732;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python SvnExploit.py -u http://192.168.27.128/.svn</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x4E0B;&#x8F7D;&#x6E90;&#x4EE3;&#x7801;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python SvnExploit.py -u http://192.168.27.128/.svn --dump</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h5 id="6&#x3001;WEB-INF-web-xml-&#x6CC4;&#x9732;-&#xB6;"><a href="#6&#x3001;WEB-INF-web-xml-&#x6CC4;&#x9732;-&#xB6;" class="headerlink" title="6&#x3001;WEB-INF / web.xml &#x6CC4;&#x9732; &#xB6;"></a>6&#x3001;WEB-INF / web.xml &#x6CC4;&#x9732; <a target="_blank" rel="noopener" href="https://ctf-wiki.github.io/ctf-wiki/web/php/php-zh/#web-inf-webxml">&#xB6;</a></h5><p>WEB-INF &#x662F; Java Web &#x5E94;&#x7528;&#x7684;&#x5B89;&#x5168;&#x76EE;&#x5F55;&#xFF0C;web.xml &#x4E2D;&#x6709;&#x6587;&#x4EF6;&#x7684;&#x6620;&#x5C04;&#x5173;&#x7CFB;&#x3002;</p>
+<p>WEB-INF &#x4E3B;&#x8981;&#x5305;&#x542B;&#x4E00;&#x4E0B;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF1A;</p>
+<ul>
+<li><code>/WEB-INF/web.xml</code> &#xFF1A;Web &#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF0C;&#x63CF;&#x8FF0;&#x4E86; servlet &#x548C;&#x5176;&#x4ED6;&#x7684;&#x5E94;&#x7528;&#x7EC4;&#x4EF6;&#x914D;&#x7F6E;&#x53CA;&#x547D;&#x540D;&#x89C4;&#x5219;&#x3002;</li>
+<li><code>/WEB-INF/classes/</code> &#xFF1A;&#x542B;&#x4E86;&#x7AD9;&#x70B9;&#x6240;&#x6709;&#x7528;&#x7684; class &#x6587;&#x4EF6;&#xFF0C;&#x5305;&#x62EC; servlet class &#x548C;&#x975E; servlet class&#xFF0C;&#x4ED6;&#x4EEC;&#x4E0D;&#x80FD;&#x5305;&#x542B;&#x5728;&#x3002;jar &#x6587;&#x4EF6;&#x4E2D;&#x3002;</li>
+<li><code>/WEB-INF/lib/</code> &#xFF1A;&#x5B58;&#x653E; web &#x5E94;&#x7528;&#x9700;&#x8981;&#x7684;&#x5404;&#x79CD; JAR &#x6587;&#x4EF6;&#xFF0C;&#x653E;&#x7F6E;&#x4EC5;&#x5728;&#x8FD9;&#x4E2A;&#x5E94;&#x7528;&#x4E2D;&#x8981;&#x6C42;&#x4F7F;&#x7528;&#x7684; jar &#x6587;&#x4EF6;&#xFF0C;&#x5982;&#x6570;&#x636E;&#x5E93;&#x9A71;&#x52A8; jar &#x6587;&#x4EF6;&#x3002;</li>
+<li><code>/WEB-INF/src/</code> &#xFF1A;&#x6E90;&#x7801;&#x76EE;&#x5F55;&#xFF0C;&#x6309;&#x7167;&#x5305;&#x540D;&#x7ED3;&#x6784;&#x653E;&#x7F6E;&#x5404;&#x4E2A; java &#x6587;&#x4EF6;&#x3002;</li>
+<li><code>/WEB-INF/database.properties</code> &#xFF1A;&#x6570;&#x636E;&#x5E93;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x3002;</li>
+</ul>
+<p>&#x901A;&#x8FC7;&#x627E;&#x5230; web.xml &#x6587;&#x4EF6;&#xFF0C;&#x63A8;&#x65AD; class &#x6587;&#x4EF6;&#x7684;&#x8DEF;&#x5F84;&#xFF0C;&#x6700;&#x540E;&#x76F4;&#x63A5; class &#x6587;&#x4EF6;&#xFF0C;&#x5728;&#x901A;&#x8FC7;&#x53CD;&#x7F16;&#x8BD1; class &#x6587;&#x4EF6;&#xFF0C;&#x5F97;&#x5230;&#x7F51;&#x7AD9;&#x6E90;&#x7801;&#x3002; &#x4E00;&#x822C;&#x60C5;&#x51B5;&#xFF0C;jsp &#x5F15;&#x64CE;&#x9ED8;&#x8BA4;&#x90FD;&#x662F;&#x7981;&#x6B62;&#x8BBF;&#x95EE; WEB-INF &#x76EE;&#x5F55;&#x7684;&#xFF0C;Nginx &#x914D;&#x5408; Tomcat &#x505A;&#x5747;&#x8861;&#x8D1F;&#x8F7D;&#x6216;&#x96C6;&#x7FA4;&#x7B49;&#x60C5;&#x51B5;&#x65F6;&#xFF0C;&#x95EE;&#x9898;&#x539F;&#x56E0;&#x5176;&#x5B9E;&#x5F88;&#x7B80;&#x5355;&#xFF0C;Nginx &#x4E0D;&#x4F1A;&#x53BB;&#x8003;&#x8651;&#x914D;&#x7F6E;&#x5176;&#x4ED6;&#x7C7B;&#x578B;&#x5F15;&#x64CE;&#xFF08;Nginx &#x4E0D;&#x662F; jsp &#x5F15;&#x64CE;&#xFF09;&#x5BFC;&#x81F4;&#x7684;&#x5B89;&#x5168;&#x95EE;&#x9898;&#x800C;&#x5F15;&#x5165;&#x5230;&#x81EA;&#x8EAB;&#x7684;&#x5B89;&#x5168;&#x89C4;&#x8303;&#x4E2D;&#x6765;&#xFF08;&#x8FD9;&#x6837;&#x8026;&#x5408;&#x6027;&#x592A;&#x9AD8;&#x4E86;&#xFF09;&#xFF0C;&#x4FEE;&#x6539; Nginx &#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7981;&#x6B62;&#x8BBF;&#x95EE; WEB-INF &#x76EE;&#x5F55;&#x5C31;&#x597D;&#x4E86;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">location ~ ^/WEB-INF/* { deny all; } # &#x6216;&#x8005;return 404; &#x6216;&#x8005;&#x5176;&#x4ED6;&#xFF01;</span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="7&#x3001;CVS-&#x6CC4;&#x9732;-&#xB6;"><a href="#7&#x3001;CVS-&#x6CC4;&#x9732;-&#xB6;" class="headerlink" title="7&#x3001;CVS &#x6CC4;&#x9732; &#xB6;"></a>7&#x3001;CVS &#x6CC4;&#x9732; <a target="_blank" rel="noopener" href="https://ctf-wiki.github.io/ctf-wiki/web/php/php-zh/#cvs">&#xB6;</a></h5><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://url/CVS/Root &#x8FD4;&#x56DE;&#x6839;&#x4FE1;&#x606F;</span><br><span class="line">http://url/CVS/Entries &#x8FD4;&#x56DE;&#x6240;&#x6709;&#x6587;&#x4EF6;&#x7684;&#x7ED3;&#x6784;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x53D6;&#x56DE;&#x6E90;&#x7801;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bk clone http://url/name dir</span><br></pre></td></tr></tbody></table></figure>
+<h5 id="8&#x3001;-swp&#x6587;&#x4EF6;"><a href="#8&#x3001;-swp&#x6587;&#x4EF6;" class="headerlink" title="8&#x3001;.swp&#x6587;&#x4EF6;"></a>8&#x3001;.swp&#x6587;&#x4EF6;</h5><p>&#x5173;&#x4E8E;swp&#x6587;&#x4EF6;<br>&#x4F7F;&#x7528;vi&#xFF0C;&#x7ECF;&#x5E38;&#x53EF;&#x4EE5;&#x770B;&#x5230;swp&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;,&#x90A3;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x662F;&#x600E;&#x4E48;&#x4EA7;&#x751F;&#x7684;&#x5462;&#xFF0C;&#x5F53;&#x4F60;&#x6253;&#x5F00;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;vi&#x5C31;&#x4F1A;&#x751F;&#x6210;&#x8FD9;&#x4E48;&#x4E00;&#x4E2A;.(filename)swp&#x6587;&#x4EF6;&#x4EE5;&#x5907;&#x4E0D;&#x6D4B;&#xFF08;&#x4E0D;&#x6D4B;&#x4E0B;&#x9762;&#x8BA8;&#x8BBA;&#xFF09;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x6B63;&#x5E38;&#x9000;&#x51FA;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x8FD9;&#x4E2A;swp&#x6587;&#x4EF6;&#x5C06;&#x4F1A;&#x81EA;&#x52A8;&#x5220;&#x9664;&#x3002;&#x4E0B;&#x9762;&#x8BF4;&#x4E0D;&#x6D4B;&#x3002;<br>&#x76F4;&#x63A5;&#x8BBF;&#x95EE;<code>.submit.php.swp</code>&#x5373;&#x53EF;</p>
+</body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/PHP/">#PHP</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/08/10/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84%E7%99%BB%E5%BD%95%E9%A2%98/">令人窒息的登录题</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/07/20/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/">php反序列化漏洞</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2020 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-epsilon2_1"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

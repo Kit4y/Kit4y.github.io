@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>CSAPP又双叒叕来一遍之函数调用过程栈帧的变化 - Hexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+
+    <meta name="description" content="&amp;#x51FD;&amp;#x6570;&amp;#x8C03;&amp;#x7528;&amp;#x5728;&amp;#x7B2C;&amp;#x4E09;&amp;#x7AE0;&amp;#x7B2C;&amp;#x4E03;&amp;#x7AE0;&amp;#x5747;&amp;#x6709;&amp;#x6D89;&amp;#x53CA;&amp;#xFF0C;&amp;#x6545;&amp;#x4E13;&amp;#x95E8;&amp;#x603B;&amp;#x7ED3;&amp;#x4E00;&amp;#x6CE2;&amp;#x51FD;&amp;#x6570;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSAPP又双叒叕来一遍之函数调用过程栈帧的变化">
+<meta property="og:url" content="http://example.com/2018/12/21/CSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B%E6%A0%88%E5%B8%A7%E7%9A%84%E5%8F%98%E5%8C%96/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;#x51FD;&amp;#x6570;&amp;#x8C03;&amp;#x7528;&amp;#x5728;&amp;#x7B2C;&amp;#x4E09;&amp;#x7AE0;&amp;#x7B2C;&amp;#x4E03;&amp;#x7AE0;&amp;#x5747;&amp;#x6709;&amp;#x6D89;&amp;#x53CA;&amp;#xFF0C;&amp;#x6545;&amp;#x4E13;&amp;#x95E8;&amp;#x603B;&amp;#x7ED3;&amp;#x4E00;&amp;#x6CE2;&amp;#x51FD;&amp;#x6570;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2018/12/21/CSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B%E6%A0%88%E5%B8%A7%E7%9A%84%E5%8F%98%E5%8C%96/2.png">
+<meta property="og:image" content="http://example.com/2018/12/21/CSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B%E6%A0%88%E5%B8%A7%E7%9A%84%E5%8F%98%E5%8C%96/1.png">
+<meta property="og:image" content="http://example.com/2018/12/21/CSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B%E6%A0%88%E5%B8%A7%E7%9A%84%E5%8F%98%E5%8C%96/3.png">
+<meta property="article:published_time" content="2018-12-20T22:33:53.000Z">
+<meta property="article:modified_time" content="2020-11-24T04:48:59.785Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="栈帧">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2018/12/21/CSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B%E6%A0%88%E5%B8%A7%E7%9A%84%E5%8F%98%E5%8C%96/2.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/friends">Friends</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+            <a class="navbar-item "
+               href="/tags">Tags</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            CSAPP又双叒叕来一遍之函数调用过程栈帧的变化
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-12-20T22:33:53.000Z" itemprop="datePublished">21 Dec 2018</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/CSAPP/">CSAPP</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            8 minutes read (About 1209 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h2 id="&#x51FD;&#x6570;&#x8C03;&#x7528;&#x5728;&#x7B2C;&#x4E09;&#x7AE0;&#x7B2C;&#x4E03;&#x7AE0;&#x5747;&#x6709;&#x6D89;&#x53CA;&#xFF0C;&#x6545;&#x4E13;&#x95E8;&#x603B;&#x7ED3;&#x4E00;&#x6CE2;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x6808;&#x5E27;&#x7684;&#x53D8;&#x5316;"><a href="#&#x51FD;&#x6570;&#x8C03;&#x7528;&#x5728;&#x7B2C;&#x4E09;&#x7AE0;&#x7B2C;&#x4E03;&#x7AE0;&#x5747;&#x6709;&#x6D89;&#x53CA;&#xFF0C;&#x6545;&#x4E13;&#x95E8;&#x603B;&#x7ED3;&#x4E00;&#x6CE2;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x6808;&#x5E27;&#x7684;&#x53D8;&#x5316;" class="headerlink" title="&#x51FD;&#x6570;&#x8C03;&#x7528;&#x5728;&#x7B2C;&#x4E09;&#x7AE0;&#x7B2C;&#x4E03;&#x7AE0;&#x5747;&#x6709;&#x6D89;&#x53CA;&#xFF0C;&#x6545;&#x4E13;&#x95E8;&#x603B;&#x7ED3;&#x4E00;&#x6CE2;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x6808;&#x5E27;&#x7684;&#x53D8;&#x5316;"></a>&#x51FD;&#x6570;&#x8C03;&#x7528;&#x5728;&#x7B2C;&#x4E09;&#x7AE0;&#x7B2C;&#x4E03;&#x7AE0;&#x5747;&#x6709;&#x6D89;&#x53CA;&#xFF0C;&#x6545;&#x4E13;&#x95E8;&#x603B;&#x7ED3;&#x4E00;&#x6CE2;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x6808;&#x5E27;&#x7684;&#x53D8;&#x5316;</h2><h4 id="1&#x3001;&#x719F;&#x6089;&#x4E00;&#x4E0B;&#x7A0B;&#x5E8F;&#x7684;&#x8FDB;&#x7A0B;&#x7A7A;&#x95F4;-&#xFF0C;&#x5373;&#x5BF9;&#x8FDB;&#x7A0B;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5185;&#x5B58;"><a href="#1&#x3001;&#x719F;&#x6089;&#x4E00;&#x4E0B;&#x7A0B;&#x5E8F;&#x7684;&#x8FDB;&#x7A0B;&#x7A7A;&#x95F4;-&#xFF0C;&#x5373;&#x5BF9;&#x8FDB;&#x7A0B;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5185;&#x5B58;" class="headerlink" title="1&#x3001;&#x719F;&#x6089;&#x4E00;&#x4E0B;&#x7A0B;&#x5E8F;&#x7684;&#x8FDB;&#x7A0B;&#x7A7A;&#x95F4; &#xFF0C;&#x5373;&#x5BF9;&#x8FDB;&#x7A0B;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5185;&#x5B58;"></a>1&#x3001;&#x719F;&#x6089;&#x4E00;&#x4E0B;&#x7A0B;&#x5E8F;&#x7684;&#x8FDB;&#x7A0B;&#x7A7A;&#x95F4; &#xFF0C;&#x5373;&#x5BF9;&#x8FDB;&#x7A0B;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5185;&#x5B58;</h4><a id="more"></a>
+
+
+<p><img src="2.png"></p>
+<p>&#x5148;&#x8BA8;&#x8BBA;32&#x4F4D;&#x7684;&#x8BA1;&#x7B97;&#x673A;&#xFF0C;&#x8BA1;&#x7B97;&#x673A;&#x7269;&#x7406;&#x5185;&#x5B58;&#x7684;&#x5927;&#x5C0F;&#x662F;&#x56FA;&#x5B9A;&#x7684;&#xFF0C;&#x5C31;&#x662F;&#x8BA1;&#x7B97;&#x673A;&#x4E3B;&#x677F;&#x5185;&#x5B58;&#x69FD;&#x4E0A;&#x7684;&#x5B9E;&#x9645;&#x7269;&#x7406;&#x5185;&#x5B58;&#xFF0C;cpu&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x8FDB;&#x884C;&#x5BFB;&#x5740;&#xFF0C;&#x7269;&#x7406;&#x5185;&#x5B58;&#x7684;&#x5BB9;&#x91CF;&#x662F;&#x56FA;&#x5B9A;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x5BFB;&#x5740;&#x7684;&#x7A7A;&#x95F4;&#x53D6;&#x51B3;&#x4E8E;cpu&#x5730;&#x5740;&#x7EBF;&#x7684;&#x6570;&#x91CF;&#x3002;&#x5728;32&#x4F4D;&#x7CFB;&#x7EDF;&#x4E0A;&#xFF0C;&#x7EBF;&#x6027;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#x53EF;&#x8FBE;4G&#xFF08;2^32&#xFF09;&#xFF1B;&#x8FD9;4G&#x4E00;&#x822C;&#x662F;&#x6309;&#x7167;3&#xFF1A;1&#x7684;&#x6BD4;&#x4F8B;&#x8FDB;&#x884C;&#x5206;&#x914D;&#xFF0C;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x4EAB;&#x6709;3G&#x7684;&#x7A7A;&#x95F4;&#xFF0C;&#x800C;&#x5185;&#x6838;&#x72EC;&#x81EA;&#x4EAB;&#x6709;&#x5269;&#x4E0B;&#x7684;1G&#x5185;&#x5B58;</p>
+<h4 id="2&#x3001;&#x8C08;&#x8C08;&#x6808;&#x5E27;&#x7684;&#x6982;&#x5FF5;"><a href="#2&#x3001;&#x8C08;&#x8C08;&#x6808;&#x5E27;&#x7684;&#x6982;&#x5FF5;" class="headerlink" title="2&#x3001;&#x8C08;&#x8C08;&#x6808;&#x5E27;&#x7684;&#x6982;&#x5FF5;"></a>2&#x3001;&#x8C08;&#x8C08;&#x6808;&#x5E27;&#x7684;&#x6982;&#x5FF5;</h4><p>&#x6808;&#x5E27;(stack frame)&#xFF0C;&#x673A;&#x5668;&#x7528;&#x6808;&#x6765;&#x4F20;&#x9012;&#x8FC7;&#x7A0B;&#x53C2;&#x6570;&#xFF0C;&#x5B58;&#x50A8;&#x8FD4;&#x56DE;&#x4FE1;&#x606F;&#xFF0C;&#x4FDD;&#x5B58;&#x5BC4;&#x5B58;&#x5668;&#x7528;&#x4E8E;&#x4EE5;&#x540E;&#x6062;&#x590D;&#xFF0C;&#x4EE5;&#x53CA;&#x672C;&#x5730;&#x5B58;&#x50A8;&#x3002;&#x4E3A;&#x5355;&#x4E2A;&#x8FC7;&#x7A0B;(&#x51FD;&#x6570;&#x8C03;&#x7528;)&#x5206;&#x914D;&#x7684;&#x90A3;&#x90E8;&#x5206;&#x6808;&#x79F0;&#x4E3A;&#x6808;&#x5E27;&#x3002;<br>&#x6808;&#x5E27;&#x5176;&#x5B9E; &#x662F;&#x4E24;&#x4E2A;&#x6307;&#x9488;&#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x5BC4;&#x5B58;&#x5668;%ebp&#x4E3A;&#x5E27;&#x6307;&#x9488;&#xFF08;&#x6307;&#x5411;&#x8BE5;&#x6808;&#x5E27;&#x7684;&#x6700;&#x5E95;&#x90E8;&#xFF09;&#xFF0C;&#x800C;&#x5BC4;&#x5B58;&#x5668;%esp&#x4E3A;&#x6808;&#x6307;&#x9488;&#xFF08;&#x6307;&#x5411;&#x8BE5;&#x6808;&#x5E27;&#x7684;&#x6700;&#x9876;&#x90E8;&#xFF09;&#xFF0C;&#x5F53;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x6808;&#x6307;&#x9488;&#x53EF;&#x4EE5;&#x79FB;&#x52A8;(&#x5927;&#x591A;&#x6570;&#x7684;&#x4FE1;&#x606F;&#x7684;&#x8BBF;&#x95EE;&#x90FD;&#x662F;&#x901A;&#x8FC7;&#x5E27;&#x6307;&#x9488;&#x7684;&#xFF0C;&#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;&#x5C31;&#x662F;&#x5982;&#x679C;&#x8BE5;&#x6808;&#x5B58;&#x5728;&#xFF0C;%ebp&#x5E27;&#x6307;&#x9488;&#x662F;&#x4E0D;&#x79FB;&#x52A8;&#x7684;&#xFF0C;&#x8BBF;&#x95EE;&#x6808;&#x91CC;&#x9762;&#x7684;&#x5143;&#x7D20;&#x53EF;&#x4EE5;&#x7528;-4(%ebp&#xFF09;&#x6216;&#x8005;8(%ebp)&#x8BBF;&#x95EE;%ebp&#x6307;&#x9488;&#x4E0B;&#x9762;&#x6216;&#x8005;&#x4E0A;&#x9762;&#x7684;&#x5143;&#x7D20;)&#x3002;<br>&#x603B;&#x4E4B;&#x7B80;&#x5355; &#x4E00;&#x53E5;&#x8BDD;&#xFF0C;&#x6808;&#x5E27;&#x7684;&#x4E3B;&#x8981;&#x4F5C;&#x7528;&#x662F;&#x7528;&#x6765;&#x63A7;&#x5236;&#x548C;&#x4FDD;&#x5B58;&#x4E00;&#x4E2A;&#x8FC7;&#x7A0B;&#x7684;&#x6240;&#x6709;&#x4FE1;&#x606F;&#x7684;&#x3002;&#x6808;&#x5E27;&#x7ED3;&#x6784;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;<br><img src="1.png"><br>&#x5927;&#x6982;&#x89E3;&#x91CA;&#xFF1A;&#x5047;&#x8BBE;&#x8FC7;&#x7A0B;P&#xFF08;&#x8C03;&#x7528;&#x8005;&#xFF09;&#x8C03;&#x7528;&#x8FC7;&#x7A0B;Q&#xFF08;&#x88AB;&#x8C03;&#x7528;&#x8005;&#xFF09;&#xFF0C;&#x5219;Q&#x7684;&#x53C2;&#x6570;&#x653E;&#x5728;P&#x7684;&#x6808;&#x5E27;&#x4E2D;&#x3002;&#x53E6;&#x5916;&#xFF0C;&#x5F53;P&#x8C03;&#x7528;Q&#x65F6;&#xFF0C;P&#x4E2D;&#x7684;&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x88AB;&#x538B;&#x5165;&#x6808;&#x4E2D;&#xFF0C;&#x5F62;&#x6210;P&#x7684;&#x6808;&#x5E27;&#x7684;&#x672B;&#x5C3E; &#xFF08;&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x5C31;&#x662F;&#x5F53;&#x7A0B;&#x5E8F;&#x4ECE;Q&#x8FD4;&#x56DE;&#x65F6;&#x5E94;&#x8BE5;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#x7684;&#x5730;&#x65B9;&#xFF09;&#x3002;Q&#x7684;&#x6808;&#x5E27;&#x4ECE;&#x4FDD;&#x5B58;&#x7684;&#x5E27;&#x6307;&#x9488;&#x7684;&#x503C;&#x5F00;&#x59CB;&#xFF0C;&#x540E;&#x9762;&#x5230;&#x65B0;&#x7684;&#x6808;&#x6307;&#x9488;&#x4E4B;&#x95F4;&#x5C31;&#x662F;&#x8BE5;&#x8FC7;&#x7A0B;&#x7684;&#x90E8;&#x5206;&#x4E86;&#x3002;</p>
+<h4 id="3&#x3001;&#x51FD;&#x6570;&#x5177;&#x4F53;&#x8C03;&#x7528;&#x793A;&#x4F8B;"><a href="#3&#x3001;&#x51FD;&#x6570;&#x5177;&#x4F53;&#x8C03;&#x7528;&#x793A;&#x4F8B;" class="headerlink" title="3&#x3001;&#x51FD;&#x6570;&#x5177;&#x4F53;&#x8C03;&#x7528;&#x793A;&#x4F8B;"></a>3&#x3001;&#x51FD;&#x6570;&#x5177;&#x4F53;&#x8C03;&#x7528;&#x793A;&#x4F8B;</h4><p>&#x6E90;&#x4EE3;&#x7801;&#xFF08;&#x5FFD;&#x7565;&#x4E3B;&#x51FD;&#x6570;&#xFF09;:</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int swap_add(int* xp,int* yp) {</span><br><span class="line">    int x = *xp;</span><br><span class="line">    int y = *yp;</span><br><span class="line">    *xp = y;</span><br><span class="line">    *yp = x;</span><br><span class="line">    return x+y;</span><br><span class="line">}</span><br><span class="line">int caller(){</span><br><span class="line">    int arg1 = 534;</span><br><span class="line">    int arg2 = 1057;</span><br><span class="line">    int sum = swap_add(&amp;arg1,&amp;arg2);</span><br><span class="line">    int diff = arg1 - arg2;</span><br><span class="line">    </span><br><span class="line">    return sum * diff;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x7ECF;&#x8FC7;&#x6C47;&#x7F16;&#x4E4B;&#x540E;caller&#x90E8;&#x5206;&#x7684;&#x4EE3;&#x7801;&#x4E3A;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">caller:</span><br><span class="line">    pushl %ebp   //&#x4FDD;&#x5B58;%ebp </span><br><span class="line">    movl %esp,%ebp    //&#x8BBE;&#x7F6E;&#x65B0;&#x7684;&#x5E27;&#x6307;&#x9488;&#x4E3A;&#x65E7;&#x7684;&#x6808;&#x6307;&#x9488;</span><br><span class="line">    subl $24,%esp  //&#x5206;&#x914D;24&#x5B50;&#x8282;&#x7684;&#x6808;&#x7A7A;&#x95F4;</span><br><span class="line">    movl $534,-4(%ebp) //&#x8BBE;&#x7F6E;arg1=534</span><br><span class="line">    movl $1057,-8(%ebp) //&#x8BBE;&#x7F6E;arg2=1057</span><br><span class="line">    leal -8(%ebp),%eax //&#x8BA1;&#x7B97;&amp;arg2</span><br><span class="line">    movl %eax,4(%esp) //&#x5C06;&amp;arg2&#x5B58;&#x5165;&#x6808;&#x4E2D;</span><br><span class="line">    leal -4(%ebp),%eax //&#x8BA1;&#x7B97;&amp;arg1</span><br><span class="line">    movl %eax,(%esp) //&#x5C06;&amp;arg1&#x5B58;&#x5165;&#x6808;&#x4E2D;</span><br><span class="line">    call swap_add //&#x8C03;&#x7528;swap_add-------------------&#x300B;&#x8FC7;&#x7A0B;&#x8C03;&#x7528;</span><br><span class="line">    movl -4(%ebp),%edx /&#x4ECE;&#x6808;&#x4E2D;&#x53D6;&#x51FA;arg1,&#x548C;arg2&#x7684;&#x503C;</span><br><span class="line">    subl -8(%ebp),%edx //&#x4E3A;&#x4E86;&#x8BA1;&#x7B97;diff, </span><br><span class="line">    imull %edx,%eax  </span><br><span class="line">    leave //&#x4E3A;&#x8FD4;&#x56DE;&#x51C6;&#x5907;&#x6808;&#xFF0C;GCC &#x4EA7;&#x751F;&#x7684;&#x4EE3;&#x7801;&#x6709;&#x65F6;&#x5019;&#x4F1A;&#x4F7F;&#x7528;leave&#x6307;&#x4EE4;&#x6765;&#x91CA;&#x653E;&#x6808;&#x5E27;&#xFF0C;</span><br><span class="line">           //&#x800C;&#x6709;&#x65F6;&#x4F1A;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x6216;&#x8005;&#x4E24;&#x4E2A;popl&#x6307;&#x4EE4;&#x3002;&#x4E24;&#x4E2A;&#x65B9;&#x6CD5;&#x90FD;&#x53EF;&#x884C;&#x3002;</span><br><span class="line">    ret             //&#x4ECE;&#x8FC7;&#x7A0B;&#x8C03;&#x7528;&#x4E2D;&#x8FD4;&#x56DE;  </span><br></pre></td></tr></tbody></table></figure>
+<p>&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x5148;&#x4FDD;&#x5B58;&#x4E86;%ebp&#x7684;&#x4E00;&#x4E2A;&#x526F;&#x672C;&#xFF0C;&#x5C06;&#x65B0;&#x7684;&#x8FC7;&#x7A0B;&#xFF08;&#x8BE5;&#x51FD;&#x6570;&#x7684;ebp&#xFF09;&#x7684;ebp&#x8BBE;&#x7F6E;&#x4E3A;&#x6808;&#x5E27;&#x7684;&#x5F00;&#x59CB;&#x4F4D;&#x7F6E;&#x3002;&#x7136;&#x540E;&#x5C06;&#x6808;&#x6307;&#x9488;&#x51CF;&#x53BB;24&#xFF0C;&#x4ECE;&#x800C;&#x5728;&#x6808;&#x4E0A;&#x5206;&#x914D;&#x4E86;24&#x5B57; &#x8282;&#x7684;&#x7A7A;&#x95F4;&#xFF08;&#x4F60;&#x5E94;&#x8BE5;&#x601D;&#x8003;&#x4E00;&#x4E0B;&#x4E3A;&#x4EC0;&#x4E48;&#x662F;24&#x5B57;&#x8282;,&#x8BB0;&#x5F97;&#x6709;&#x4E24;&#x4E2A;&#x4E3A;&#x4FDD;&#x5B58;&#x7684;&#x5BC4;&#x5B58;&#x5668;&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x662F;&#x521D;&#x59CB;&#x5316;&#x4E24;&#x4E2A;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#xFF0C;&#x8BA1;&#x7B97;&#x4E24;&#x4E2A;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#x7684;&#x5730;&#x5740;&#x5E76;&#x5B58;&#x5165;&#x6808;&#x4E2D;&#xFF0C;&#x5F62;&#x6210;&#x4E86;&#x51FD;&#x6570;swap_add&#x7684;&#x53C2;&#x6570;&#x3002;&#x5C06;&#x8FD9;&#x4E9B; &#x53C2;&#x6570;&#x5B58;&#x50A8;&#x5230;&#x76F8;&#x5BF9;&#x4E8E;&#x6808;&#x6307;&#x9488;&#x504F;&#x79FB;&#x91CF;&#x4E3A;0&#x548C;+4&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x7559;&#x5F85;&#x7A0D;&#x540E;&#x7684;swap_add&#x8C03;&#x7528;&#x8BBF;&#x95EE;&#x3002;&#x7136;&#x540E;&#x8C03;&#x7528;swap_add</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">swap_add:</span><br><span class="line">    pushl %ebp //save old %ebp</span><br><span class="line">    movl %esp,%ebp  //set %ebp as frame pointer</span><br><span class="line">    pushl %ebx     //save %ebx</span><br><span class="line">     </span><br><span class="line">    movl 8(%ebp),%edx   //Get xp</span><br><span class="line">    movl 12(%ebp),%ecx   //Get yp</span><br><span class="line">    movl (%edx),%ebx   //Get x</span><br><span class="line">    movl (%ecx),%eax    //Get u</span><br><span class="line">    movl %eax,(%edx)    //Store y as xp</span><br><span class="line">    movl %ebx,(%ecx)      //Sotre x as yp</span><br><span class="line">    addl %ebx,%eax         //return value = x + y</span><br><span class="line">     </span><br><span class="line">    popl %ebx        //restore  %ebx</span><br><span class="line">    popl %ebp        //restore %ebp</span><br><span class="line">    ret        //&#x4ECE;&#x8FC7;&#x7A0B;&#x8C03;&#x7528;&#x4E2D;&#x8FD4;&#x56DE;, &#x5C06;&#x63A7;&#x5236;&#x8F6C;&#x79FB;&#x56DE;caller</span><br></pre></td></tr></tbody></table></figure>
+<p>&#x8BF4;&#x660E;&#x4E09;&#x70B9;&#xFF0C;1&#x3001;&#x8BF4;&#x660E;&#x4E00;&#x70B9;&#x7A0B;&#x5E8F;&#x5728;&#x6267;&#x884C;&#x5230;swap_add&#x7684;&#x4EE3;&#x7801;&#x4E4B;&#x524D;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5728;&#x6267;&#x884C;call&#x8BED;&#x53E5;&#x5DF2;&#x7ECF;&#x628A;&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x538B;&#x5165;&#x6808;&#x4E2D;&#xFF0C;&#x5305;&#x62EC;%esp-4. 2&#x3001;&#x6700;&#x540E;&#x4E00;&#x90E8; &#x5206;&#x7684;popl %ebx   popl %ebp&#x3002;&#x5B83;&#x7684;&#x4F5C;&#x7528;&#x662F;&#x6062;&#x590D;&#x4E86;&#x4E4B;&#x524D;&#x5B58;&#x50A8;&#x7684;&#x6808;&#x5E27;&#x6307;&#x9488;&#x7684;&#x503C;.  3&#x3001;&#x8FD4;&#x56DE;&#x503C;&#x662F;&#x5B58;&#x5165;&#x4E86;%eax&#x4E2D;&#xFF0C;&#x5728;&#x63A5;&#x4E0B;&#x6765;&#x7684;&#x8C03;&#x7528;&#x7A0B;&#x5E8F;caller&#x4E2D;&#x76F4;&#x63A5;&#x8BBF;&#x95EE;&#x8BE5;&#x5BC4;&#x5B58;&#x5668;</p>
+<h4 id="&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x7684;&#x6808;&#x53D8;&#x5316;&#x5982;&#x4E0B;&#x6240;&#x793A;"><a href="#&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x7684;&#x6808;&#x53D8;&#x5316;&#x5982;&#x4E0B;&#x6240;&#x793A;" class="headerlink" title="&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x7684;&#x6808;&#x53D8;&#x5316;&#x5982;&#x4E0B;&#x6240;&#x793A;"></a>&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x7684;&#x6808;&#x53D8;&#x5316;&#x5982;&#x4E0B;&#x6240;&#x793A;</h4><p><img src="3.png"></p>
+</body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/%E6%A0%88%E5%B8%A7/">#栈帧</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2018/12/21/CSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E9%93%BE%E6%8E%A5/">CSAPP又双叒叕来一遍之链接</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2018/12/20/%E5%90%84%E7%A7%8D%E6%BA%90%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/">Ubuntu16环境配置-换源</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2020 John Doe&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-epsilon2_1"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
