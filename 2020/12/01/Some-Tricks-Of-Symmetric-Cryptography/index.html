@@ -23,16 +23,16 @@
 <meta property="og:site_name" content="ShuYu">
 <meta property="og:description" content="Symmetric Cryptography means this encryption algorithm use the same key for encryption and decryption. Although I am a web dog, encryption algorithm in some web question recently let me broken heart.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2020/12/01/Some-Tricks-Of-Symmetric-Cryptography/Some-Tricks-Of-Symmetric-Cryptography/1.png">
-<meta property="og:image" content="http://example.com/2020/12/01/Some-Tricks-Of-Symmetric-Cryptography/Some-Tricks-Of-Symmetric-Cryptography/2.png">
-<meta property="og:image" content="http://example.com/2020/12/01/Some-Tricks-Of-Symmetric-Cryptography/Some-Tricks-Of-Symmetric-Cryptography/3.png">
-<meta property="og:image" content="http://example.com/2020/12/01/Some-Tricks-Of-Symmetric-Cryptography/Some-Tricks-Of-Symmetric-Cryptography/4.png">
+<meta property="og:image" content="http://example.com/2020/12/01/Some-Tricks-Of-Symmetric-Cryptography/1.png">
+<meta property="og:image" content="http://example.com/2020/12/01/Some-Tricks-Of-Symmetric-Cryptography/2.png">
+<meta property="og:image" content="http://example.com/2020/12/01/Some-Tricks-Of-Symmetric-Cryptography/3.png">
+<meta property="og:image" content="http://example.com/2020/12/01/Some-Tricks-Of-Symmetric-Cryptography/4.png">
 <meta property="article:published_time" content="2020-12-01T06:05:08.000Z">
-<meta property="article:modified_time" content="2020-12-01T06:48:10.411Z">
+<meta property="article:modified_time" content="2020-12-01T08:29:55.219Z">
 <meta property="article:author" content="ShuYu">
 <meta property="article:tag" content="crypto">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2020/12/01/Some-Tricks-Of-Symmetric-Cryptography/Some-Tricks-Of-Symmetric-Cryptography/1.png">
+<meta name="twitter:image" content="http://example.com/2020/12/01/Some-Tricks-Of-Symmetric-Cryptography/1.png">
 
 
 
@@ -144,13 +144,15 @@
         <span class="column is-narrow">
             
             
-            2 minutes read (About 344 words)
+            2 minutes read (About 323 words)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
         <html><head></head><body><p>Symmetric Cryptography means this encryption algorithm use the same key for encryption and decryption. Although I am a web dog, encryption algorithm in some web question recently let me broken heart.</p>
+<a id="more"></a>
+
 <!-- toc -->
 
 <ul>
@@ -165,16 +167,14 @@
 <!-- tocstop -->
 
 <h2><span id="1-some-symmetric-encryption-algorithm">1. Some Symmetric Encryption Algorithm</span></h2><p>DES&#x3001;3DES&#x3001;TDEA&#x3001;Blowfish&#x3001;RC2&#x3001;RC4&#x3001;RC5&#x3001;IDEA&#x3001;SKIPJACK</p>
-<a id="more"></a>
-
 <p>Here is another blog for <a href="/2019/08/16/S-DES%E8%AF%A6%E8%A7%A3/">S-DES</a> which i wrote before.</p>
 <h2><span id="2-symmetric-cryptography-in-ctf-web">2. Symmetric Cryptography in CTF-WEB</span></h2><p>here are some crypto in ctf.which i know most is Padding Oracle or Cbc Flipped Ciphertext Bits.<br>for example CBC in NJCTF or <a target="_blank" rel="noopener" href="http://ctf5.shiyanbar.com/web/jiandan/test.php">shiyanba easy login question</a> and so on . some i want introduce some Padding Oracle Tricks in ctf_web.</p>
-<h2><span id="3-some-encryption-mode">3. Some Encryption mode</span></h2><p>Symmetric encryption has two types of encryption modes, namely block encryption and stream encryption.but in AES algorithm has five modes.if you want to find a aes decrypto/encrypto online mabey you need choice which mode you want use.<br>for example<br><img src="./Some-Tricks-Of-Symmetric-Cryptography/1.png"></p>
+<h2><span id="3-some-encryption-mode">3. Some Encryption mode</span></h2><p>Symmetric encryption has two types of encryption modes, namely block encryption and stream encryption.but in AES algorithm has five modes.if you want to find a aes decrypto/encrypto online mabey you need choice which mode you want use.<br>for example<br><img src="1.png"></p>
 <blockquote>
 <p>Electronic Codebook Book (ECB)<br>Cipher Block Chaining (CBC)<br>Counter (CTR)<br>Cipher FeedBack (CFB)<br>Output FeedBack (OFB)</p>
 </blockquote>
-<h3><span id="31-electronic-codebook-book-ecb">3.1. Electronic Codebook Book (ECB)</span></h3><p>ECB is the simplest mode is encryption modes.<br><img src="./Some-Tricks-Of-Symmetric-Cryptography/2.png"><br>As we can see,we just need block the plaintext.Encryto every piece,than split joint every ciphertext.this is ECB encryption mode.</p>
-<h3><span id="32-cipher-block-chaining-cbc">3.2. Cipher Block Chaining (CBC)</span></h3><p>In this mode, the plaintext is first divided into several segments, and then each segment is XOR with the initial block(first segments) or the ciphertext segment of the previous segment, and then encrypted with the key.<br><img src="./Some-Tricks-Of-Symmetric-Cryptography/3.png"><br>Explain this encryption flow chart:<br>&#x2022; Ciphertext-0 = Encrypt(Plaintext XOR IV)&#x2014;for first plaintext segment<br>&#x2022; Ciphertext-N= Encrypt(Plaintext XOR Ciphertext-N-1)&#x2014;othere plaintext segments<br>Decyption is as same.<br><img src="./Some-Tricks-Of-Symmetric-Cryptography/4.png"><br>&#x2022; Plaintext-0 = Decrypt(Ciphertext XOR IV) &#x2014;for first ciphertext segment<br>&#x2022;Plaintext-N= Decrypt(Ciphertext XOR Ciphertext-N-1)&#x2014;othere ciphertext segments</p>
+<h3><span id="31-electronic-codebook-book-ecb">3.1. Electronic Codebook Book (ECB)</span></h3><p>ECB is the simplest mode is encryption modes.<br><img src="2.png"><br>As we can see,we just need block the plaintext.Encryto every piece,than split joint every ciphertext.this is ECB encryption mode.</p>
+<h3><span id="32-cipher-block-chaining-cbc">3.2. Cipher Block Chaining (CBC)</span></h3><p>In this mode, the plaintext is first divided into several segments, and then each segment is XOR with the initial block(first segments) or the ciphertext segment of the previous segment, and then encrypted with the key.<br><img src="3.png"><br>Explain this encryption flow chart:<br>&#x2022; Ciphertext-0 = Encrypt(Plaintext XOR IV)&#x2014;for first plaintext segment<br>&#x2022; Ciphertext-N= Encrypt(Plaintext XOR Ciphertext-N-1)&#x2014;othere plaintext segments<br>Decyption as same.<br><img src="4.png"><br>&#x2022; Plaintext-0 = Decrypt(Ciphertext XOR IV) &#x2014;for first ciphertext segment<br>&#x2022;Plaintext-N= Decrypt(Ciphertext XOR Ciphertext-N-1)&#x2014;othere ciphertext segments</p>
 </body></html>
     
     </div>
