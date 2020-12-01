@@ -123,6 +123,48 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
+            <a href="../../2019/12/03/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/" itemprop="url">php伪协议</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-12-02T18:02:25.000Z" itemprop="datePublished">Dec 3 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="../../categories/Web/">Web</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            5 minutes read (About 738 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="php&#x652F;&#x6301;&#x7684;&#x4F2A;&#x534F;&#x8BAE;"><a href="#php&#x652F;&#x6301;&#x7684;&#x4F2A;&#x534F;&#x8BAE;" class="headerlink" title="php&#x652F;&#x6301;&#x7684;&#x4F2A;&#x534F;&#x8BAE;"></a>php&#x652F;&#x6301;&#x7684;&#x4F2A;&#x534F;&#x8BAE;</h3><figure class="highlight plain hljs"><table><tbody><tr><td class="code"><pre><code class="hljs plain">php:// &#x2014; &#x8BBF;&#x95EE;&#x5404;&#x4E2A;&#x8F93;&#x5165;/&#x8F93;&#x51FA;&#x6D41;&#xFF08;I/O streams&#xFF09;<br>file:// &#x2014; &#x8BBF;&#x95EE;&#x672C;&#x5730;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;<br>phar:// &#x2014; PHP &#x5F52;&#x6863;<br>zlib:// &#x2014; &#x538B;&#x7F29;&#x6D41;<br>data:// &#x2014; &#x6570;&#x636E;&#xFF08;RFC 2397&#xFF09;<br>http:// &#x2014; &#x8BBF;&#x95EE; HTTP(s) &#x7F51;&#x5740;<br>ftp:// &#x2014; &#x8BBF;&#x95EE; FTP(s) URLs<br>glob:// &#x2014; &#x67E5;&#x627E;&#x5339;&#x914D;&#x7684;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#x6A21;&#x5F0F;<br>ssh2:// &#x2014; Secure Shell 2<br>rar:// &#x2014; RAR<br>ogg:// &#x2014; &#x97F3;&#x9891;&#x6D41;<br>expect:// &#x2014; &#x5904;&#x7406;&#x4EA4;&#x4E92;&#x5F0F;&#x7684;&#x6D41;<br></code></pre></td></tr></tbody></table></figure></body></html>
+        <p class="article-more-link">
+            <a href="../../2019/12/03/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
             <a href="../../2019/12/03/php%E4%B8%AD%E7%A5%9E%E7%A7%98%E7%9A%84md5/" itemprop="url">php中佛系的md5和数组</a>
         
     </h1>
@@ -509,48 +551,6 @@
 
 
     
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="../../2019/11/19/flask%E5%88%B0SSTI/" itemprop="url">从flask到SSTI</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            
-                <time datetime="2019-11-19T06:27:51.000Z" itemprop="datePublished">Nov 19 2019</time>
-            
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="../../categories/CTF/">CTF</a><span>></span><a class="article-category-link" href="../../categories/CTF/Web/">Web</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            12 minutes read (About 1785 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <html><head></head><body><h3 id="flask&#x57FA;&#x7840;&#x77E5;&#x8BC6;"><a href="#flask&#x57FA;&#x7840;&#x77E5;&#x8BC6;" class="headerlink" title="flask&#x57FA;&#x7840;&#x77E5;&#x8BC6;"></a>flask&#x57FA;&#x7840;&#x77E5;&#x8BC6;</h3><figure class="highlight python hljs"><table><tbody><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask<br>app=Flask(__name__)<br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&apos;/&apos;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hello_world</span>():</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hello World&#xFF01;&quot;</span><br><br><span class="hljs-keyword">if</span> __name__==<span class="hljs-string">&apos;__main__&apos;</span>:<br>    app.debug = <span class="hljs-literal">True</span><br>    app.run(host=<span class="hljs-string">&apos;0.0.0.0&apos;</span>,port=<span class="hljs-number">80</span>)<br></code></pre></td></tr></tbody></table></figure></body></html>
-        <p class="article-more-link">
-            <a href="../../2019/11/19/flask%E5%88%B0SSTI/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
     
         
 <nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">
@@ -572,7 +572,7 @@
         
         <li><span class="pagination-ellipsis">&hellip;</span></li>
         
-        <li><a class="pagination-link" href="../9/">9</a></li>
+        <li><a class="pagination-link" href="../10/">10</a></li>
         
     </ul>
 </nav>

@@ -123,6 +123,48 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
+            <a href="../../2019/11/19/flask%E5%88%B0SSTI/" itemprop="url">从flask到SSTI</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-11-19T06:27:51.000Z" itemprop="datePublished">Nov 19 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="../../categories/CTF/">CTF</a><span>></span><a class="article-category-link" href="../../categories/CTF/Web/">Web</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            12 minutes read (About 1785 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><h3 id="flask&#x57FA;&#x7840;&#x77E5;&#x8BC6;"><a href="#flask&#x57FA;&#x7840;&#x77E5;&#x8BC6;" class="headerlink" title="flask&#x57FA;&#x7840;&#x77E5;&#x8BC6;"></a>flask&#x57FA;&#x7840;&#x77E5;&#x8BC6;</h3><figure class="highlight python hljs"><table><tbody><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask<br>app=Flask(__name__)<br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&apos;/&apos;</span></span>)</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hello_world</span>():</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hello World&#xFF01;&quot;</span><br><br><span class="hljs-keyword">if</span> __name__==<span class="hljs-string">&apos;__main__&apos;</span>:<br>    app.debug = <span class="hljs-literal">True</span><br>    app.run(host=<span class="hljs-string">&apos;0.0.0.0&apos;</span>,port=<span class="hljs-number">80</span>)<br></code></pre></td></tr></tbody></table></figure></body></html>
+        <p class="article-more-link">
+            <a href="../../2019/11/19/flask%E5%88%B0SSTI/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
             <a href="../../2019/11/19/%E5%93%88%E5%B8%8C%E9%95%BF%E5%BA%A6%E6%89%A9%E5%B1%95%E6%94%BB%E5%87%BB%E4%BB%A5%E5%8F%8AHashPump%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E5%92%8C%E4%B8%A4%E9%81%93%E9%A2%98%E7%9B%AE/" itemprop="url">哈希长度扩展攻击以及HashPump安装使用和两道题目</a>
         
     </h1>
@@ -507,49 +549,6 @@
 
 
     
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="../../2019/08/16/S-DES%E8%AF%A6%E8%A7%A3/" itemprop="url">S-DES详解</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            
-                <time datetime="2019-08-16T06:30:07.000Z" itemprop="datePublished">Aug 16 2019</time>
-            
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="../../categories/Crypto/">Crypto</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            10 minutes read (About 1569 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <html><head></head><body><h3 id="&#x4E00;&#x3001;S-DES&#x4ECB;&#x7ECD;"><a href="#&#x4E00;&#x3001;S-DES&#x4ECB;&#x7ECD;" class="headerlink" title="&#x4E00;&#x3001;S-DES&#x4ECB;&#x7ECD;"></a>&#x4E00;&#x3001;S-DES&#x4ECB;&#x7ECD;</h3><p>S-DES&#x662F;DES&#x7B97;&#x6CD5;&#x7684;&#x7B80;&#x5316;&#x7248;,&#x5E76;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x7684;&#x4EF7;&#x503C;,&#x53EA;&#x7528;&#x4E8E;&#x6559;&#x5B66;&#x6765;&#x7406;&#x89E3;DES&#x7B97;&#x6CD5;&#x7684;&#x52A0;&#x5BC6;&#x65B9;&#x6CD5;,&#x90A3;&#x4E48;&#x53EF;&#x80FD;&#x5C31;&#x6709;&#x5C0F;&#x670B;&#x53CB;&#x4F1A;&#x95EE;&#x4E86;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x4E0D;&#x662F;&#x76F4;&#x63A5;&#x8BB2;DES&#x5462;,Orz&#x5BF9;&#x4E8E;&#x975E;&#x4FE1;&#x5B89;&#x7684;&#x840C;&#x65B0;&#x6765;&#x8BF4;,DES&#x786E;&#x5B9E;&#x96BE;,&#x6240;&#x4EE5;&#x5148;&#x770B;&#x4E00;&#x4E0B;&#x7B80;&#x6D01;&#x7248;&#x7684;S-DES&#x7684;&#x7B97;&#x6CD5;&#x5148;&#x9884;&#x70ED;&#x9884;&#x70ED;&#x3002;</p>
-<h3 id="&#x4E8C;&#x3001;&#x6574;&#x4F53;&#x52A0;&#x5BC6;&#x6D41;&#x7A0B;"><a href="#&#x4E8C;&#x3001;&#x6574;&#x4F53;&#x52A0;&#x5BC6;&#x6D41;&#x7A0B;" class="headerlink" title="&#x4E8C;&#x3001;&#x6574;&#x4F53;&#x52A0;&#x5BC6;&#x6D41;&#x7A0B;"></a>&#x4E8C;&#x3001;&#x6574;&#x4F53;&#x52A0;&#x5BC6;&#x6D41;&#x7A0B;</h3></body></html>
-        <p class="article-more-link">
-            <a href="../../2019/08/16/S-DES%E8%AF%A6%E8%A7%A3/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
     
         
 <nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">
@@ -573,7 +572,7 @@
         
         <li><span class="pagination-ellipsis">&hellip;</span></li>
         
-        <li><a class="pagination-link" href="../9/">9</a></li>
+        <li><a class="pagination-link" href="../10/">10</a></li>
         
     </ul>
 </nav>
