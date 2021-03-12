@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head>
     <meta charset="utf-8">
-<title>Redis哨兵核心选举算法-通过开车理解quorum和majority的意义 - ShuYu</title>
+<title>Redis哨兵核心选举算法-通过开车理解quorum和majority的意义 - 书鱼</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -20,14 +20,14 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis哨兵核心选举算法-通过开车理解quorum和majority的意义">
 <meta property="og:url" content="http://example.com/2019/07/13/Redis%E5%93%A8%E5%85%B5%E6%A0%B8%E5%BF%83%E9%80%89%E4%B8%BE%E7%AE%97%E6%B3%95-%E9%80%9A%E8%BF%87%E5%BC%80%E8%BD%A6%E7%90%86%E8%A7%A3quorum%E5%92%8Cmajority%E7%9A%84%E6%84%8F%E4%B9%89/index.html">
-<meta property="og:site_name" content="ShuYu">
+<meta property="og:site_name" content="书鱼">
 <meta property="og:description" content="&amp;#x6954;&amp;#x5B50;&amp;#xFF1A;&amp;#x521A;&amp;#x597D;&amp;#x5728;&amp;#x6574;Redis&amp;#x7F13;&amp;#x5B58;&amp;#x9AD8;&amp;#x53EF;&amp;#x7528;&amp;#xFF0C;&amp;#x963F;&amp;#x6C64;&amp;#x54E5;&amp;#x7684;&amp;#x4E00;&amp;#x53E5;&amp;#x8BDD;Redis&amp;#x54E8;&amp;#x5175;&amp;#x96C6;&amp;#x7FA">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2019/07/13/Redis%E5%93%A8%E5%85%B5%E6%A0%B8%E5%BF%83%E9%80%89%E4%B8%BE%E7%AE%97%E6%B3%95-%E9%80%9A%E8%BF%87%E5%BC%80%E8%BD%A6%E7%90%86%E8%A7%A3quorum%E5%92%8Cmajority%E7%9A%84%E6%84%8F%E4%B9%89/1.jpg">
 <meta property="og:image" content="http://example.com/2019/07/13/Redis%E5%93%A8%E5%85%B5%E6%A0%B8%E5%BF%83%E9%80%89%E4%B8%BE%E7%AE%97%E6%B3%95-%E9%80%9A%E8%BF%87%E5%BC%80%E8%BD%A6%E7%90%86%E8%A7%A3quorum%E5%92%8Cmajority%E7%9A%84%E6%84%8F%E4%B9%89/4.jpg">
 <meta property="article:published_time" content="2019-07-12T21:37:46.000Z">
 <meta property="article:modified_time" content="2020-11-24T04:52:20.230Z">
-<meta property="article:author" content="ShuYu">
+<meta property="article:author" content="Bkfish">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2019/07/13/Redis%E5%93%A8%E5%85%B5%E6%A0%B8%E5%BF%83%E9%80%89%E4%B8%BE%E7%AE%97%E6%B3%95-%E9%80%9A%E8%BF%87%E5%BC%80%E8%BD%A6%E7%90%86%E8%A7%A3quorum%E5%92%8Cmajority%E7%9A%84%E6%84%8F%E4%B9%89/1.jpg">
@@ -238,7 +238,7 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2020 ShuYu&nbsp;
+                &copy; 2021 Bkfish&nbsp;
                 Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
                         target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>

